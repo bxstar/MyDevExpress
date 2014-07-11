@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FB5FACE1-E412-4944-AE1B-32A8C12A343F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TaoBaoDataServer.WinClientData</RootNamespace>
+    <AssemblyName>TaoBaoDataServer.WinClientData</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v13.2.Core, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="iclickpro.AccessCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Dll\iclickpro.AccessCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Dll\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NetServ.Net.Json">
+      <HintPath>..\Dll\NetServ.Net.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TopSdk">
+      <HintPath>..\Dll\TopSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.5.0.15095, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Dll\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessLayer\BusinessAdgroupHandler.cs" />
+    <Compile Include="BusinessLayer\BusinessBatchHandler.cs" />
+    <Compile Include="BusinessLayer\BusinessCampaignHandler.cs" />
+    <Compile Include="BusinessLayer\BusinessKeywordHandler.cs" />
+    <Compile Include="BusinessLayer\BusinessReportHandler.cs" />
+    <Compile Include="BusinessLayer\BusinessUserHandler.cs" />
+    <Compile Include="BusinessLayer\CommonHandler.cs" />
+    <Compile Include="BusinessLayer\BusinessTaobaoApiHandler.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="DataBase\DTOHelper.cs" />
+    <Compile Include="DataBase\DTOProperty.cs" />
+    <Compile Include="DataBase\DTOType.cs" />
+    <Compile Include="DataBase\EmitHelper.cs" />
+    <Compile Include="DataBase\SqlDataProvider.cs" />
+    <Compile Include="DataBase\SqlHelper.cs" />
+    <Compile Include="DynamicJsonParser.cs" />
+    <Compile Include="FrmAddKeyword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddKeyword.Designer.cs">
+      <DependentUpon>FrmAddKeyword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOutPut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOutPut.Designer.cs">
+      <DependentUpon>FrmOutPut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReport.Designer.cs">
+      <DependentUpon>FrmReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSetKeywordCustom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSetKeywordCustom.Designer.cs">
+      <DependentUpon>FrmSetKeywordCustom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSetKeywordRank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSetKeywordRank.Designer.cs">
+      <DependentUpon>FrmSetKeywordRank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\adrptcampaignbase.cs" />
+    <Compile Include="Model\adrptcampaigneffect.cs" />
+    <Compile Include="Model\adrptkeywordbase.cs" />
+    <Compile Include="Model\adrptkeywordeffect.cs" />
+    <Compile Include="Model\EntityAdgroup.cs" />
+    <Compile Include="Model\EntityCampaign.cs" />
+    <Compile Include="Model\EntityCampaignRpt.cs" />
+    <Compile Include="Model\EntityItem.cs" />
+    <Compile Include="Model\EntityKeywordCustom.cs" />
+    <Compile Include="Model\EntityKeywordEx.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAPITest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAPITest.Designer.cs">
+      <DependentUpon>FrmAPITest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDataBaseTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDataBaseTest.Designer.cs">
+      <DependentUpon>FrmDataBaseTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFindWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFindWord.Designer.cs">
+      <DependentUpon>FrmFindWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFindWordByAdgroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFindWordByAdgroup.Designer.cs">
+      <DependentUpon>FrmFindWordByAdgroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWord.Designer.cs">
+      <DependentUpon>FrmWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm类目预测.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm类目预测.Designer.cs">
+      <DependentUpon>Frm类目预测.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EntityKeywordRpt.cs" />
+    <Compile Include="Model\EntityMajorizationAdgroupRecord.cs" />
+    <Compile Include="Model\EntityPriceRank.cs" />
+    <Compile Include="Model\KeywordAndCategory.cs" />
+    <Compile Include="Model\keywordAvgData.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\ResponseKeyword.cs" />
+    <Compile Include="MyTraceListener.cs" />
+    <Compile Include="MyTraceListenerWithColor.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortableBindingList.cs" />
+    <Compile Include="TechNet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UsingWithSystemAPI.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddKeyword.resx">
+      <DependentUpon>FrmAddKeyword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAPITest.resx">
+      <DependentUpon>FrmAPITest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDataBaseTest.resx">
+      <DependentUpon>FrmDataBaseTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFindWord.resx">
+      <DependentUpon>FrmFindWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFindWordByAdgroup.resx">
+      <DependentUpon>FrmFindWordByAdgroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOutPut.resx">
+      <DependentUpon>FrmOutPut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReport.resx">
+      <DependentUpon>FrmReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSetKeywordCustom.resx">
+      <DependentUpon>FrmSetKeywordCustom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSetKeywordRank.resx">
+      <DependentUpon>FrmSetKeywordRank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWord.resx">
+      <DependentUpon>FrmWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm类目预测.resx">
+      <DependentUpon>Frm类目预测.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KeywordForecastCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strKeywords" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KeywordForecastCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KeywordForecastCacheResult" type="tns:ArrayOfEntityKeywordCategoryForecast" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEntityKeywordCategoryForecast">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EntityKeywordCategoryForecast" nillable="true" type="tns:EntityKeywordCategoryForecast" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityKeywordCategoryForecast">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="categroy_word" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="category_child" type="tns:ArrayOfEntityCategoryInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEntityCategoryInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EntityCategoryInfo" nillable="true" type="tns:EntityCategoryInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityCategoryInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="category_desc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="category_id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="category_name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="KeywordBaseCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strKeywords" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KeywordBaseCacheResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KeywordBaseCacheResult" type="tns:ArrayOfEntityWordBase" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEntityWordBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EntityWordBase" nillable="true" type="tns:EntityWordBase" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityWordBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="word" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="reord_base" type="tns:ArrayOfEntityBaseInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEntityBaseInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EntityBaseInfo" nillable="true" type="tns:EntityBaseInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityBaseInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="impression" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="click" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="competition" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="avg_price" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="ctr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="date" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetValueResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetValueResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveKeyResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllKeys">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllKeysResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllKeysResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FlushDB">
+        <s:complexType />
+      </s:element>
+      <s:element name="FlushDBResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="KeywordForecastCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:KeywordForecastCache" />
+  </wsdl:message>
+  <wsdl:message name="KeywordForecastCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:KeywordForecastCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="KeywordBaseCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:KeywordBaseCache" />
+  </wsdl:message>
+  <wsdl:message name="KeywordBaseCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:KeywordBaseCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetValueSoapIn">
+    <wsdl:part name="parameters" element="tns:GetValue" />
+  </wsdl:message>
+  <wsdl:message name="GetValueSoapOut">
+    <wsdl:part name="parameters" element="tns:GetValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetValueSoapIn">
+    <wsdl:part name="parameters" element="tns:SetValue" />
+  </wsdl:message>
+  <wsdl:message name="SetValueSoapOut">
+    <wsdl:part name="parameters" element="tns:SetValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveKeySoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveKey" />
+  </wsdl:message>
+  <wsdl:message name="RemoveKeySoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllKeysSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllKeys" />
+  </wsdl:message>
+  <wsdl:message name="GetAllKeysSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllKeysResponse" />
+  </wsdl:message>
+  <wsdl:message name="FlushDBSoapIn">
+    <wsdl:part name="parameters" element="tns:FlushDB" />
+  </wsdl:message>
+  <wsdl:message name="FlushDBSoapOut">
+    <wsdl:part name="parameters" element="tns:FlushDBResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceForKeywordForecastSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KeywordForecastCache">
+      <wsdl:input message="tns:KeywordForecastCacheSoapIn" />
+      <wsdl:output message="tns:KeywordForecastCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KeywordBaseCache">
+      <wsdl:input message="tns:KeywordBaseCacheSoapIn" />
+      <wsdl:output message="tns:KeywordBaseCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValue">
+      <wsdl:input message="tns:GetValueSoapIn" />
+      <wsdl:output message="tns:GetValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetValue">
+      <wsdl:input message="tns:SetValueSoapIn" />
+      <wsdl:output message="tns:SetValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveKey">
+      <wsdl:input message="tns:RemoveKeySoapIn" />
+      <wsdl:output message="tns:RemoveKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllKeys">
+      <wsdl:input message="tns:GetAllKeysSoapIn" />
+      <wsdl:output message="tns:GetAllKeysSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FlushDB">
+      <wsdl:input message="tns:FlushDBSoapIn" />
+      <wsdl:output message="tns:FlushDBSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceForKeywordForecastSoap" type="tns:WebServiceForKeywordForecastSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeywordForecastCache">
+      <soap:operation soapAction="http://tempuri.org/KeywordForecastCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeywordBaseCache">
+      <soap:operation soapAction="http://tempuri.org/KeywordBaseCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValue">
+      <soap:operation soapAction="http://tempuri.org/GetValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetValue">
+      <soap:operation soapAction="http://tempuri.org/SetValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveKey">
+      <soap:operation soapAction="http://tempuri.org/RemoveKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllKeys">
+      <soap:operation soapAction="http://tempuri.org/GetAllKeys" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FlushDB">
+      <soap:operation soapAction="http://tempuri.org/FlushDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceForKeywordForecastSoap12" type="tns:WebServiceForKeywordForecastSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeywordForecastCache">
+      <soap12:operation soapAction="http://tempuri.org/KeywordForecastCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeywordBaseCache">
+      <soap12:operation soapAction="http://tempuri.org/KeywordBaseCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValue">
+      <soap12:operation soapAction="http://tempuri.org/GetValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetValue">
+      <soap12:operation soapAction="http://tempuri.org/SetValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveKey">
+      <soap12:operation soapAction="http://tempuri.org/RemoveKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllKeys">
+      <soap12:operation soapAction="http://tempuri.org/GetAllKeys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FlushDB">
+      <soap12:operation soapAction="http://tempuri.org/FlushDB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebServiceForKeywordForecast">
+    <wsdl:port name="WebServiceForKeywordForecastSoap" binding="tns:WebServiceForKeywordForecastSoap">
+      <soap:address location="http://localhost:27968/WebServiceForKeywordForecast.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceForKeywordForecastSoap12" binding="tns:WebServiceForKeywordForecastSoap12">
+      <soap12:address location="http://localhost:27968/WebServiceForKeywordForecast.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
