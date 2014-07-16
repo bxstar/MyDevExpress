@@ -255,52 +255,120 @@ namespace TaoBaoDataServer.WinClientData
             TopSession session = GetSession();
             int intReportDays = Convert.ToInt32(txtReportDays.Text.Trim());
 
-            for (int i = 0; i < gridViewAdgroup.DataRowCount; i++)
+            string cacheKey = string.Empty;
+            if (chkKeywordRptRecentDays.Checked)
             {
-                ADGroup item = gridViewAdgroup.GetRow(gridViewAdgroup.GetRowHandle(i)) as ADGroup;
-                if (item != null)
-                {
-                    List<EntityKeywordRpt> lstBase = null; List<EntityKeywordRpt> lstEffect = null;
-                    if (chkKeywordRptRecentDays.Checked)
-                    {
-                        lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, intReportDays);
-                        lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, intReportDays);
-                    }
-                    else if (chkKeywordRptDtp.Checked)
-                    {
-                        lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"));
-                        lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"));
-                    }
-                    if (lstBase != null)
-                        lstAll.AddRange(lstBase);
-                    if (lstEffect != null)
-                        lstAll.AddRange(lstEffect);
-                }
+                cacheKey = string.Format("action:{0},username:{1},para:{2}", "keywordrpt", session.UserName, intReportDays);
+            }
+            else
+            {
+                cacheKey = string.Format("action:{0},username:{1},para:{2},{3}", "keywordrpt", session.UserName, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"));
             }
 
-            List<EntityKeywordRpt> data = (from a in lstAll
-                                           group a by new { a.date, a.keywordstr, a.adgroupid } into b
-                                           select new EntityKeywordRpt()
-                                           {
-                                               date = b.Key.date,
-                                               campaignid = b.First().campaignid,
-                                               adgroupid = b.Key.adgroupid,
-                                               keywordid = b.First().keywordid,
-                                               keywordstr = b.Key.keywordstr,
-                                               impressions = b.Sum(c => c.impressions),
-                                               click = b.Sum(c => c.click),
-                                               cost = b.Sum(c => c.cost),
-                                               ctr = b.Sum(c => c.impressions) == 0 ? 0M : Math.Round(b.Sum(c => c.click) * 100M / b.Sum(c => c.impressions), 2),
-                                               cpc = b.Sum(c => c.click) == 0 ? 0M : Math.Round(b.Sum(c => c.cost) / b.Sum(c => c.click), 2),
-                                               avgpos = b.Sum(c => c.avgpos),
-                                               directpay = b.Sum(c => c.directpay),
-                                               indirectpay = b.Sum(c => c.indirectpay),
-                                               roi = b.Sum(c => c.cost) == 0M ? 0M : Math.Round(b.Sum(c => c.directpay + c.indirectpay) / b.Sum(c => c.cost), 2),
-                                               directpaycount = b.Sum(c => c.directpaycount),
-                                               indirectpaycount = b.Sum(c => c.indirectpaycount),
-                                               favitemcount = b.Sum(c => c.favitemcount),
-                                               favshopcount = b.Sum(c => c.favshopcount)
-                                           }).ToList();
+            object cacheValue = MyCache.GetLocalCache(cacheKey);
+            if (cacheValue == null || !chkIsUseLocalCache.Checked)
+            {
+                for (int i = 0; i < gridViewAdgroup.DataRowCount; i++)
+                {
+                    ADGroup item = gridViewAdgroup.GetRow(gridViewAdgroup.GetRowHandle(i)) as ADGroup;
+                    if (item != null)
+                    {
+                        List<EntityKeywordRpt> lstBase = null; List<EntityKeywordRpt> lstEffect = null;
+                        if (chkKeywordRptRecentDays.Checked)
+                        {
+                            if (chkSoureDistinguish.Checked)
+                            {//区分站内站外
+                                lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, intReportDays, "1,2");
+                                lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, intReportDays, "1,2");
+                            }
+                            else
+                            {//不区分站内站外
+                                lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, intReportDays);
+                                lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, intReportDays);
+                            }
+                        }
+                        else if (chkKeywordRptDtp.Checked)
+                        {
+                            if (chkSoureDistinguish.Checked)
+                            {//区分站内站外
+                                lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"), "1,2");
+                                lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"), "1,2");
+                            }
+                            else
+                            {//不区分站内站外
+                                lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"));
+                                lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"));
+                            }
+                        }
+                        if (lstBase != null)
+                            lstAll.AddRange(lstBase);
+                        if (lstEffect != null)
+                            lstAll.AddRange(lstEffect);
+                    }
+                }
+                MyCache.SetLocalCache(cacheKey, lstAll);
+            }
+            else
+            {
+                lstAll = cacheValue as List<EntityKeywordRpt>;
+                MessageBox.Show("本地缓存获取");
+            }
+
+            List<EntityKeywordRpt> data = new List<EntityKeywordRpt>();
+            if (chkSoureDistinguish.Checked)
+            {//区分站内站外来源
+                data = (from a in lstAll
+                        group a by new { a.date, a.keywordstr, a.adgroupid, a.source } into b
+                        select new EntityKeywordRpt()
+                        {
+                            date = b.Key.date,
+                            campaignid = b.First().campaignid,
+                            adgroupid = b.Key.adgroupid,
+                            keywordid = b.First().keywordid,
+                            keywordstr = b.Key.keywordstr,
+                            source = b.Key.source,
+                            impressions = b.Sum(c => c.impressions),
+                            click = b.Sum(c => c.click),
+                            cost = b.Sum(c => c.cost),
+                            ctr = b.Sum(c => c.impressions) == 0 ? 0M : Math.Round(b.Sum(c => c.click) * 100M / b.Sum(c => c.impressions), 2),
+                            cpc = b.Sum(c => c.click) == 0 ? 0M : Math.Round(b.Sum(c => c.cost) / b.Sum(c => c.click), 2),
+                            avgpos = b.Sum(c => c.avgpos),
+                            directpay = b.Sum(c => c.directpay),
+                            indirectpay = b.Sum(c => c.indirectpay),
+                            roi = b.Sum(c => c.cost) == 0M ? 0M : Math.Round(b.Sum(c => c.directpay + c.indirectpay) / b.Sum(c => c.cost), 2),
+                            directpaycount = b.Sum(c => c.directpaycount),
+                            indirectpaycount = b.Sum(c => c.indirectpaycount),
+                            favitemcount = b.Sum(c => c.favitemcount),
+                            favshopcount = b.Sum(c => c.favshopcount)
+                        }).ToList();
+            }
+            else
+            {//不区分站内站外
+                data = (from a in lstAll
+                        group a by new { a.date, a.keywordstr, a.adgroupid } into b
+                        select new EntityKeywordRpt()
+                        {
+                            date = b.Key.date,
+                            campaignid = b.First().campaignid,
+                            adgroupid = b.Key.adgroupid,
+                            keywordid = b.First().keywordid,
+                            keywordstr = b.Key.keywordstr,
+                            impressions = b.Sum(c => c.impressions),
+                            click = b.Sum(c => c.click),
+                            cost = b.Sum(c => c.cost),
+                            ctr = b.Sum(c => c.impressions) == 0 ? 0M : Math.Round(b.Sum(c => c.click) * 100M / b.Sum(c => c.impressions), 2),
+                            cpc = b.Sum(c => c.click) == 0 ? 0M : Math.Round(b.Sum(c => c.cost) / b.Sum(c => c.click), 2),
+                            directpay = b.Sum(c => c.directpay),
+                            indirectpay = b.Sum(c => c.indirectpay),
+                            roi = b.Sum(c => c.cost) == 0M ? 0M : Math.Round(b.Sum(c => c.directpay + c.indirectpay) / b.Sum(c => c.cost), 2),
+                            directpaycount = b.Sum(c => c.directpaycount),
+                            indirectpaycount = b.Sum(c => c.indirectpaycount),
+                            favitemcount = b.Sum(c => c.favitemcount),
+                            favshopcount = b.Sum(c => c.favshopcount)
+                        }).ToList();
+            }
+
+
             gridControlKeywordRpt.DataSource = data;
 
         }

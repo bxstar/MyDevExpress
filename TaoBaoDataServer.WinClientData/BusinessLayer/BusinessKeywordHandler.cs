@@ -394,9 +394,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
-        /// 下载关键词的基本报表数据
+        /// 线上，下载关键词的基本报表数据，最近多少天
         /// </summary>
-        public List<EntityKeywordRpt> DownLoadKeywordBaseReport(TopSession session, long campaignId, long adgroupId, int days)
+        public List<EntityKeywordRpt> DownLoadKeywordBaseReport(TopSession session, long campaignId, long adgroupId, int days, string source = "SUMMARY")
         {
             List<EntityKeywordRpt> lstAll = new List<EntityKeywordRpt>();
             //每页返回
@@ -407,7 +407,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 i = i + 1;
                 DateTime dtStart = DateTime.Now;
                 // 下载推广组基础报表
-                var response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SEARCH", pageSize, i, "SUMMARY");
+                var response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SEARCH", pageSize, i, source);
 
                 if (response.IsError)
                 {
@@ -417,7 +417,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         while (isBanError)
                         {
                             System.Threading.Thread.Sleep(2000);
-                            response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SEARCH", pageSize, i, "SUMMARY");
+                            response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SEARCH", pageSize, i, source);
                             if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
                             {//超过5分钟放弃
                                 isBanError = true;
@@ -460,14 +460,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         rpt.impressions = item.impressions == null ? 0 : item.impressions;
                         rpt.click = item.click == null ? 0 : item.click;
                         rpt.cost = item.cost == null ? 0M : item.cost;
-                        rpt.source = item.source == null ? string.Empty : item.source;
+                        rpt.source = item.source == null ? string.Empty : Convert.ToString(item.source);
                         rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
-                        //if (rpt.source == 1)
-                        //{
-                        //    rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;     //只保存站内的排名
-                        //}
                         rpt.searchtype = item.searchtype;
-                        rpt.source = item.source;
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }
@@ -483,7 +478,10 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             return lstAll;
         }
 
-        public List<EntityKeywordRpt> DownLoadKeywordBaseReport(TopSession session, long campaignId, long adgroupId, string startDay, string endDay)
+        /// <summary>
+        /// 线上，下载关键词的基本报表数据，时间范围
+        /// </summary>
+        public List<EntityKeywordRpt> DownLoadKeywordBaseReport(TopSession session, long campaignId, long adgroupId, string startDay, string endDay, string source = "SUMMARY")
         {
             List<EntityKeywordRpt> lstAll = new List<EntityKeywordRpt>();
             //每页返回
@@ -494,7 +492,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 i = i + 1;
                 DateTime dtStart = DateTime.Now;
                 // 下载推广组基础报表
-                var response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, startDay, endDay, "SEARCH", pageSize, i, "SUMMARY");
+                var response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, startDay, endDay, "SEARCH", pageSize, i, source);
 
                 if (response.IsError)
                 {
@@ -504,7 +502,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         while (isBanError)
                         {
                             System.Threading.Thread.Sleep(2000);
-                            response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, startDay, endDay, "SEARCH", pageSize, i, "SUMMARY");
+                            response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, startDay, endDay, "SEARCH", pageSize, i, source);
                             if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
                             {//超过5分钟放弃
                                 isBanError = true;
@@ -547,14 +545,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         rpt.impressions = item.impressions == null ? 0 : item.impressions;
                         rpt.click = item.click == null ? 0 : item.click;
                         rpt.cost = item.cost == null ? 0M : item.cost;
-                        rpt.source = item.source == null ? string.Empty : item.source;
+                        rpt.source = item.source == null ? string.Empty : Convert.ToString(item.source);
                         rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
-                        //if (rpt.source == 1)
-                        //{
-                        //    rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;     //只保存站内的排名
-                        //}
                         rpt.searchtype = item.searchtype;
-                        rpt.source = item.source;
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }
@@ -571,9 +564,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
-        /// 开始下载关键词的效果报表数据
+        /// 线上，开始下载关键词的效果报表数据，最近多少天
         /// </summary>
-        public List<EntityKeywordRpt> DownLoadKeywordEffectReport(TopSession session, long campaignId, long adgroupId, int days)
+        public List<EntityKeywordRpt> DownLoadKeywordEffectReport(TopSession session, long campaignId, long adgroupId, int days, string source = "SUMMARY")
         {
             List<EntityKeywordRpt> lstAll = new List<EntityKeywordRpt>();
 
@@ -585,7 +578,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 pageIndex = pageIndex + 1;
                 DateTime dtStart = DateTime.Now;
                 // 下载推广组效果报表
-                var response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SEARCH", pageSize, pageIndex, "SUMMARY");
+                var response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SEARCH", pageSize, pageIndex, source);
                 if (response.IsError)
                 {
                     if (CommonHandler.IsBanMsg(response))
@@ -594,7 +587,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         while (isBanError)
                         {
                             System.Threading.Thread.Sleep(2000);
-                            response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SEARCH", pageSize, pageIndex, "SUMMARY");
+                            response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SEARCH", pageSize, pageIndex, source);
                             if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
                             {//超过5分钟放弃
                                 isBanError = true;
@@ -637,7 +630,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
                         rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
                         rpt.searchtype = item.searchtype;
-                        rpt.source = item.source;
+                        rpt.source = item.source == null ? string.Empty : Convert.ToString(item.source);
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }
@@ -652,11 +645,10 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             return lstAll;
         }
 
-
         /// <summary>
-        /// 开始下载关键词的效果报表数据
+        /// 线上，开始下载关键词的效果报表数据，时间范围
         /// </summary>
-        public List<EntityKeywordRpt> DownLoadKeywordEffectReport(TopSession session, long campaignId, long adgroupId, string startDay, string endDay)
+        public List<EntityKeywordRpt> DownLoadKeywordEffectReport(TopSession session, long campaignId, long adgroupId, string startDay, string endDay, string source = "SUMMARY")
         {
             List<EntityKeywordRpt> lstAll = new List<EntityKeywordRpt>();
 
@@ -668,7 +660,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 pageIndex = pageIndex + 1;
                 DateTime dtStart = DateTime.Now;
                 // 下载推广组效果报表
-                var response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, startDay, endDay, "SEARCH", pageSize, pageIndex, "SUMMARY");
+                var response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, startDay, endDay, "SEARCH", pageSize, pageIndex, source);
                 if (response.IsError)
                 {
                     if (CommonHandler.IsBanMsg(response))
@@ -677,7 +669,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         while (isBanError)
                         {
                             System.Threading.Thread.Sleep(2000);
-                            response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, startDay, endDay, "SEARCH", pageSize, pageIndex, "SUMMARY");
+                            response = TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, startDay, endDay, "SEARCH", pageSize, pageIndex, source);
                             if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
                             {//超过5分钟放弃
                                 isBanError = true;
@@ -720,7 +712,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
                         rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
                         rpt.searchtype = item.searchtype;
-                        rpt.source = item.source;
+                        rpt.source = item.source == null ? string.Empty : Convert.ToString(item.source);
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }

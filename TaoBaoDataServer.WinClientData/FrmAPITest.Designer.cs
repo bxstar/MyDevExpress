@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.gridControlUser = new DevExpress.XtraGrid.GridControl();
@@ -65,6 +66,7 @@
             this.txtToken = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.btnCheckAddPrice = new System.Windows.Forms.Button();
             this.btnGetMajorCampaign = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
@@ -77,11 +79,11 @@
             this.btnGetCampaign = new System.Windows.Forms.Button();
             this.txtBudget = new System.Windows.Forms.TextBox();
             this.dgvCampaign = new System.Windows.Forms.DataGridView();
-            this.cMenuDgvCampaign = new System.Windows.Forms.ContextMenuStrip();
+            this.cMenuDgvCampaign = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.同步推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gridControlAdgroup = new DevExpress.XtraGrid.GridControl();
-            this.cMenuDgvAdgroup = new System.Windows.Forms.ContextMenuStrip();
+            this.cMenuDgvAdgroup = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.设置黑白名单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.同步关键词ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.网页打开宝贝ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,7 +99,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.gridControlKeyword = new DevExpress.XtraGrid.GridControl();
-            this.cMenuDgvKeyword = new System.Windows.Forms.ContextMenuStrip();
+            this.cMenuDgvKeyword = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.查询排名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewKeyword = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -116,10 +118,28 @@
             this.dgvQscore = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.gridControlKeywordRpt = new DevExpress.XtraGrid.GridControl();
-            this.cMenuDgvKeywordRpt = new System.Windows.Forms.ContextMenuStrip();
+            this.cMenuDgvKeywordRpt = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.查看推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewKeywordRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colKeywordRptDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptAdgroupId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptKeywordStr = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptImpressions = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptClick = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptCost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptCtr = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptCpc = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptPay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptDirectpay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptIndirectpay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptPayCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptFavcount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptFavItemCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptRoi = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptAvgPos = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colKeywordRptSource = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.chkSoureDistinguish = new System.Windows.Forms.CheckBox();
             this.btnNewKeywordRptForm = new System.Windows.Forms.Button();
             this.gbxDtp = new System.Windows.Forms.GroupBox();
             this.dtpKeywordRptEndDay = new System.Windows.Forms.DateTimePicker();
@@ -155,7 +175,7 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.btnCheckAddPrice = new System.Windows.Forms.Button();
+            this.chkIsUseLocalCache = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -532,6 +552,16 @@
             this.panel8.Size = new System.Drawing.Size(1062, 123);
             this.panel8.TabIndex = 7;
             // 
+            // btnCheckAddPrice
+            // 
+            this.btnCheckAddPrice.Location = new System.Drawing.Point(602, 79);
+            this.btnCheckAddPrice.Name = "btnCheckAddPrice";
+            this.btnCheckAddPrice.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckAddPrice.TabIndex = 8;
+            this.btnCheckAddPrice.Text = "加价检测";
+            this.btnCheckAddPrice.UseVisualStyleBackColor = true;
+            this.btnCheckAddPrice.Click += new System.EventHandler(this.btnCheckAddPrice_Click);
+            // 
             // btnGetMajorCampaign
             // 
             this.btnGetMajorCampaign.Location = new System.Drawing.Point(38, 25);
@@ -632,35 +662,35 @@
             // 
             // dgvCampaign
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvCampaign.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCampaign.ContextMenuStrip = this.cMenuDgvCampaign;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvCampaign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCampaign.Location = new System.Drawing.Point(3, 3);
             this.dgvCampaign.Name = "dgvCampaign";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvCampaign.RowTemplate.Height = 23;
             this.dgvCampaign.Size = new System.Drawing.Size(1062, 352);
             this.dgvCampaign.TabIndex = 0;
@@ -1016,35 +1046,35 @@
             // 
             this.dgvQscore.AllowUserToAddRows = false;
             this.dgvQscore.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvQscore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvQscore.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvQscore.Location = new System.Drawing.Point(3, 3);
             this.dgvQscore.Name = "dgvQscore";
             this.dgvQscore.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvQscore.RowTemplate.Height = 23;
             this.dgvQscore.Size = new System.Drawing.Size(1062, 469);
             this.dgvQscore.TabIndex = 0;
@@ -1090,14 +1120,180 @@
             // 
             // gridViewKeywordRpt
             // 
+            this.gridViewKeywordRpt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colKeywordRptDate,
+            this.colKeywordRptAdgroupId,
+            this.colKeywordRptKeywordStr,
+            this.colKeywordRptImpressions,
+            this.colKeywordRptClick,
+            this.colKeywordRptCost,
+            this.colKeywordRptCtr,
+            this.colKeywordRptCpc,
+            this.colKeywordRptPay,
+            this.colKeywordRptDirectpay,
+            this.colKeywordRptIndirectpay,
+            this.colKeywordRptPayCount,
+            this.colKeywordRptFavcount,
+            this.colKeywordRptFavItemCount,
+            this.colKeywordRptRoi,
+            this.colKeywordRptAvgPos,
+            this.colKeywordRptSource});
             this.gridViewKeywordRpt.GridControl = this.gridControlKeywordRpt;
             this.gridViewKeywordRpt.Name = "gridViewKeywordRpt";
             this.gridViewKeywordRpt.OptionsSelection.MultiSelect = true;
             this.gridViewKeywordRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
             this.gridViewKeywordRpt.OptionsView.ShowGroupPanel = false;
             // 
+            // colKeywordRptDate
+            // 
+            this.colKeywordRptDate.Caption = "date";
+            this.colKeywordRptDate.FieldName = "date";
+            this.colKeywordRptDate.Name = "colKeywordRptDate";
+            this.colKeywordRptDate.Visible = true;
+            this.colKeywordRptDate.VisibleIndex = 0;
+            this.colKeywordRptDate.Width = 74;
+            // 
+            // colKeywordRptAdgroupId
+            // 
+            this.colKeywordRptAdgroupId.Caption = "adgroupid";
+            this.colKeywordRptAdgroupId.FieldName = "adgroupid";
+            this.colKeywordRptAdgroupId.Name = "colKeywordRptAdgroupId";
+            this.colKeywordRptAdgroupId.Visible = true;
+            this.colKeywordRptAdgroupId.VisibleIndex = 1;
+            this.colKeywordRptAdgroupId.Width = 74;
+            // 
+            // colKeywordRptKeywordStr
+            // 
+            this.colKeywordRptKeywordStr.Caption = "keywordstr";
+            this.colKeywordRptKeywordStr.FieldName = "keywordstr";
+            this.colKeywordRptKeywordStr.Name = "colKeywordRptKeywordStr";
+            this.colKeywordRptKeywordStr.Visible = true;
+            this.colKeywordRptKeywordStr.VisibleIndex = 2;
+            this.colKeywordRptKeywordStr.Width = 150;
+            // 
+            // colKeywordRptImpressions
+            // 
+            this.colKeywordRptImpressions.Caption = "imp";
+            this.colKeywordRptImpressions.FieldName = "impressions";
+            this.colKeywordRptImpressions.Name = "colKeywordRptImpressions";
+            this.colKeywordRptImpressions.Visible = true;
+            this.colKeywordRptImpressions.VisibleIndex = 3;
+            this.colKeywordRptImpressions.Width = 50;
+            // 
+            // colKeywordRptClick
+            // 
+            this.colKeywordRptClick.Caption = "click";
+            this.colKeywordRptClick.FieldName = "click";
+            this.colKeywordRptClick.Name = "colKeywordRptClick";
+            this.colKeywordRptClick.Visible = true;
+            this.colKeywordRptClick.VisibleIndex = 4;
+            this.colKeywordRptClick.Width = 50;
+            // 
+            // colKeywordRptCost
+            // 
+            this.colKeywordRptCost.Caption = "cost";
+            this.colKeywordRptCost.FieldName = "cost";
+            this.colKeywordRptCost.Name = "colKeywordRptCost";
+            this.colKeywordRptCost.Visible = true;
+            this.colKeywordRptCost.VisibleIndex = 5;
+            this.colKeywordRptCost.Width = 50;
+            // 
+            // colKeywordRptCtr
+            // 
+            this.colKeywordRptCtr.Caption = "ctr";
+            this.colKeywordRptCtr.FieldName = "ctr";
+            this.colKeywordRptCtr.Name = "colKeywordRptCtr";
+            this.colKeywordRptCtr.Visible = true;
+            this.colKeywordRptCtr.VisibleIndex = 6;
+            this.colKeywordRptCtr.Width = 50;
+            // 
+            // colKeywordRptCpc
+            // 
+            this.colKeywordRptCpc.Caption = "cpc";
+            this.colKeywordRptCpc.FieldName = "cpc";
+            this.colKeywordRptCpc.Name = "colKeywordRptCpc";
+            this.colKeywordRptCpc.Visible = true;
+            this.colKeywordRptCpc.VisibleIndex = 7;
+            this.colKeywordRptCpc.Width = 50;
+            // 
+            // colKeywordRptPay
+            // 
+            this.colKeywordRptPay.Caption = "pay";
+            this.colKeywordRptPay.FieldName = "pay";
+            this.colKeywordRptPay.Name = "colKeywordRptPay";
+            this.colKeywordRptPay.Visible = true;
+            this.colKeywordRptPay.VisibleIndex = 8;
+            this.colKeywordRptPay.Width = 50;
+            // 
+            // colKeywordRptDirectpay
+            // 
+            this.colKeywordRptDirectpay.Caption = "directpay";
+            this.colKeywordRptDirectpay.FieldName = "directpay";
+            this.colKeywordRptDirectpay.Name = "colKeywordRptDirectpay";
+            this.colKeywordRptDirectpay.Width = 50;
+            // 
+            // colKeywordRptIndirectpay
+            // 
+            this.colKeywordRptIndirectpay.Caption = "indirectpay";
+            this.colKeywordRptIndirectpay.FieldName = "indirectpay";
+            this.colKeywordRptIndirectpay.Name = "colKeywordRptIndirectpay";
+            this.colKeywordRptIndirectpay.Width = 50;
+            // 
+            // colKeywordRptPayCount
+            // 
+            this.colKeywordRptPayCount.Caption = "paycount";
+            this.colKeywordRptPayCount.FieldName = "paycount";
+            this.colKeywordRptPayCount.Name = "colKeywordRptPayCount";
+            this.colKeywordRptPayCount.Visible = true;
+            this.colKeywordRptPayCount.VisibleIndex = 9;
+            this.colKeywordRptPayCount.Width = 60;
+            // 
+            // colKeywordRptFavcount
+            // 
+            this.colKeywordRptFavcount.Caption = "favcount";
+            this.colKeywordRptFavcount.FieldName = "favcount";
+            this.colKeywordRptFavcount.Name = "colKeywordRptFavcount";
+            this.colKeywordRptFavcount.Visible = true;
+            this.colKeywordRptFavcount.VisibleIndex = 10;
+            this.colKeywordRptFavcount.Width = 60;
+            // 
+            // colKeywordRptFavItemCount
+            // 
+            this.colKeywordRptFavItemCount.Caption = "favitemcount";
+            this.colKeywordRptFavItemCount.FieldName = "favitemcount";
+            this.colKeywordRptFavItemCount.Name = "colKeywordRptFavItemCount";
+            this.colKeywordRptFavItemCount.Width = 50;
+            // 
+            // colKeywordRptRoi
+            // 
+            this.colKeywordRptRoi.Caption = "roi";
+            this.colKeywordRptRoi.FieldName = "roi";
+            this.colKeywordRptRoi.Name = "colKeywordRptRoi";
+            this.colKeywordRptRoi.Visible = true;
+            this.colKeywordRptRoi.VisibleIndex = 11;
+            this.colKeywordRptRoi.Width = 39;
+            // 
+            // colKeywordRptAvgPos
+            // 
+            this.colKeywordRptAvgPos.Caption = "avgpos";
+            this.colKeywordRptAvgPos.FieldName = "avgpos";
+            this.colKeywordRptAvgPos.Name = "colKeywordRptAvgPos";
+            this.colKeywordRptAvgPos.Visible = true;
+            this.colKeywordRptAvgPos.VisibleIndex = 12;
+            this.colKeywordRptAvgPos.Width = 50;
+            // 
+            // colKeywordRptSource
+            // 
+            this.colKeywordRptSource.Caption = "source";
+            this.colKeywordRptSource.FieldName = "source";
+            this.colKeywordRptSource.Name = "colKeywordRptSource";
+            this.colKeywordRptSource.Visible = true;
+            this.colKeywordRptSource.VisibleIndex = 13;
+            this.colKeywordRptSource.Width = 290;
+            // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.chkSoureDistinguish);
             this.panel4.Controls.Add(this.btnNewKeywordRptForm);
             this.panel4.Controls.Add(this.gbxDtp);
             this.panel4.Controls.Add(this.gbxRecentDays);
@@ -1110,6 +1306,16 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1062, 56);
             this.panel4.TabIndex = 2;
+            // 
+            // chkSoureDistinguish
+            // 
+            this.chkSoureDistinguish.AutoSize = true;
+            this.chkSoureDistinguish.Location = new System.Drawing.Point(25, 19);
+            this.chkSoureDistinguish.Name = "chkSoureDistinguish";
+            this.chkSoureDistinguish.Size = new System.Drawing.Size(84, 16);
+            this.chkSoureDistinguish.TabIndex = 13;
+            this.chkSoureDistinguish.Text = "区分站内外";
+            this.chkSoureDistinguish.UseVisualStyleBackColor = true;
             // 
             // btnNewKeywordRptForm
             // 
@@ -1126,15 +1332,15 @@
             this.gbxDtp.Controls.Add(this.dtpKeywordRptEndDay);
             this.gbxDtp.Controls.Add(this.label13);
             this.gbxDtp.Controls.Add(this.dtpKeywordRptStartDay);
-            this.gbxDtp.Location = new System.Drawing.Point(260, 6);
+            this.gbxDtp.Location = new System.Drawing.Point(324, 6);
             this.gbxDtp.Name = "gbxDtp";
-            this.gbxDtp.Size = new System.Drawing.Size(305, 39);
+            this.gbxDtp.Size = new System.Drawing.Size(266, 39);
             this.gbxDtp.TabIndex = 11;
             this.gbxDtp.TabStop = false;
             // 
             // dtpKeywordRptEndDay
             // 
-            this.dtpKeywordRptEndDay.Location = new System.Drawing.Point(164, 12);
+            this.dtpKeywordRptEndDay.Location = new System.Drawing.Point(141, 11);
             this.dtpKeywordRptEndDay.Name = "dtpKeywordRptEndDay";
             this.dtpKeywordRptEndDay.Size = new System.Drawing.Size(118, 21);
             this.dtpKeywordRptEndDay.TabIndex = 8;
@@ -1142,7 +1348,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(141, 16);
+            this.label13.Location = new System.Drawing.Point(118, 16);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(17, 12);
             this.label13.TabIndex = 7;
@@ -1150,7 +1356,7 @@
             // 
             // dtpKeywordRptStartDay
             // 
-            this.dtpKeywordRptStartDay.Location = new System.Drawing.Point(29, 12);
+            this.dtpKeywordRptStartDay.Location = new System.Drawing.Point(6, 11);
             this.dtpKeywordRptStartDay.Name = "dtpKeywordRptStartDay";
             this.dtpKeywordRptStartDay.Size = new System.Drawing.Size(106, 21);
             this.dtpKeywordRptStartDay.TabIndex = 6;
@@ -1160,7 +1366,7 @@
             this.gbxRecentDays.Controls.Add(this.label8);
             this.gbxRecentDays.Controls.Add(this.label9);
             this.gbxRecentDays.Controls.Add(this.txtReportDays);
-            this.gbxRecentDays.Location = new System.Drawing.Point(49, 6);
+            this.gbxRecentDays.Location = new System.Drawing.Point(143, 6);
             this.gbxRecentDays.Name = "gbxRecentDays";
             this.gbxRecentDays.Size = new System.Drawing.Size(150, 39);
             this.gbxRecentDays.TabIndex = 10;
@@ -1195,7 +1401,7 @@
             // chkKeywordRptRecentDays
             // 
             this.chkKeywordRptRecentDays.AutoSize = true;
-            this.chkKeywordRptRecentDays.Location = new System.Drawing.Point(28, 18);
+            this.chkKeywordRptRecentDays.Location = new System.Drawing.Point(122, 20);
             this.chkKeywordRptRecentDays.Name = "chkKeywordRptRecentDays";
             this.chkKeywordRptRecentDays.Size = new System.Drawing.Size(15, 14);
             this.chkKeywordRptRecentDays.TabIndex = 9;
@@ -1205,7 +1411,7 @@
             // chkKeywordRptDtp
             // 
             this.chkKeywordRptDtp.AutoSize = true;
-            this.chkKeywordRptDtp.Location = new System.Drawing.Point(239, 18);
+            this.chkKeywordRptDtp.Location = new System.Drawing.Point(303, 21);
             this.chkKeywordRptDtp.Name = "chkKeywordRptDtp";
             this.chkKeywordRptDtp.Size = new System.Drawing.Size(15, 14);
             this.chkKeywordRptDtp.TabIndex = 5;
@@ -1407,6 +1613,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkIsUseLocalCache);
             this.panel1.Controls.Add(this.btnNickAndSession);
             this.panel1.Controls.Add(this.cbxApp);
             this.panel1.Controls.Add(this.btnGetTopSession);
@@ -1422,7 +1629,7 @@
             // 
             // btnNickAndSession
             // 
-            this.btnNickAndSession.Location = new System.Drawing.Point(715, 49);
+            this.btnNickAndSession.Location = new System.Drawing.Point(563, 48);
             this.btnNickAndSession.Name = "btnNickAndSession";
             this.btnNickAndSession.Size = new System.Drawing.Size(116, 23);
             this.btnNickAndSession.TabIndex = 5;
@@ -1453,15 +1660,17 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // btnCheckAddPrice
+            // chkIsUseLocalCache
             // 
-            this.btnCheckAddPrice.Location = new System.Drawing.Point(602, 79);
-            this.btnCheckAddPrice.Name = "btnCheckAddPrice";
-            this.btnCheckAddPrice.Size = new System.Drawing.Size(75, 23);
-            this.btnCheckAddPrice.TabIndex = 8;
-            this.btnCheckAddPrice.Text = "加价检测";
-            this.btnCheckAddPrice.UseVisualStyleBackColor = true;
-            this.btnCheckAddPrice.Click += new System.EventHandler(this.btnCheckAddPrice_Click);
+            this.chkIsUseLocalCache.AutoSize = true;
+            this.chkIsUseLocalCache.Checked = true;
+            this.chkIsUseLocalCache.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIsUseLocalCache.Location = new System.Drawing.Point(715, 52);
+            this.chkIsUseLocalCache.Name = "chkIsUseLocalCache";
+            this.chkIsUseLocalCache.Size = new System.Drawing.Size(96, 16);
+            this.chkIsUseLocalCache.TabIndex = 6;
+            this.chkIsUseLocalCache.Text = "使用本地缓存";
+            this.chkIsUseLocalCache.UseVisualStyleBackColor = true;
             // 
             // FrmAPITest
             // 
@@ -1653,5 +1862,24 @@
         private System.Windows.Forms.TextBox txtDeadLine;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button btnCheckAddPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptAdgroupId;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptKeywordStr;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptImpressions;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptClick;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptCost;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptCtr;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptCpc;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptAvgPos;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptDirectpay;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptIndirectpay;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptRoi;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptPay;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptPayCount;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptFavcount;
+        private DevExpress.XtraGrid.Columns.GridColumn colKeywordRptFavItemCount;
+        private System.Windows.Forms.CheckBox chkSoureDistinguish;
+        private System.Windows.Forms.CheckBox chkIsUseLocalCache;
     }
 }

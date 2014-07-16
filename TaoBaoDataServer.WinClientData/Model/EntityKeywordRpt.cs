@@ -39,31 +39,73 @@ namespace TaoBaoDataServer.WinClientData.Model
 
         public decimal cpc { get; set; }
 
+        /// <summary>
+        /// 平均排名
+        /// </summary>
         public decimal avgpos { get; set; }
 
+        /// <summary>
+        /// 直接转化金额，单位（元）
+        /// </summary>
         public decimal directpay { get; set; }
 
-
+        /// <summary>
+        /// 间接转化金额，单位（元）
+        /// </summary>
         public decimal indirectpay { get; set; }
+
+        /// <summary>
+        /// 总转化金额，单位（元）
+        /// </summary>
+        public decimal pay
+        {
+            get { return directpay + indirectpay; }
+        }
 
         public decimal roi { get; set; }
 
-
+        /// <summary>
+        /// 直接转化数
+        /// </summary>
         public int directpaycount { get; set; }
 
-
+        /// <summary>
+        /// 间接转化数
+        /// </summary>
         public int indirectpaycount { get; set; }
 
+        /// <summary>
+        /// 总转化数
+        /// </summary>
+        public int paycount
+        {
+            get { return directpaycount + indirectpaycount; }
+        }
 
+        /// <summary>
+        /// 宝贝收藏数
+        /// </summary>
         public int favitemcount { get; set; }
 
-
+        /// <summary>
+        /// 店铺收藏数
+        /// </summary>
         public int favshopcount { get; set; }
 
+        /// <summary>
+        /// 总收藏数
+        /// </summary>
+        public int favcount
+        {
+            get { return favitemcount + favshopcount; }
+
+        }
 
         public string searchtype { get; set; }
 
-
+        /// <summary>
+        /// 来源，1站内，2站外
+        /// </summary>
         public string source { get; set; }
 
         /// <summary>
