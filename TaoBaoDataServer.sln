@@ -21,7 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLL", "DLL", "{ADADD7CC-11F
 		Dll\ServiceStack.Interfaces.dll = Dll\ServiceStack.Interfaces.dll
 		Dll\ServiceStack.Redis.dll = Dll\ServiceStack.Redis.dll
 		Dll\ServiceStack.Text.dll = Dll\ServiceStack.Text.dll
-		C:\Program Files (x86)\DevExpress 13.2\Components\Bin\Framework\System.Windows.Interactivity.dll = C:\Program Files (x86)\DevExpress 13.2\Components\Bin\Framework\System.Windows.Interactivity.dll
 		Dll\TopSdk.dll = Dll\TopSdk.dll
 		Dll\WeifenLuo.WinFormsUI.Docking.dll = Dll\WeifenLuo.WinFormsUI.Docking.dll
 	EndProjectSection

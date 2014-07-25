@@ -278,8 +278,9 @@ namespace TaoBaoDataServer.WinClientData
                         {
                             if (chkSoureDistinguish.Checked)
                             {//区分站内站外
-                                lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, intReportDays, "1,2");
-                                lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, intReportDays, "1,2");
+                                MessageBox.Show("API不支持暂时无法实现");
+                                //lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, intReportDays, "1,2");
+                                //lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, intReportDays, "1,2");
                             }
                             else
                             {//不区分站内站外
@@ -291,8 +292,9 @@ namespace TaoBaoDataServer.WinClientData
                         {
                             if (chkSoureDistinguish.Checked)
                             {//区分站内站外
-                                lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"), "1,2");
-                                lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"), "1,2");
+                                MessageBox.Show("API不支持暂时无法实现");
+                                //lstBase = keywordHandler.DownLoadKeywordBaseReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"), "1,2");
+                                //lstEffect = keywordHandler.DownLoadKeywordEffectReport(session, item.CampaignId, item.AdgroupId, dtpKeywordRptStartDay.Value.ToString("yyyy-MM-dd"), dtpKeywordRptEndDay.Value.ToString("yyyy-MM-dd"), "1,2");
                             }
                             else
                             {//不区分站内站外
@@ -406,121 +408,6 @@ namespace TaoBaoDataServer.WinClientData
             return null;
         }
 
-        /// <summary>
-        /// 下载推广计划的基本报表，将淘宝的推广计划基础和效果数据下载或更新到数据库
-        /// </summary>
-        public string DownLoadCamapginBaseReport(TopSession session)
-        {
-            try
-            {
-                DateTime dtStart = DateTime.Now;
-                // 下载推广计划的基本报表
-                var report = taobaoApiHandler.TaobaoSimbaRptCampaignbaseGet(session, System.DateTime.Now.AddDays(-30).Date.ToString("yyyy-MM-dd"), System.DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"));
-                if (report.IsError)
-                {
-                    if (report.ErrMsg.Contains("ban") || report.SubErrMsg.Contains("ban"))
-                    {//遇到频繁访问的错误，需要多次访问
-                        Boolean isBanError = true;
-                        while (isBanError)
-                        {
-                            System.Threading.Thread.Sleep(2000);
-                            report = taobaoApiHandler.TaobaoSimbaRptCampaignbaseGet(session, System.DateTime.Now.AddDays(-30).Date.ToString("yyyy-MM-dd"), System.DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"));
-                            if (report.IsError && (report.ErrMsg.Contains("ban") || report.SubErrMsg.Contains("ban")) && dtStart.AddMinutes(5) > DateTime.Now)
-                            {//超过5分钟放弃
-                                isBanError = true;
-                            }
-                            else
-                            {
-                                if (dtStart.AddMinutes(5) <= DateTime.Now)
-                                {
-                                    logger.Error("线上下载推广计划的基本报表出错，已重试5分钟" + report.Body);
-                                    return null;
-                                }
-                                isBanError = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                return report.RptCampaignBaseList;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("BusinessBatchHandler/DownLoadCamapginBaseReport,淘宝API下载推广计划基础报表 失败：", ex);
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 下载推广计划的效果报表，将淘宝的推广计划基础和效果数据下载或更新到数据库
-        /// </summary>
-        public string DownLoadCampaignEffectReport(TopSession session)
-        {
-            try
-            {
-                DateTime dtStart = DateTime.Now;
-                // 下载推广组效果报表
-                var report = taobaoApiHandler.TaobaoSimbaRptCampaigneffectGet(session, System.DateTime.Now.AddDays(0 - 30).Date.ToString("yyyy-MM-dd"), System.DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"));
-                if (report.IsError)
-                {
-                    if (report.ErrMsg.Contains("ban") || report.SubErrMsg.Contains("ban"))
-                    {//遇到频繁访问的错误，需要多次访问
-                        Boolean isBanError = true;
-                        while (isBanError)
-                        {
-                            System.Threading.Thread.Sleep(2000);
-                            report = taobaoApiHandler.TaobaoSimbaRptCampaigneffectGet(session, System.DateTime.Now.AddDays(0 - 30).Date.ToString("yyyy-MM-dd"), System.DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"));
-                            if (report.IsError && (report.ErrMsg.Contains("ban") || report.SubErrMsg.Contains("ban")) && dtStart.AddMinutes(5) > DateTime.Now)
-                            {//超过5分钟放弃
-                                isBanError = true;
-                            }
-                            else
-                            {
-                                if (dtStart.AddMinutes(5) <= DateTime.Now)
-                                {
-                                    logger.Error("线上下载推广计划的效果报表出错，已重试5分钟" + report.Body);
-                                    return null;
-                                }
-                                isBanError = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                return report.RptCampaignEffectList;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("BusinessBatchHandler/DownLoadCampaignEffectReport,淘宝API下载推广组效果报表 失败：", ex);
-                return null;
-            }
-        }
-
-        public static int getPageCount(int totalNum, int pageSize)
-        {
-            // 每页显示的条数 = 0 的情况
-            if (pageSize == 0)
-            {
-                return 0;
-            }
-
-            int nRemainder = totalNum % pageSize;
-            if (nRemainder > 0)
-            {
-                return totalNum / pageSize + 1;
-            }
-            else
-            {
-                return totalNum / pageSize;
-            }
-        }
-
         private void dgvCampaign_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
@@ -575,8 +462,10 @@ namespace TaoBaoDataServer.WinClientData
         {
             gridControlCampaignRpt.DataSource = null;
             TopSession session = GetSession();
-            session.CampaignId = Convert.ToInt64(txtCampaignId.Text);
-            string json = DownLoadCamapginBaseReport(session);
+            long campaignId = Convert.ToInt64(txtCampaignId.Text);
+            string strStartDay = DateTime.Now.AddDays(0 - 30).Date.ToString("yyyy-MM-dd");
+            string strEndDay = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd");
+            string json = campaignHandler.DownLoadCamapginBaseReport(session, campaignId, strStartDay, strEndDay);
             List<adrptcampaignbase> lstRpt = TechNet.JsonDeserialize<List<adrptcampaignbase>>(json);
             gridControlCampaignRpt.DataSource = lstRpt;
         }
@@ -585,75 +474,22 @@ namespace TaoBaoDataServer.WinClientData
         {
             gridControlCampaignRpt.DataSource = null;
             TopSession session = GetSession();
-            session.CampaignId = Convert.ToInt64(txtCampaignId.Text);
-            string json = DownLoadCampaignEffectReport(session);
+            long campaignId = Convert.ToInt64(txtCampaignId.Text);
+            string strStartDay = DateTime.Now.AddDays(0 - 30).Date.ToString("yyyy-MM-dd");
+            string strEndDay = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd");
+            string json = campaignHandler.DownLoadCampaignEffectReport(session, campaignId, strStartDay, strEndDay);
             List<adrptcampaigneffect> lstRpt = TechNet.JsonDeserialize<List<adrptcampaigneffect>>(json);
             gridControlCampaignRpt.DataSource = lstRpt;
         }
 
         private void btnGetCampaignRpt_Click(object sender, EventArgs e)
         {
-            gridControlCampaignRpt.DataSource = null;
             TopSession session = GetSession();
-            session.CampaignId = Convert.ToInt64(txtCampaignId.Text);
+            long campaignId = Convert.ToInt64(txtCampaignId.Text);
             List<EntityCampaignReport> lstAll = new List<EntityCampaignReport>();
-            string jsonBaseRpt = DownLoadCamapginBaseReport(session).ToLower();
-            if (!string.IsNullOrEmpty(jsonBaseRpt) && jsonBaseRpt.Length > 2)
-            {
-                var arrBaseRpt = new DynamicJsonParser().FromJson(jsonBaseRpt);
-                foreach (var item in arrBaseRpt)
-                {
-                    EntityCampaignReport rpt = new EntityCampaignReport();
-                    rpt.date = item.date;
-                    rpt.nick = item.nick;
-                    rpt.impressions = item.impressions == null ? 0 : item.impressions;
-                    rpt.click = item.click == null ? 0 : item.click;
-                    rpt.cost = item.cost == null ? 0M : item.cost;
-                    rpt.source = item.source;
-                    rpt.avgpos = item.avgpos == null ? 0M : item.avgpos;
-                    lstAll.Add(rpt);
-                }
-            }
+            lstAll = campaignHandler.DownLoadCampaignReport(session, campaignId, 30);
 
-            string jsonEffectRpt = DownLoadCampaignEffectReport(session).ToLower();
-            if (!string.IsNullOrEmpty(jsonEffectRpt) && jsonEffectRpt.Length > 2)
-            {
-                var arrEffectRpt = new DynamicJsonParser().FromJson(jsonEffectRpt);
-                foreach (var item in arrEffectRpt)
-                {
-                    EntityCampaignReport rpt = new EntityCampaignReport();
-                    rpt.date = item.date;
-                    rpt.nick = item.nick;
-                    rpt.directpay = item.directpay == null ? 0M : item.directpay;
-                    rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
-                    rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
-                    rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
-                    rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
-                    rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
-                    lstAll.Add(rpt);
-                }
-            }
-            var lstCampaignRpt = (from a in lstAll
-                                               group a by new { a.nick, a.date } into b
-                                               select new 
-                                               {
-                                                   date = b.Key.date,
-                                                   impressions = b.Sum(c => c.impressions),
-                                                   click = b.Sum(c => c.click),
-                                                   cost = b.Sum(c => c.cost),
-                                                   ctr = b.Sum(c => c.impressions) == 0 ? 0M : Math.Round(b.Sum(c => c.click) * 100M / b.Sum(c => c.impressions), 2),
-                                                   cpc = b.Sum(c => c.click) == 0 ? 0M : Math.Round(b.Sum(c => c.cost) / b.Sum(c => c.click), 2),
-                                                   avgpos = b.Sum(c => c.avgpos),
-                                                   directpay = b.Sum(c => c.directpay),
-                                                   indirectpay = b.Sum(c => c.indirectpay),
-                                                   roi = b.Sum(c => c.cost) == 0M ? 0M : Math.Round(b.Sum(c => c.directpay + c.indirectpay) / b.Sum(c => c.cost), 2),
-                                                   directpaycount = b.Sum(c => c.directpaycount),
-                                                   indirectpaycount = b.Sum(c => c.indirectpaycount),
-                                                   favitemcount = b.Sum(c => c.favitemcount),
-                                                   favshopcount = b.Sum(c => c.favshopcount)
-                                               }).ToList();
-            gridControlCampaignRpt.DataSource = lstCampaignRpt;
-            //gridControlCampaignRpt.DataSource = lstCampaignRpt.Select(o=>new {o.date,o.impressions,o.click,o.cost,o.ctr,o.cpc,o.avgpos,};
+            gridControlCampaignRpt.DataSource = new SortableBindingList<EntityCampaignReport>(lstAll);
         }
 
         private void btnGetCategoryTop_Click(object sender, EventArgs e)
@@ -664,22 +500,6 @@ namespace TaoBaoDataServer.WinClientData
             foreach (string word in result.TopWords)
             {
                 richTextBox1.AppendText(word + "\n");
-            }
-        }
-
-        public Boolean IsBanMsg(Top.Api.TopResponse response)
-        {
-            if (response.ErrMsg == null || response.SubErrMsg == null)
-            {
-                return false;
-            }
-            if (response.ErrMsg.Contains("Limited") || response.SubErrMsg.Contains("ban"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -740,195 +560,6 @@ namespace TaoBaoDataServer.WinClientData
             }
         }
 
-        private void btnUpdateKeywordRpt_Click(object sender, EventArgs e)
-        {//由于淘宝关键词报表的延迟性，需要经常手动更新转化数据
-            int days = Convert.ToInt32(numKeywordRptDays.Value);
-            Boolean isNeedUpdate = chkNeedUpdateKeywordRpt.Checked;
-
-            int validUserCount = 0;
-            foreach (var user in lstUser.Where(o => o.IsEnableMajorization))
-            {
-                EntityCampaign ec = campaignHandler.GetCampaign(user.UserID);
-
-                if (ec.campaignid > 0 && ec.dailylimit != 0M && ec.clickcost != 0M)
-                {
-                    frmOutPut.OutPutMsg(string.Format("用户{0},开始更新关键词报表", user.UserName));
-                }
-                else
-                {
-                    if (ec.campaignid > 0)
-                    {
-                        frmOutPut.OutPutMsg(string.Format("用户{0},ID{1},未设置日限额或单次点击限价", user.UserName, user.UserID));
-                    }
-                    else
-                    {
-                        frmOutPut.OutPutMsg(string.Format("用户{0},ID{1},未选择计划", user.UserName, user.UserID));
-                    }
-                    continue;
-                }
-
-                // 线上，获取计划信息
-                List<Campaign> onlineCampaign = campaignHandler.GetCampaignOnline(user);
-                // 判断从线上获取的计划是否存在
-                if (onlineCampaign == null || onlineCampaign.Count == 0)
-                {
-                    string strGetCampaignExMsg = "用户" + user.UserName + ",从淘宝API线上获取计划失败，没有得到返回的计划,可能是用户的Session过期...";
-                    frmOutPut.OutPutMsg(strGetCampaignExMsg);
-                    continue;
-                }
-                // 判断数据库中的计划在线上是否存在
-                Campaign campaign = onlineCampaign.Find(o => o.CampaignId == ec.campaignid);
-                if (campaign == null)
-                {
-                    string strOnlineCampaignFindExMsg = "用户" + user.UserName + ",从淘宝API线上获取到的计划与数据库中的计划ID没有相同的ID,请检查前端保存是否有错误...";
-                    frmOutPut.OutPutMsg(strOnlineCampaignFindExMsg);
-                    continue;
-                }
-
-                // 用户自己主动暂停计划
-                if (campaign.OnlineStatus == "offline")
-                {
-                    string strOfflineExMsg = "用户" + user.UserName + ",暂停在该计划下的推广...";
-                    frmOutPut.OutPutMsg(strOfflineExMsg);
-                    continue;
-                }
-                else
-                {
-                    // 用户被迫下线
-                    if (campaign.SettleStatus == "offline")
-                    {
-                        string message = "";
-                        if (campaign.SettleReason == "1")
-                        {// 余额不足下线
-                            message = "用户" + user.UserName + ",余额不足,已经下线...";
-                        }
-                        else if (campaign.SettleReason == "2")
-                        {// 超过日限额下线
-                            message = "用户" + user.UserName + ",超过日限额,已经下线...";
-                        }
-                        else
-                        {
-                            message = "用户" + user.UserName + ",余额不足,超过日限额,已经下线...";
-                        }
-                        frmOutPut.OutPutMsg(message);
-                        continue;
-                    }
-                }
-
-                // 线上，获取该计划下的所有推广组
-                List<ADGroup> lstAdgroupFromTaobao = adgroupHandler.GetAdgroupOnline(user, campaign.CampaignId);
-                if (lstAdgroupFromTaobao.Count == 0)
-                {
-                    string strGetAdAdgroupExMsgTaobao = "用户" + user.UserName + ",直通车后台,该计划下没有找到推广组...";
-                    frmOutPut.OutPutMsg(strGetAdAdgroupExMsgTaobao);
-                    continue;
-                }
-                // 数据库，获取推广组信息
-                List<EntityAdgroup> lstAdgroupFromDB;
-                lstAdgroupFromDB = adgroupHandler.GetAdAdgroup(user.UserID, Convert.ToInt64(campaign.CampaignId)).Where(o => o.IsEnableMajorization).ToList();
-
-                if (lstAdgroupFromDB.Count == 0)
-                {
-                    string strGetAdAdgroupExMsgDB = "用户" + user.UserName + ",没有在全自动推广计划下选择宝贝进行推广...";
-                    frmOutPut.OutPutMsg(strGetAdAdgroupExMsgDB);
-                    continue;
-                }
-                Boolean IsAdgroupExist = true;  //数据库中推广组是否在线上存在
-                List<ADGroup> lstAdgroupNeedMajor = new List<ADGroup>();    //需要优化的推广组，这部分推广组在数据库中存在，且也在线上（线上有，而数据库中没有的推广组不进行优化）
-                // 对比线上的推广组和服务器的推广组，不一致告警
-                foreach (EntityAdgroup item in lstAdgroupFromDB)
-                {
-                    ADGroup adgroupExist = lstAdgroupFromTaobao.Find(o => o.AdgroupId == item.adgroupid && o.CampaignId == item.campaignid);
-                    if (adgroupExist == null)
-                    {
-                        string strExMsg = "用户" + user.UserName + string.Format(",服务器上的推广组{0}在直通车后台不存在", item.adgroupid);
-                        frmOutPut.OutPutMsg(strExMsg);
-                        //删除服务器上的推广组，但最好告知用户不要在直通车后台删除推广组
-                        //adgroupHandler.DeleteAdgroup(item.adgroupid);
-                        IsAdgroupExist = false;
-                    }
-                    else
-                    {
-                        if (adgroupExist.OfflineType != item.offlinetype || adgroupExist.OnlineStatus != item.onlinestatus)
-                        {//将线上的推广组状态同步到本地
-                            adgroupHandler.UpdateAdgroupStatus(adgroupExist.AdgroupId, adgroupExist.OnlineStatus, adgroupExist.OfflineType);
-                        }
-                        //为了核对报表的一致性，线上暂停的推广组也下载更新其报告，但真实生产环境不这样做，真实生产环境如果用户将其设置推广中状态会继续下载其报告
-                        lstAdgroupNeedMajor.Add(adgroupExist);
-                    }
-                }
-                if (IsAdgroupExist)
-                {
-                    frmOutPut.OutPutMsg(string.Format("用户{0},ID{1},推广组数据验证成功,需要优化推广组数{2}", user.UserName, user.UserID, lstAdgroupNeedMajor.Count));
-                }
-                else
-                {
-                    frmOutPut.OutPutMsg(string.Format("用户{0},ID{1},推广组数据验证失败,已删除相应的推广组,以便继续优化,需要优化推广组数{2}", user.UserName, user.UserID, lstAdgroupNeedMajor.Count));
-                }
-
-                validUserCount++;       //有效用户数
-
-
-                foreach (ADGroup adgroupItem in lstAdgroupNeedMajor)
-                {
-                    Boolean isDifferent = false;
-                    // 下载推广组的基础报告
-                    Boolean resultDownBaseRpt = batchHandler.DownLoadKeywordBaseReport(user, adgroupItem.CampaignId, adgroupItem.AdgroupId, days, isNeedUpdate, ref isDifferent);
-                    int retryCount = 1;//重试次数，重试原因：这里不是防止ban，而是一些淘宝莫名其妙的异常比如Jayrock.Json.JsonException: The text '.' has the incorrect syntax for a number
-                    while (!resultDownBaseRpt && retryCount < 4)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},下载基础报告数据出错,重试{2}", user.UserName, adgroupItem.AdgroupId, retryCount++));
-                        resultDownBaseRpt = batchHandler.DownLoadKeywordBaseReport(user, adgroupItem.CampaignId, adgroupItem.AdgroupId, days, isNeedUpdate, ref isDifferent);
-                    }
-                    if (resultDownBaseRpt)
-                    {
-                        if (!isDifferent)
-                        {
-                            frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},下载基础报告数据成功", user.UserName, adgroupItem.AdgroupId));
-                        }
-                        else
-                        {
-                            frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},下载基础报告数据数据发生变化，需要更新", user.UserName, adgroupItem.AdgroupId));
-                        }
-                    }
-                    else
-                        frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},下载基础报告数据失败", user.UserName, adgroupItem.AdgroupId));
-
-                    isDifferent = false;
-                    // 下载推广组的效果报告
-                    Boolean resultDownEffectRpt = batchHandler.DownLoadKeywordEffectReport(user, adgroupItem.CampaignId, adgroupItem.AdgroupId, days, isNeedUpdate, ref isDifferent);
-                    retryCount = 1;
-                    while (!resultDownEffectRpt && retryCount < 4)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},下载效果报告数据出错,重试{2}", user.UserName, adgroupItem.AdgroupId, retryCount++));
-                        resultDownEffectRpt = batchHandler.DownLoadKeywordEffectReport(user, adgroupItem.CampaignId, adgroupItem.AdgroupId, days, isNeedUpdate, ref isDifferent);
-                    }
-                    if (resultDownEffectRpt)
-                    {
-                        if (!isDifferent)
-                        {
-                            frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},下载效果报告数据成功", user.UserName, adgroupItem.AdgroupId));
-                        }
-                        else
-                        {
-                            frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},下载效果报告数据数据发生变化，需要更新", user.UserName, adgroupItem.AdgroupId));
-                        }
-                    }
-                    else
-                        frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},下载效果报告数据失败", user.UserName, adgroupItem.AdgroupId));
-                    // 插入下载状态，表示推广组已经成功下载完成
-                    if (resultDownBaseRpt && resultDownEffectRpt)
-                    {
-                        frmOutPut.OutPutMsg(string.Format("用户{0},推广组:{1},成功更新关键词报表", user.UserName, adgroupItem.AdgroupId));
-                    }
-                }
-            }
-
-            frmOutPut.OutPutMsg(string.Format("有效用户数{0}", validUserCount));
-        }
-
         private void chkKeywordRptRecentDays_CheckedChanged(object sender, EventArgs e)
         {
             gbxRecentDays.Enabled = true;
@@ -948,6 +579,7 @@ namespace TaoBaoDataServer.WinClientData
             EntityKeywordRpt rpt = gridViewKeywordRpt.GetFocusedRow() as EntityKeywordRpt;
             SelectedTab("获取推广组及宝贝");
             Boolean isFind = false;
+            gridViewAdgroup.ClearSelection();
             for (int i = 0; i < gridViewAdgroup.DataRowCount; i++)
             {
                 ADGroup adgroupItem = gridViewAdgroup.GetRow(gridViewAdgroup.GetRowHandle(i)) as ADGroup;
@@ -1033,52 +665,6 @@ namespace TaoBaoDataServer.WinClientData
             {
                 MessageBox.Show(response.Body);
             }
-
-            //int needUpdateCount = 0;
-            ////批量修改计划，将淘快词名称去掉
-            //var lst = lstUser.Where(o => o.CampaignName != null && o.CampaignName.StartsWith("淘快词"));
-            //foreach (var session in lst)
-            //{
-            //    SimbaCampaignsGetResponse campaignsRes = TaobaoApiHandler.TaobaoSimbaCampaignsGet(session);
-            //    if (campaignsRes.IsError)
-            //    {
-            //        frmOutPut.OutPutMsg(string.Format("用户{0}，ID{1} 获取计划发生错误，", session.ProxyUserName, session.UserID, campaignsRes.Body));
-            //        continue;
-            //    }
-            //    Campaign campaignOnline = campaignsRes.Campaigns.Find(o => o.OnlineStatus == "online" && o.CampaignId == session.CampaignId && o.Title.StartsWith("淘快词"));
-            //    if (campaignOnline != null)
-            //    {
-            //        needUpdateCount++;
-            //    }
-            //    //var response = TaobaoApiHandler.TaobaoSimbaCampaignUpdate(session, session.CampaignId, session.CampaignName.Replace("淘快词", ""), "online");
-            //    //if (response.IsError)
-            //    //{
-            //    //    frmOutPut.OutPutMsg(string.Format("用户{0}，ID{1} 更改计划发生错误，", session.ProxyUserName, session.UserID, response.Body));
-            //    //}
-            //}
-
-            //frmOutPut.OutPutMsg(needUpdateCount.ToString());
-        }
-
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            dgvCampaign.DataSource = null;
-            TopSession session = GetSession();
-
-            //string msg = string.Empty;
-            //List<long> lstCampaignId = new List<long>();
-            //lstCampaignId.Add(Convert.ToInt64(txtCampaignId.Text));
-            //List<EntityCampaignReport> lstRpt =campaignHandler.GetCampaignRpt(session, lstCampaignId, 60, ref msg);
-
-            //DateTime dtStart = new DateTime(2013, 10, 20);
-            //DateTime dtEnd = new DateTime(2013, 10, 27);
-
-            //var response = TaobaoApiHandler.TaobaoSimbaRptCustbaseGet(session, dtStart, dtEnd, 500, 1);
-            //var response = TaobaoApiHandler.TaobaoSimbaRptCusteffectGet(session, dtStart, dtEnd, 500, 1);
-            string str = string.Empty;
-            List<EntityCampaignReport> lstReport = reportHandler.GetAllCampaignRpt(session, 30, ref str).OrderByDescending(o => o.date).ToList();
-            dgvCampaign.DataSource = new SortableBindingList<EntityCampaignReport>(lstReport);
-
         }
 
         private void 设置黑白名单ToolStripMenuItem_Click(object sender, EventArgs e)

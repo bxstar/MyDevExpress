@@ -15,7 +15,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// TopAPI
         /// </summary>
-        private static ITopClient _client = new DefaultTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
+        private ITopClient _client = new DefaultTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
 
         /// <summary>
         /// 根据参数设置top连接的客户端
@@ -24,6 +24,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         {
             _client = new DefaultTopClient(url, appKey, appSecret, format);
         }
+
 
         #region 店铺
 
@@ -534,7 +535,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             return response;
         }
 
-        public SimbaRptCampaignbaseGetResponse TaobaoSimbaRptCampaignbaseGet(TopSession session,long campaignId, string startTime, string endTime)
+        public SimbaRptCampaignbaseGetResponse TaobaoSimbaRptCampaignbaseGet(TopSession session, long campaignId, string startTime, string endTime)
         {
             var req = new SimbaRptCampaignbaseGetRequest
             {
@@ -821,7 +822,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 验证权限
         /// </summary>
-        /// <returns></returns>
         public SimbaCustomersAuthorizedGetResponse TaobaoSimbaCustomersAuthorizedGet(TopSession session)
         {
             var req = new SimbaCustomersAuthorizedGetRequest();
@@ -832,8 +832,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// taobao.simba.keywordsbyadgroupid.get 取得一个推广组的所有关键词
         /// </summary>
-        /// <param name="adGroupId"></param>
-        /// <returns></returns>
         public SimbaKeywordsbyadgroupidGetResponse TaoBaoSimbaKeywordsGet(TopSession session, long adGroupId)
         {
             var req = new SimbaKeywordsbyadgroupidGetRequest
@@ -845,63 +843,47 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             return response;
         }
 
-
-
-
         /// <summary>
-        /// 取得报表的基础数据
+        /// 取得推广计划下，所有推广组报表的基础数据
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="campaignId"></param>
-        /// <param name="starttime"></param>
-        /// <param name="endtime"></param>
-        /// <param name="source"></param>
-        /// <param name="pageNum"></param>
-        /// <param name="search_type"></param>
-        /// <returns></returns>
-        public SimbaRptCampadgroupbaseGetResponse TaobaoSimbaRptCampadgroupbaseGet(TopSession session, long campaignId, string starttime, string endtime, string source, int pageNum, string search_type)
+        public SimbaRptCampadgroupbaseGetResponse TaobaoSimbaRptCampadgroupbaseGet(TopSession session, long campaignId, string starttime, string endtime)
         {
             string subtoken = GetSubwayToken(session);
-            var req = new SimbaRptCampadgroupbaseGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, StartTime = starttime, EndTime = endtime, Source = source, PageNo = pageNum, PageSize = 500, SearchType = search_type };
+            var req = new SimbaRptCampadgroupbaseGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, StartTime = starttime, EndTime = endtime, Source = "SUMMARY", PageNo = 1, PageSize = 500, SearchType = "SUMMARY" };
             var response = _client.Execute(req, session.TopSessions);
             return response;
         }
 
         /// <summary>
-        /// 取得推广组报表的基础数据
+        /// 取得推广计划下，所有推广组报表的效果数据
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="campaignId"></param>
-        /// <param name="starttime"></param>
-        /// <param name="endtime"></param>
-        /// <param name="source"></param>
-        /// <param name="pageNum"></param>
-        /// <param name="search_type"></param>
-        /// <returns></returns>
+        public SimbaRptCampadgroupeffectGetResponse TaobaoSimbaRptCampadgroupeffectGet(TopSession session, long campaignId, string starttime, string endtime)
+        {
+            string subtoken = GetSubwayToken(session);
+            var req = new SimbaRptCampadgroupeffectGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, StartTime = starttime, EndTime = endtime, Source = "SUMMARY", PageNo = 1, PageSize = 500, SearchType = "SUMMARY" };
+            var response = _client.Execute(req, session.TopSessions);
+            return response;
+        }
+
+        /// <summary>
+        /// 取得某个推广组报表的基础数据
+        /// </summary>
         public SimbaRptAdgroupbaseGetResponse TaobaoSimbaRptAdgroupbaseGet(TopSession session, long campaignId, long adgroupId, string starttime, string endtime)
         {
             string subtoken = GetSubwayToken(session);
-            var req = new SimbaRptAdgroupbaseGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, AdgroupId = adgroupId, StartTime = starttime, EndTime = endtime, Source = "1,2", PageNo = 1, PageSize = 500, SearchType = "SUMMARY" };
+            var req = new SimbaRptAdgroupbaseGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, AdgroupId = adgroupId, StartTime = starttime, EndTime = endtime, Source = "SUMMARY", PageNo = 1, PageSize = 500, SearchType = "SUMMARY" };
             var response = _client.Execute(req, session.TopSessions);
             return response;
         }
 
 
         /// <summary>
-        /// 取得推广组效果报表的数据
+        /// 取得某个推广组报表的效果数据
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="campaignId"></param>
-        /// <param name="starttime"></param>
-        /// <param name="endtime"></param>
-        /// <param name="source"></param>
-        /// <param name="pageNum"></param>
-        /// <param name="search_type"></param>
-        /// <returns></returns>
         public SimbaRptAdgroupeffectGetResponse TaobaoSimbaRptAdgroupeffectGet(TopSession session, long campaignId, long adgroupId, string starttime, string endtime)
         {
             string subtoken = GetSubwayToken(session);
-            var req = new SimbaRptAdgroupeffectGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, AdgroupId = adgroupId, StartTime = starttime, EndTime = endtime, Source = "1,2", PageNo = 1, PageSize = 500, SearchType = "SUMMARY" };
+            var req = new SimbaRptAdgroupeffectGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, AdgroupId = adgroupId, StartTime = starttime, EndTime = endtime, Source = "SUMMARY", PageNo = 1, PageSize = 500, SearchType = "SUMMARY" };
             var response = _client.Execute(req, session.TopSessions);
             return response;
         }
@@ -951,9 +933,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// taobao.simba.rpt.adgroupkeywordbase.get 推广组下的词基础报表数据查询(明细数据不分类型查询)
         /// </summary>
-        /// <returns></returns>
         public SimbaRptAdgroupkeywordbaseGetResponse TaobaoSimbaRptAdgroupkeywordbaseGet(TopSession session,
-                                                                             string nick,
                                                                              long campaignId,
                                                                              long adgroupId,
                                                                              string startTime,
@@ -963,7 +943,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                                                                              long pageNo,
                                                                              string source)
         {
-            var req = new SimbaRptAdgroupkeywordbaseGetRequest { Nick = nick, SubwayToken = GetSubwayToken(session), CampaignId = campaignId, AdgroupId = adgroupId, StartTime = startTime, EndTime = endTime, PageNo = pageNo, PageSize = pageSize, SearchType = searchType, Source = source };
+            var req = new SimbaRptAdgroupkeywordbaseGetRequest { Nick = session.UserName, SubwayToken = GetSubwayToken(session), CampaignId = campaignId, AdgroupId = adgroupId, StartTime = startTime, EndTime = endTime, PageNo = pageNo, PageSize = pageSize, SearchType = searchType, Source = source };
             var response = _client.Execute(req, session.TopSessions);
             return response;
         }
@@ -971,22 +951,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
 
 
         /// <summary>
-        /// 获取报表效果数据
+        /// taobao.simba.rpt.adgroupkeywordeffect.get 推广组下的词效果报表数据查询(明细数据不分类型查询)
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="nick"></param>
-        /// <param name="subwayToken"></param>
-        /// <param name="campaignId"></param>
-        /// <param name="adgroupId"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <param name="searchType"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="pageNo"></param>
-        /// <param name="source"></param>
-        /// <returns></returns>
         public SimbaRptAdgroupkeywordeffectGetResponse TaobaoSimbaRptAdgroupkeywordeffectGet(TopSession session,
-                                                                            string nick,
                                                                             long campaignId,
                                                                             long adgroupId,
                                                                             string startTime,
@@ -996,7 +963,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                                                                             long pageNo,
                                                                             string source)
         {
-            var req = new SimbaRptAdgroupkeywordeffectGetRequest { Nick = nick, SubwayToken = GetSubwayToken(session), CampaignId = campaignId, AdgroupId = adgroupId, StartTime = startTime, EndTime = endTime, PageNo = pageNo, PageSize = pageSize, SearchType = searchType, Source = source };
+            var req = new SimbaRptAdgroupkeywordeffectGetRequest { Nick = session.UserName, SubwayToken = GetSubwayToken(session), CampaignId = campaignId, AdgroupId = adgroupId, StartTime = startTime, EndTime = endTime, PageNo = pageNo, PageSize = pageSize, SearchType = searchType, Source = source };
             var response = _client.Execute(req, session.TopSessions);
             return response;
         }
@@ -1105,7 +1072,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             req.StartTime = start_time;
             req.PageSize = page_size;
             req.PageNo = page_no;
-            SimbaAdgroupsChangedGetResponse response = _client.Execute(req,session.TopSessions);
+            SimbaAdgroupsChangedGetResponse response = _client.Execute(req, session.TopSessions);
             return response;
         }
 
@@ -1154,6 +1121,17 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             req.PageSize = page_size;
             req.Source = "SUMMARY";
             SimbaRptCusteffectGetResponse response = _client.Execute(req, session.TopSessions);
+            return response;
+        }
+
+        /// <summary>
+        /// taobao.simba.insight.toplevelcats.get 获取全部类目，一级类目
+        /// </summary>
+        public SimbaInsightToplevelcatsGetResponse TaobaoSimbaInsightToplevelcatsGet(TopSession session)
+        {
+            SimbaInsightToplevelcatsGetRequest req = new SimbaInsightToplevelcatsGetRequest();
+            req.Nick = session.UserName;
+            var response = _client.Execute(req, session.TopSessions);
             return response;
         }
     }

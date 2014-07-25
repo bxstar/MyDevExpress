@@ -279,5 +279,208 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             return response;
         }
 
+        /// <summary>
+        /// 调用淘宝API封装，参数类型TopSession,String,String
+        /// </summary>
+        public static T DoTaoBaoApi<T>(Func<TopSession, string, string, T> apiMethod, TopSession user, string strPara1, string strPara2, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        {
+            var response = apiMethod(user, strPara1, strPara2);
+            DateTime dtStart = DateTime.Now;
+            int banCount = 0;
+            if (response.IsError)
+            {
+                if (CommonHandler.IsBanMsg(response))
+                {//遇到频繁访问的错误，需要多次访问
+                    Boolean isBanError = true;
+                    while (isBanError)
+                    {
+                        banCount++;
+                        System.Threading.Thread.Sleep(2000 * banCount);
+                        response = apiMethod(user, strPara1, strPara2);
+                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                        {//默认，超过1分钟放弃
+                            isBanError = true;
+                        }
+                        else
+                        {
+                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                            {
+                                return response;
+                            }
+                            isBanError = false;
+                        }
+                    }
+                }
+                else if (reDoTimes > 0)
+                {//遇到一般性错误重试
+                    int times = 1;
+                    while (response.IsError && times <= reDoTimes)
+                    {
+                        times++;
+                        System.Threading.Thread.Sleep(300);
+                        response = apiMethod(user, strPara1, strPara2);
+                    }
+                }
+                else
+                {
+                    return response;
+                }
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// 调用淘宝API封装，参数类型TopSession,long,long,String,String
+        /// </summary>
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, string, string, T> apiMethod, TopSession user, long longPara1, long longPara2, string strPara3, string strPara4, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        {
+            var response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
+            DateTime dtStart = DateTime.Now;
+            int banCount = 0;
+            if (response.IsError)
+            {
+                if (CommonHandler.IsBanMsg(response))
+                {//遇到频繁访问的错误，需要多次访问
+                    Boolean isBanError = true;
+                    while (isBanError)
+                    {
+                        banCount++;
+                        System.Threading.Thread.Sleep(2000 * banCount);
+                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
+                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                        {//默认，超过1分钟放弃
+                            isBanError = true;
+                        }
+                        else
+                        {
+                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                            {
+                                return response;
+                            }
+                            isBanError = false;
+                        }
+                    }
+                }
+                else if (reDoTimes > 0)
+                {//遇到一般性错误重试
+                    int times = 1;
+                    while (response.IsError && times <= reDoTimes)
+                    {
+                        times++;
+                        System.Threading.Thread.Sleep(300);
+                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
+                    }
+                }
+                else
+                {
+                    return response;
+                }
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// 调用淘宝API封装，参数类型TopSession,long,String,String
+        /// </summary>
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, string, string, T> apiMethod, TopSession user, long longPara1, string strPara2, string strPara3, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        {
+            var response = apiMethod(user, longPara1, strPara2, strPara3);
+            DateTime dtStart = DateTime.Now;
+            int banCount = 0;
+            if (response.IsError)
+            {
+                if (CommonHandler.IsBanMsg(response))
+                {//遇到频繁访问的错误，需要多次访问
+                    Boolean isBanError = true;
+                    while (isBanError)
+                    {
+                        banCount++;
+                        System.Threading.Thread.Sleep(2000 * banCount);
+                        response = apiMethod(user, longPara1, strPara2, strPara3);
+                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                        {//默认，超过1分钟放弃
+                            isBanError = true;
+                        }
+                        else
+                        {
+                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                            {
+                                return response;
+                            }
+                            isBanError = false;
+                        }
+                    }
+                }
+                else if (reDoTimes > 0)
+                {//遇到一般性错误重试
+                    int times = 1;
+                    while (response.IsError && times <= reDoTimes)
+                    {
+                        times++;
+                        System.Threading.Thread.Sleep(300);
+                        response = apiMethod(user, longPara1, strPara2, strPara3);
+                    }
+                }
+                else
+                {
+                    return response;
+                }
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// 调用淘宝API封装，参数类型TopSession,long,long,String,String,String,long,long,String
+        /// </summary>
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, string, string, string, long, long, string, T> apiMethod, TopSession user, long longPara1, long longPara2, string strPara3, string strPara4, string strPara5, long longPara6, long longPara7, string strPara8, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        {
+            var response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
+            DateTime dtStart = DateTime.Now;
+            int banCount = 0;
+            if (response.IsError)
+            {
+                if (CommonHandler.IsBanMsg(response))
+                {//遇到频繁访问的错误，需要多次访问
+                    Boolean isBanError = true;
+                    while (isBanError)
+                    {
+                        banCount++;
+                        System.Threading.Thread.Sleep(2000 * banCount);
+                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
+                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                        {//默认，超过1分钟放弃
+                            isBanError = true;
+                        }
+                        else
+                        {
+                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                            {
+                                return response;
+                            }
+                            isBanError = false;
+                        }
+                    }
+                }
+                else if (reDoTimes > 0)
+                {//遇到一般性错误重试
+                    int times = 1;
+                    while (response.IsError && times <= reDoTimes)
+                    {
+                        times++;
+                        System.Threading.Thread.Sleep(300);
+                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
+                    }
+                }
+                else
+                {
+                    return response;
+                }
+            }
+
+            return response;
+        }
     }
 }

@@ -96,6 +96,55 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// 是否优化
         /// </summary>
         public bool IsEnableMajorization { get; set; }
+
+        /// <summary>
+        /// 收费代码
+        /// </summary>
+        public string ItemCodes { get; set; }
+
+        /// <summary>
+        /// 订购关系到期时间，如：2000-01-01 00:00:00
+        /// </summary>
+        public string DeadLine { get; set; }
+
+        /// <summary>
+        /// 是否二次授权
+        /// </summary>
+        public Boolean IsAuth2 { get; set; }
+
+        /// <summary>
+        /// 最近二次授权的时间
+        /// </summary>
+        public DateTime Auth2Date { get; set; }
+
+
+        #region 扩展的用户信息
+        /// <summary>
+        /// QQ
+        /// </summary>
+        public string UserQQ { get; set; }
+
+        /// <summary>
+        /// 主旺旺
+        /// </summary>
+        public string MainWangWang { get; set; }
+
+        /// <summary>
+        /// 店长旺旺
+        /// </summary>
+        public string ShopperWangWang { get; set; }
+
+        /// <summary>
+        /// 店铺平均利润率
+        /// </summary>
+        public string AvgProfitRate { get; set; }
+
+        /// <summary>
+        /// 用户邮箱
+        /// </summary>
+        public string UserEMail { get; set; }
+
+        #endregion
     }
 
     /// <summary>

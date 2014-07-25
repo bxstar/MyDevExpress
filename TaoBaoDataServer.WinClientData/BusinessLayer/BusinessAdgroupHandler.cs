@@ -6,6 +6,7 @@ using Top.Api.Domain;
 using TaoBaoDataServer.WinClientData.Model;
 using log4net;
 using iclickpro.AccessCommon;
+using Top.Api.Response;
 using System.Data.SqlClient;
 using System.Data;
 
@@ -232,7 +233,7 @@ insert into ad_adgroup
 
             Top.Api.Domain.ADGroup result = new Top.Api.Domain.ADGroup();
             string strSql = string.Format(@"SELECT * FROM ad_adgroup where adgroup_id={0}", adgroupId);
-            
+
             ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), strSql);
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -243,6 +244,253 @@ insert into ad_adgroup
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 数据库，获取宝贝信息
+        /// </summary>
+        public EntityItem GetItem(long itemId)
+        {
+            EntityItem item = new EntityItem();
+            string strSql = "select * from ad_item where item_id=" + itemId;
+            DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), strSql);
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow dr = ds.Tables[0].Rows[0];
+                item.item_id = itemId;
+                item.item_title = dr["item_title"].ToString();
+                item.local_id = Convert.ToInt32(dr["local_id"]);
+                if (dr["cid"] != null && dr["cid"] != DBNull.Value)
+                {
+                    long cid = 0;
+                    Int64.TryParse(dr["cid"].ToString(), out cid);
+                    item.cid = cid;
+                }
+                item.categroy_name = dr["category_name"].ToString();
+            }
+
+            return item;
+        }
+
+        /// <summary>
+        /// 下载推广组报表，最近多少天
+        /// </summary>
+        public List<EntityAdgroupReport> DownLoadAdgroupReport(TopSession session, long campaignId, long adgroupId, int days)
+        {
+            string strStartDay = DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd");
+            string strEndDay = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd");
+            return DownLoadAdgroupReport(session, campaignId, adgroupId, strStartDay, strEndDay);
+        }
+
+        /// <summary>
+        /// 下载推广组报表，时间段
+        /// </summary>
+        public List<EntityAdgroupReport> DownLoadAdgroupReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
+        {
+            List<EntityAdgroupReport> lstAll = new List<EntityAdgroupReport>();
+            //获取推广组基础数据
+            long pageSize = 500;
+            long i = 0;
+            while (true)
+            {
+                i = i + 1;
+                int returnPageSize = 0;
+                string jsonBaseRpt = DownLoadAdgroupBaseReport(session, campaignId, adgroupId, strStartDay, strEndDay).ToLower();
+                if (!string.IsNullOrEmpty(jsonBaseRpt) && jsonBaseRpt.Length > 2)
+                {
+                    var data = new DynamicJsonParser().FromJson(jsonBaseRpt);
+                    foreach (var item in data)
+                    {
+                        EntityAdgroupReport rpt = new EntityAdgroupReport();
+                        rpt.date = item.date;
+                        rpt.campaign_id = item.campaignid;
+                        rpt.adgroup_id = item.adgroupid;
+                        rpt.impressions = item.impressions == null ? 0 : item.impressions;
+                        rpt.click = item.click == null ? 0 : item.click;
+                        rpt.ctr = item.ctr == null ? 0M : item.ctr;
+                        rpt.cost = item.cost == null ? 0M : item.cost;
+                        rpt.cpc = item.cpc == null ? 0M : item.cpc;
+                        rpt.source = item.source == null ? string.Empty : item.source;
+                        rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
+                        rpt.source = item.source;
+                        lstAll.Add(rpt);
+                        returnPageSize++;
+                    }
+                }
+
+                // 返回的行数小于500的时候，说明到了最后一页，返回
+                if (returnPageSize < pageSize)
+                {
+                    break;
+                }
+            }
+
+            //获取推广组效果数据
+            i = 0;
+            while (true)
+            {
+                i = i + 1;
+                int returnPageSize = 0;
+                string jsonEffectRpt = DownLoadAdgroupEffectReport(session, campaignId, adgroupId, strStartDay, strEndDay).ToLower();
+                if (!string.IsNullOrEmpty(jsonEffectRpt) && jsonEffectRpt.Length > 2)
+                {
+                    var data = new DynamicJsonParser().FromJson(jsonEffectRpt);
+                    foreach (var item in data)
+                    {
+                        EntityAdgroupReport rpt = lstAll.Find(o => o.adgroup_id == item.adgroupid && o.date == item.date);
+                        if (rpt == null)
+                        {
+                            logger.ErrorFormat("获取推广组报表有误，{0}", jsonEffectRpt);
+                            continue;
+                        }
+                        rpt.directpay = item.directpay == null ? 0M : item.directpay;
+                        rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
+                        rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
+                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
+                        rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
+                        rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
+                        rpt.roi = rpt.cost == 0M ? 0M : Math.Round((rpt.directpay + rpt.indirectpay) / rpt.cost, 2);
+                        returnPageSize++;
+                    }
+                }
+
+                // 返回的行数小于500的时候，说明到了最后一页，返回
+                if (returnPageSize < pageSize)
+                {
+                    break;
+                }
+            }
+
+            return lstAll;
+        }
+
+        /// <summary>
+        /// 下载推广组的基础报表
+        /// </summary>
+        private string DownLoadAdgroupBaseReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
+        {
+            var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupbaseGet, session, campaignId, adgroupId, strStartDay, strEndDay);
+            return response.RptAdgroupBaseList;
+        }
+
+        /// <summary>
+        /// 下载推广组的效果报表
+        /// </summary>
+        private string DownLoadAdgroupEffectReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
+        {
+            var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupeffectGet, session, campaignId, adgroupId, strStartDay, strEndDay);
+            return response.RptAdgroupEffectList;
+        }
+
+        /// <summary>
+        /// 下载推广计划下所有推广组报表，最近多少天
+        /// </summary>
+        public List<EntityAdgroupReport> DownLoadAdgroupReportByCampaign(TopSession session, long campaignId, int days)
+        {
+            string strStartDay = DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd");
+            string strEndDay = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd");
+            return DownLoadAdgroupReportByCampaign(session, campaignId, strStartDay, strEndDay);
+        }
+
+        /// <summary>
+        /// 下载推广计划下所有推广组报表，时间段
+        /// </summary>
+        public List<EntityAdgroupReport> DownLoadAdgroupReportByCampaign(TopSession session, long campaignId, string strStartDay, string strEndDay)
+        {
+            List<EntityAdgroupReport> lstAll = new List<EntityAdgroupReport>();
+            //获取推广组基础数据
+            long pageSize = 500;
+            long i = 0;
+            while (true)
+            {
+                i = i + 1;
+                int returnPageSize = 0;
+                string jsonBaseRpt = DownLoadAdgroupBaseReportByCampaign(session, campaignId, strStartDay, strEndDay).ToLower();
+                if (!string.IsNullOrEmpty(jsonBaseRpt) && jsonBaseRpt.Length > 2)
+                {
+                    var data = new DynamicJsonParser().FromJson(jsonBaseRpt);
+                    foreach (var item in data)
+                    {
+                        EntityAdgroupReport rpt = new EntityAdgroupReport();
+                        rpt.date = item.date;
+                        rpt.campaign_id = item.campaignid;
+                        rpt.adgroup_id = item.adgroupid;
+                        rpt.impressions = item.impressions == null ? 0 : item.impressions;
+                        rpt.click = item.click == null ? 0 : item.click;
+                        rpt.ctr = item.ctr == null ? 0M : item.ctr;
+                        rpt.cost = item.cost == null ? 0M : item.cost;
+                        rpt.cpc = item.cpc == null ? 0M : item.cpc;
+                        rpt.source = item.source == null ? string.Empty : item.source;
+                        rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
+                        rpt.source = item.source;
+                        lstAll.Add(rpt);
+                        returnPageSize++;
+                    }
+                }
+
+                // 返回的行数小于500的时候，说明到了最后一页，返回
+                if (returnPageSize < pageSize)
+                {
+                    break;
+                }
+            }
+
+            //获取推广组效果数据
+            i = 0;
+            while (true)
+            {
+                i = i + 1;
+                int returnPageSize = 0;
+                string jsonEffectRpt = DownLoadAdgroupEffectReportByCampaign(session, campaignId, strStartDay, strEndDay).ToLower();
+                if (!string.IsNullOrEmpty(jsonEffectRpt) && jsonEffectRpt.Length > 2)
+                {
+                    var data = new DynamicJsonParser().FromJson(jsonEffectRpt);
+                    foreach (var item in data)
+                    {
+                        EntityAdgroupReport rpt = lstAll.Find(o => o.adgroup_id == item.adgroupid && o.date == item.date);
+                        if (rpt == null)
+                        {
+                            logger.ErrorFormat("获取推广组报表有误，{0}", jsonEffectRpt);
+                            continue;
+                        }
+                        rpt.directpay = item.directpay == null ? 0M : item.directpay;
+                        rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
+                        rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
+                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
+                        rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
+                        rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
+                        rpt.roi = rpt.cost == 0M ? 0M : Math.Round((rpt.directpay + rpt.indirectpay) / rpt.cost, 2);
+                        returnPageSize++;
+                    }
+                }
+
+                // 返回的行数小于500的时候，说明到了最后一页，返回
+                if (returnPageSize < pageSize)
+                {
+                    break;
+                }
+            }
+
+            return lstAll;
+        }
+
+
+        /// <summary>
+        /// 下载推广计划下，所有推广组的基础报表
+        /// </summary>
+        private string DownLoadAdgroupBaseReportByCampaign(TopSession session, long campaignId, string strStartDay, string strEndDay)
+        {
+            var response = CommonHandler.DoTaoBaoApi<SimbaRptCampadgroupbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampadgroupbaseGet, session, campaignId, strStartDay, strEndDay);
+            return response.RptCampadgroupBaseList;
+        }
+
+        /// <summary>
+        /// 下载推广计划下，所有推广组的效果报表
+        /// </summary>
+        private string DownLoadAdgroupEffectReportByCampaign(TopSession session, long campaignId, string strStartDay, string strEndDay)
+        {
+            var response = CommonHandler.DoTaoBaoApi<SimbaRptCampadgroupeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampadgroupeffectGet, session, campaignId, strStartDay, strEndDay);
+            return response.RptCampadgroupEffectList;
         }
     }
 }

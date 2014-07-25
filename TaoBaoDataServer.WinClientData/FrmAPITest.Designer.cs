@@ -42,11 +42,6 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnCheckTuoguan = new System.Windows.Forms.Button();
             this.btnSelectioned = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.numKeywordRptDays = new System.Windows.Forms.NumericUpDown();
-            this.chkNeedUpdateKeywordRpt = new System.Windows.Forms.CheckBox();
-            this.btnUpdateKeywordRpt = new System.Windows.Forms.Button();
             this.btnSelectionAllUser = new System.Windows.Forms.Button();
             this.btnInvertSelectionUser = new System.Windows.Forms.Button();
             this.btnGetAllUser = new System.Windows.Forms.Button();
@@ -69,7 +64,6 @@
             this.btnCheckAddPrice = new System.Windows.Forms.Button();
             this.btnGetMajorCampaign = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnTest = new System.Windows.Forms.Button();
             this.btnGetBudget = new System.Windows.Forms.Button();
             this.btnUpdateCampaign = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -172,17 +166,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtSession = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkIsUseLocalCache = new System.Windows.Forms.CheckBox();
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.chkIsUseLocalCache = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewUser)).BeginInit();
             this.panel7.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numKeywordRptDays)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -198,7 +190,6 @@
             this.cMenuDgvKeyword.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewKeyword)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewPrice.Properties)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQscore)).BeginInit();
             this.tabPage6.SuspendLayout();
@@ -271,7 +262,6 @@
             // 
             this.panel7.Controls.Add(this.btnCheckTuoguan);
             this.panel7.Controls.Add(this.btnSelectioned);
-            this.panel7.Controls.Add(this.groupBox1);
             this.panel7.Controls.Add(this.btnSelectionAllUser);
             this.panel7.Controls.Add(this.btnInvertSelectionUser);
             this.panel7.Controls.Add(this.btnGetAllUser);
@@ -300,62 +290,6 @@
             this.btnSelectioned.Text = "选中";
             this.btnSelectioned.UseVisualStyleBackColor = true;
             this.btnSelectioned.Click += new System.EventHandler(this.btnSelectioned_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.numKeywordRptDays);
-            this.groupBox1.Controls.Add(this.chkNeedUpdateKeywordRpt);
-            this.groupBox1.Controls.Add(this.btnUpdateKeywordRpt);
-            this.groupBox1.Location = new System.Drawing.Point(614, 15);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(456, 66);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "更新关键词报表";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(188, 27);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 12);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "天数据";
-            // 
-            // numKeywordRptDays
-            // 
-            this.numKeywordRptDays.Location = new System.Drawing.Point(141, 23);
-            this.numKeywordRptDays.Name = "numKeywordRptDays";
-            this.numKeywordRptDays.Size = new System.Drawing.Size(41, 21);
-            this.numKeywordRptDays.TabIndex = 5;
-            this.numKeywordRptDays.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // chkNeedUpdateKeywordRpt
-            // 
-            this.chkNeedUpdateKeywordRpt.AutoSize = true;
-            this.chkNeedUpdateKeywordRpt.Checked = true;
-            this.chkNeedUpdateKeywordRpt.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkNeedUpdateKeywordRpt.Location = new System.Drawing.Point(7, 26);
-            this.chkNeedUpdateKeywordRpt.Name = "chkNeedUpdateKeywordRpt";
-            this.chkNeedUpdateKeywordRpt.Size = new System.Drawing.Size(72, 16);
-            this.chkNeedUpdateKeywordRpt.TabIndex = 4;
-            this.chkNeedUpdateKeywordRpt.Text = "更新数据";
-            this.chkNeedUpdateKeywordRpt.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateKeywordRpt
-            // 
-            this.btnUpdateKeywordRpt.Location = new System.Drawing.Point(302, 23);
-            this.btnUpdateKeywordRpt.Name = "btnUpdateKeywordRpt";
-            this.btnUpdateKeywordRpt.Size = new System.Drawing.Size(114, 23);
-            this.btnUpdateKeywordRpt.TabIndex = 3;
-            this.btnUpdateKeywordRpt.Text = "检查关键词报表";
-            this.btnUpdateKeywordRpt.UseVisualStyleBackColor = true;
-            this.btnUpdateKeywordRpt.Click += new System.EventHandler(this.btnUpdateKeywordRpt_Click);
             // 
             // btnSelectionAllUser
             // 
@@ -537,7 +471,6 @@
             this.panel8.Controls.Add(this.btnCheckAddPrice);
             this.panel8.Controls.Add(this.btnGetMajorCampaign);
             this.panel8.Controls.Add(this.label5);
-            this.panel8.Controls.Add(this.btnTest);
             this.panel8.Controls.Add(this.btnGetBudget);
             this.panel8.Controls.Add(this.btnUpdateCampaign);
             this.panel8.Controls.Add(this.label4);
@@ -580,16 +513,6 @@
             this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 2;
             this.label5.Text = "推广计划ID：";
-            // 
-            // btnTest
-            // 
-            this.btnTest.Location = new System.Drawing.Point(38, 79);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(101, 23);
-            this.btnTest.TabIndex = 6;
-            this.btnTest.Text = "计划报表测试";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // btnGetBudget
             // 
@@ -937,7 +860,6 @@
             // 
             this.txtNewPrice.Location = new System.Drawing.Point(745, 25);
             this.txtNewPrice.Name = "txtNewPrice";
-            this.txtNewPrice.Size = new System.Drawing.Size(100, 20);
             this.txtNewPrice.TabIndex = 10;
             this.txtNewPrice.ToolTip = "关键词新价格，单位为分，如果是加价则为+*或+*%，降价则为-*或-*%";
             // 
@@ -1627,6 +1549,18 @@
             this.panel1.Size = new System.Drawing.Size(1076, 83);
             this.panel1.TabIndex = 1;
             // 
+            // chkIsUseLocalCache
+            // 
+            this.chkIsUseLocalCache.AutoSize = true;
+            this.chkIsUseLocalCache.Checked = true;
+            this.chkIsUseLocalCache.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIsUseLocalCache.Location = new System.Drawing.Point(715, 52);
+            this.chkIsUseLocalCache.Name = "chkIsUseLocalCache";
+            this.chkIsUseLocalCache.Size = new System.Drawing.Size(96, 16);
+            this.chkIsUseLocalCache.TabIndex = 6;
+            this.chkIsUseLocalCache.Text = "使用本地缓存";
+            this.chkIsUseLocalCache.UseVisualStyleBackColor = true;
+            // 
             // btnNickAndSession
             // 
             this.btnNickAndSession.Location = new System.Drawing.Point(563, 48);
@@ -1660,18 +1594,6 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // chkIsUseLocalCache
-            // 
-            this.chkIsUseLocalCache.AutoSize = true;
-            this.chkIsUseLocalCache.Checked = true;
-            this.chkIsUseLocalCache.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIsUseLocalCache.Location = new System.Drawing.Point(715, 52);
-            this.chkIsUseLocalCache.Name = "chkIsUseLocalCache";
-            this.chkIsUseLocalCache.Size = new System.Drawing.Size(96, 16);
-            this.chkIsUseLocalCache.TabIndex = 6;
-            this.chkIsUseLocalCache.Text = "使用本地缓存";
-            this.chkIsUseLocalCache.UseVisualStyleBackColor = true;
-            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1689,9 +1611,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewUser)).EndInit();
             this.panel7.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numKeywordRptDays)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -1711,7 +1630,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewKeyword)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewPrice.Properties)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQscore)).EndInit();
@@ -1799,11 +1717,6 @@
         private System.Windows.Forms.Button btnInvertSelectionUser;
         private System.Windows.Forms.Button btnSelectionAllUser;
         private System.Windows.Forms.Button btnGetTopSession;
-        private System.Windows.Forms.Button btnUpdateKeywordRpt;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.NumericUpDown numKeywordRptDays;
-        private System.Windows.Forms.CheckBox chkNeedUpdateKeywordRpt;
         private System.Windows.Forms.CheckBox chkKeywordRptDtp;
         private System.Windows.Forms.CheckBox chkKeywordRptRecentDays;
         private System.Windows.Forms.DateTimePicker dtpKeywordRptEndDay;
@@ -1817,7 +1730,6 @@
         private System.Windows.Forms.Button btnUpdateCampaign;
         private System.Windows.Forms.TextBox txtNewCampaignName;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.ContextMenuStrip cMenuDgvAdgroup;
         private System.Windows.Forms.ToolStripMenuItem 设置黑白名单ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 同步关键词ToolStripMenuItem;

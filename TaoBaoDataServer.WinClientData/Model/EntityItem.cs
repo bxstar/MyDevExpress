@@ -10,10 +10,28 @@ namespace TaoBaoDataServer.WinClientData.Model
     /// </summary>
     public class EntityItem
     {
+        public int local_id { get; set; }
+
         /// <summary>
-        /// item_id
+        /// 宝贝ID
         /// </summary>		
         public long item_id { get; set; }
+
+        /// <summary>
+        /// 宝贝标题
+        /// </summary>
+        public string item_title { get; set; }
+
+        /// <summary>
+        /// 宝贝类目，最底层的类目
+        /// </summary>
+        public long cid { get; set; }
+
+        /// <summary>
+        /// 类目名称
+        /// </summary>
+        public string categroy_name { get; set; }
+
         /// <summary>
         /// user_id
         /// </summary>		
@@ -22,17 +40,21 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// campaign_id
         /// </summary>		
         public long campaign_id { get; set; }
-        /// <summary>
-        /// item_title
-        /// </summary>		
-        public string item_title { get; set; }
+
         /// <summary>
         /// item_url
         /// </summary>		
         public string item_url { get; set; }
+
+        public DateTime create_date { get; set; }
+
+        public DateTime update_date { get; set; }
+
+        #region 扩展属性
         /// <summary>
-        /// is_success
-        /// </summary>		
-        public bool is_success { get; set; }     
+        /// 宝贝的属性列表
+        /// </summary>
+        public List<string> LstPropsName { get; set; }
+        #endregion 
     }
 }

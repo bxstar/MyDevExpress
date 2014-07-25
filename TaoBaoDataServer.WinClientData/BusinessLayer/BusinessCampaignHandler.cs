@@ -16,7 +16,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
     public class BusinessCampaignHandler
     {
         private static log4net.ILog logger = LogManager.GetLogger("loggerAX");
-        BusinessTaobaoApiHandler TaobaoApiHandler = new BusinessTaobaoApiHandler();
+        BusinessTaobaoApiHandler taobaoApiHandler = new BusinessTaobaoApiHandler();
 
         /// <summary>
         /// 数据库，获取用户绑定的推广计划
@@ -63,7 +63,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             List<Campaign> listCampaign = new List<Campaign>();
             try
             {
-                var response = TaobaoApiHandler.TaobaoSimbaCampaignsGet(session);
+                var response = taobaoApiHandler.TaobaoSimbaCampaignsGet(session);
                 if (response.IsError)
                 {
                     logger.Error(string.Format("用户{0}，ID={1} 线上，淘宝API下载推广计划数据 失败：{2}", session.ProxyUserName, session.UserID, response.Body));
@@ -81,7 +81,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
-        /// 推广计划报表
+        /// 数据库，推广计划报表
         /// </summary>
         public List<EntityCampaignReport> GetCampaignRpt(TopSession session, List<long> lstCampaignId, int day, ref string errorMsg)
         {
@@ -91,7 +91,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             if (lstCampaignId == null)
             {//取用户所有推广中的计划
                 lstCampaignId = new List<long>();
-                SimbaCampaignsGetResponse campaignsRes = TaobaoApiHandler.TaobaoSimbaCampaignsGet(session);
+                SimbaCampaignsGetResponse campaignsRes = taobaoApiHandler.TaobaoSimbaCampaignsGet(session);
                 if (campaignsRes.IsError)
                 {
                     logger.Error(campaignsRes.Body);
@@ -105,7 +105,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             {
 
                 // 下载推广计划的基本报表
-                var reportBase = TaobaoApiHandler.TaobaoSimbaRptCampaignbaseGet(session, itemCampaignId, DateTime.Now.AddDays(0 - day).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"));
+                var reportBase = taobaoApiHandler.TaobaoSimbaRptCampaignbaseGet(session, itemCampaignId, DateTime.Now.AddDays(0 - day).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"));
                 if (reportBase.IsError)
                 {
                     logger.Error(reportBase.Body);
@@ -139,7 +139,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                     date_rpt.cost = date_rpt.cost + TechNet.JsonObjectToInt(service["cost"]) / 100.0M;
                 }
 
-                var reportEffect = TaobaoApiHandler.TaobaoSimbaRptCampaigneffectGet(session, itemCampaignId, DateTime.Now.AddDays(0 - day).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"));
+                var reportEffect = taobaoApiHandler.TaobaoSimbaRptCampaigneffectGet(session, itemCampaignId, DateTime.Now.AddDays(0 - day).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"));
 
                 if (reportEffect.IsError)
                 {
@@ -292,8 +292,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             return lstRecord;
         }
 
+
         /// <summary>
-        /// 获取最近多少天的计划基础和效果报告
+        /// 数据库，获取最近多少天的计划基础和效果报告
         /// </summary>
         public List<EntityCampaignReport> GetCampaignReport(long campaignId, int userId, int day)
         {
@@ -325,6 +326,83 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 }
             }
             return lstCampaignReport;
+        }
+
+        /// <summary>
+        /// 线上，下载推广计划报表
+        /// </summary>
+        public List<EntityCampaignReport> DownLoadCampaignReport(TopSession session, long campaignId, int days)
+        {
+            List<EntityCampaignReport> lstAll = new List<EntityCampaignReport>();
+            string strStartDay = DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd");
+            string strEndDay = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd");
+
+            string jsonBaseRpt = DownLoadCamapginBaseReport(session, campaignId, strStartDay, strEndDay).ToLower();
+            if (!string.IsNullOrEmpty(jsonBaseRpt) && jsonBaseRpt.Length > 2)
+            {
+                var arrBaseRpt = new DynamicJsonParser().FromJson(jsonBaseRpt);
+                foreach (var item in arrBaseRpt)
+                {
+                    EntityCampaignReport rpt = new EntityCampaignReport();
+                    rpt.date = item.date;
+                    rpt.campaign_id = item.campaignid;
+                    rpt.nick = item.nick;
+                    rpt.impressions = item.impressions == null ? 0 : item.impressions;
+                    rpt.click = item.click == null ? 0 : item.click;
+                    rpt.ctr = item.ctr == null ? 0M : item.ctr;
+                    rpt.cost = item.cost == null ? 0M : item.cost;
+                    rpt.cpc = item.cpc == null ? 0M : item.cpc;
+                    rpt.avgpos = item.avgpos == null ? 0M : item.avgpos;
+                    rpt.source = item.source;
+
+                    lstAll.Add(rpt);
+                }
+            }
+
+            string jsonEffectRpt = DownLoadCampaignEffectReport(session, campaignId, strStartDay, strEndDay).ToLower();
+            if (!string.IsNullOrEmpty(jsonEffectRpt) && jsonEffectRpt.Length > 2)
+            {
+                var arrEffectRpt = new DynamicJsonParser().FromJson(jsonEffectRpt);
+                foreach (var item in arrEffectRpt)
+                {
+                    EntityCampaignReport rpt = lstAll.Find(o => o.date == item.date);
+                    if (rpt == null)
+                    {
+                        logger.ErrorFormat("base:{0}\r\n effect:{1}", jsonBaseRpt, jsonEffectRpt);
+                        continue;
+                    }
+                    rpt.directpay = item.directpay == null ? 0M : item.directpay;
+                    rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
+                    rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
+                    rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
+                    rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
+                    rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
+                    rpt.totalpay = rpt.directpay + rpt.indirectpay;
+                    rpt.totalpaycount = rpt.directpaycount + rpt.indirectpaycount;
+                    rpt.roi = rpt.cost == 0M ? 0M : Math.Round((rpt.directpay + rpt.indirectpay) / rpt.cost, 2);
+                }
+            }
+
+            return lstAll;
+        }
+
+        /// <summary>
+        /// 下载推广计划的基本报表
+        /// </summary>
+        public string DownLoadCamapginBaseReport(TopSession session, long campaignId, string strStartDay, string strEndDay)
+        {
+
+            var response = CommonHandler.DoTaoBaoApi<SimbaRptCampaignbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampaignbaseGet, session, campaignId, strStartDay, strEndDay);
+            return response.RptCampaignBaseList;
+        }
+
+        /// <summary>
+        /// 下载推广计划的效果报表
+        /// </summary>
+        public string DownLoadCampaignEffectReport(TopSession session, long campaignId, string strStartDay, string strEndDay)
+        {
+            var response = CommonHandler.DoTaoBaoApi<SimbaRptCampaigneffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampaigneffectGet, session, campaignId, strStartDay, strEndDay);
+            return response.RptCampaignEffectList;
         }
     }
 }

@@ -104,48 +104,108 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public List<TopSession> GetUserInfo(int? userId)
         {
-            List<TopSession> listSession = new List<TopSession>();
-            // 读取数据库，从数据库中取得数据
-            string strSql = string.Empty;
-            if (userId == null)
+            List<TopSession> lstUser = new List<TopSession>();
+            try
             {
-                strSql = "SELECT local_user_id,online_user_id ,campaign_id,title, user_name,proxy_user_name,user_session,a.create_date,delete_flag,IsEnableMajorization FROM ad_user a left join ad_campaign b on a.local_user_id=b.user_id ";
-            }
-            else
-            {
-                strSql = string.Format("SELECT local_user_id,online_user_id ,campaign_id,title, user_name,proxy_user_name,user_session,a.create_date,delete_flag,IsEnableMajorization FROM ad_user a left join ad_campaign b on a.local_user_id=b.user_id where local_user_id={0}", userId);
-            }
-            var dsUserInfo = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), strSql);
-            // 从数据库中读取用户信息
-            if (dsUserInfo != null && dsUserInfo.Tables.Count > 0 && dsUserInfo.Tables[0].Rows.Count > 0)
-            {
-                for (int i = 0; i < dsUserInfo.Tables[0].Rows.Count; i++)
+                // 读取数据库，从数据库中取得数据
+                string strSql = string.Empty;
+                if (userId == null)
                 {
-                    TopSession session = new TopSession();
-                    // 获取淘宝线上ID
-                    session.OnlineUserID = Convert.ToInt64(dsUserInfo.Tables[0].Rows[i]["online_user_id"]);
-                    // 获取淘宝用户名
-                    session.UserName = dsUserInfo.Tables[0].Rows[i]["user_name"].ToString();
-                    session.ProxyUserName = dsUserInfo.Tables[0].Rows[i]["proxy_user_name"].ToString();
-                    // 获取本地ID
-                    session.UserID = Convert.ToInt32(dsUserInfo.Tables[0].Rows[i]["local_user_id"]);
-                    if (dsUserInfo.Tables[0].Rows[i]["campaign_id"] != DBNull.Value)
-                        session.CampaignId = Convert.ToInt64(dsUserInfo.Tables[0].Rows[i]["campaign_id"]);
-                    if (dsUserInfo.Tables[0].Rows[i]["title"] != DBNull.Value)
-                        session.CampaignName = dsUserInfo.Tables[0].Rows[i]["title"].ToString();
-                    // 获取用户的Session
-                    session.TopSessions = dsUserInfo.Tables[0].Rows[i]["user_session"].ToString();
-                    // 获取用户的优化配置
-                    session.MajorConfigs = GetUserMajorConfigs(session.UserID);
-                    session.CreateDate = Convert.ToDateTime(dsUserInfo.Tables[0].Rows[i]["create_date"]);
-                    session.IsEnableMajorization = Convert.ToBoolean(dsUserInfo.Tables[0].Rows[i]["IsEnableMajorization"]);
-                    if (dsUserInfo.Tables[0].Rows[i]["delete_flag"] != DBNull.Value)
-                        session.DeleteFlag = dsUserInfo.Tables[0].Rows[i]["delete_flag"].ToString() == "1" ? true : false;
-                    // 加入返回值
-                    listSession.Add(session);
+                    strSql = "SELECT a.* ,b.campaign_id,b.title campaign_name FROM ad_user a left join ad_campaign b on a.local_user_id=b.user_id where a.delete_flag = '1' and b.campaign_id is not null";
+                }
+                else
+                {
+                    strSql = string.Format("SELECT a.* ,b.campaign_id,b.title campaign_name FROM ad_user a left join ad_campaign b on a.local_user_id=b.user_id where local_user_id={0} ", userId);
+                }
+                DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), strSql);
+                // 从数据库中读取用户信息
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        TopSession session = new TopSession();
+                        DataRow drUser = ds.Tables[0].Rows[i];
+                        SetModelByDataRow(drUser, session);
+                        lstUser.Add(session);
+                    }
                 }
             }
-            return listSession;
+            catch (Exception ex)
+            {
+                logger.Error("BusinessUserHandler/GetUserInfo,获取所有用户信息错误：", ex);
+            }
+            return lstUser;
+        }
+
+        /// <summary>
+        /// 获取购买了托管版收费代码的客户
+        /// </summary>
+        public List<TopSession> GetCheckAfterUser(string ArticleCode)
+        {
+            // 从数据库中获取宝贝信息
+            List<TopSession> userList = GetUserInfo(null);
+
+
+            foreach (TopSession session in userList)
+            {
+                try
+                {
+                    //根据收费代码设置托管无效用户
+                    EntityUserSubscribe userSubscribe = GetUserSubscribe(session, ArticleCode);
+                    logger.InfoFormat("用户{0},ID{1},获取的收费代码为{2}", session.ProxyUserName, session.UserID, userSubscribe.item_codes);
+                    if (userSubscribe.item_codes == null)
+                    {//没有收费代码，token失效，则标识优化到期
+                        UpdateUserState(session.UserID, 0);
+                        session.Expire = true;
+                    }
+                    else
+                    {
+                        if (session.ItemCodes != userSubscribe.item_codes || session.DeadLine != userSubscribe.dead_line)
+                        {//收费代码更新
+                            session.ItemCodes = userSubscribe.item_codes;
+                            session.DeadLine = userSubscribe.dead_line;
+                            UpdateUserSubscribe(session);
+                        }
+                        session.Expire = false;
+                    }
+                }
+                catch (Exception se)
+                {
+                    logger.Error("用户{0},ID{1},获取收费代码出错", se);
+                }
+            }
+
+            // 返回未过期用户
+            return userList.Where(o => !o.Expire).ToList();
+
+        }
+
+        /// <summary>
+        /// 根据DataRow数据生成User对象
+        /// </summary>
+        private void SetModelByDataRow(DataRow drUser, TopSession session)
+        {
+            session.UserID = Convert.ToInt32(drUser["local_user_id"]);
+            session.CampaignId = Convert.ToInt64(drUser["campaign_id"]);
+            session.CampaignName = drUser["campaign_name"].ToString();
+            session.ProxyUserName = drUser["proxy_user_name"].ToString();
+            session.UserName = drUser["user_name"].ToString();
+            session.TopSessions = drUser["user_session"].ToString();
+            session.ItemCodes = drUser["item_codes"].ToString();
+            session.DeadLine = drUser["deadline"].ToString();
+            session.IsEnableMajorization = Convert.ToBoolean(drUser["IsEnableMajorization"]);
+            session.MajorConfigs = GetUserMajorConfigs(session.UserID);
+            session.CreateDate = Convert.ToDateTime(drUser["create_date"]);
+            if (drUser["auth2_date"] != null && drUser["auth2_date"] != DBNull.Value)
+            {
+                session.IsAuth2 = true;
+                session.Auth2Date = Convert.ToDateTime(drUser["auth2_date"]);
+            }
+            session.UserQQ = drUser["user_qq"].ToString();
+            session.MainWangWang = drUser["main_wangwang"].ToString();
+            session.ShopperWangWang = drUser["shopper_wangwang"].ToString();
+            session.AvgProfitRate = drUser["avg_profit_rate"].ToString();
+            session.UserEMail = drUser["user_email"].ToString();
         }
 
         /// <summary>
@@ -163,6 +223,28 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 model.dead_line = response.ArticleUserSubscribes.Select(o => o.Deadline).Max();
             }
             return model;
+        }
+
+        /// <summary>
+        /// 更新用户的订购信息
+        /// </summary>
+        public bool UpdateUserSubscribe(TopSession user)
+        {
+            try
+            {
+                Dictionary<string, object> res = new Dictionary<string, object>();
+                var param = new Dictionary<string, object>();
+                param.Add("local_user_id", user.UserID);
+                param.Add("item_codes", user.ItemCodes == null ? DBNull.Value : (object)user.ItemCodes);
+                param.Add("deadline", user.DeadLine == null ? DBNull.Value : (object)user.DeadLine);
+                SqlHelper.ExecuteNonQuery(SqlDataProvider.GetAPSqlConnection(), "UPDATE ad_user SET item_codes = @item_codes,deadline=@deadline,update_date=getdate() WHERE local_user_id = @local_user_id;", SqlNameAndParamer.ConvertSqlParameter(param));
+            }
+            catch (Exception se)
+            {
+                logger.Error("更新用户订购信息错误：", se);
+                return false;
+            }
+            return true;
         }
     }
 }

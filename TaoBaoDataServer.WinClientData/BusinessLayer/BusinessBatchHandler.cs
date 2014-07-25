@@ -8,6 +8,7 @@ using NetServ.Net.Json;
 using System.IO;
 using System.Data.SqlClient;
 using iclickpro.AccessCommon;
+using Top.Api.Response;
 
 namespace TaoBaoDataServer.WinClientData.BusinessLayer
 {
@@ -17,52 +18,22 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         BusinessTaobaoApiHandler taobaoApiHandler = new BusinessTaobaoApiHandler();
 
         /// <summary>
-        /// 下载关键词的基本报表数据
+        /// 下载关键词的基本报表数据，并保存到数据库
         /// </summary>
-        public Boolean DownLoadKeywordBaseReport(TopSession session, long campaignId, long adgroupId, int days ,Boolean isNeedUpdate,ref Boolean isDifferent)
+        public Boolean DownLoadKeywordBaseReport(TopSession session, long campaignId, long adgroupId, int days, Boolean isNeedUpdate, ref Boolean isDifferent)
         {
             //每页返回
-            int pageSize = 500;
+            long pageSize = 500;
             try
             {
-                int i = 0;
+                long i = 0;
                 while (true)
                 {
                     i = i + 1;
                     DateTime dtStart = DateTime.Now;
                     // 下载推广组基础报表
-                    var response = taobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SUMMARY", pageSize, i, "1,2");
-
-                    if (response.IsError)
-                    {
-                        if (CommonHandler.IsBanMsg(response))
-                        {//遇到频繁访问的错误，需要多次访问
-                            Boolean isBanError = true;
-                            while (isBanError)
-                            {
-                                System.Threading.Thread.Sleep(2000);
-                                response = taobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SUMMARY", pageSize, i, "1,2");
-                                if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
-                                {//超过5分钟放弃
-                                    isBanError = true;
-                                }
-                                else
-                                {
-                                    if (dtStart.AddMinutes(5) <= DateTime.Now)
-                                    {
-                                        logger.Error("线上下载关键词的基本报表数据,已重试5分钟" + response.Body);
-                                        return false;
-                                    }
-                                    isBanError = false;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            logger.Error("线上下载关键词的基本报表数据" + response.Body);
-                            return false;
-                        }
-                    }
+                    var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupkeywordbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupkeywordbaseGet,
+                        session, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"), "SUMMARY", pageSize, i, "SUMMARY");
 
                     if (response == null || String.IsNullOrEmpty(response.RptAdgroupkeywordBaseList) || response.RptAdgroupkeywordBaseList == "[]" || response.RptAdgroupkeywordBaseList == "{}")
                     {
@@ -121,49 +92,21 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 开始下载关键词的效果报表数据
         /// </summary>
-        public Boolean DownLoadKeywordEffectReport(TopSession session, long campaignId, long adgroupId, int days,Boolean isNeedUpdate,ref Boolean isDifferent)
+        public Boolean DownLoadKeywordEffectReport(TopSession session, long campaignId, long adgroupId, int days, Boolean isNeedUpdate, ref Boolean isDifferent)
         {
             //每页返回
-            int pageSize = 500;
+            long pageSize = 500;
             try
             {
-                int i = 0;
+                long i = 0;
                 while (true)
                 {
                     i = i + 1;
                     DateTime dtStart = DateTime.Now;
                     // 下载推广组效果报表
-                    var response = taobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SUMMARY", pageSize, i, "1,2");
-                    if (response.IsError)
-                    {
-                        if (CommonHandler.IsBanMsg(response))
-                        {//遇到频繁访问的错误，需要多次访问
-                            Boolean isBanError = true;
-                            while (isBanError)
-                            {
-                                System.Threading.Thread.Sleep(2000);
-                                response = taobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet(session, session.UserName, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd"), "SUMMARY", pageSize, i, "1,2");
-                                if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
-                                {//超过5分钟放弃
-                                    isBanError = true;
-                                }
-                                else
-                                {
-                                    if (dtStart.AddMinutes(5) <= DateTime.Now)
-                                    {
-                                        logger.Error("线上下载关键词的效果报表数据，已重试5分钟" + response.Body);
-                                        return false;
-                                    }
-                                    isBanError = false;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            logger.Error("线上下载关键词的效果报表数据" + response.Body);
-                            return false;
-                        }
-                    }
+                    var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupkeywordeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet,
+                        session, campaignId, adgroupId, DateTime.Now.AddDays(0 - days).ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"), "SUMMARY", pageSize, i, "SUMMARY");
+
                     if (response == null || String.IsNullOrEmpty(response.RptAdgroupkeywordEffectList) || response.RptAdgroupkeywordEffectList == "[]" || response.RptAdgroupkeywordEffectList == "{}")
                     {
                         break;
