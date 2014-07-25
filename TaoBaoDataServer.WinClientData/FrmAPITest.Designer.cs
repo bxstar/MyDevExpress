@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.gridControlUser = new DevExpress.XtraGrid.GridControl();
@@ -106,9 +106,10 @@
             this.btnKeywordChange = new System.Windows.Forms.Button();
             this.btnGetKeyword = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.txtCatmatchQscore = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
             this.btnGetQscore = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCatmatchQscore = new System.Windows.Forms.TextBox();
             this.dgvQscore = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.gridControlKeywordRpt = new DevExpress.XtraGrid.GridControl();
@@ -147,6 +148,23 @@
             this.chkKeywordRptDtp = new System.Windows.Forms.CheckBox();
             this.btnGetAllKeywordRpt = new System.Windows.Forms.Button();
             this.btnGetKeywordRpt = new System.Windows.Forms.Button();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.gridControlAdgroupRpt = new DevExpress.XtraGrid.GridControl();
+            this.gridViewAdgroupRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.btnNewAdgroupRptForm = new System.Windows.Forms.Button();
+            this.gbxAdgroupRptDtp = new System.Windows.Forms.GroupBox();
+            this.dtpAdgroupRptEndDay = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dtpAdgroupRptStartDay = new System.Windows.Forms.DateTimePicker();
+            this.gbxAdgroupRptRecentDays = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtAdgroupReportDays = new System.Windows.Forms.TextBox();
+            this.chkAdgroupRptRecentDays = new System.Windows.Forms.CheckBox();
+            this.chkAdgroupRptDtp = new System.Windows.Forms.CheckBox();
+            this.btnGetAllAdgroupRpt = new System.Windows.Forms.Button();
+            this.btnGetAdgroupRpt = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.gridControlCampaignRpt = new DevExpress.XtraGrid.GridControl();
             this.gridViewCampaignRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -170,23 +188,6 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.gbxAdgroupRptDtp = new System.Windows.Forms.GroupBox();
-            this.dtpAdgroupRptEndDay = new System.Windows.Forms.DateTimePicker();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dtpAdgroupRptStartDay = new System.Windows.Forms.DateTimePicker();
-            this.gbxAdgroupRptRecentDays = new System.Windows.Forms.GroupBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtAdgroupReportDays = new System.Windows.Forms.TextBox();
-            this.chkAdgroupRptRecentDays = new System.Windows.Forms.CheckBox();
-            this.chkAdgroupRptDtp = new System.Windows.Forms.CheckBox();
-            this.btnGetAllAdgroupRpt = new System.Windows.Forms.Button();
-            this.btnGetAdgroupRpt = new System.Windows.Forms.Button();
-            this.gridControlAdgroupRpt = new DevExpress.XtraGrid.GridControl();
-            this.gridViewAdgroupRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -209,6 +210,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewPrice.Properties)).BeginInit();
             this.tabPage5.SuspendLayout();
+            this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQscore)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlKeywordRpt)).BeginInit();
@@ -217,6 +219,12 @@
             this.panel4.SuspendLayout();
             this.gbxDtp.SuspendLayout();
             this.gbxRecentDays.SuspendLayout();
+            this.tabPage10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlAdgroupRpt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewAdgroupRpt)).BeginInit();
+            this.panel10.SuspendLayout();
+            this.gbxAdgroupRptDtp.SuspendLayout();
+            this.gbxAdgroupRptRecentDays.SuspendLayout();
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCampaignRpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCampaignRpt)).BeginInit();
@@ -224,13 +232,6 @@
             this.tabPage8.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.tabPage10.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.gbxAdgroupRptDtp.SuspendLayout();
-            this.gbxAdgroupRptRecentDays.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlAdgroupRpt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewAdgroupRpt)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -611,35 +612,35 @@
             // 
             // dgvCampaign
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCampaign.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCampaign.ContextMenuStrip = this.cMenuDgvCampaign;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCampaign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCampaign.Location = new System.Drawing.Point(3, 3);
             this.dgvCampaign.Name = "dgvCampaign";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCampaign.RowTemplate.Height = 23;
             this.dgvCampaign.Size = new System.Drawing.Size(1062, 352);
             this.dgvCampaign.TabIndex = 0;
@@ -962,22 +963,16 @@
             this.tabPage5.Text = "获取质量得分";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // txtCatmatchQscore
+            // panel9
             // 
-            this.txtCatmatchQscore.Location = new System.Drawing.Point(127, 20);
-            this.txtCatmatchQscore.Name = "txtCatmatchQscore";
-            this.txtCatmatchQscore.Size = new System.Drawing.Size(100, 21);
-            this.txtCatmatchQscore.TabIndex = 7;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 23);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(113, 12);
-            this.label7.TabIndex = 6;
-            this.label7.Tag = "";
-            this.label7.Text = "类目出价质量得分：";
+            this.panel9.Controls.Add(this.btnGetQscore);
+            this.panel9.Controls.Add(this.label7);
+            this.panel9.Controls.Add(this.txtCatmatchQscore);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel9.Location = new System.Drawing.Point(3, 299);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(1062, 56);
+            this.panel9.TabIndex = 8;
             // 
             // btnGetQscore
             // 
@@ -989,39 +984,56 @@
             this.btnGetQscore.UseVisualStyleBackColor = true;
             this.btnGetQscore.Click += new System.EventHandler(this.btnGetQscore_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 23);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(113, 12);
+            this.label7.TabIndex = 6;
+            this.label7.Tag = "";
+            this.label7.Text = "类目出价质量得分：";
+            // 
+            // txtCatmatchQscore
+            // 
+            this.txtCatmatchQscore.Location = new System.Drawing.Point(127, 20);
+            this.txtCatmatchQscore.Name = "txtCatmatchQscore";
+            this.txtCatmatchQscore.Size = new System.Drawing.Size(100, 21);
+            this.txtCatmatchQscore.TabIndex = 7;
+            // 
             // dgvQscore
             // 
             this.dgvQscore.AllowUserToAddRows = false;
             this.dgvQscore.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvQscore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvQscore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvQscore.Location = new System.Drawing.Point(3, 3);
             this.dgvQscore.Name = "dgvQscore";
             this.dgvQscore.ReadOnly = true;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvQscore.RowTemplate.Height = 23;
             this.dgvQscore.Size = new System.Drawing.Size(1062, 352);
             this.dgvQscore.TabIndex = 0;
@@ -1089,6 +1101,7 @@
             this.gridViewKeywordRpt.Name = "gridViewKeywordRpt";
             this.gridViewKeywordRpt.OptionsSelection.MultiSelect = true;
             this.gridViewKeywordRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewKeywordRpt.OptionsView.ShowFooter = true;
             this.gridViewKeywordRpt.OptionsView.ShowGroupPanel = false;
             // 
             // colKeywordRptDate
@@ -1096,6 +1109,8 @@
             this.colKeywordRptDate.Caption = "date";
             this.colKeywordRptDate.FieldName = "date";
             this.colKeywordRptDate.Name = "colKeywordRptDate";
+            this.colKeywordRptDate.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "个数：{0}")});
             this.colKeywordRptDate.Visible = true;
             this.colKeywordRptDate.VisibleIndex = 0;
             this.colKeywordRptDate.Width = 74;
@@ -1123,6 +1138,8 @@
             this.colKeywordRptImpressions.Caption = "imp";
             this.colKeywordRptImpressions.FieldName = "impressions";
             this.colKeywordRptImpressions.Name = "colKeywordRptImpressions";
+            this.colKeywordRptImpressions.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "impressions", "总计：{0}")});
             this.colKeywordRptImpressions.Visible = true;
             this.colKeywordRptImpressions.VisibleIndex = 3;
             this.colKeywordRptImpressions.Width = 50;
@@ -1132,6 +1149,8 @@
             this.colKeywordRptClick.Caption = "click";
             this.colKeywordRptClick.FieldName = "click";
             this.colKeywordRptClick.Name = "colKeywordRptClick";
+            this.colKeywordRptClick.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "click", "总计：{0}")});
             this.colKeywordRptClick.Visible = true;
             this.colKeywordRptClick.VisibleIndex = 4;
             this.colKeywordRptClick.Width = 50;
@@ -1141,6 +1160,8 @@
             this.colKeywordRptCost.Caption = "cost";
             this.colKeywordRptCost.FieldName = "cost";
             this.colKeywordRptCost.Name = "colKeywordRptCost";
+            this.colKeywordRptCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "cost", "总计：{0}")});
             this.colKeywordRptCost.Visible = true;
             this.colKeywordRptCost.VisibleIndex = 5;
             this.colKeywordRptCost.Width = 50;
@@ -1168,6 +1189,8 @@
             this.colKeywordRptPay.Caption = "pay";
             this.colKeywordRptPay.FieldName = "pay";
             this.colKeywordRptPay.Name = "colKeywordRptPay";
+            this.colKeywordRptPay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pay", "总计：{0}")});
             this.colKeywordRptPay.Visible = true;
             this.colKeywordRptPay.VisibleIndex = 8;
             this.colKeywordRptPay.Width = 50;
@@ -1191,6 +1214,8 @@
             this.colKeywordRptPayCount.Caption = "paycount";
             this.colKeywordRptPayCount.FieldName = "paycount";
             this.colKeywordRptPayCount.Name = "colKeywordRptPayCount";
+            this.colKeywordRptPayCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "paycount", "总计：{0}")});
             this.colKeywordRptPayCount.Visible = true;
             this.colKeywordRptPayCount.VisibleIndex = 9;
             this.colKeywordRptPayCount.Width = 60;
@@ -1200,6 +1225,8 @@
             this.colKeywordRptFavcount.Caption = "favcount";
             this.colKeywordRptFavcount.FieldName = "favcount";
             this.colKeywordRptFavcount.Name = "colKeywordRptFavcount";
+            this.colKeywordRptFavcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favcount", "总计：{0}")});
             this.colKeywordRptFavcount.Visible = true;
             this.colKeywordRptFavcount.VisibleIndex = 10;
             this.colKeywordRptFavcount.Width = 60;
@@ -1384,6 +1411,173 @@
             this.btnGetKeywordRpt.Text = "获取选中推广组的关键词报表";
             this.btnGetKeywordRpt.UseVisualStyleBackColor = true;
             this.btnGetKeywordRpt.Click += new System.EventHandler(this.btnGetKeywordRpt_Click);
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.gridControlAdgroupRpt);
+            this.tabPage10.Controls.Add(this.panel10);
+            this.tabPage10.Location = new System.Drawing.Point(4, 22);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage10.TabIndex = 9;
+            this.tabPage10.Text = "获取推广组报表";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // gridControlAdgroupRpt
+            // 
+            this.gridControlAdgroupRpt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlAdgroupRpt.Location = new System.Drawing.Point(3, 3);
+            this.gridControlAdgroupRpt.MainView = this.gridViewAdgroupRpt;
+            this.gridControlAdgroupRpt.Name = "gridControlAdgroupRpt";
+            this.gridControlAdgroupRpt.Size = new System.Drawing.Size(1062, 296);
+            this.gridControlAdgroupRpt.TabIndex = 5;
+            this.gridControlAdgroupRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewAdgroupRpt});
+            // 
+            // gridViewAdgroupRpt
+            // 
+            this.gridViewAdgroupRpt.GridControl = this.gridControlAdgroupRpt;
+            this.gridViewAdgroupRpt.Name = "gridViewAdgroupRpt";
+            this.gridViewAdgroupRpt.OptionsSelection.MultiSelect = true;
+            this.gridViewAdgroupRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewAdgroupRpt.OptionsView.ShowGroupPanel = false;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.btnNewAdgroupRptForm);
+            this.panel10.Controls.Add(this.gbxAdgroupRptDtp);
+            this.panel10.Controls.Add(this.gbxAdgroupRptRecentDays);
+            this.panel10.Controls.Add(this.chkAdgroupRptRecentDays);
+            this.panel10.Controls.Add(this.chkAdgroupRptDtp);
+            this.panel10.Controls.Add(this.btnGetAllAdgroupRpt);
+            this.panel10.Controls.Add(this.btnGetAdgroupRpt);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel10.Location = new System.Drawing.Point(3, 299);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(1062, 56);
+            this.panel10.TabIndex = 4;
+            // 
+            // btnNewAdgroupRptForm
+            // 
+            this.btnNewAdgroupRptForm.Location = new System.Drawing.Point(1010, 16);
+            this.btnNewAdgroupRptForm.Name = "btnNewAdgroupRptForm";
+            this.btnNewAdgroupRptForm.Size = new System.Drawing.Size(75, 23);
+            this.btnNewAdgroupRptForm.TabIndex = 12;
+            this.btnNewAdgroupRptForm.Text = "新开窗口";
+            this.btnNewAdgroupRptForm.UseVisualStyleBackColor = true;
+            this.btnNewAdgroupRptForm.Click += new System.EventHandler(this.btnNewAdgroupRptForm_Click);
+            // 
+            // gbxAdgroupRptDtp
+            // 
+            this.gbxAdgroupRptDtp.Controls.Add(this.dtpAdgroupRptEndDay);
+            this.gbxAdgroupRptDtp.Controls.Add(this.label12);
+            this.gbxAdgroupRptDtp.Controls.Add(this.dtpAdgroupRptStartDay);
+            this.gbxAdgroupRptDtp.Location = new System.Drawing.Point(260, 6);
+            this.gbxAdgroupRptDtp.Name = "gbxAdgroupRptDtp";
+            this.gbxAdgroupRptDtp.Size = new System.Drawing.Size(305, 39);
+            this.gbxAdgroupRptDtp.TabIndex = 11;
+            this.gbxAdgroupRptDtp.TabStop = false;
+            // 
+            // dtpAdgroupRptEndDay
+            // 
+            this.dtpAdgroupRptEndDay.Location = new System.Drawing.Point(164, 12);
+            this.dtpAdgroupRptEndDay.Name = "dtpAdgroupRptEndDay";
+            this.dtpAdgroupRptEndDay.Size = new System.Drawing.Size(118, 21);
+            this.dtpAdgroupRptEndDay.TabIndex = 8;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(141, 16);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(17, 12);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "至";
+            // 
+            // dtpAdgroupRptStartDay
+            // 
+            this.dtpAdgroupRptStartDay.Location = new System.Drawing.Point(29, 12);
+            this.dtpAdgroupRptStartDay.Name = "dtpAdgroupRptStartDay";
+            this.dtpAdgroupRptStartDay.Size = new System.Drawing.Size(106, 21);
+            this.dtpAdgroupRptStartDay.TabIndex = 6;
+            // 
+            // gbxAdgroupRptRecentDays
+            // 
+            this.gbxAdgroupRptRecentDays.Controls.Add(this.label20);
+            this.gbxAdgroupRptRecentDays.Controls.Add(this.label21);
+            this.gbxAdgroupRptRecentDays.Controls.Add(this.txtAdgroupReportDays);
+            this.gbxAdgroupRptRecentDays.Location = new System.Drawing.Point(49, 6);
+            this.gbxAdgroupRptRecentDays.Name = "gbxAdgroupRptRecentDays";
+            this.gbxAdgroupRptRecentDays.Size = new System.Drawing.Size(150, 39);
+            this.gbxAdgroupRptRecentDays.TabIndex = 10;
+            this.gbxAdgroupRptRecentDays.TabStop = false;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(19, 17);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(41, 12);
+            this.label20.TabIndex = 2;
+            this.label20.Text = "最近：";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(113, 17);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(17, 12);
+            this.label21.TabIndex = 2;
+            this.label21.Text = "天";
+            // 
+            // txtAdgroupReportDays
+            // 
+            this.txtAdgroupReportDays.Location = new System.Drawing.Point(66, 13);
+            this.txtAdgroupReportDays.Name = "txtAdgroupReportDays";
+            this.txtAdgroupReportDays.Size = new System.Drawing.Size(41, 21);
+            this.txtAdgroupReportDays.TabIndex = 3;
+            this.txtAdgroupReportDays.Text = "15";
+            // 
+            // chkAdgroupRptRecentDays
+            // 
+            this.chkAdgroupRptRecentDays.AutoSize = true;
+            this.chkAdgroupRptRecentDays.Location = new System.Drawing.Point(28, 18);
+            this.chkAdgroupRptRecentDays.Name = "chkAdgroupRptRecentDays";
+            this.chkAdgroupRptRecentDays.Size = new System.Drawing.Size(15, 14);
+            this.chkAdgroupRptRecentDays.TabIndex = 9;
+            this.chkAdgroupRptRecentDays.UseVisualStyleBackColor = true;
+            this.chkAdgroupRptRecentDays.CheckedChanged += new System.EventHandler(this.chkAdgroupRptRecentDays_CheckedChanged);
+            // 
+            // chkAdgroupRptDtp
+            // 
+            this.chkAdgroupRptDtp.AutoSize = true;
+            this.chkAdgroupRptDtp.Location = new System.Drawing.Point(239, 18);
+            this.chkAdgroupRptDtp.Name = "chkAdgroupRptDtp";
+            this.chkAdgroupRptDtp.Size = new System.Drawing.Size(15, 14);
+            this.chkAdgroupRptDtp.TabIndex = 5;
+            this.chkAdgroupRptDtp.UseVisualStyleBackColor = true;
+            this.chkAdgroupRptDtp.CheckedChanged += new System.EventHandler(this.chkAdgroupRptDtp_CheckedChanged);
+            // 
+            // btnGetAllAdgroupRpt
+            // 
+            this.btnGetAllAdgroupRpt.Location = new System.Drawing.Point(810, 16);
+            this.btnGetAllAdgroupRpt.Name = "btnGetAllAdgroupRpt";
+            this.btnGetAllAdgroupRpt.Size = new System.Drawing.Size(194, 23);
+            this.btnGetAllAdgroupRpt.TabIndex = 4;
+            this.btnGetAllAdgroupRpt.Text = "获取所有推广组的关键词报表";
+            this.btnGetAllAdgroupRpt.UseVisualStyleBackColor = true;
+            this.btnGetAllAdgroupRpt.Click += new System.EventHandler(this.btnGetAllAdgroupRpt_Click);
+            // 
+            // btnGetAdgroupRpt
+            // 
+            this.btnGetAdgroupRpt.Location = new System.Drawing.Point(585, 16);
+            this.btnGetAdgroupRpt.Name = "btnGetAdgroupRpt";
+            this.btnGetAdgroupRpt.Size = new System.Drawing.Size(219, 23);
+            this.btnGetAdgroupRpt.TabIndex = 1;
+            this.btnGetAdgroupRpt.Text = "获取选中推广组的关键词报表";
+            this.btnGetAdgroupRpt.UseVisualStyleBackColor = true;
+            this.btnGetAdgroupRpt.Click += new System.EventHandler(this.btnGetAdgroupRpt_Click);
             // 
             // tabPage7
             // 
@@ -1619,173 +1813,6 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.btnGetQscore);
-            this.panel9.Controls.Add(this.label7);
-            this.panel9.Controls.Add(this.txtCatmatchQscore);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(3, 299);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1062, 56);
-            this.panel9.TabIndex = 8;
-            // 
-            // tabPage10
-            // 
-            this.tabPage10.Controls.Add(this.gridControlAdgroupRpt);
-            this.tabPage10.Controls.Add(this.panel10);
-            this.tabPage10.Location = new System.Drawing.Point(4, 22);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1068, 358);
-            this.tabPage10.TabIndex = 9;
-            this.tabPage10.Text = "获取推广组报表";
-            this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.gbxAdgroupRptDtp);
-            this.panel10.Controls.Add(this.gbxAdgroupRptRecentDays);
-            this.panel10.Controls.Add(this.chkAdgroupRptRecentDays);
-            this.panel10.Controls.Add(this.chkAdgroupRptDtp);
-            this.panel10.Controls.Add(this.btnGetAllAdgroupRpt);
-            this.panel10.Controls.Add(this.btnGetAdgroupRpt);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel10.Location = new System.Drawing.Point(3, 299);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1062, 56);
-            this.panel10.TabIndex = 4;
-            // 
-            // gbxAdgroupRptDtp
-            // 
-            this.gbxAdgroupRptDtp.Controls.Add(this.dtpAdgroupRptEndDay);
-            this.gbxAdgroupRptDtp.Controls.Add(this.label12);
-            this.gbxAdgroupRptDtp.Controls.Add(this.dtpAdgroupRptStartDay);
-            this.gbxAdgroupRptDtp.Location = new System.Drawing.Point(260, 6);
-            this.gbxAdgroupRptDtp.Name = "gbxAdgroupRptDtp";
-            this.gbxAdgroupRptDtp.Size = new System.Drawing.Size(305, 39);
-            this.gbxAdgroupRptDtp.TabIndex = 11;
-            this.gbxAdgroupRptDtp.TabStop = false;
-            // 
-            // dtpAdgroupRptEndDay
-            // 
-            this.dtpAdgroupRptEndDay.Location = new System.Drawing.Point(164, 12);
-            this.dtpAdgroupRptEndDay.Name = "dtpAdgroupRptEndDay";
-            this.dtpAdgroupRptEndDay.Size = new System.Drawing.Size(118, 21);
-            this.dtpAdgroupRptEndDay.TabIndex = 8;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(141, 16);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(17, 12);
-            this.label12.TabIndex = 7;
-            this.label12.Text = "至";
-            // 
-            // dtpAdgroupRptStartDay
-            // 
-            this.dtpAdgroupRptStartDay.Location = new System.Drawing.Point(29, 12);
-            this.dtpAdgroupRptStartDay.Name = "dtpAdgroupRptStartDay";
-            this.dtpAdgroupRptStartDay.Size = new System.Drawing.Size(106, 21);
-            this.dtpAdgroupRptStartDay.TabIndex = 6;
-            // 
-            // gbxAdgroupRptRecentDays
-            // 
-            this.gbxAdgroupRptRecentDays.Controls.Add(this.label20);
-            this.gbxAdgroupRptRecentDays.Controls.Add(this.label21);
-            this.gbxAdgroupRptRecentDays.Controls.Add(this.txtAdgroupReportDays);
-            this.gbxAdgroupRptRecentDays.Location = new System.Drawing.Point(49, 6);
-            this.gbxAdgroupRptRecentDays.Name = "gbxAdgroupRptRecentDays";
-            this.gbxAdgroupRptRecentDays.Size = new System.Drawing.Size(150, 39);
-            this.gbxAdgroupRptRecentDays.TabIndex = 10;
-            this.gbxAdgroupRptRecentDays.TabStop = false;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(19, 17);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(41, 12);
-            this.label20.TabIndex = 2;
-            this.label20.Text = "最近：";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(113, 17);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(17, 12);
-            this.label21.TabIndex = 2;
-            this.label21.Text = "天";
-            // 
-            // txtAdgroupReportDays
-            // 
-            this.txtAdgroupReportDays.Location = new System.Drawing.Point(66, 13);
-            this.txtAdgroupReportDays.Name = "txtAdgroupReportDays";
-            this.txtAdgroupReportDays.Size = new System.Drawing.Size(41, 21);
-            this.txtAdgroupReportDays.TabIndex = 3;
-            this.txtAdgroupReportDays.Text = "15";
-            // 
-            // chkAdgroupRptRecentDays
-            // 
-            this.chkAdgroupRptRecentDays.AutoSize = true;
-            this.chkAdgroupRptRecentDays.Location = new System.Drawing.Point(28, 18);
-            this.chkAdgroupRptRecentDays.Name = "chkAdgroupRptRecentDays";
-            this.chkAdgroupRptRecentDays.Size = new System.Drawing.Size(15, 14);
-            this.chkAdgroupRptRecentDays.TabIndex = 9;
-            this.chkAdgroupRptRecentDays.UseVisualStyleBackColor = true;
-            this.chkAdgroupRptRecentDays.CheckedChanged += new System.EventHandler(this.chkAdgroupRptRecentDays_CheckedChanged);
-            // 
-            // chkAdgroupRptDtp
-            // 
-            this.chkAdgroupRptDtp.AutoSize = true;
-            this.chkAdgroupRptDtp.Location = new System.Drawing.Point(239, 18);
-            this.chkAdgroupRptDtp.Name = "chkAdgroupRptDtp";
-            this.chkAdgroupRptDtp.Size = new System.Drawing.Size(15, 14);
-            this.chkAdgroupRptDtp.TabIndex = 5;
-            this.chkAdgroupRptDtp.UseVisualStyleBackColor = true;
-            this.chkAdgroupRptDtp.CheckedChanged += new System.EventHandler(this.chkAdgroupRptDtp_CheckedChanged);
-            // 
-            // btnGetAllAdgroupRpt
-            // 
-            this.btnGetAllAdgroupRpt.Location = new System.Drawing.Point(810, 16);
-            this.btnGetAllAdgroupRpt.Name = "btnGetAllAdgroupRpt";
-            this.btnGetAllAdgroupRpt.Size = new System.Drawing.Size(194, 23);
-            this.btnGetAllAdgroupRpt.TabIndex = 4;
-            this.btnGetAllAdgroupRpt.Text = "获取所有推广组的关键词报表";
-            this.btnGetAllAdgroupRpt.UseVisualStyleBackColor = true;
-            this.btnGetAllAdgroupRpt.Click += new System.EventHandler(this.btnGetAllAdgroupRpt_Click);
-            // 
-            // btnGetAdgroupRpt
-            // 
-            this.btnGetAdgroupRpt.Location = new System.Drawing.Point(585, 16);
-            this.btnGetAdgroupRpt.Name = "btnGetAdgroupRpt";
-            this.btnGetAdgroupRpt.Size = new System.Drawing.Size(219, 23);
-            this.btnGetAdgroupRpt.TabIndex = 1;
-            this.btnGetAdgroupRpt.Text = "获取选中推广组的关键词报表";
-            this.btnGetAdgroupRpt.UseVisualStyleBackColor = true;
-            this.btnGetAdgroupRpt.Click += new System.EventHandler(this.btnGetAdgroupRpt_Click);
-            // 
-            // gridControlAdgroupRpt
-            // 
-            this.gridControlAdgroupRpt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlAdgroupRpt.Location = new System.Drawing.Point(3, 3);
-            this.gridControlAdgroupRpt.MainView = this.gridViewAdgroupRpt;
-            this.gridControlAdgroupRpt.Name = "gridControlAdgroupRpt";
-            this.gridControlAdgroupRpt.Size = new System.Drawing.Size(1062, 296);
-            this.gridControlAdgroupRpt.TabIndex = 5;
-            this.gridControlAdgroupRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewAdgroupRpt});
-            // 
-            // gridViewAdgroupRpt
-            // 
-            this.gridViewAdgroupRpt.GridControl = this.gridControlAdgroupRpt;
-            this.gridViewAdgroupRpt.Name = "gridViewAdgroupRpt";
-            this.gridViewAdgroupRpt.OptionsSelection.MultiSelect = true;
-            this.gridViewAdgroupRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
-            this.gridViewAdgroupRpt.OptionsView.ShowGroupPanel = false;
-            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1824,6 +1851,8 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewPrice.Properties)).EndInit();
             this.tabPage5.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQscore)).EndInit();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlKeywordRpt)).EndInit();
@@ -1835,6 +1864,15 @@
             this.gbxDtp.PerformLayout();
             this.gbxRecentDays.ResumeLayout(false);
             this.gbxRecentDays.PerformLayout();
+            this.tabPage10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlAdgroupRpt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewAdgroupRpt)).EndInit();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.gbxAdgroupRptDtp.ResumeLayout(false);
+            this.gbxAdgroupRptDtp.PerformLayout();
+            this.gbxAdgroupRptRecentDays.ResumeLayout(false);
+            this.gbxAdgroupRptRecentDays.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCampaignRpt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCampaignRpt)).EndInit();
@@ -1844,17 +1882,6 @@
             this.panel6.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            this.tabPage10.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.gbxAdgroupRptDtp.ResumeLayout(false);
-            this.gbxAdgroupRptDtp.PerformLayout();
-            this.gbxAdgroupRptRecentDays.ResumeLayout(false);
-            this.gbxAdgroupRptRecentDays.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlAdgroupRpt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewAdgroupRpt)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2013,5 +2040,6 @@
         private System.Windows.Forms.CheckBox chkAdgroupRptDtp;
         private System.Windows.Forms.Button btnGetAllAdgroupRpt;
         private System.Windows.Forms.Button btnGetAdgroupRpt;
+        private System.Windows.Forms.Button btnNewAdgroupRptForm;
     }
 }

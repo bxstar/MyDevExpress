@@ -10,17 +10,7 @@ namespace TaoBaoDataServer.WinClientData.Model
     /// </summary>
     public class EntityCampaignReport
     {
-        /// <summary>
-        /// 推广计划编号
-        /// </summary>
-        public long campaign_id { get; set; }
-
         public string date { get; set; }
-
-        /// <summary>
-        /// 用户名
-        /// </summary>
-        public string nick { get; set; }
 
         /// <summary>
         /// 
@@ -46,16 +36,6 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// 
         /// </summary>
         public decimal cpc { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public decimal avgpos { get; set; }
-
-        /// <summary>
-        /// 来源
-        /// </summary>
-        public string source { get; set; }
 
         /// <summary>
         /// 直接成交金额
@@ -90,10 +70,6 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// </summary>
         public int indirectpaycount { get; set; }
 
-        /// <summary>
-        /// 点击成交转化率
-        /// </summary>
-        public decimal rate { get; set; }
 
         /// <summary>
         /// 
@@ -104,5 +80,30 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// 
         /// </summary>
         public int favshopcount { get; set; }
+
+        /// <summary>
+        /// 推广计划编号
+        /// </summary>
+        public long campaign_id { get; set; }
+
+        /// <summary>
+        /// 点击成交转化率
+        /// </summary>
+        public decimal rate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal avgpos { get; set; }
+
+        /// <summary>
+        /// 来源
+        /// </summary>
+        public string source { get; set; }
+
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string nick { get; set; }
     }
 }

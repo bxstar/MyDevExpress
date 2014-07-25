@@ -71,6 +71,7 @@ namespace TaoBaoDataServer.WinClientData
         private void FrmAPITest_Load(object sender, EventArgs e)
         {
             chkKeywordRptRecentDays.Checked = true;
+            chkAdgroupRptRecentDays.Checked = true;
             //txtNickName.Text = Config.UserName;
             //txtSession.Text = Config.TopSessions;
             //txtNickName.Text = "tp_世奇广告";
@@ -1100,6 +1101,14 @@ namespace TaoBaoDataServer.WinClientData
             gbxAdgroupRptRecentDays.Enabled = false;
             gbxAdgroupRptDtp.Enabled = true;
             chkAdgroupRptRecentDays.Checked = false;
+        }
+
+        private void btnNewAdgroupRptForm_Click(object sender, EventArgs e)
+        {
+            object reportData = gridControlAdgroupRpt.DataSource;
+            FrmReport frm = new FrmReport(string.Format("计划：{0}，ID：{1}，推广组报表", selectedCampaign.Title, selectedCampaign.CampaignId));
+            frm.ReportData = reportData;
+            frm.Show();
         }
     }
 }
