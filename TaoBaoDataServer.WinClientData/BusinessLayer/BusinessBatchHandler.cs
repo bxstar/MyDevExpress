@@ -16,6 +16,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
     {
         private static log4net.ILog logger = LogManager.GetLogger("loggerAX");
         BusinessTaobaoApiHandler taobaoApiHandler = new BusinessTaobaoApiHandler();
+        BusinessCampaignHandler campaignHandler = new BusinessCampaignHandler();
 
         /// <summary>
         /// 下载关键词的基本报表数据，并保存到数据库
@@ -537,7 +538,82 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
 
         #endregion
 
+        /// <summary>
+        /// 根据最近3天的花费对比日限额，判断是否需要提价
+        /// </summary>
+        public Boolean IsNeedAddPrice(TopSession session, long campaignId, double budget ,ref string msg)
+        {
+            decimal dailyLimit = budget > 3000 ? 30M : Convert.ToDecimal(budget);       //超过3000日限额的，包括未设置日限额的，统统算作3000
+            Boolean resultAddPrice = false;
+            List<EntityCampaignReport> lstReport = new List<EntityCampaignReport>();
+            try
+            {
+                // 下载推广计划的基本报表
+                var report = taobaoApiHandler.TaobaoSimbaRptCampaignbaseGet(session, campaignId, DateTime.Now.AddDays(-3).ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"));
 
+                if (report == null || String.IsNullOrEmpty(report.RptCampaignBaseList) || report.RptCampaignBaseList == "[]" || report.RptCampaignBaseList == "{}")
+                {
+                    return false;
+                }
+                // 解析推广组json数据
+                NetServ.Net.Json.JsonArray data;
+                // 解析推广组
+                using (JsonParser parser = new JsonParser(new StringReader(report.RptCampaignBaseList), true))
+                {
+                    data = parser.ParseArray();
+                }
+                foreach (JsonObject service in data)
+                {
+                    EntityCampaignReport campaignReport = new EntityCampaignReport();
+                    campaignReport.date = CommonFunction.JsonObjectToString(service["date"]);
+                    campaignReport.impressions = (CommonFunction.JsonObjectToInt(service["impressions"])) + campaignReport.impressions;
+                    campaignReport.cost = (CommonFunction.JsonObjectToDecimal(service["cost"]) / 100.0M) + campaignReport.cost;
+                    lstReport.Add(campaignReport);
+                }
+
+                if (lstReport.Where(o => o.impressions > 0).Count() == 0)
+                {//展现全为0的，数据有问题
+                    return false;
+                }
+                Boolean isRecentlyCostLower = false;    //是否最近花费都小于日限额的70%
+                if (lstReport.Max(o => o.cost) <= (dailyLimit * 0.7M))
+                {//最近的花费都小于日限额的70%
+                    isRecentlyCostLower = true;
+                }
+                else
+                {//不满足直接返回
+                    return false;
+                }
+                EntityMajorConfig addPriceConfig = CommonHandler.GetMajorConfig(CommonHandler.Const_MajorizationConfig浮动加价);
+                Boolean isAddPriceLessFive = false;     //15天内是否加价策略连续执行少于5次
+                List<EntityMajorizationAdgroupRecord> lstRecord = campaignHandler.GetMajorizationAdgroup(campaignId).Where
+                    (o => o.create_date > DateTime.Now.AddDays(-15) && o.config_id == addPriceConfig.LocalID).ToList();
+                if (lstRecord.GroupBy(o => o.create_date.ToString("yyyy-MM-dd")).Count() < 5)
+                {
+                    isAddPriceLessFive = true;
+                }
+                else
+                {
+                    isAddPriceLessFive = false;
+                }
+
+                if (isRecentlyCostLower && isAddPriceLessFive)
+                {
+                    resultAddPrice = true;
+                    decimal recentlyAvgCost = lstReport.Where(o => o.impressions > 0).Average(o => o.cost);     //最近的平均花费
+                    decimal addPriceRate = (dailyLimit - recentlyAvgCost) / dailyLimit;
+
+                    msg = string.Format("日限额{0}，平均花费{1}，加价幅度{2}", dailyLimit, recentlyAvgCost, addPriceRate);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(string.Format("用户{0},ID{1},判断是否需要提价失败：", session.ProxyUserName, session.UserID), ex);
+                return false;
+            }
+            return resultAddPrice;
+        }
     }
 
 }

@@ -37,7 +37,7 @@ namespace TaoBaoDataServer.WinClientData
         MainForm frmMain;
 
         /// <summary>
-        /// 选中的推广计划ID
+        /// 选中的推广计划
         /// </summary>
         Campaign selectedCampaign = new Campaign();
 
@@ -90,7 +90,7 @@ namespace TaoBaoDataServer.WinClientData
                 cbxApp.SelectedIndex = 2;
                 
             gridViewUser.IndicatorWidth = 50;
-            gridViewAdgroup.IndicatorWidth = gridViewKeyword.IndicatorWidth = gridViewKeywordRpt.IndicatorWidth = gridViewCampaignRpt.IndicatorWidth = 30;
+            gridViewAdgroup.IndicatorWidth = gridViewKeyword.IndicatorWidth = gridViewKeywordRpt.IndicatorWidth = gridViewCampaignRpt.IndicatorWidth = gridViewAdgroupRpt.IndicatorWidth = 30;
 
             //显示行号
             gridViewUser.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
@@ -98,6 +98,7 @@ namespace TaoBaoDataServer.WinClientData
             gridViewKeyword.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
             gridViewKeywordRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
             gridViewCampaignRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
+            gridViewAdgroupRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
 
             //排序完成后显示第一行
             gridViewUser.EndSorting += new EventHandler(gridViewEndSorting);
@@ -105,6 +106,7 @@ namespace TaoBaoDataServer.WinClientData
             gridViewKeyword.EndSorting += new EventHandler(gridViewEndSorting);
             gridViewKeywordRpt.EndSorting += new EventHandler(gridViewEndSorting);
             gridViewCampaignRpt.EndSorting += new EventHandler(gridViewEndSorting);
+            gridViewAdgroupRpt.EndSorting += new EventHandler(gridViewEndSorting);
         }
 
         private TopSession GetSession()
@@ -1042,10 +1044,11 @@ namespace TaoBaoDataServer.WinClientData
 
             double budget = GetCampaignBudget(user, ec.campaignid);
             txtBudget.Text = budget.ToString();
-            Boolean result = IsNeedAddPrice(user, ec.campaignid, budget);
+            string strMsg = string.Empty;
+            Boolean result = batchHandler.IsNeedAddPrice(user, ec.campaignid, budget,ref strMsg);
             if (result)
             {
-                
+                MessageBox.Show(strMsg);
             }
             else
             {
@@ -1053,82 +1056,50 @@ namespace TaoBaoDataServer.WinClientData
             }
         }
 
-        /// <summary>
-        /// 根据最近3天的花费对比日限额，判断是否需要提价
-        /// </summary>
-        private Boolean IsNeedAddPrice(TopSession session, long campaignId, double budget)
+        private void btnGetAdgroupRpt_Click(object sender, EventArgs e)
         {
-            decimal dailyLimit = budget > 3000 ? 30M : Convert.ToDecimal(budget);       //超过3000日限额的，包括未设置日限额的，统统算作3000
-            Boolean resultAddPrice = false;
-            List<EntityCampaignReport> lstReport = new List<EntityCampaignReport>();
-            try
+            TopSession user = GetSession();
+            int intReportDays = Convert.ToInt32(txtAdgroupReportDays.Text.Trim());
+            List<EntityAdgroupReport> lstRpt = new List<EntityAdgroupReport>();
+            if (chkAdgroupRptRecentDays.Checked)
             {
-                // 下载推广计划的基本报表
-                var report = taobaoApiHandler.TaobaoSimbaRptCampaignbaseGet(session, campaignId, DateTime.Now.AddDays(-3).ToString("yyyy-MM-dd"), DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"));
-
-                if (report == null || String.IsNullOrEmpty(report.RptCampaignBaseList) || report.RptCampaignBaseList == "[]" || report.RptCampaignBaseList == "{}")
-                {
-                    return false;
-                }
-                // 解析推广组json数据
-                NetServ.Net.Json.JsonArray data;
-                // 解析推广组
-                using (JsonParser parser = new JsonParser(new StringReader(report.RptCampaignBaseList), true))
-                {
-                    data = parser.ParseArray();
-                }
-                foreach (JsonObject service in data)
-                {
-                    EntityCampaignReport campaignReport = new EntityCampaignReport();
-                    campaignReport.date = CommonFunction.JsonObjectToString(service["date"]);
-                    campaignReport.impressions = (CommonFunction.JsonObjectToInt(service["impressions"])) + campaignReport.impressions;
-                    campaignReport.cost = (CommonFunction.JsonObjectToDecimal(service["cost"]) / 100.0M) + campaignReport.cost;
-                    lstReport.Add(campaignReport);
-                }
-
-                if (lstReport.Where(o => o.impressions > 0).Count() == 0)
-                {//展现全为0的，数据有问题
-                    return false;
-                }
-                Boolean isRecentlyCostLower = false;    //是否最近花费都小于日限额的70%
-                if (lstReport.Max(o => o.cost) <= (dailyLimit * 0.7M))
-                {//最近的花费都小于日限额的70%
-                    isRecentlyCostLower = true;
-                }
-                else
-                {//不满足直接返回
-                    return false;
-                }
-                EntityMajorConfig addPriceConfig = CommonHandler.GetMajorConfig(CommonHandler.Const_MajorizationConfig浮动加价);
-                Boolean isAddPriceLessFive = false;     //15天内是否加价策略连续执行少于5次
-                List<EntityMajorizationAdgroupRecord> lstRecord = campaignHandler.GetMajorizationAdgroup(campaignId).Where
-                    (o => o.create_date > DateTime.Now.AddDays(-15) && o.config_id == addPriceConfig.LocalID).ToList();
-                if (lstRecord.GroupBy(o => o.create_date.ToString("yyyy-MM-dd")).Count() < 5)
-                {
-                    isAddPriceLessFive = true;
-                }
-                else
-                {
-                    isAddPriceLessFive = false;
-                }
-
-                if (isRecentlyCostLower && isAddPriceLessFive)
-                {
-                    resultAddPrice = true;
-                    decimal recentlyAvgCost = lstReport.Where(o => o.impressions > 0).Average(o => o.cost);     //最近的平均花费
-                    decimal addPriceRate = (dailyLimit - recentlyAvgCost) / dailyLimit;
-
-                    string str = string.Format("日限额{0}，平均花费{1}，加价幅度{2}", dailyLimit, recentlyAvgCost, addPriceRate);
-                    MessageBox.Show(str);
-                }
-
+                lstRpt = adgroupHandler.DownLoadAdgroupReport(user, selectedCampaign.CampaignId, selectedAdGroup.AdgroupId, intReportDays);
             }
-            catch (Exception ex)
+            else if (chkAdgroupRptDtp.Checked)
             {
-                logger.Error(string.Format("用户{0},ID{1},判断是否需要提价失败：", session.ProxyUserName, session.UserID), ex);
-                return false;
+                lstRpt = adgroupHandler.DownLoadAdgroupReport(user, selectedCampaign.CampaignId, selectedAdGroup.AdgroupId, dtpAdgroupRptStartDay.Value.ToString("yyyy-MM-dd"), dtpAdgroupRptEndDay.Value.ToString("yyyy-MM-dd"));
             }
-            return resultAddPrice;
+            gridControlAdgroupRpt.DataSource = new SortableBindingList<EntityAdgroupReport>(lstRpt);
+        }
+
+        private void btnGetAllAdgroupRpt_Click(object sender, EventArgs e)
+        {
+            TopSession user = GetSession();
+            int intReportDays = Convert.ToInt32(txtAdgroupReportDays.Text.Trim());
+            List<EntityAdgroupReport> lstRpt = new List<EntityAdgroupReport>();
+            if (chkAdgroupRptRecentDays.Checked)
+            {
+                lstRpt = adgroupHandler.DownLoadAdgroupReportByCampaign(user, selectedCampaign.CampaignId, intReportDays);
+            }
+            else if (chkAdgroupRptDtp.Checked)
+            {
+                lstRpt = adgroupHandler.DownLoadAdgroupReportByCampaign(user, selectedCampaign.CampaignId, dtpAdgroupRptStartDay.Value.ToString("yyyy-MM-dd"), dtpAdgroupRptEndDay.Value.ToString("yyyy-MM-dd"));
+            }
+            gridControlAdgroupRpt.DataSource = new SortableBindingList<EntityAdgroupReport>(lstRpt);
+        }
+
+        private void chkAdgroupRptRecentDays_CheckedChanged(object sender, EventArgs e)
+        {
+            gbxAdgroupRptRecentDays.Enabled = true;
+            gbxAdgroupRptDtp.Enabled = false;
+            chkAdgroupRptDtp.Checked = false;
+        }
+
+        private void chkAdgroupRptDtp_CheckedChanged(object sender, EventArgs e)
+        {
+            gbxAdgroupRptRecentDays.Enabled = false;
+            gbxAdgroupRptDtp.Enabled = true;
+            chkAdgroupRptRecentDays.Checked = false;
         }
     }
 }
