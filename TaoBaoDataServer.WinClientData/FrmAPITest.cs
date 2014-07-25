@@ -610,11 +610,7 @@ namespace TaoBaoDataServer.WinClientData
                     rpt.click = item.click == null ? 0 : item.click;
                     rpt.cost = item.cost == null ? 0M : item.cost;
                     rpt.source = item.source;
-                    rpt.avgpos = item.avgpos;
-                    //if (rpt.source == 1)
-                    //{
-                    //    rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;     //只保存站内的排名
-                    //}
+                    rpt.avgpos = item.avgpos == null ? 0M : item.avgpos;
                     lstAll.Add(rpt);
                 }
             }
@@ -737,11 +733,10 @@ namespace TaoBaoDataServer.WinClientData
 
         private void btnGetTopSession_Click(object sender, EventArgs e)
         {
-            lstUser = userHandler.GetUserInfo(null).Where(o => o.UserName == o.ProxyUserName).ToList();
-            TopSession session = lstUser.Find(o => o.ProxyUserName == txtNickName.Text.Trim());
-            if (session != null)
+            TopSession user = userHandler.GetUserSession(txtNickName.Text.Trim());
+            if (user != null)
             {
-                txtSession.Text = session.TopSessions;
+                txtSession.Text = user.TopSessions;
             }
         }
 
@@ -1151,7 +1146,7 @@ namespace TaoBaoDataServer.WinClientData
 
         private void 查询排名ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Keyword k = gridViewKeyword.GetFocusedRow() as Keyword;
+            dynamic k = gridViewKeyword.GetFocusedRow() as dynamic;
             if (k != null)
             {
                 FrmSetKeywordRank frm = new FrmSetKeywordRank();
