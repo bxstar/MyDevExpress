@@ -199,10 +199,18 @@ namespace TaoBaoDataServer.WinClientData
         private void btnGetQscore_Click(object sender, EventArgs e)
         {
             TopSession session = GetSession();
-            string strCatMatchQscore = string.Empty;
-            List<KeywordQscore> result = GetQscore(session, selectedAdGroup.AdgroupId, ref strCatMatchQscore);
-            txtCatmatchQscore.Text = strCatMatchQscore;
-            dgvQscore.DataSource = result;
+            if (chkGetCatQScore.Checked)
+            {
+                string strCatMatchQscore = string.Empty;
+                List<KeywordQscore> result = GetQscore(session, selectedAdGroup.AdgroupId, ref strCatMatchQscore);
+                txtCatmatchQscore.Text = strCatMatchQscore;
+                dgvQscore.DataSource = new SortableBindingList<KeywordQscore>(result);
+            }
+            else
+            {
+                var response = taobaoApiHandler.TaobaoSimbaKeywordsQscoreGet(session, selectedAdGroup.AdgroupId);
+                dgvQscore.DataSource = new SortableBindingList<KeywordQscore>(response.KeywordQscoreList);
+            }
         }
 
         private void btnGetKeywordRpt_Click(object sender, EventArgs e)

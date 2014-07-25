@@ -107,10 +107,9 @@
             this.btnGetKeyword = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.btnGetQscore = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtCatmatchQscore = new System.Windows.Forms.TextBox();
             this.dgvQscore = new System.Windows.Forms.DataGridView();
+            this.btnGetQscore = new System.Windows.Forms.Button();
+            this.txtCatmatchQscore = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.gridControlKeywordRpt = new DevExpress.XtraGrid.GridControl();
             this.cMenuDgvKeywordRpt = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -188,6 +187,7 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
+            this.chkGetCatQScore = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -953,8 +953,8 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.panel9);
             this.tabPage5.Controls.Add(this.dgvQscore);
+            this.tabPage5.Controls.Add(this.panel9);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -965,41 +965,14 @@
             // 
             // panel9
             // 
+            this.panel9.Controls.Add(this.chkGetCatQScore);
             this.panel9.Controls.Add(this.btnGetQscore);
-            this.panel9.Controls.Add(this.label7);
             this.panel9.Controls.Add(this.txtCatmatchQscore);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel9.Location = new System.Drawing.Point(3, 299);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(1062, 56);
             this.panel9.TabIndex = 8;
-            // 
-            // btnGetQscore
-            // 
-            this.btnGetQscore.Location = new System.Drawing.Point(233, 20);
-            this.btnGetQscore.Name = "btnGetQscore";
-            this.btnGetQscore.Size = new System.Drawing.Size(101, 23);
-            this.btnGetQscore.TabIndex = 1;
-            this.btnGetQscore.Text = "获取质量得分";
-            this.btnGetQscore.UseVisualStyleBackColor = true;
-            this.btnGetQscore.Click += new System.EventHandler(this.btnGetQscore_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 23);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(113, 12);
-            this.label7.TabIndex = 6;
-            this.label7.Tag = "";
-            this.label7.Text = "类目出价质量得分：";
-            // 
-            // txtCatmatchQscore
-            // 
-            this.txtCatmatchQscore.Location = new System.Drawing.Point(127, 20);
-            this.txtCatmatchQscore.Name = "txtCatmatchQscore";
-            this.txtCatmatchQscore.Size = new System.Drawing.Size(100, 21);
-            this.txtCatmatchQscore.TabIndex = 7;
             // 
             // dgvQscore
             // 
@@ -1035,9 +1008,26 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvQscore.RowTemplate.Height = 23;
-            this.dgvQscore.Size = new System.Drawing.Size(1062, 352);
+            this.dgvQscore.Size = new System.Drawing.Size(1062, 296);
             this.dgvQscore.TabIndex = 0;
             this.dgvQscore.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
+            // 
+            // btnGetQscore
+            // 
+            this.btnGetQscore.Location = new System.Drawing.Point(397, 19);
+            this.btnGetQscore.Name = "btnGetQscore";
+            this.btnGetQscore.Size = new System.Drawing.Size(101, 23);
+            this.btnGetQscore.TabIndex = 1;
+            this.btnGetQscore.Text = "获取质量得分";
+            this.btnGetQscore.UseVisualStyleBackColor = true;
+            this.btnGetQscore.Click += new System.EventHandler(this.btnGetQscore_Click);
+            // 
+            // txtCatmatchQscore
+            // 
+            this.txtCatmatchQscore.Location = new System.Drawing.Point(243, 21);
+            this.txtCatmatchQscore.Name = "txtCatmatchQscore";
+            this.txtCatmatchQscore.Size = new System.Drawing.Size(100, 21);
+            this.txtCatmatchQscore.TabIndex = 7;
             // 
             // tabPage6
             // 
@@ -1813,6 +1803,16 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
+            // chkGetCatQScore
+            // 
+            this.chkGetCatQScore.AutoSize = true;
+            this.chkGetCatQScore.Location = new System.Drawing.Point(38, 21);
+            this.chkGetCatQScore.Name = "chkGetCatQScore";
+            this.chkGetCatQScore.Size = new System.Drawing.Size(180, 16);
+            this.chkGetCatQScore.TabIndex = 8;
+            this.chkGetCatQScore.Text = "是否获取类目出价质量得分：";
+            this.chkGetCatQScore.UseVisualStyleBackColor = true;
+            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1916,7 +1916,6 @@
         private System.Windows.Forms.DataGridView dgvQscore;
         private System.Windows.Forms.Button btnGetQscore;
         private System.Windows.Forms.TextBox txtCatmatchQscore;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Button btnGetKeywordRpt;
         private System.Windows.Forms.Button btnGetOneItem;
@@ -2041,5 +2040,6 @@
         private System.Windows.Forms.Button btnGetAllAdgroupRpt;
         private System.Windows.Forms.Button btnGetAdgroupRpt;
         private System.Windows.Forms.Button btnNewAdgroupRptForm;
+        private System.Windows.Forms.CheckBox chkGetCatQScore;
     }
 }
