@@ -1030,12 +1030,26 @@ namespace TaoBaoDataServer.WinClientData
             if (data != null)
             {
                 string str = data.ToString();
-                string[] separator = new string[] { "\t" };
-                string[] source = str.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-                if (source.Count<string>() == 2)
+                string[] separatorHead = new string[] { "\r\n" };
+                string[] separatorContent = new string[] { "\t" };
+                string[] sourceHead = str.Split(separatorHead, StringSplitOptions.RemoveEmptyEntries);
+                if (sourceHead.Length == 2)
+                {//剪切板中有标题 
+                    string[] source = sourceHead[1].Split(separatorContent, StringSplitOptions.RemoveEmptyEntries);
+                    if (source.Length == 2)
+                    {
+                        this.txtNickName.Text = source[0];
+                        this.txtSession.Text = source[1];
+                    }
+                }
+                else
                 {
-                    this.txtNickName.Text = source[0];
-                    this.txtSession.Text = source[1];
+                    string[] source = str.Split(separatorContent, StringSplitOptions.RemoveEmptyEntries);
+                    if (source.Length == 2)
+                    {
+                        this.txtNickName.Text = source[0];
+                        this.txtSession.Text = source[1];
+                    }
                 }
             }
 
