@@ -1132,5 +1132,34 @@ namespace TaoBaoDataServer.WinClientData
             frm.ReportData = reportData;
             frm.Show();
         }
+
+        private void 网页打开宝贝ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EntityAdgroupReport rpt = gridViewAdgroupRpt.GetFocusedRow() as EntityAdgroupReport;
+            long itemId = 0;
+            List<ADGroup> lstAdgroup = gridControlAdgroup.DataSource as List<ADGroup>;
+            if (lstAdgroup != null)
+            {
+                ADGroup adgroup = lstAdgroup.Find(o => o.AdgroupId == rpt.adgroup_id);
+                if (adgroup != null)
+                {
+                    itemId = adgroup.NumIid;
+                }
+            }
+            if (itemId == 0)
+            {
+                TopSession session = GetSession();
+                List<long> lstAdgroupId = new List<long>();
+                lstAdgroupId.Add(rpt.adgroup_id);
+                var response = taobaoApiHandler.TaobaoSimbaAdgroupsByAdgroupIds(session, lstAdgroupId);
+                if (!response.IsError)
+                {
+                    ADGroup adgroup = response.Adgroups.AdgroupList.Find(o => o.AdgroupId == rpt.adgroup_id);
+                    itemId = adgroup.NumIid;
+                }
+            }
+            string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", itemId);
+            System.Diagnostics.Process.Start("iexplore.exe", itemUrl);
+        }
     }
 }

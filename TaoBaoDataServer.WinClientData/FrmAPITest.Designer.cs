@@ -106,8 +106,9 @@
             this.btnKeywordChange = new System.Windows.Forms.Button();
             this.btnGetKeyword = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.panel9 = new System.Windows.Forms.Panel();
             this.dgvQscore = new System.Windows.Forms.DataGridView();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.chkGetCatQScore = new System.Windows.Forms.CheckBox();
             this.btnGetQscore = new System.Windows.Forms.Button();
             this.txtCatmatchQscore = new System.Windows.Forms.TextBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -187,7 +188,8 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.chkGetCatQScore = new System.Windows.Forms.CheckBox();
+            this.cMenuDgvAdgroupRpt = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.网页打开宝贝ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -210,8 +212,8 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewPrice.Properties)).BeginInit();
             this.tabPage5.SuspendLayout();
-            this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQscore)).BeginInit();
+            this.panel9.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlKeywordRpt)).BeginInit();
             this.cMenuDgvKeywordRpt.SuspendLayout();
@@ -232,6 +234,7 @@
             this.tabPage8.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.cMenuDgvAdgroupRpt.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -963,17 +966,6 @@
             this.tabPage5.Text = "获取质量得分";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.chkGetCatQScore);
-            this.panel9.Controls.Add(this.btnGetQscore);
-            this.panel9.Controls.Add(this.txtCatmatchQscore);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(3, 299);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1062, 56);
-            this.panel9.TabIndex = 8;
-            // 
             // dgvQscore
             // 
             this.dgvQscore.AllowUserToAddRows = false;
@@ -1011,6 +1003,27 @@
             this.dgvQscore.Size = new System.Drawing.Size(1062, 296);
             this.dgvQscore.TabIndex = 0;
             this.dgvQscore.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.chkGetCatQScore);
+            this.panel9.Controls.Add(this.btnGetQscore);
+            this.panel9.Controls.Add(this.txtCatmatchQscore);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel9.Location = new System.Drawing.Point(3, 299);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(1062, 56);
+            this.panel9.TabIndex = 8;
+            // 
+            // chkGetCatQScore
+            // 
+            this.chkGetCatQScore.AutoSize = true;
+            this.chkGetCatQScore.Location = new System.Drawing.Point(38, 21);
+            this.chkGetCatQScore.Name = "chkGetCatQScore";
+            this.chkGetCatQScore.Size = new System.Drawing.Size(180, 16);
+            this.chkGetCatQScore.TabIndex = 8;
+            this.chkGetCatQScore.Text = "是否获取类目出价质量得分：";
+            this.chkGetCatQScore.UseVisualStyleBackColor = true;
             // 
             // btnGetQscore
             // 
@@ -1416,6 +1429,7 @@
             // 
             // gridControlAdgroupRpt
             // 
+            this.gridControlAdgroupRpt.ContextMenuStrip = this.cMenuDgvAdgroupRpt;
             this.gridControlAdgroupRpt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlAdgroupRpt.Location = new System.Drawing.Point(3, 3);
             this.gridControlAdgroupRpt.MainView = this.gridViewAdgroupRpt;
@@ -1803,15 +1817,19 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // chkGetCatQScore
+            // cMenuDgvAdgroupRpt
             // 
-            this.chkGetCatQScore.AutoSize = true;
-            this.chkGetCatQScore.Location = new System.Drawing.Point(38, 21);
-            this.chkGetCatQScore.Name = "chkGetCatQScore";
-            this.chkGetCatQScore.Size = new System.Drawing.Size(180, 16);
-            this.chkGetCatQScore.TabIndex = 8;
-            this.chkGetCatQScore.Text = "是否获取类目出价质量得分：";
-            this.chkGetCatQScore.UseVisualStyleBackColor = true;
+            this.cMenuDgvAdgroupRpt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.网页打开宝贝ToolStripMenuItem1});
+            this.cMenuDgvAdgroupRpt.Name = "cMenuDgvAdgroupRpt";
+            this.cMenuDgvAdgroupRpt.Size = new System.Drawing.Size(153, 48);
+            // 
+            // 网页打开宝贝ToolStripMenuItem1
+            // 
+            this.网页打开宝贝ToolStripMenuItem1.Name = "网页打开宝贝ToolStripMenuItem1";
+            this.网页打开宝贝ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.网页打开宝贝ToolStripMenuItem1.Text = "网页打开宝贝";
+            this.网页打开宝贝ToolStripMenuItem1.Click += new System.EventHandler(this.网页打开宝贝ToolStripMenuItem1_Click);
             // 
             // FrmAPITest
             // 
@@ -1851,9 +1869,9 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewPrice.Properties)).EndInit();
             this.tabPage5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQscore)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvQscore)).EndInit();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlKeywordRpt)).EndInit();
             this.cMenuDgvKeywordRpt.ResumeLayout(false);
@@ -1882,6 +1900,7 @@
             this.panel6.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.cMenuDgvAdgroupRpt.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2041,5 +2060,7 @@
         private System.Windows.Forms.Button btnGetAdgroupRpt;
         private System.Windows.Forms.Button btnNewAdgroupRptForm;
         private System.Windows.Forms.CheckBox chkGetCatQScore;
+        private System.Windows.Forms.ContextMenuStrip cMenuDgvAdgroupRpt;
+        private System.Windows.Forms.ToolStripMenuItem 网页打开宝贝ToolStripMenuItem1;
     }
 }
