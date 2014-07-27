@@ -15,7 +15,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// TopAPI
         /// </summary>
-        private ITopClient _client = new DefaultTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
+        private static ITopClient _client = new DefaultTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
 
         /// <summary>
         /// 根据参数设置top连接的客户端
