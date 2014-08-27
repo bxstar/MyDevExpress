@@ -1134,5 +1134,41 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             var response = _client.Execute(req, session.TopSessions);
             return response;
         }
+
+        /// <summary>
+        /// taobao.simba.campaign.schedule.get 获取分时折扣设置
+        /// </summary>
+        public SimbaCampaignScheduleGetResponse TaobaoSimbaCampaignScheduleGet(TopSession session, long campaignId)
+        {
+            SimbaCampaignScheduleGetRequest req = new SimbaCampaignScheduleGetRequest();
+            req.Nick = session.UserName;
+            req.CampaignId = campaignId;
+            var response = _client.Execute(req, session.TopSessions);
+            return response;
+        }
+
+        /// <summary>
+        /// taobao.simba.campaign.area.get 获取计划的投放地域
+        /// </summary>
+        public SimbaCampaignAreaGetResponse TaobaoSimbaCampaignAreaGet(TopSession session, long campaignId)
+        {
+            SimbaCampaignAreaGetRequest req = new SimbaCampaignAreaGetRequest();
+            req.Nick = session.UserName;
+            req.CampaignId = campaignId;
+            var response = _client.Execute(req, session.TopSessions);
+            return response;
+        }
+
+        /// <summary>
+        /// taobao.simba.campaign.platform.get 取得一个推广计划的投放平台设置
+        /// </summary>
+        public SimbaCampaignPlatformGetResponse TaobaoSimbaCampaignPlatformGet(TopSession session, long campaignId)
+        {
+            SimbaCampaignPlatformGetRequest req = new SimbaCampaignPlatformGetRequest();
+            req.Nick = session.UserName;
+            req.CampaignId = campaignId;
+            var response = _client.Execute(req, session.TopSessions);
+            return response;
+        }
     }
 }

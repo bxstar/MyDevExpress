@@ -505,10 +505,12 @@ namespace TaoBaoDataServer.WinClientData
 
         private void btnGetCategoryTop_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
             TopSession session = GetSession();
-            string categoryIds = txtCategoryIds.Text;
-            var result = taobaoApiHandler.TaobaoSimbaInsightCatstopwordGet(session, categoryIds);
-            foreach (string word in result.TopWords)
+            string catInfo = CommonHandler.GetItemCatsOnline(txtCategoryIds.Text.Trim());
+            richTextBox1.AppendText("类目信息：" + catInfo + "\n");
+            List<string> lstReuslt = CommonHandler.GetCatTop100Keyword(Convert.ToInt64(txtCategoryIds.Text.Trim()));
+            foreach (string word in lstReuslt)
             {
                 richTextBox1.AppendText(word + "\n");
             }
@@ -1160,6 +1162,33 @@ namespace TaoBaoDataServer.WinClientData
             }
             string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", itemId);
             System.Diagnostics.Process.Start("iexplore.exe", itemUrl);
+        }
+
+        private void btnGetSchedule_Click(object sender, EventArgs e)
+        {
+            txtSchedule.Text = string.Empty;
+            TopSession session = GetSession();
+            long campaignId = selectedCampaign.CampaignId;
+            var response = taobaoApiHandler.TaobaoSimbaCampaignScheduleGet(session, campaignId);
+            txtSchedule.Text = response.CampaignSchedule.Schedule;
+        }
+
+        private void btnGetArea_Click(object sender, EventArgs e)
+        {
+            txtArea.Text = string.Empty;
+            TopSession session = GetSession();
+            long campaignId = selectedCampaign.CampaignId;
+            var response = taobaoApiHandler.TaobaoSimbaCampaignAreaGet(session, campaignId);
+            txtArea.Text = response.CampaignArea.Area;
+        }
+
+        private void btnGetPlatform_Click(object sender, EventArgs e)
+        {
+            txtPlatform.Text = string.Empty;
+            TopSession session = GetSession();
+            long campaignId = selectedCampaign.CampaignId;
+            var response = taobaoApiHandler.TaobaoSimbaCampaignPlatformGet(session, campaignId);
+            txtPlatform.Text = response.Body;
         }
     }
 }

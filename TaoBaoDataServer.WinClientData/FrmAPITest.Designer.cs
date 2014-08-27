@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.gridControlUser = new DevExpress.XtraGrid.GridControl();
@@ -150,6 +150,8 @@
             this.btnGetKeywordRpt = new System.Windows.Forms.Button();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.gridControlAdgroupRpt = new DevExpress.XtraGrid.GridControl();
+            this.cMenuDgvAdgroupRpt = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.网页打开宝贝ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewAdgroupRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnNewAdgroupRptForm = new System.Windows.Forms.Button();
@@ -188,8 +190,15 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.cMenuDgvAdgroupRpt = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.网页打开宝贝ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnGetPlatform = new System.Windows.Forms.Button();
+            this.btnGetArea = new System.Windows.Forms.Button();
+            this.btnGetSchedule = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtPlatform = new System.Windows.Forms.TextBox();
+            this.txtArea = new System.Windows.Forms.TextBox();
+            this.txtSchedule = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -223,6 +232,7 @@
             this.gbxRecentDays.SuspendLayout();
             this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlAdgroupRpt)).BeginInit();
+            this.cMenuDgvAdgroupRpt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAdgroupRpt)).BeginInit();
             this.panel10.SuspendLayout();
             this.gbxAdgroupRptDtp.SuspendLayout();
@@ -234,7 +244,6 @@
             this.tabPage8.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.cMenuDgvAdgroupRpt.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -498,6 +507,15 @@
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.btnGetPlatform);
+            this.panel8.Controls.Add(this.btnGetArea);
+            this.panel8.Controls.Add(this.btnGetSchedule);
+            this.panel8.Controls.Add(this.label23);
+            this.panel8.Controls.Add(this.label22);
+            this.panel8.Controls.Add(this.label7);
+            this.panel8.Controls.Add(this.txtPlatform);
+            this.panel8.Controls.Add(this.txtArea);
+            this.panel8.Controls.Add(this.txtSchedule);
             this.panel8.Controls.Add(this.btnCheckAddPrice);
             this.panel8.Controls.Add(this.btnGetMajorCampaign);
             this.panel8.Controls.Add(this.label5);
@@ -517,7 +535,7 @@
             // 
             // btnCheckAddPrice
             // 
-            this.btnCheckAddPrice.Location = new System.Drawing.Point(602, 79);
+            this.btnCheckAddPrice.Location = new System.Drawing.Point(898, 25);
             this.btnCheckAddPrice.Name = "btnCheckAddPrice";
             this.btnCheckAddPrice.Size = new System.Drawing.Size(75, 23);
             this.btnCheckAddPrice.TabIndex = 8;
@@ -527,7 +545,7 @@
             // 
             // btnGetMajorCampaign
             // 
-            this.btnGetMajorCampaign.Location = new System.Drawing.Point(38, 25);
+            this.btnGetMajorCampaign.Location = new System.Drawing.Point(20, 26);
             this.btnGetMajorCampaign.Name = "btnGetMajorCampaign";
             this.btnGetMajorCampaign.Size = new System.Drawing.Size(101, 23);
             this.btnGetMajorCampaign.TabIndex = 7;
@@ -538,7 +556,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(276, 30);
+            this.label5.Location = new System.Drawing.Point(258, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 2;
@@ -546,7 +564,7 @@
             // 
             // btnGetBudget
             // 
-            this.btnGetBudget.Location = new System.Drawing.Point(490, 79);
+            this.btnGetBudget.Location = new System.Drawing.Point(232, 79);
             this.btnGetBudget.Name = "btnGetBudget";
             this.btnGetBudget.Size = new System.Drawing.Size(75, 23);
             this.btnGetBudget.TabIndex = 1;
@@ -567,7 +585,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(276, 84);
+            this.label4.Location = new System.Drawing.Point(18, 84);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 2;
@@ -591,14 +609,14 @@
             // 
             // txtCampaignId
             // 
-            this.txtCampaignId.Location = new System.Drawing.Point(359, 26);
+            this.txtCampaignId.Location = new System.Drawing.Point(341, 27);
             this.txtCampaignId.Name = "txtCampaignId";
             this.txtCampaignId.Size = new System.Drawing.Size(100, 21);
             this.txtCampaignId.TabIndex = 3;
             // 
             // btnGetCampaign
             // 
-            this.btnGetCampaign.Location = new System.Drawing.Point(172, 25);
+            this.btnGetCampaign.Location = new System.Drawing.Point(154, 26);
             this.btnGetCampaign.Name = "btnGetCampaign";
             this.btnGetCampaign.Size = new System.Drawing.Size(75, 23);
             this.btnGetCampaign.TabIndex = 2;
@@ -608,42 +626,42 @@
             // 
             // txtBudget
             // 
-            this.txtBudget.Location = new System.Drawing.Point(359, 81);
+            this.txtBudget.Location = new System.Drawing.Point(101, 81);
             this.txtBudget.Name = "txtBudget";
             this.txtBudget.Size = new System.Drawing.Size(100, 21);
             this.txtBudget.TabIndex = 3;
             // 
             // dgvCampaign
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvCampaign.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCampaign.ContextMenuStrip = this.cMenuDgvCampaign;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvCampaign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCampaign.Location = new System.Drawing.Point(3, 3);
             this.dgvCampaign.Name = "dgvCampaign";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvCampaign.RowTemplate.Height = 23;
             this.dgvCampaign.Size = new System.Drawing.Size(1062, 352);
             this.dgvCampaign.TabIndex = 0;
@@ -970,35 +988,35 @@
             // 
             this.dgvQscore.AllowUserToAddRows = false;
             this.dgvQscore.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvQscore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvQscore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvQscore.Location = new System.Drawing.Point(3, 3);
             this.dgvQscore.Name = "dgvQscore";
             this.dgvQscore.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvQscore.RowTemplate.Height = 23;
             this.dgvQscore.Size = new System.Drawing.Size(1062, 296);
             this.dgvQscore.TabIndex = 0;
@@ -1439,6 +1457,20 @@
             this.gridControlAdgroupRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAdgroupRpt});
             // 
+            // cMenuDgvAdgroupRpt
+            // 
+            this.cMenuDgvAdgroupRpt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.网页打开宝贝ToolStripMenuItem1});
+            this.cMenuDgvAdgroupRpt.Name = "cMenuDgvAdgroupRpt";
+            this.cMenuDgvAdgroupRpt.Size = new System.Drawing.Size(153, 48);
+            // 
+            // 网页打开宝贝ToolStripMenuItem1
+            // 
+            this.网页打开宝贝ToolStripMenuItem1.Name = "网页打开宝贝ToolStripMenuItem1";
+            this.网页打开宝贝ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.网页打开宝贝ToolStripMenuItem1.Text = "网页打开宝贝";
+            this.网页打开宝贝ToolStripMenuItem1.Click += new System.EventHandler(this.网页打开宝贝ToolStripMenuItem1_Click);
+            // 
             // gridViewAdgroupRpt
             // 
             this.gridViewAdgroupRpt.GridControl = this.gridControlAdgroupRpt;
@@ -1817,19 +1849,83 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // cMenuDgvAdgroupRpt
+            // btnGetPlatform
             // 
-            this.cMenuDgvAdgroupRpt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.网页打开宝贝ToolStripMenuItem1});
-            this.cMenuDgvAdgroupRpt.Name = "cMenuDgvAdgroupRpt";
-            this.cMenuDgvAdgroupRpt.Size = new System.Drawing.Size(153, 48);
+            this.btnGetPlatform.Location = new System.Drawing.Point(1068, 80);
+            this.btnGetPlatform.Name = "btnGetPlatform";
+            this.btnGetPlatform.Size = new System.Drawing.Size(75, 23);
+            this.btnGetPlatform.TabIndex = 20;
+            this.btnGetPlatform.Text = "投放平台";
+            this.btnGetPlatform.UseVisualStyleBackColor = true;
+            this.btnGetPlatform.Click += new System.EventHandler(this.btnGetPlatform_Click);
             // 
-            // 网页打开宝贝ToolStripMenuItem1
+            // btnGetArea
             // 
-            this.网页打开宝贝ToolStripMenuItem1.Name = "网页打开宝贝ToolStripMenuItem1";
-            this.网页打开宝贝ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.网页打开宝贝ToolStripMenuItem1.Text = "网页打开宝贝";
-            this.网页打开宝贝ToolStripMenuItem1.Click += new System.EventHandler(this.网页打开宝贝ToolStripMenuItem1_Click);
+            this.btnGetArea.Location = new System.Drawing.Point(790, 81);
+            this.btnGetArea.Name = "btnGetArea";
+            this.btnGetArea.Size = new System.Drawing.Size(75, 23);
+            this.btnGetArea.TabIndex = 19;
+            this.btnGetArea.Text = "投放地域";
+            this.btnGetArea.UseVisualStyleBackColor = true;
+            this.btnGetArea.Click += new System.EventHandler(this.btnGetArea_Click);
+            // 
+            // btnGetSchedule
+            // 
+            this.btnGetSchedule.Location = new System.Drawing.Point(508, 81);
+            this.btnGetSchedule.Name = "btnGetSchedule";
+            this.btnGetSchedule.Size = new System.Drawing.Size(87, 23);
+            this.btnGetSchedule.TabIndex = 18;
+            this.btnGetSchedule.Text = "获取分时折扣";
+            this.btnGetSchedule.UseVisualStyleBackColor = true;
+            this.btnGetSchedule.Click += new System.EventHandler(this.btnGetSchedule_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(891, 86);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(65, 12);
+            this.label23.TabIndex = 13;
+            this.label23.Text = "投放平台：";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(613, 86);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(65, 12);
+            this.label22.TabIndex = 14;
+            this.label22.Text = "投放地域：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(331, 86);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "分时折扣：";
+            // 
+            // txtPlatform
+            // 
+            this.txtPlatform.Location = new System.Drawing.Point(962, 82);
+            this.txtPlatform.Name = "txtPlatform";
+            this.txtPlatform.Size = new System.Drawing.Size(100, 21);
+            this.txtPlatform.TabIndex = 15;
+            // 
+            // txtArea
+            // 
+            this.txtArea.Location = new System.Drawing.Point(684, 82);
+            this.txtArea.Name = "txtArea";
+            this.txtArea.Size = new System.Drawing.Size(100, 21);
+            this.txtArea.TabIndex = 16;
+            // 
+            // txtSchedule
+            // 
+            this.txtSchedule.Location = new System.Drawing.Point(402, 82);
+            this.txtSchedule.Name = "txtSchedule";
+            this.txtSchedule.Size = new System.Drawing.Size(100, 21);
+            this.txtSchedule.TabIndex = 17;
             // 
             // FrmAPITest
             // 
@@ -1884,6 +1980,7 @@
             this.gbxRecentDays.PerformLayout();
             this.tabPage10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlAdgroupRpt)).EndInit();
+            this.cMenuDgvAdgroupRpt.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAdgroupRpt)).EndInit();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
@@ -1900,7 +1997,6 @@
             this.panel6.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.cMenuDgvAdgroupRpt.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2062,5 +2158,14 @@
         private System.Windows.Forms.CheckBox chkGetCatQScore;
         private System.Windows.Forms.ContextMenuStrip cMenuDgvAdgroupRpt;
         private System.Windows.Forms.ToolStripMenuItem 网页打开宝贝ToolStripMenuItem1;
+        private System.Windows.Forms.Button btnGetPlatform;
+        private System.Windows.Forms.Button btnGetArea;
+        private System.Windows.Forms.Button btnGetSchedule;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtPlatform;
+        private System.Windows.Forms.TextBox txtArea;
+        private System.Windows.Forms.TextBox txtSchedule;
     }
 }

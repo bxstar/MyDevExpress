@@ -4,11 +4,23 @@ using System.Linq;
 using System.Text;
 using TaoBaoDataServer.WinClientData.Model;
 using iclickpro.AccessCommon;
+using log4net;
 
 namespace TaoBaoDataServer.WinClientData.BusinessLayer
 {
     public class CommonHandler
     {
+        /// <summary>
+        /// 写log信息
+        /// </summary>
+        private static ILog logger = log4net.LogManager.GetLogger("Logger");
+
+        /// <summary>
+        /// 缓存获取淘宝词指数和类目预测代理类
+        /// </summary>
+        private static WService.WebServiceForKeywordForecast wsKeywordForecastProxy = new WService.WebServiceForKeywordForecast();
+
+
         /// <summary>
         /// 优化策略，删除所有的关键词，换一批新词
         /// </summary>
@@ -23,6 +35,43 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// 优化策略，花费过高，对关键词降价并找均价更低的词，由用户降低投入所触发
         /// </summary>
         public const string Const_MajorizationConfig浮动降价 = "花费过高浮动降价策略";
+
+        /// <summary>
+        /// 线上，类目TOP100关键词
+        /// </summary>
+        public static List<string> GetCatTop100Keyword(long catId)
+        {
+            List<string> result = null;
+            try
+            {
+                string strItem = wsKeywordForecastProxy.GetCatTop100Keyword(null, catId.ToString());
+                result = strItem.Split(',').ToList();
+            }
+            catch (Exception se)
+            {
+                logger.Error("缓存，获取类目TOP100关键词错误", se);
+                return null;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 线上，获取类目名称
+        /// </summary>
+        public static string GetItemCatsOnline(string catIds)
+        {
+            string result = null;
+            try
+            {
+                result = wsKeywordForecastProxy.GetItemCatsOnline(null, catIds);
+            }
+            catch (Exception se)
+            {
+                logger.Error("缓存，获取获取类目名称错误", se);
+                return null;
+            }
+            return result;
+        }
 
         /// <summary>
         /// 获取策略
@@ -95,6 +144,37 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
+        /// 计划报表汇总数
+        /// </summary>
+        public static EntityCampaignReport CalculateSumReport(List<EntityCampaignReport> lstUserReport)
+        {
+            EntityCampaignReport rpt = new EntityCampaignReport();
+            foreach (EntityCampaignReport report in lstUserReport)
+            {
+                rpt.impressions += report.impressions;
+                rpt.click += report.click;
+                rpt.cost += report.cost;
+                rpt.totalpay += report.totalpay;
+                rpt.totalpaycount += report.totalpaycount;
+            }
+            if (rpt.impressions != 0)
+            {
+                rpt.ctr = Math.Round(Convert.ToDecimal(rpt.click * 100) / rpt.impressions, 2);
+                if (rpt.click != 0)
+                {
+                    rpt.rate = Math.Round(Convert.ToDecimal(rpt.totalpaycount * 100) / rpt.click, 2);
+                    rpt.cpc = Math.Round(rpt.cost / rpt.click, 2);
+                }
+                if (rpt.totalpay > 0 && rpt.cost > 0)
+                {
+                    rpt.roi = Math.Round(rpt.totalpay / rpt.cost, 2);
+                }
+            }
+            rpt.campaign_id = lstUserReport[0].campaign_id;
+            return rpt;
+        }
+
+        /// <summary>
         /// 调用淘宝API出错后，返回结果是否是频繁访问
         /// </summary>
         public static Boolean IsBanMsg(Top.Api.TopResponse response)
@@ -138,37 +218,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 groupLstWord.Add(lstWord);
             }
             return groupLstWord;
-        }
-
-        /// <summary>
-        /// 计划报表汇总数
-        /// </summary>
-        public static EntityCampaignReport CalculateSumReport(List<EntityCampaignReport> lstUserReport)
-        {
-            EntityCampaignReport rpt = new EntityCampaignReport();
-            foreach (EntityCampaignReport report in lstUserReport)
-            {
-                rpt.impressions += report.impressions;
-                rpt.click += report.click;
-                rpt.cost += report.cost;
-                rpt.totalpay += report.totalpay;
-                rpt.totalpaycount += report.totalpaycount;
-            }
-            if (rpt.impressions != 0)
-            {
-                rpt.ctr = Math.Round(Convert.ToDecimal(rpt.click * 100) / rpt.impressions, 2);
-                if (rpt.click != 0)
-                {
-                    rpt.rate = Math.Round(Convert.ToDecimal(rpt.totalpaycount * 100) / rpt.click, 2);
-                    rpt.cpc = Math.Round(rpt.cost / rpt.click, 2);
-                }
-                if (rpt.totalpay > 0 && rpt.cost > 0)
-                {
-                    rpt.roi = Math.Round(rpt.totalpay / rpt.cost, 2);
-                }
-            }
-            rpt.campaign_id = lstUserReport[0].campaign_id;
-            return rpt;
         }
 
         /// <summary>
