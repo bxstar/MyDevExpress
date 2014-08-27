@@ -16,7 +16,7 @@ namespace TaoBaoDataServer.WinClientData
     public partial class FrmSetKeywordRank : Form
     {
         #region 属性
-        private static log4net.ILog logger = LogManager.GetLogger("loggerAX");
+        private static log4net.ILog logger = LogManager.GetLogger("Logger");
         BusinessTaobaoApiHandler TaobaoApiHandler = new BusinessTaobaoApiHandler();
         BusinessUserHandler userHandler = new BusinessUserHandler();
         BusinessKeywordHandler keywordHandler = new BusinessKeywordHandler();

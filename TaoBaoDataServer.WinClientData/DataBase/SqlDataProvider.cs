@@ -11,7 +11,7 @@ namespace TaoBaoDataServer.WinClientData
 {
 	public class SqlDataProvider
 	{
-		private static log4net.ILog logAX = LogManager.GetLogger("loggerAX");
+		private static log4net.ILog logAX = LogManager.GetLogger("Logger");
 
 		#region Conn
 

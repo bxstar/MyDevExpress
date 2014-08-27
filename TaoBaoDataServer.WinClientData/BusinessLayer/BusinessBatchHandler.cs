@@ -14,7 +14,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
 {
     public class BusinessBatchHandler
     {
-        private static log4net.ILog logger = LogManager.GetLogger("loggerAX");
+        private static log4net.ILog logger = LogManager.GetLogger("Logger");
         BusinessTaobaoApiHandler taobaoApiHandler = new BusinessTaobaoApiHandler();
         BusinessCampaignHandler campaignHandler = new BusinessCampaignHandler();
 

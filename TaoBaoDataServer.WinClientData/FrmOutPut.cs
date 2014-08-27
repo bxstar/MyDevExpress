@@ -51,5 +51,10 @@ namespace TaoBaoDataServer.WinClientData
             Debug.WriteLine(strMsg);
         }
 
+        private void 清除内容ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.rtxOutPut.Clear();
+        }
+
     }
 }

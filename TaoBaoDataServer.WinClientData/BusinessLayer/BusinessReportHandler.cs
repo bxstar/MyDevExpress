@@ -12,7 +12,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
 {
     public class BusinessReportHandler
     {
-        private static log4net.ILog logger = LogManager.GetLogger("loggerAX");
+        private static log4net.ILog logger = LogManager.GetLogger("Logger");
         BusinessTaobaoApiHandler TaobaoApiHandler = new BusinessTaobaoApiHandler();
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
 {
     public class BusinessKeywordHandler
     {
-        private static log4net.ILog logger = LogManager.GetLogger("loggerAX");
+        private static log4net.ILog logger = LogManager.GetLogger("Logger");
         BusinessTaobaoApiHandler TaobaoApiHandler = new BusinessTaobaoApiHandler();
 
         #region 添加关键词

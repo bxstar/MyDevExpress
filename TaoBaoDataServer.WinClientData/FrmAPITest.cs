@@ -24,7 +24,7 @@ namespace TaoBaoDataServer.WinClientData
     /// </summary>
     public partial class FrmAPITest : DockContent
     {
-        private static log4net.ILog logger = LogManager.GetLogger("loggerAX");
+        private static log4net.ILog logger = LogManager.GetLogger("Logger");
         BusinessTaobaoApiHandler taobaoApiHandler = new BusinessTaobaoApiHandler();
         BusinessAdgroupHandler adgroupHandler = new BusinessAdgroupHandler();
         BusinessBatchHandler batchHandler = new BusinessBatchHandler();

@@ -28,17 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.rtxOutPut = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.清除内容ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtxOutPut
             // 
+            this.rtxOutPut.ContextMenuStrip = this.contextMenuStrip1;
             this.rtxOutPut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtxOutPut.Location = new System.Drawing.Point(0, 0);
             this.rtxOutPut.Name = "rtxOutPut";
             this.rtxOutPut.Size = new System.Drawing.Size(430, 659);
             this.rtxOutPut.TabIndex = 0;
             this.rtxOutPut.Text = "";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.清除内容ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 26);
+            // 
+            // 清除内容ToolStripMenuItem
+            // 
+            this.清除内容ToolStripMenuItem.Name = "清除内容ToolStripMenuItem";
+            this.清除内容ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清除内容ToolStripMenuItem.Text = "清除内容";
+            this.清除内容ToolStripMenuItem.Click += new System.EventHandler(this.清除内容ToolStripMenuItem_Click);
             // 
             // FrmOutPut
             // 
@@ -50,6 +69,7 @@
             this.Name = "FrmOutPut";
             this.Text = "输出窗口";
             this.Load += new System.EventHandler(this.FrmOutPut_Load);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -57,5 +77,7 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox rtxOutPut;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 清除内容ToolStripMenuItem;
     }
 }

@@ -18,7 +18,7 @@ namespace TaoBaoDataServer.WinClientData
 {
     public partial class FrmWord : DockContent
     {
-        private static log4net.ILog logAX = LogManager.GetLogger("loggerAX");
+        private static log4net.ILog logAX = LogManager.GetLogger("Logger");
         BusinessTaobaoApiHandler TaobaoApiHandler = new BusinessTaobaoApiHandler();
         BusinessKeywordHandler keywordHandler = new BusinessKeywordHandler();
 

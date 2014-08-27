@@ -19,7 +19,7 @@ namespace TaoBaoDataServer.WinClientData
     public partial class FrmFindWordByAdgroup : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         IOutPut frmOutPut;
-        private static log4net.ILog logger = LogManager.GetLogger("loggerAX");
+        private static log4net.ILog logger = LogManager.GetLogger("Logger");
         BusinessTaobaoApiHandler TaobaoApiHandler = new BusinessTaobaoApiHandler();
         BusinessAdgroupHandler adgroupHandler = new BusinessAdgroupHandler();
         BusinessKeywordHandler keywordHandler = new BusinessKeywordHandler();
