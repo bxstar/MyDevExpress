@@ -37,6 +37,11 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public const string Const_MajorizationConfig浮动降价 = "花费过高浮动降价策略";
 
         /// <summary>
+        /// 优化程序全路径
+        /// </summary>
+        public static readonly string Const_MajorizationPath = CommonFunction.GetAppSetting("MajorizationPath");
+
+        /// <summary>
         /// 线上，类目TOP100关键词
         /// </summary>
         public static List<string> GetCatTop100Keyword(long catId)

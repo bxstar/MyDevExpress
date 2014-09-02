@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.gridControlUser = new DevExpress.XtraGrid.GridControl();
@@ -61,6 +61,19 @@
             this.txtToken = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnInvestmentChange = new System.Windows.Forms.Button();
+            this.txtInvestmentChange = new System.Windows.Forms.TextBox();
+            this.btnSetBudget = new System.Windows.Forms.Button();
+            this.btnGetPlatform = new System.Windows.Forms.Button();
+            this.btnGetArea = new System.Windows.Forms.Button();
+            this.btnGetSchedule = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtPlatform = new System.Windows.Forms.TextBox();
+            this.txtArea = new System.Windows.Forms.TextBox();
+            this.txtSchedule = new System.Windows.Forms.TextBox();
             this.btnCheckAddPrice = new System.Windows.Forms.Button();
             this.btnGetMajorCampaign = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -190,15 +203,6 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.btnGetPlatform = new System.Windows.Forms.Button();
-            this.btnGetArea = new System.Windows.Forms.Button();
-            this.btnGetSchedule = new System.Windows.Forms.Button();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtPlatform = new System.Windows.Forms.TextBox();
-            this.txtArea = new System.Windows.Forms.TextBox();
-            this.txtSchedule = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -507,6 +511,10 @@
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.label24);
+            this.panel8.Controls.Add(this.btnInvestmentChange);
+            this.panel8.Controls.Add(this.txtInvestmentChange);
+            this.panel8.Controls.Add(this.btnSetBudget);
             this.panel8.Controls.Add(this.btnGetPlatform);
             this.panel8.Controls.Add(this.btnGetArea);
             this.panel8.Controls.Add(this.btnGetSchedule);
@@ -533,9 +541,124 @@
             this.panel8.Size = new System.Drawing.Size(1062, 123);
             this.panel8.TabIndex = 7;
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("宋体", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label24.Location = new System.Drawing.Point(658, 12);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(395, 11);
+            this.label24.TabIndex = 24;
+            this.label24.Text = "优化使用策略，增加投入使用+**，减少投入使用-**，不需要%号，按**%来计算";
+            // 
+            // btnInvestmentChange
+            // 
+            this.btnInvestmentChange.Location = new System.Drawing.Point(931, 28);
+            this.btnInvestmentChange.Name = "btnInvestmentChange";
+            this.btnInvestmentChange.Size = new System.Drawing.Size(122, 23);
+            this.btnInvestmentChange.TabIndex = 23;
+            this.btnInvestmentChange.Text = "优化（投入变动）";
+            this.btnInvestmentChange.UseVisualStyleBackColor = true;
+            this.btnInvestmentChange.Click += new System.EventHandler(this.btnInvestmentChange_Click);
+            // 
+            // txtInvestmentChange
+            // 
+            this.txtInvestmentChange.Location = new System.Drawing.Point(872, 28);
+            this.txtInvestmentChange.Name = "txtInvestmentChange";
+            this.txtInvestmentChange.Size = new System.Drawing.Size(53, 21);
+            this.txtInvestmentChange.TabIndex = 22;
+            // 
+            // btnSetBudget
+            // 
+            this.btnSetBudget.Location = new System.Drawing.Point(264, 81);
+            this.btnSetBudget.Name = "btnSetBudget";
+            this.btnSetBudget.Size = new System.Drawing.Size(75, 23);
+            this.btnSetBudget.TabIndex = 21;
+            this.btnSetBudget.Text = "设置日限额";
+            this.btnSetBudget.UseVisualStyleBackColor = true;
+            this.btnSetBudget.Click += new System.EventHandler(this.btnSetBudget_Click);
+            // 
+            // btnGetPlatform
+            // 
+            this.btnGetPlatform.Location = new System.Drawing.Point(1068, 80);
+            this.btnGetPlatform.Name = "btnGetPlatform";
+            this.btnGetPlatform.Size = new System.Drawing.Size(75, 23);
+            this.btnGetPlatform.TabIndex = 20;
+            this.btnGetPlatform.Text = "投放平台";
+            this.btnGetPlatform.UseVisualStyleBackColor = true;
+            this.btnGetPlatform.Click += new System.EventHandler(this.btnGetPlatform_Click);
+            // 
+            // btnGetArea
+            // 
+            this.btnGetArea.Location = new System.Drawing.Point(810, 80);
+            this.btnGetArea.Name = "btnGetArea";
+            this.btnGetArea.Size = new System.Drawing.Size(75, 23);
+            this.btnGetArea.TabIndex = 19;
+            this.btnGetArea.Text = "投放地域";
+            this.btnGetArea.UseVisualStyleBackColor = true;
+            this.btnGetArea.Click += new System.EventHandler(this.btnGetArea_Click);
+            // 
+            // btnGetSchedule
+            // 
+            this.btnGetSchedule.Location = new System.Drawing.Point(531, 80);
+            this.btnGetSchedule.Name = "btnGetSchedule";
+            this.btnGetSchedule.Size = new System.Drawing.Size(87, 23);
+            this.btnGetSchedule.TabIndex = 18;
+            this.btnGetSchedule.Text = "获取分时折扣";
+            this.btnGetSchedule.UseVisualStyleBackColor = true;
+            this.btnGetSchedule.Click += new System.EventHandler(this.btnGetSchedule_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(891, 86);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(65, 12);
+            this.label23.TabIndex = 13;
+            this.label23.Text = "投放平台：";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(633, 86);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(65, 12);
+            this.label22.TabIndex = 14;
+            this.label22.Text = "投放地域：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(356, 85);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "分时折扣：";
+            // 
+            // txtPlatform
+            // 
+            this.txtPlatform.Location = new System.Drawing.Point(962, 82);
+            this.txtPlatform.Name = "txtPlatform";
+            this.txtPlatform.Size = new System.Drawing.Size(100, 21);
+            this.txtPlatform.TabIndex = 15;
+            // 
+            // txtArea
+            // 
+            this.txtArea.Location = new System.Drawing.Point(704, 82);
+            this.txtArea.Name = "txtArea";
+            this.txtArea.Size = new System.Drawing.Size(100, 21);
+            this.txtArea.TabIndex = 16;
+            // 
+            // txtSchedule
+            // 
+            this.txtSchedule.Location = new System.Drawing.Point(425, 82);
+            this.txtSchedule.Name = "txtSchedule";
+            this.txtSchedule.Size = new System.Drawing.Size(100, 21);
+            this.txtSchedule.TabIndex = 17;
+            // 
             // btnCheckAddPrice
             // 
-            this.btnCheckAddPrice.Location = new System.Drawing.Point(898, 25);
+            this.btnCheckAddPrice.Location = new System.Drawing.Point(791, 26);
             this.btnCheckAddPrice.Name = "btnCheckAddPrice";
             this.btnCheckAddPrice.Size = new System.Drawing.Size(75, 23);
             this.btnCheckAddPrice.TabIndex = 8;
@@ -556,7 +679,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(258, 31);
+            this.label5.Location = new System.Drawing.Point(222, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 2;
@@ -564,7 +687,7 @@
             // 
             // btnGetBudget
             // 
-            this.btnGetBudget.Location = new System.Drawing.Point(232, 79);
+            this.btnGetBudget.Location = new System.Drawing.Point(183, 80);
             this.btnGetBudget.Name = "btnGetBudget";
             this.btnGetBudget.Size = new System.Drawing.Size(75, 23);
             this.btnGetBudget.TabIndex = 1;
@@ -574,7 +697,7 @@
             // 
             // btnUpdateCampaign
             // 
-            this.btnUpdateCampaign.Location = new System.Drawing.Point(808, 25);
+            this.btnUpdateCampaign.Location = new System.Drawing.Point(710, 26);
             this.btnUpdateCampaign.Name = "btnUpdateCampaign";
             this.btnUpdateCampaign.Size = new System.Drawing.Size(75, 23);
             this.btnUpdateCampaign.TabIndex = 5;
@@ -585,7 +708,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 84);
+            this.label4.Location = new System.Drawing.Point(18, 86);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 2;
@@ -593,7 +716,7 @@
             // 
             // txtNewCampaignName
             // 
-            this.txtNewCampaignName.Location = new System.Drawing.Point(571, 26);
+            this.txtNewCampaignName.Location = new System.Drawing.Point(494, 28);
             this.txtNewCampaignName.Name = "txtNewCampaignName";
             this.txtNewCampaignName.Size = new System.Drawing.Size(210, 21);
             this.txtNewCampaignName.TabIndex = 4;
@@ -601,7 +724,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(488, 29);
+            this.label14.Location = new System.Drawing.Point(423, 31);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(65, 12);
             this.label14.TabIndex = 2;
@@ -609,14 +732,14 @@
             // 
             // txtCampaignId
             // 
-            this.txtCampaignId.Location = new System.Drawing.Point(341, 27);
+            this.txtCampaignId.Location = new System.Drawing.Point(305, 26);
             this.txtCampaignId.Name = "txtCampaignId";
             this.txtCampaignId.Size = new System.Drawing.Size(100, 21);
             this.txtCampaignId.TabIndex = 3;
             // 
             // btnGetCampaign
             // 
-            this.btnGetCampaign.Location = new System.Drawing.Point(154, 26);
+            this.btnGetCampaign.Location = new System.Drawing.Point(127, 26);
             this.btnGetCampaign.Name = "btnGetCampaign";
             this.btnGetCampaign.Size = new System.Drawing.Size(75, 23);
             this.btnGetCampaign.TabIndex = 2;
@@ -626,42 +749,42 @@
             // 
             // txtBudget
             // 
-            this.txtBudget.Location = new System.Drawing.Point(101, 81);
+            this.txtBudget.Location = new System.Drawing.Point(77, 80);
             this.txtBudget.Name = "txtBudget";
             this.txtBudget.Size = new System.Drawing.Size(100, 21);
             this.txtBudget.TabIndex = 3;
             // 
             // dgvCampaign
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCampaign.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCampaign.ContextMenuStrip = this.cMenuDgvCampaign;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCampaign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCampaign.Location = new System.Drawing.Point(3, 3);
             this.dgvCampaign.Name = "dgvCampaign";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCampaign.RowTemplate.Height = 23;
             this.dgvCampaign.Size = new System.Drawing.Size(1062, 352);
             this.dgvCampaign.TabIndex = 0;
@@ -988,35 +1111,35 @@
             // 
             this.dgvQscore.AllowUserToAddRows = false;
             this.dgvQscore.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvQscore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvQscore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvQscore.Location = new System.Drawing.Point(3, 3);
             this.dgvQscore.Name = "dgvQscore";
             this.dgvQscore.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvQscore.RowTemplate.Height = 23;
             this.dgvQscore.Size = new System.Drawing.Size(1062, 296);
             this.dgvQscore.TabIndex = 0;
@@ -1807,8 +1930,6 @@
             // chkIsUseLocalCache
             // 
             this.chkIsUseLocalCache.AutoSize = true;
-            this.chkIsUseLocalCache.Checked = true;
-            this.chkIsUseLocalCache.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkIsUseLocalCache.Location = new System.Drawing.Point(715, 52);
             this.chkIsUseLocalCache.Name = "chkIsUseLocalCache";
             this.chkIsUseLocalCache.Size = new System.Drawing.Size(96, 16);
@@ -1848,84 +1969,6 @@
             this.btnGetTopSession.Text = "获取TopSession";
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
-            // 
-            // btnGetPlatform
-            // 
-            this.btnGetPlatform.Location = new System.Drawing.Point(1068, 80);
-            this.btnGetPlatform.Name = "btnGetPlatform";
-            this.btnGetPlatform.Size = new System.Drawing.Size(75, 23);
-            this.btnGetPlatform.TabIndex = 20;
-            this.btnGetPlatform.Text = "投放平台";
-            this.btnGetPlatform.UseVisualStyleBackColor = true;
-            this.btnGetPlatform.Click += new System.EventHandler(this.btnGetPlatform_Click);
-            // 
-            // btnGetArea
-            // 
-            this.btnGetArea.Location = new System.Drawing.Point(790, 81);
-            this.btnGetArea.Name = "btnGetArea";
-            this.btnGetArea.Size = new System.Drawing.Size(75, 23);
-            this.btnGetArea.TabIndex = 19;
-            this.btnGetArea.Text = "投放地域";
-            this.btnGetArea.UseVisualStyleBackColor = true;
-            this.btnGetArea.Click += new System.EventHandler(this.btnGetArea_Click);
-            // 
-            // btnGetSchedule
-            // 
-            this.btnGetSchedule.Location = new System.Drawing.Point(508, 81);
-            this.btnGetSchedule.Name = "btnGetSchedule";
-            this.btnGetSchedule.Size = new System.Drawing.Size(87, 23);
-            this.btnGetSchedule.TabIndex = 18;
-            this.btnGetSchedule.Text = "获取分时折扣";
-            this.btnGetSchedule.UseVisualStyleBackColor = true;
-            this.btnGetSchedule.Click += new System.EventHandler(this.btnGetSchedule_Click);
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(891, 86);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(65, 12);
-            this.label23.TabIndex = 13;
-            this.label23.Text = "投放平台：";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(613, 86);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(65, 12);
-            this.label22.TabIndex = 14;
-            this.label22.Text = "投放地域：";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(331, 86);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 12);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "分时折扣：";
-            // 
-            // txtPlatform
-            // 
-            this.txtPlatform.Location = new System.Drawing.Point(962, 82);
-            this.txtPlatform.Name = "txtPlatform";
-            this.txtPlatform.Size = new System.Drawing.Size(100, 21);
-            this.txtPlatform.TabIndex = 15;
-            // 
-            // txtArea
-            // 
-            this.txtArea.Location = new System.Drawing.Point(684, 82);
-            this.txtArea.Name = "txtArea";
-            this.txtArea.Size = new System.Drawing.Size(100, 21);
-            this.txtArea.TabIndex = 16;
-            // 
-            // txtSchedule
-            // 
-            this.txtSchedule.Location = new System.Drawing.Point(402, 82);
-            this.txtSchedule.Name = "txtSchedule";
-            this.txtSchedule.Size = new System.Drawing.Size(100, 21);
-            this.txtSchedule.TabIndex = 17;
             // 
             // FrmAPITest
             // 
@@ -2167,5 +2210,9 @@
         private System.Windows.Forms.TextBox txtPlatform;
         private System.Windows.Forms.TextBox txtArea;
         private System.Windows.Forms.TextBox txtSchedule;
+        private System.Windows.Forms.Button btnSetBudget;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button btnInvestmentChange;
+        private System.Windows.Forms.TextBox txtInvestmentChange;
     }
 }

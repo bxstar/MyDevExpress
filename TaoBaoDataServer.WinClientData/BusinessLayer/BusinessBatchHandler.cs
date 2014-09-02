@@ -541,7 +541,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 根据最近3天的花费对比日限额，判断是否需要提价
         /// </summary>
-        public Boolean IsNeedAddPrice(TopSession session, long campaignId, double budget ,ref string msg)
+        public Boolean IsNeedAddPrice(TopSession session, long campaignId, long budget ,ref string msg)
         {
             decimal dailyLimit = budget > 3000 ? 30M : Convert.ToDecimal(budget);       //超过3000日限额的，包括未设置日限额的，统统算作3000
             Boolean resultAddPrice = false;

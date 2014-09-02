@@ -21,37 +21,90 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 数据库，获取用户绑定的推广计划
         /// </summary>
-        public EntityCampaign GetCampaign(int userId)
+        public List<EntityCampaign> GetCampaign(int userId)
         {
-            EntityCampaign e = new EntityCampaign();
+            List<EntityCampaign> lstCampaign = new List<EntityCampaign>();
 
             var param = new Dictionary<string, object>();
             param.Add("user_id", userId);
             DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_campaign WHERE user_id = @user_id", SqlNameAndParamer.ConvertSqlParameter(param));
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                DataRow dr = ds.Tables[0].Rows[0];
-                e.localcampaignid = Convert.ToInt32(dr["local_campaign_id"]);
-                if (dr["campaign_id"] != null && dr["campaign_id"] != DBNull.Value)
-                    e.campaignid = Convert.ToInt64(dr["campaign_id"]);
-                if (dr["title"] != null && dr["title"] != DBNull.Value)
-                    e.title = dr["title"].ToString();
-                if (dr["online_status"] != null && dr["online_status"] != DBNull.Value)
-                    e.onlinestatus = dr["online_status"].ToString();
-                if (dr["settle_reason"] != null && dr["settle_reason"] != DBNull.Value)
-                    e.onlinestatus = dr["settle_reason"].ToString();
-                if (dr["settle_status"] != null && dr["settle_status"] != DBNull.Value)
-                    e.onlinestatus = dr["settle_status"].ToString();
-                if (dr["daily_limit"] != null && dr["daily_limit"] != DBNull.Value)
-                    e.dailylimit = Convert.ToDecimal(dr["daily_limit"]);
-                if (dr["click_cost"] != null && dr["click_cost"] != DBNull.Value)
-                    e.dailylimit = Convert.ToDecimal(dr["click_cost"]);
-                e.userid = Convert.ToInt32(dr["user_id"]);
-                e.createdate = Convert.ToDateTime(dr["create_date"]);
-                e.updatedate = Convert.ToDateTime(dr["update_date"]);
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    DataRow dr = ds.Tables[0].Rows[i];
+                    EntityCampaign e = new EntityCampaign();
+                    e.localcampaignid = Convert.ToInt32(dr["local_campaign_id"]);
+                    if (dr["campaign_id"] != null && dr["campaign_id"] != DBNull.Value)
+                        e.campaignid = Convert.ToInt64(dr["campaign_id"]);
+                    if (dr["title"] != null && dr["title"] != DBNull.Value)
+                        e.title = dr["title"].ToString();
+                    if (dr["online_status"] != null && dr["online_status"] != DBNull.Value)
+                        e.onlinestatus = dr["online_status"].ToString();
+                    if (dr["settle_reason"] != null && dr["settle_reason"] != DBNull.Value)
+                        e.settlereason = dr["settle_reason"].ToString();
+                    if (dr["settle_status"] != null && dr["settle_status"] != DBNull.Value)
+                        e.settlestatus = dr["settle_status"].ToString();
+                    if (dr["daily_limit"] != null && dr["daily_limit"] != DBNull.Value)
+                        e.dailylimit = Convert.ToDecimal(dr["daily_limit"]);
+                    if (dr["click_cost"] != null && dr["click_cost"] != DBNull.Value)
+                        e.clickcost = Convert.ToDecimal(dr["click_cost"]);
+                    e.userid = Convert.ToInt32(dr["user_id"]);
+                    e.createdate = Convert.ToDateTime(dr["create_date"]);
+                    e.updatedate = Convert.ToDateTime(dr["update_date"]);
+
+                    lstCampaign.Add(e);
+                }
+
             }
 
-            return e;
+            return lstCampaign;
+        }
+
+        /// <summary>
+        /// 数据库，获取所有推广计划
+        /// </summary>
+        public List<EntityCampaign> GetAllCampaign()
+        {
+            List<EntityCampaign> lstCampaign = new List<EntityCampaign>();
+            DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user au LEFT JOIN ad_campaign ac ON au.local_user_id=ac.[user_id] ");
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    EntityCampaign e = new EntityCampaign();
+                    System.Data.DataRow dr = ds.Tables[0].Rows[i];
+                    if (dr["local_campaign_id"] != null && dr["local_campaign_id"] != DBNull.Value)
+                        e.localcampaignid = Convert.ToInt32(dr["local_campaign_id"]);
+                    if (dr["campaign_id"] != null && dr["campaign_id"] != DBNull.Value)
+                        e.campaignid = Convert.ToInt64(dr["campaign_id"]);
+                    if (dr["title"] != null && dr["title"] != DBNull.Value)
+                        e.title = dr["title"].ToString();
+                    if (dr["online_status"] != null && dr["online_status"] != DBNull.Value)
+                        e.onlinestatus = dr["online_status"].ToString();
+                    if (dr["settle_reason"] != null && dr["settle_reason"] != DBNull.Value)
+                        e.settlereason = dr["settle_reason"].ToString();
+                    if (dr["settle_status"] != null && dr["settle_status"] != DBNull.Value)
+                        e.settlestatus = dr["settle_status"].ToString();
+                    if (dr["daily_limit"] != null && dr["daily_limit"] != DBNull.Value)
+                        e.dailylimit = Convert.ToDecimal(dr["daily_limit"]);
+                    if (dr["click_cost"] != null && dr["click_cost"] != DBNull.Value)
+                        e.clickcost = Convert.ToDecimal(dr["click_cost"]);
+                    if (dr["user_id"] != null && dr["user_id"] != DBNull.Value)
+                        e.userid = Convert.ToInt32(dr["user_id"]);
+                    if (dr["proxy_user_name"] != null && dr["proxy_user_name"] != DBNull.Value)
+                        e.nick = dr["proxy_user_name"].ToString();
+                    if (dr["create_date"] != null && dr["create_date"] != DBNull.Value)
+                        e.createdate = Convert.ToDateTime(dr["create_date"]);
+                    if (dr["update_date"] != null && dr["update_date"] != DBNull.Value)
+                        e.updatedate = Convert.ToDateTime(dr["update_date"]);
+
+                    lstCampaign.Add(e);
+                }
+
+            }
+
+            return lstCampaign;
         }
 
         /// <summary>
@@ -78,6 +131,69 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 logger.Error("线上，淘宝API下载推广计划数据 失败：", ex);
             }
             return listCampaign;
+        }
+
+        /// <summary>
+        /// 线上，获取一个计划的日限额
+        /// </summary>
+        public long GetCampaignBudget(TopSession session, long campaignId)
+        {
+            var response = taobaoApiHandler.TaobaoSimbaCampaignBudgetGet(session, campaignId);
+            if (response != null && response.CampaignBudget != null)
+            {
+                return response.CampaignBudget.Budget;
+            }
+            else
+            {
+                //获取失败
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 线上，设置一个计划的日限额
+        /// </summary>
+        public double SetCampaignBudget(TopSession session, long campaignId, long budget)
+        {
+            var response = taobaoApiHandler.TaobaoSimbaCampaignBudgetUpdate(session, campaignId, budget);
+            if (response != null && response.CampaignBudget != null)
+            {
+                return Convert.ToDouble(response.CampaignBudget.Budget);
+            }
+            else
+            {
+                //设置失败
+                return -1;
+            }
+        }
+
+        /// <summary>
+        ///  数据库，用户手动设置日限额以及单次点击最高限价，会引发增加或减少投入
+        /// </summary>
+        /// <param name="userId">用户信息</param>
+        /// <param name="campaignId">推广计划ID</param>
+        /// <param name="budget">日限额，-1表示不修改日限额，整数（单位：元）</param>
+        /// <param name="maxCPC">单次点击最高限价（单位：元）</param>
+        public void SetBudget(int userId, long campaignId, long budget, decimal maxCPC)
+        {
+            var param = new Dictionary<string, object>();
+            param.Add("campaign_id", campaignId);
+            param.Add("daily_limit", budget);
+            param.Add("click_cost", maxCPC);
+            param.Add("user_id", userId);
+            DateTime nowDate = DateTime.Now;
+            param.Add("update_date", nowDate);
+            param.Add("create_date", nowDate);
+            if (budget != -1)
+            {
+                SqlHelper.ExecuteNonQuery(SqlDataProvider.GetAPSqlConnection(), "UPDATE ad_daily_limit_update_record SET delete_flag = 0 WHERE user_id = @user_id;", SqlNameAndParamer.ConvertSqlParameter(param));
+                SqlHelper.ExecuteNonQuery(SqlDataProvider.GetAPSqlConnection(), "INSERT INTO ad_daily_limit_update_record (user_id, daily_limit, click_cost, create_date) VALUES (@user_id, @daily_limit, @click_cost, @create_date);", SqlNameAndParamer.ConvertSqlParameter(param));
+                SqlHelper.ExecuteNonQuery(SqlDataProvider.GetAPSqlConnection(), "UPDATE ad_campaign SET daily_limit = @daily_limit, click_cost = @click_cost, update_date = @update_date WHERE campaign_id = @campaign_id", SqlNameAndParamer.ConvertSqlParameter(param));
+            }
+            else
+            {
+                SqlHelper.ExecuteNonQuery(SqlDataProvider.GetAPSqlConnection(), "UPDATE ad_campaign SET click_cost = @click_cost, update_date = @update_date WHERE campaign_id = @campaign_id", SqlNameAndParamer.ConvertSqlParameter(param));
+            }
         }
 
         /// <summary>
@@ -182,52 +298,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             }
 
             return lstRpt;
-        }
-
-        /// <summary>
-        /// 数据库，获取所有推广计划
-        /// </summary>
-        public List<EntityCampaign> GetAllCampaign()
-        {
-            List<EntityCampaign> lstCampaign = new List<EntityCampaign>();
-            DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user au LEFT JOIN ad_campaign ac ON au.local_user_id=ac.[user_id] ");
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    EntityCampaign e = new EntityCampaign();
-                    System.Data.DataRow dr = ds.Tables[0].Rows[i];
-                    if (dr["local_campaign_id"] != null && dr["local_campaign_id"] != DBNull.Value)
-                        e.localcampaignid = Convert.ToInt32(dr["local_campaign_id"]);
-                    if (dr["campaign_id"] != null && dr["campaign_id"] != DBNull.Value)
-                        e.campaignid = Convert.ToInt64(dr["campaign_id"]);
-                    if (dr["title"] != null && dr["title"] != DBNull.Value)
-                        e.title = dr["title"].ToString();
-                    if (dr["online_status"] != null && dr["online_status"] != DBNull.Value)
-                        e.onlinestatus = dr["online_status"].ToString();
-                    if (dr["settle_reason"] != null && dr["settle_reason"] != DBNull.Value)
-                        e.onlinestatus = dr["settle_reason"].ToString();
-                    if (dr["settle_status"] != null && dr["settle_status"] != DBNull.Value)
-                        e.onlinestatus = dr["settle_status"].ToString();
-                    if (dr["daily_limit"] != null && dr["daily_limit"] != DBNull.Value)
-                        e.dailylimit = Convert.ToDecimal(dr["daily_limit"]);
-                    if (dr["click_cost"] != null && dr["click_cost"] != DBNull.Value)
-                        e.dailylimit = Convert.ToDecimal(dr["click_cost"]);
-                    if (dr["user_id"] != null && dr["user_id"] != DBNull.Value)
-                        e.userid = Convert.ToInt32(dr["user_id"]);
-                    if (dr["proxy_user_name"] != null && dr["proxy_user_name"] != DBNull.Value)
-                        e.nick = dr["proxy_user_name"].ToString();
-                    if (dr["create_date"] != null && dr["create_date"] != DBNull.Value)
-                        e.createdate = Convert.ToDateTime(dr["create_date"]);
-                    if (dr["update_date"] != null && dr["update_date"] != DBNull.Value)
-                        e.updatedate = Convert.ToDateTime(dr["update_date"]);
-
-                    lstCampaign.Add(e);
-                }
-
-            }
-
-            return lstCampaign;
         }
 
         /// <summary>

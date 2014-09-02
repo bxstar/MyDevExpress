@@ -54,6 +54,15 @@ namespace TaoBaoDataServer.WinClientData
         }
 
         /// <summary>
+        /// 优化程序全路径
+        /// </summary>
+        public static string MajorizationPath
+        {
+            get { return GetCfgValue("MajorizationPath"); }
+            set { SetCfgValue("MajorizationPath", value); }
+        }
+
+        /// <summary>
         /// 词库表的表名
         /// </summary>
         public static string KeywordBankTableName

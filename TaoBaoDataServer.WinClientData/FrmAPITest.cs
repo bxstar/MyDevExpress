@@ -145,16 +145,14 @@ namespace TaoBaoDataServer.WinClientData
         private void btnGetMajorCampaign_Click(object sender, EventArgs e)
         {
             TopSession session = userHandler.GetUserSession(txtNickName.Text.Trim());
-            EntityCampaign ec = campaignHandler.GetCampaign(session.UserID);
-            List<EntityCampaign> lst = new List<EntityCampaign>();
-            lst.Add(ec);
+            List<EntityCampaign> lst = campaignHandler.GetCampaign(session.UserID);
             dgvCampaign.DataSource = lst;
         }
 
         private void btnGetBudget_Click(object sender, EventArgs e)
         {
             TopSession session = GetSession();
-            double result = GetCampaignBudget(session, selectedCampaign.CampaignId);
+            long result = campaignHandler.GetCampaignBudget(session, selectedCampaign.CampaignId);
             txtBudget.Text = result.ToString();
         }
 
@@ -387,23 +385,6 @@ namespace TaoBaoDataServer.WinClientData
         }
 
         /// <summary>
-        /// 线上，获取一个计划的日限额
-        /// </summary>
-        private double GetCampaignBudget(TopSession session, long campaignId)
-        {
-            var response = taobaoApiHandler.TaobaoSimbaCampaignBudgetGet(session, campaignId);
-            if (response != null && response.CampaignBudget != null)
-            {
-                return Convert.ToDouble(response.CampaignBudget.Budget);
-            }
-            else
-            {
-                // 默认设置为30元
-                return 30;
-            }
-        }
-
-        /// <summary>
         /// 线上，获取推广组下关键词的质量得分
         /// </summary>
         private List<KeywordQscore> GetQscore(TopSession session, long adgroupId, ref string strCatmatchQscore)
@@ -467,6 +448,16 @@ namespace TaoBaoDataServer.WinClientData
             TopSession session = GetSession();
             var result = taobaoApiHandler.TaobaoSimbaAccountBalanceGet(session);
             txtBalance.Text = result.Balance;
+        }
+
+        private void btnSetBudget_Click(object sender, EventArgs e)
+        {
+            TopSession session = GetSession();
+            double result = campaignHandler.SetCampaignBudget(session, selectedCampaign.CampaignId, Convert.ToInt64(txtBudget.Text));
+            if (txtBudget.Text == result.ToString())
+            {
+                MessageBox.Show("设置日限额成功");
+            }
         }
 
         private void btnGetCampaignBaseRpt_Click(object sender, EventArgs e)
@@ -721,19 +712,20 @@ namespace TaoBaoDataServer.WinClientData
 
         private void 同步推广组ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (selectedCampaign.CampaignId == 0)
+            {
+                MessageBox.Show("请先选中计划");
+                return;
+            }
             TopSession session = userHandler.GetUserSession(txtNickName.Text.Trim());
-
-            long campaign_id_online = Convert.ToInt64(txtCampaignId.Text);
-
-            long campaign_id_local = campaignHandler.GetCampaign(session.UserID).campaignid;
-            if (campaign_id_local != campaign_id_online)
+            if (campaignHandler.GetCampaign(session.UserID).Find(o => o.campaignid == selectedCampaign.CampaignId) == null)
             {
                 MessageBox.Show("数据库中没有此计划，请重新选择需要同步推广组的计划");
                 return;
             }
 
-            List<ADGroup> lstAdgroup = adgroupHandler.GetAdgroupOnline(session, campaign_id_online);
-            frmOutPut.OutPutMsg(string.Format("用户{0},计划:{1},从线上下载推广组成功，推广组数{2}，其中状态为推广中：{3}", session.UserID, campaign_id_online, lstAdgroup.Count, lstAdgroup.Where(o => o.OnlineStatus == "online").Count()));
+            List<ADGroup> lstAdgroup = adgroupHandler.GetAdgroupOnline(session, selectedCampaign.CampaignId);
+            frmOutPut.OutPutMsg(string.Format("用户{0},计划:{1},从线上下载推广组成功，推广组数{2}，其中状态为推广中：{3}", session.UserID, selectedCampaign.CampaignId, lstAdgroup.Count, lstAdgroup.Where(o => o.OnlineStatus == "online").Count()));
             adgroupHandler.DeleteAdgroup(session.UserID);
             frmOutPut.OutPutMsg("本地删除推广组成功");
             foreach (var item in lstAdgroup)
@@ -974,7 +966,7 @@ namespace TaoBaoDataServer.WinClientData
         }
 
         private void cbxApp_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {//硬编码
             if (cbxApp.SelectedIndex == 0)
             {//安心代驾
                 Config.AppKey = "21596194";
@@ -984,6 +976,7 @@ namespace TaoBaoDataServer.WinClientData
                 taobaoApiHandler.SetTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
                 txtArticleCode.Text = Config.ArticleCode = "FW_GOODS-1897024";
                 Config.ItemCode = "FW_GOODS-1897024-v2";
+                Config.MajorizationPath = @"D:\自动开车\Majorization_Mobile\Majorization.exe";
             }
             else if (cbxApp.SelectedIndex == 1)
             {//淘快词托管
@@ -994,6 +987,7 @@ namespace TaoBaoDataServer.WinClientData
                 taobaoApiHandler.SetTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
                 txtArticleCode.Text = Config.ArticleCode = "ts-25420";
                 Config.ItemCode = "ts-25420-v4";
+                Config.MajorizationPath = @"D:\淘快词\AP\Majorization\Majorization.exe";
             }
             else if (cbxApp.SelectedIndex == 2)
             {//淘快车 
@@ -1003,6 +997,7 @@ namespace TaoBaoDataServer.WinClientData
                 taobaoApiHandler.SetTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
                 txtArticleCode.Text = Config.ArticleCode = "ts-21434";
                 Config.ItemCode = string.Empty;
+                Config.MajorizationPath = string.Empty;
             }
             frmMain.SetMainTitle(Config.App_Title);
         }
@@ -1061,13 +1056,13 @@ namespace TaoBaoDataServer.WinClientData
         {
             dgvCampaign.DataSource = null;
             TopSession user = userHandler.GetUserSession(txtNickName.Text.Trim());
-            EntityCampaign ec = campaignHandler.GetCampaign(user.UserID);
+            EntityCampaign ec = campaignHandler.GetCampaign(user.UserID).Find(o => o.campaignid == selectedCampaign.CampaignId);
             List<EntityCampaign> lst = new List<EntityCampaign>();
             lst.Add(ec);
             dgvCampaign.DataSource = lst;
             txtCampaignId.Text = ec.campaignid.ToString();
 
-            double budget = GetCampaignBudget(user, ec.campaignid);
+            long budget = campaignHandler.GetCampaignBudget(user, ec.campaignid);
             txtBudget.Text = budget.ToString();
             string strMsg = string.Empty;
             Boolean result = batchHandler.IsNeedAddPrice(user, ec.campaignid, budget,ref strMsg);
@@ -1189,6 +1184,58 @@ namespace TaoBaoDataServer.WinClientData
             long campaignId = selectedCampaign.CampaignId;
             var response = taobaoApiHandler.TaobaoSimbaCampaignPlatformGet(session, campaignId);
             txtPlatform.Text = response.Body;
+        }
+
+        private void btnInvestmentChange_Click(object sender, EventArgs e)
+        {
+            TopSession session = userHandler.GetUserSession(txtNickName.Text);
+            EntityCampaign myCampaign = null;
+            if (selectedCampaign.CampaignId == 0)
+            {
+                MessageBox.Show("请选择推广计划后，再使用");
+                return;
+            }
+            else
+            {
+                myCampaign = campaignHandler.GetCampaign(session.UserID).Find(o => o.campaignid == selectedCampaign.CampaignId);
+            }
+
+            string paramTpl = "userId={0} configId={1}";
+            string param = string.Empty;
+
+            if (txtInvestmentChange.Text.StartsWith("+"))
+            {//执行增加投入
+                decimal investChange = Convert.ToDecimal(txtInvestmentChange.Text.Substring(1));
+                decimal newMaxCPC = myCampaign.clickcost * (1 + investChange / 100);
+                campaignHandler.SetBudget(session.UserID, myCampaign.campaignid, campaignHandler.GetCampaignBudget(session, selectedCampaign.CampaignId), newMaxCPC);
+                param = string.Format(paramTpl, session.UserID, CommonHandler.Const_MajorizationConfig浮动加价);
+            }
+            else if (txtInvestmentChange.Text.StartsWith("-"))
+            {//执行减少投入 
+                decimal investChange = Convert.ToDecimal(txtInvestmentChange.Text.Substring(1));
+                decimal newMaxCPC = myCampaign.clickcost * (1 - investChange / 100);
+                campaignHandler.SetBudget(session.UserID, myCampaign.campaignid, campaignHandler.GetCampaignBudget(session, selectedCampaign.CampaignId), newMaxCPC);
+                param = string.Format(paramTpl, session.UserID, CommonHandler.Const_MajorizationConfig浮动降价);
+            }
+            else if (CommonFunction.IsInt(txtInvestmentChange.Text))
+            {//找词优化，执行策略id 
+                param = string.Format(paramTpl, session.UserID, Convert.ToInt32(txtInvestmentChange.Text));
+            }
+            else if (txtInvestmentChange.Text.Length == 0)
+            {//默认策略优化 
+                param = string.Format("userId={0}", session.UserID);
+            }
+            else
+            {
+                MessageBox.Show("参数输入错误");
+                return;
+            }
+
+            DialogResult dialogResult = MessageBox.Show(string.Format("是否执行优化命令：{0} {1}？", CommonHandler.Const_MajorizationPath, param), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.OK)
+            {
+                System.Diagnostics.Process.Start("cmd.exe", string.Format("/k {0} {1} /a", CommonHandler.Const_MajorizationPath, param));
+            }
         }
     }
 }
