@@ -1231,10 +1231,10 @@ namespace TaoBaoDataServer.WinClientData
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show(string.Format("是否执行优化命令：{0} {1}？", CommonHandler.Const_MajorizationPath, param), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show(string.Format("是否执行优化命令：{0} {1}？", Config.MajorizationPath, param), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.OK)
             {
-                System.Diagnostics.Process.Start("cmd.exe", string.Format("/k {0} {1} /a", CommonHandler.Const_MajorizationPath, param));
+                System.Diagnostics.Process.Start("cmd.exe", string.Format("/k {0} {1} /a", Config.MajorizationPath, param));
             }
         }
     }
