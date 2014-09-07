@@ -25,17 +25,19 @@ namespace TaoBaoDataServer.WinClientData
             FrmAPITest frmContent1 = new FrmAPITest(frmOutPut, this);
             FrmFindWordByAdgroup frmContent2 = new FrmFindWordByAdgroup(frmOutPut);
             FrmFindWord frmContent3 = new FrmFindWord();
-            FrmWord frmContent4 = new FrmWord();
+            FrmWord frmContent4 = new FrmWord(frmOutPut);
             FrmReport frmContent5 = new FrmReport();
+            Form1 frmTool = new Form1();
 
-            frmOutPut.Show(dockPanel1, DockState.DockLeft);
+            frmOutPut.Show(dockPanel1, DockState.DockLeftAutoHide);
             frmContent1.Show(dockPanel1);
             frmContent2.Show(dockPanel1);
             frmContent3.Show(dockPanel1);
             frmContent4.Show(dockPanel1);
             frmContent5.Show(dockPanel1);
+            frmTool.Show(dockPanel1);
             frmDB.Show(dockPanel1);
-            frmContent1.BringToFront();
+            frmContent4.BringToFront();
         }
 
         public void SetMainTitle(string title)

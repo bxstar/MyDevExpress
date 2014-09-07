@@ -33,6 +33,8 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
         private System.Threading.SendOrPostCallback KeywordBaseCacheOperationCompleted;
 
+        private System.Threading.SendOrPostCallback KeywordAnalysisCacheOperationCompleted;
+
         private System.Threading.SendOrPostCallback GetAdgroupUseWordOperationCompleted;
 
         private System.Threading.SendOrPostCallback SetAdgroupUseWordOperationCompleted;
@@ -61,13 +63,21 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
         private System.Threading.SendOrPostCallback GetTopCatsOnlineOperationCompleted;
 
-        private System.Threading.SendOrPostCallback GetItemCatsOnlineOperationCompleted;
+        private System.Threading.SendOrPostCallback GetCatsFullInfoOnlineOperationCompleted;
 
-        private System.Threading.SendOrPostCallback GetItemCatsByParentCatIdOnlineOperationCompleted;
+        private System.Threading.SendOrPostCallback GetItemCatsOnlineOperationCompleted;
 
         private System.Threading.SendOrPostCallback GetCatTop100KeywordOperationCompleted;
 
+        private System.Threading.SendOrPostCallback GetCatTopKeywordOperationCompleted;
+
         private System.Threading.SendOrPostCallback GetItemInfoCacheOperationCompleted;
+
+        private System.Threading.SendOrPostCallback GetWordsDataCacheOperationCompleted;
+
+        private System.Threading.SendOrPostCallback GetWordsSubDataCacheOperationCompleted;
+
+        private System.Threading.SendOrPostCallback GetRelatedwordsByKeywordOperationCompleted;
 
         private System.Threading.SendOrPostCallback GetIsOutPutInfoLogOperationCompleted;
 
@@ -84,6 +94,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
         /// <remarks/>
         public event KeywordBaseCacheCompletedEventHandler KeywordBaseCacheCompleted;
+
+        /// <remarks/>
+        public event KeywordAnalysisCacheCompletedEventHandler KeywordAnalysisCacheCompleted;
 
         /// <remarks/>
         public event GetAdgroupUseWordCompletedEventHandler GetAdgroupUseWordCompleted;
@@ -128,16 +141,28 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
         public event GetTopCatsOnlineCompletedEventHandler GetTopCatsOnlineCompleted;
 
         /// <remarks/>
-        public event GetItemCatsOnlineCompletedEventHandler GetItemCatsOnlineCompleted;
+        public event GetCatsFullInfoOnlineCompletedEventHandler GetCatsFullInfoOnlineCompleted;
 
         /// <remarks/>
-        public event GetItemCatsByParentCatIdOnlineCompletedEventHandler GetItemCatsByParentCatIdOnlineCompleted;
+        public event GetItemCatsOnlineCompletedEventHandler GetItemCatsOnlineCompleted;
 
         /// <remarks/>
         public event GetCatTop100KeywordCompletedEventHandler GetCatTop100KeywordCompleted;
 
         /// <remarks/>
+        public event GetCatTopKeywordCompletedEventHandler GetCatTopKeywordCompleted;
+
+        /// <remarks/>
         public event GetItemInfoCacheCompletedEventHandler GetItemInfoCacheCompleted;
+
+        /// <remarks/>
+        public event GetWordsDataCacheCompletedEventHandler GetWordsDataCacheCompleted;
+
+        /// <remarks/>
+        public event GetWordsSubDataCacheCompletedEventHandler GetWordsSubDataCacheCompleted;
+
+        /// <remarks/>
+        public event GetRelatedwordsByKeywordCompletedEventHandler GetRelatedwordsByKeywordCompleted;
 
         /// <remarks/>
         public event GetIsOutPutInfoLogCompletedEventHandler GetIsOutPutInfoLogCompleted;
@@ -240,6 +265,58 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.KeywordBaseCacheCompleted(this, new KeywordBaseCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/KeywordAnalysisCache", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public EntityWordBase[] KeywordAnalysisCache(string strKeywords, string stu)
+        {
+            object[] results = this.Invoke("KeywordAnalysisCache", new object[] {
+                        strKeywords,
+                        stu});
+            return ((EntityWordBase[])(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginKeywordAnalysisCache(string strKeywords, string stu, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("KeywordAnalysisCache", new object[] {
+                        strKeywords,
+                        stu}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public EntityWordBase[] EndKeywordAnalysisCache(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((EntityWordBase[])(results[0]));
+        }
+
+        /// <remarks/>
+        public void KeywordAnalysisCacheAsync(string strKeywords, string stu)
+        {
+            this.KeywordAnalysisCacheAsync(strKeywords, stu, null);
+        }
+
+        /// <remarks/>
+        public void KeywordAnalysisCacheAsync(string strKeywords, string stu, object userState)
+        {
+            if ((this.KeywordAnalysisCacheOperationCompleted == null))
+            {
+                this.KeywordAnalysisCacheOperationCompleted = new System.Threading.SendOrPostCallback(this.OnKeywordAnalysisCacheOperationCompleted);
+            }
+            this.InvokeAsync("KeywordAnalysisCache", new object[] {
+                        strKeywords,
+                        stu}, this.KeywordAnalysisCacheOperationCompleted, userState);
+        }
+
+        private void OnKeywordAnalysisCacheOperationCompleted(object arg)
+        {
+            if ((this.KeywordAnalysisCacheCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.KeywordAnalysisCacheCompleted(this, new KeywordAnalysisCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -931,6 +1008,61 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
         }
 
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetCatsFullInfoOnline", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetCatsFullInfoOnline(string access_token, string catLevel, string categoryIds)
+        {
+            object[] results = this.Invoke("GetCatsFullInfoOnline", new object[] {
+                        access_token,
+                        catLevel,
+                        categoryIds});
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetCatsFullInfoOnline(string access_token, string catLevel, string categoryIds, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetCatsFullInfoOnline", new object[] {
+                        access_token,
+                        catLevel,
+                        categoryIds}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public string EndGetCatsFullInfoOnline(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetCatsFullInfoOnlineAsync(string access_token, string catLevel, string categoryIds)
+        {
+            this.GetCatsFullInfoOnlineAsync(access_token, catLevel, categoryIds, null);
+        }
+
+        /// <remarks/>
+        public void GetCatsFullInfoOnlineAsync(string access_token, string catLevel, string categoryIds, object userState)
+        {
+            if ((this.GetCatsFullInfoOnlineOperationCompleted == null))
+            {
+                this.GetCatsFullInfoOnlineOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCatsFullInfoOnlineOperationCompleted);
+            }
+            this.InvokeAsync("GetCatsFullInfoOnline", new object[] {
+                        access_token,
+                        catLevel,
+                        categoryIds}, this.GetCatsFullInfoOnlineOperationCompleted, userState);
+        }
+
+        private void OnGetCatsFullInfoOnlineOperationCompleted(object arg)
+        {
+            if ((this.GetCatsFullInfoOnlineCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCatsFullInfoOnlineCompleted(this, new GetCatsFullInfoOnlineCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetItemCatsOnline", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GetItemCatsOnline(string access_token, string categoryIds)
         {
@@ -979,58 +1111,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetItemCatsOnlineCompleted(this, new GetItemCatsOnlineCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetItemCatsByParentCatIdOnline", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetItemCatsByParentCatIdOnline(string access_token, long parentCatId)
-        {
-            object[] results = this.Invoke("GetItemCatsByParentCatIdOnline", new object[] {
-                        access_token,
-                        parentCatId});
-            return ((string)(results[0]));
-        }
-
-        /// <remarks/>
-        public System.IAsyncResult BeginGetItemCatsByParentCatIdOnline(string access_token, long parentCatId, System.AsyncCallback callback, object asyncState)
-        {
-            return this.BeginInvoke("GetItemCatsByParentCatIdOnline", new object[] {
-                        access_token,
-                        parentCatId}, callback, asyncState);
-        }
-
-        /// <remarks/>
-        public string EndGetItemCatsByParentCatIdOnline(System.IAsyncResult asyncResult)
-        {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((string)(results[0]));
-        }
-
-        /// <remarks/>
-        public void GetItemCatsByParentCatIdOnlineAsync(string access_token, long parentCatId)
-        {
-            this.GetItemCatsByParentCatIdOnlineAsync(access_token, parentCatId, null);
-        }
-
-        /// <remarks/>
-        public void GetItemCatsByParentCatIdOnlineAsync(string access_token, long parentCatId, object userState)
-        {
-            if ((this.GetItemCatsByParentCatIdOnlineOperationCompleted == null))
-            {
-                this.GetItemCatsByParentCatIdOnlineOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetItemCatsByParentCatIdOnlineOperationCompleted);
-            }
-            this.InvokeAsync("GetItemCatsByParentCatIdOnline", new object[] {
-                        access_token,
-                        parentCatId}, this.GetItemCatsByParentCatIdOnlineOperationCompleted, userState);
-        }
-
-        private void OnGetItemCatsByParentCatIdOnlineOperationCompleted(object arg)
-        {
-            if ((this.GetItemCatsByParentCatIdOnlineCompleted != null))
-            {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetItemCatsByParentCatIdOnlineCompleted(this, new GetItemCatsByParentCatIdOnlineCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -1087,6 +1167,58 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
         }
 
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetCatTopKeyword", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetCatTopKeyword(string access_token, string categoryId)
+        {
+            object[] results = this.Invoke("GetCatTopKeyword", new object[] {
+                        access_token,
+                        categoryId});
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetCatTopKeyword(string access_token, string categoryId, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetCatTopKeyword", new object[] {
+                        access_token,
+                        categoryId}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public string EndGetCatTopKeyword(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetCatTopKeywordAsync(string access_token, string categoryId)
+        {
+            this.GetCatTopKeywordAsync(access_token, categoryId, null);
+        }
+
+        /// <remarks/>
+        public void GetCatTopKeywordAsync(string access_token, string categoryId, object userState)
+        {
+            if ((this.GetCatTopKeywordOperationCompleted == null))
+            {
+                this.GetCatTopKeywordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCatTopKeywordOperationCompleted);
+            }
+            this.InvokeAsync("GetCatTopKeyword", new object[] {
+                        access_token,
+                        categoryId}, this.GetCatTopKeywordOperationCompleted, userState);
+        }
+
+        private void OnGetCatTopKeywordOperationCompleted(object arg)
+        {
+            if ((this.GetCatTopKeywordCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCatTopKeywordCompleted(this, new GetCatTopKeywordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetItemInfoCache", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GetItemInfoCache(string access_token, string itemIdOrUrl)
         {
@@ -1135,6 +1267,177 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetItemInfoCacheCompleted(this, new GetItemInfoCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetWordsDataCache", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetWordsDataCache(string access_token, string keywords, string startDate, string endDate)
+        {
+            object[] results = this.Invoke("GetWordsDataCache", new object[] {
+                        access_token,
+                        keywords,
+                        startDate,
+                        endDate});
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetWordsDataCache(string access_token, string keywords, string startDate, string endDate, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetWordsDataCache", new object[] {
+                        access_token,
+                        keywords,
+                        startDate,
+                        endDate}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public string EndGetWordsDataCache(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetWordsDataCacheAsync(string access_token, string keywords, string startDate, string endDate)
+        {
+            this.GetWordsDataCacheAsync(access_token, keywords, startDate, endDate, null);
+        }
+
+        /// <remarks/>
+        public void GetWordsDataCacheAsync(string access_token, string keywords, string startDate, string endDate, object userState)
+        {
+            if ((this.GetWordsDataCacheOperationCompleted == null))
+            {
+                this.GetWordsDataCacheOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetWordsDataCacheOperationCompleted);
+            }
+            this.InvokeAsync("GetWordsDataCache", new object[] {
+                        access_token,
+                        keywords,
+                        startDate,
+                        endDate}, this.GetWordsDataCacheOperationCompleted, userState);
+        }
+
+        private void OnGetWordsDataCacheOperationCompleted(object arg)
+        {
+            if ((this.GetWordsDataCacheCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetWordsDataCacheCompleted(this, new GetWordsDataCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetWordsSubDataCache", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetWordsSubDataCache(string access_token, string keywords, string startDate, string endDate)
+        {
+            object[] results = this.Invoke("GetWordsSubDataCache", new object[] {
+                        access_token,
+                        keywords,
+                        startDate,
+                        endDate});
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetWordsSubDataCache(string access_token, string keywords, string startDate, string endDate, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetWordsSubDataCache", new object[] {
+                        access_token,
+                        keywords,
+                        startDate,
+                        endDate}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public string EndGetWordsSubDataCache(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetWordsSubDataCacheAsync(string access_token, string keywords, string startDate, string endDate)
+        {
+            this.GetWordsSubDataCacheAsync(access_token, keywords, startDate, endDate, null);
+        }
+
+        /// <remarks/>
+        public void GetWordsSubDataCacheAsync(string access_token, string keywords, string startDate, string endDate, object userState)
+        {
+            if ((this.GetWordsSubDataCacheOperationCompleted == null))
+            {
+                this.GetWordsSubDataCacheOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetWordsSubDataCacheOperationCompleted);
+            }
+            this.InvokeAsync("GetWordsSubDataCache", new object[] {
+                        access_token,
+                        keywords,
+                        startDate,
+                        endDate}, this.GetWordsSubDataCacheOperationCompleted, userState);
+        }
+
+        private void OnGetWordsSubDataCacheOperationCompleted(object arg)
+        {
+            if ((this.GetWordsSubDataCacheCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetWordsSubDataCacheCompleted(this, new GetWordsSubDataCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetRelatedwordsByKeyword", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetRelatedwordsByKeyword(string access_token, string keywords, long depth)
+        {
+            object[] results = this.Invoke("GetRelatedwordsByKeyword", new object[] {
+                        access_token,
+                        keywords,
+                        depth});
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetRelatedwordsByKeyword(string access_token, string keywords, long depth, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetRelatedwordsByKeyword", new object[] {
+                        access_token,
+                        keywords,
+                        depth}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public string EndGetRelatedwordsByKeyword(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetRelatedwordsByKeywordAsync(string access_token, string keywords, long depth)
+        {
+            this.GetRelatedwordsByKeywordAsync(access_token, keywords, depth, null);
+        }
+
+        /// <remarks/>
+        public void GetRelatedwordsByKeywordAsync(string access_token, string keywords, long depth, object userState)
+        {
+            if ((this.GetRelatedwordsByKeywordOperationCompleted == null))
+            {
+                this.GetRelatedwordsByKeywordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetRelatedwordsByKeywordOperationCompleted);
+            }
+            this.InvokeAsync("GetRelatedwordsByKeyword", new object[] {
+                        access_token,
+                        keywords,
+                        depth}, this.GetRelatedwordsByKeywordOperationCompleted, userState);
+        }
+
+        private void OnGetRelatedwordsByKeywordOperationCompleted(object arg)
+        {
+            if ((this.GetRelatedwordsByKeywordCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetRelatedwordsByKeywordCompleted(this, new GetRelatedwordsByKeywordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -1443,6 +1746,12 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
         private string wordField;
 
+        private string word_area_perField;
+
+        private string word_source_perField;
+
+        private string word_hp_priceField;
+
         private EntityBaseInfo[] reord_baseField;
 
         /// <remarks/>
@@ -1455,6 +1764,45 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
             set
             {
                 this.wordField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string word_area_per
+        {
+            get
+            {
+                return this.word_area_perField;
+            }
+            set
+            {
+                this.word_area_perField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string word_source_per
+        {
+            get
+            {
+                return this.word_source_perField;
+            }
+            set
+            {
+                this.word_source_perField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string word_hp_price
+        {
+            get
+            {
+                return this.word_hp_priceField;
+            }
+            set
+            {
+                this.word_hp_priceField = value;
             }
         }
 
@@ -1516,6 +1864,36 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
         private object[] results;
 
         internal KeywordBaseCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public EntityWordBase[] Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((EntityWordBase[])(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    public delegate void KeywordAnalysisCacheCompletedEventHandler(object sender, KeywordAnalysisCacheCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class KeywordAnalysisCacheCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal KeywordAnalysisCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;
@@ -1928,18 +2306,18 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
-    public delegate void GetItemCatsOnlineCompletedEventHandler(object sender, GetItemCatsOnlineCompletedEventArgs e);
+    public delegate void GetCatsFullInfoOnlineCompletedEventHandler(object sender, GetCatsFullInfoOnlineCompletedEventArgs e);
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetItemCatsOnlineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    public partial class GetCatsFullInfoOnlineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
 
         private object[] results;
 
-        internal GetItemCatsOnlineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        internal GetCatsFullInfoOnlineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;
@@ -1958,18 +2336,18 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
-    public delegate void GetItemCatsByParentCatIdOnlineCompletedEventHandler(object sender, GetItemCatsByParentCatIdOnlineCompletedEventArgs e);
+    public delegate void GetItemCatsOnlineCompletedEventHandler(object sender, GetItemCatsOnlineCompletedEventArgs e);
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetItemCatsByParentCatIdOnlineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    public partial class GetItemCatsOnlineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
 
         private object[] results;
 
-        internal GetItemCatsByParentCatIdOnlineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+        internal GetItemCatsOnlineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;
@@ -2018,6 +2396,36 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    public delegate void GetCatTopKeywordCompletedEventHandler(object sender, GetCatTopKeywordCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetCatTopKeywordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetCatTopKeywordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public string Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
     public delegate void GetItemInfoCacheCompletedEventHandler(object sender, GetItemInfoCacheCompletedEventArgs e);
 
     /// <remarks/>
@@ -2030,6 +2438,96 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
         private object[] results;
 
         internal GetItemInfoCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public string Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    public delegate void GetWordsDataCacheCompletedEventHandler(object sender, GetWordsDataCacheCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetWordsDataCacheCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetWordsDataCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public string Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    public delegate void GetWordsSubDataCacheCompletedEventHandler(object sender, GetWordsSubDataCacheCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetWordsSubDataCacheCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetWordsSubDataCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public string Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    public delegate void GetRelatedwordsByKeywordCompletedEventHandler(object sender, GetRelatedwordsByKeywordCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetRelatedwordsByKeywordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetRelatedwordsByKeywordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;

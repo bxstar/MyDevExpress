@@ -5,6 +5,8 @@ using System.Text;
 using TaoBaoDataServer.WinClientData.Model;
 using iclickpro.AccessCommon;
 using log4net;
+using Top.Api.Domain;
+using Top.Api.Response;
 
 namespace TaoBaoDataServer.WinClientData.BusinessLayer
 {
@@ -72,6 +74,37 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             }
             return result;
         }
+
+        /// <summary>
+        /// 获取关键词基础数据
+        /// </summary>
+        public static List<TaoBaoDataServer.WinClientData.BusinessLayer.WService.EntityWordBase> GetKeyWordBaseFromWs(string strKeywords)
+        {
+            return wsKeywordForecastProxy.KeywordBaseCache(strKeywords).ToList();
+        }
+
+
+        /// <summary>
+        /// 获取关键词大盘数据
+        /// </summary>
+        public static List<InsightWordDataDTO> GetWordsDataFromWs(string keywords, string startDate, string endDate)
+        {
+
+            string strResponse = wsKeywordForecastProxy.GetWordsDataCache(null, keywords, startDate, endDate);
+            SimbaInsightWordsdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordsdataGetResponse>(strResponse);
+            return response.WordDataList;
+        }
+
+        /// <summary>
+        /// 获取流量细分数据
+        /// </summary>
+        public static List<InsightWordSubDataDTO> GetWordsSubDataFromWs(string keywords, string startDate, string endDate)
+        {
+            string strResponse = wsKeywordForecastProxy.GetWordsSubDataCache(null, keywords, startDate, endDate);
+            SimbaInsightWordssubdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordssubdataGetResponse>(strResponse);
+            return response.WordSubdataList;
+        }
+
 
         /// <summary>
         /// 获取策略

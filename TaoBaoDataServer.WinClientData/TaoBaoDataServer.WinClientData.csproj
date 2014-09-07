@@ -35,26 +35,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.v13.2">
-      <HintPath>..\Dll\DevExpress.Data.v13.2.dll</HintPath>
+    <Reference Include="DevExpress.Data.v14.1">
     </Reference>
-    <Reference Include="DevExpress.Printing.v13.2.Core">
-      <HintPath>..\Dll\DevExpress.Printing.v13.2.Core.dll</HintPath>
+    <Reference Include="DevExpress.Printing.v14.1.Core">
     </Reference>
-    <Reference Include="DevExpress.Utils.v13.2">
-      <HintPath>..\Dll\DevExpress.Utils.v13.2.dll</HintPath>
+    <Reference Include="DevExpress.Utils.v14.1">
     </Reference>
-    <Reference Include="DevExpress.XtraEditors.v13.2">
-      <HintPath>..\Dll\DevExpress.XtraEditors.v13.2.dll</HintPath>
+    <Reference Include="DevExpress.XtraEditors.v14.1">
     </Reference>
-    <Reference Include="DevExpress.XtraGrid.v13.2">
-      <HintPath>..\Dll\DevExpress.XtraGrid.v13.2.dll</HintPath>
+    <Reference Include="DevExpress.XtraGrid.v14.1">
     </Reference>
-    <Reference Include="DevExpress.XtraLayout.v13.2">
-      <HintPath>..\Dll\DevExpress.XtraLayout.v13.2.dll</HintPath>
+    <Reference Include="DevExpress.XtraLayout.v14.1">
     </Reference>
-    <Reference Include="DevExpress.XtraPrinting.v13.2">
-      <HintPath>..\Dll\DevExpress.XtraPrinting.v13.2.dll</HintPath>
+    <Reference Include="DevExpress.XtraPrinting.v14.1">
     </Reference>
     <Reference Include="iclickpro.AccessCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dll\iclickpro.AccessCommon.dll</HintPath>
@@ -81,7 +74,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TopSdk">
+    <Reference Include="TopSdk, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dll\TopSdk.dll</HintPath>
     </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.5.0.15095, Culture=neutral, processorArchitecture=MSIL">

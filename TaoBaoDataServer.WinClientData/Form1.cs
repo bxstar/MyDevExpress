@@ -8,13 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using iclickpro.AccessCommon;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace TaoBaoDataServer.WinClientData
 {
     /// <summary>
     /// 日志滚动输出，多线程实现，不用Application.DoEvents
     /// </summary>
-    public partial class Form1 : Form
+    public partial class Form1 : DockContent
     {
         Thread Log;
 
