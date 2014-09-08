@@ -73,21 +73,21 @@ WHERE aa.[user_id]=2480 AND aa.adgroup_id<>343774331
 
             List<TopSession> lstUser = userHandler.GetUserInfo(null).Where(o => o.UserName == o.ProxyUserName).ToList();
 
-            List<EntityItem> lstData = SqlDataProvider.GetDataFromDB<EntityItem>("batch_item_modify");
-            foreach (var item in lstData)
-            {
-                TopSession user = lstUser.Find(o => o.UserID == item.user_id);
-                if (user != null)
-                {
-                    var result = taobaoHandler.TaobaoSimbaAdgroupAdd(user, item.campaign_id, item.item_id, 20, item.item_title, item.item_url.Replace("_sum.jpg", ""));
-                    if (result.IsError)
-                    {
-                        logger.ErrorFormat("item_id：{0}，item_title：{1}，宝贝恢复出错，原因：{2}", item.item_id, item.item_title, result.SubErrMsg);
-                    }
-                }
+            //List<EntityItem> lstData = SqlDataProvider.GetDataFromDB<EntityItem>("batch_item_modify");
+            //foreach (var item in lstData)
+            //{
+            //    TopSession user = lstUser.Find(o => o.UserID == item.user_id);
+            //    if (user != null)
+            //    {
+            //        var result = taobaoHandler.TaobaoSimbaAdgroupAdd(user, item.campaign_id, item.item_id, 20, item.item_title, item.item_url.Replace("_sum.jpg", ""));
+            //        if (result.IsError)
+            //        {
+            //            logger.ErrorFormat("item_id：{0}，item_title：{1}，宝贝恢复出错，原因：{2}", item.item_id, item.item_title, result.SubErrMsg);
+            //        }
+            //    }
 
 
-            }
+            //}
 
             MessageBox.Show("宝贝恢复完成");
         }

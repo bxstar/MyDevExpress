@@ -49,6 +49,9 @@
     </Reference>
     <Reference Include="DevExpress.XtraPrinting.v14.1">
     </Reference>
+    <Reference Include="GlassButton">
+      <HintPath>..\..\..\虚拟货币\DianChe\Dll\GlassButton.dll</HintPath>
+    </Reference>
     <Reference Include="iclickpro.AccessCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dll\iclickpro.AccessCommon.dll</HintPath>
     </Reference>
@@ -57,6 +60,9 @@
     </Reference>
     <Reference Include="NetServ.Net.Json">
       <HintPath>..\Dll\NetServ.Net.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\Dll\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -86,10 +92,12 @@
     <Compile Include="BusinessLayer\BusinessBatchHandler.cs" />
     <Compile Include="BusinessLayer\BusinessCampaignHandler.cs" />
     <Compile Include="BusinessLayer\BusinessKeywordHandler.cs" />
+    <Compile Include="BusinessLayer\BusinessMQ.cs" />
     <Compile Include="BusinessLayer\BusinessReportHandler.cs" />
     <Compile Include="BusinessLayer\BusinessUserHandler.cs" />
     <Compile Include="BusinessLayer\CommonHandler.cs" />
     <Compile Include="BusinessLayer\BusinessTaobaoApiHandler.cs" />
+    <Compile Include="BusinessLayer\ServiceSplitWord.cs" />
     <Compile Include="BusinessLayer\ServiceWord.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DataBase\DTOHelper.cs" />

@@ -6,16 +6,24 @@ using System.Text;
 namespace TaoBaoDataServer.WinClientData.Model
 {
     /// <summary>
-    /// 宝贝对象实体
+    /// 淘宝宝贝实体类
     /// </summary>
     public class EntityItem
     {
+        /// <summary>
+        /// 本地ID
+        /// </summary>
         public int local_id { get; set; }
 
         /// <summary>
         /// 宝贝ID
         /// </summary>		
         public long item_id { get; set; }
+
+        /// <summary>
+        /// 宝贝的卖家昵称
+        /// </summary>
+        public string nick { get; set; }
 
         /// <summary>
         /// 宝贝标题
@@ -33,28 +41,15 @@ namespace TaoBaoDataServer.WinClientData.Model
         public string categroy_name { get; set; }
 
         /// <summary>
-        /// user_id
-        /// </summary>		
-        public long user_id { get; set; }
-        /// <summary>
-        /// campaign_id
-        /// </summary>		
-        public long campaign_id { get; set; }
-
-        /// <summary>
-        /// item_url
-        /// </summary>		
-        public string item_url { get; set; }
-
-        public DateTime create_date { get; set; }
-
-        public DateTime update_date { get; set; }
-
+        /// 宝贝的主图地址
+        /// </summary>
+        public string pic_url { get; set; }
         #region 扩展属性
         /// <summary>
         /// 宝贝的属性列表
         /// </summary>
         public List<string> LstPropsName { get; set; }
-        #endregion 
+        #endregion
+
     }
 }

@@ -17,6 +17,13 @@ namespace TaoBaoDataServer.WinClientData
     {
         void OutPutMsg(string strMsg, List<string> lstContent);
         void OutPutMsg(string strMsg);
+
+        /// <summary>
+        /// 带参数输出
+        /// </summary>
+        /// <param name="strMsg">内容</param>
+        /// <param name="args">参数</param>
+        void OutPutMsgFormat(string strMsg, params object[] args);
     }
 
     /// <summary>
@@ -34,6 +41,17 @@ namespace TaoBaoDataServer.WinClientData
             System.Diagnostics.Debug.Listeners.Add(new MyTraceListener(this.rtxOutPut));
         }
 
+
+        public void OutPutMsg(string strMsg)
+        {
+            Debug.WriteLine(strMsg);
+        }
+
+        public void OutPutMsgFormat(string strMsg, params object[] args)
+        {
+            Debug.WriteLine(string.Format(strMsg, args));
+        }
+
         public void OutPutMsg(string strMsg, List<string> lstContent)
         {
             Debug.IndentLevel = 0;
@@ -44,11 +62,6 @@ namespace TaoBaoDataServer.WinClientData
             {
                 Debug.WriteLine(item);
             }
-        }
-
-        public void OutPutMsg(string strMsg)
-        {
-            Debug.WriteLine(strMsg);
         }
 
         private void 清除内容ToolStripMenuItem_Click(object sender, EventArgs e)

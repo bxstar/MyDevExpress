@@ -44,10 +44,10 @@
             this.gridViewKeywordBase = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gridControlWordsData = new DevExpress.XtraGrid.GridControl();
+            this.gridViewWordsData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gridControlWordsSubData = new DevExpress.XtraGrid.GridControl();
             this.gridViewWordsSubData = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridViewWordsData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelTop.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -55,10 +55,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewKeywordBase)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlWordsData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewWordsData)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlWordsSubData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewWordsSubData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewWordsData)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
@@ -75,13 +75,13 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1010, 102);
+            this.panelTop.Size = new System.Drawing.Size(1010, 147);
             this.panelTop.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(864, 61);
+            this.label3.Location = new System.Drawing.Point(981, 96);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 12);
             this.label3.TabIndex = 9;
@@ -91,7 +91,7 @@
             // 
             this.dtEndDate.CustomFormat = "yyyy-MM-dd";
             this.dtEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtEndDate.Location = new System.Drawing.Point(887, 56);
+            this.dtEndDate.Location = new System.Drawing.Point(909, 111);
             this.dtEndDate.Name = "dtEndDate";
             this.dtEndDate.Size = new System.Drawing.Size(89, 21);
             this.dtEndDate.TabIndex = 8;
@@ -100,14 +100,14 @@
             // 
             this.dtStartDate.CustomFormat = "yyyy-MM-dd";
             this.dtStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtStartDate.Location = new System.Drawing.Point(765, 56);
+            this.dtStartDate.Location = new System.Drawing.Point(909, 72);
             this.dtStartDate.Name = "dtStartDate";
-            this.dtStartDate.Size = new System.Drawing.Size(93, 21);
+            this.dtStartDate.Size = new System.Drawing.Size(89, 21);
             this.dtStartDate.TabIndex = 7;
             // 
             // btnGetKeywordIndex
             // 
-            this.btnGetKeywordIndex.Location = new System.Drawing.Point(668, 56);
+            this.btnGetKeywordIndex.Location = new System.Drawing.Point(923, 39);
             this.btnGetKeywordIndex.Name = "btnGetKeywordIndex";
             this.btnGetKeywordIndex.Size = new System.Drawing.Size(75, 23);
             this.btnGetKeywordIndex.TabIndex = 6;
@@ -118,7 +118,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 62);
+            this.label2.Location = new System.Drawing.Point(27, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 3;
@@ -126,7 +126,7 @@
             // 
             // btnGetWord
             // 
-            this.btnGetWord.Location = new System.Drawing.Point(668, 23);
+            this.btnGetWord.Location = new System.Drawing.Point(923, 10);
             this.btnGetWord.Name = "btnGetWord";
             this.btnGetWord.Size = new System.Drawing.Size(75, 23);
             this.btnGetWord.TabIndex = 2;
@@ -136,22 +136,23 @@
             // 
             // txtKeywords
             // 
-            this.txtKeywords.Location = new System.Drawing.Point(84, 58);
+            this.txtKeywords.Location = new System.Drawing.Point(84, 39);
+            this.txtKeywords.Multiline = true;
             this.txtKeywords.Name = "txtKeywords";
-            this.txtKeywords.Size = new System.Drawing.Size(565, 21);
+            this.txtKeywords.Size = new System.Drawing.Size(816, 93);
             this.txtKeywords.TabIndex = 1;
             // 
             // txtNumID
             // 
-            this.txtNumID.Location = new System.Drawing.Point(84, 25);
+            this.txtNumID.Location = new System.Drawing.Point(84, 12);
             this.txtNumID.Name = "txtNumID";
-            this.txtNumID.Size = new System.Drawing.Size(565, 21);
+            this.txtNumID.Size = new System.Drawing.Size(816, 21);
             this.txtNumID.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 29);
+            this.label1.Location = new System.Drawing.Point(25, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 0;
@@ -163,10 +164,10 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 102);
+            this.tabControl1.Location = new System.Drawing.Point(0, 147);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1010, 481);
+            this.tabControl1.Size = new System.Drawing.Size(1010, 436);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
@@ -175,7 +176,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1002, 455);
+            this.tabPage1.Size = new System.Drawing.Size(1002, 410);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "关键词基础指数";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -187,7 +188,7 @@
             this.gridControlKeywordBase.Location = new System.Drawing.Point(3, 3);
             this.gridControlKeywordBase.MainView = this.gridViewKeywordBase;
             this.gridControlKeywordBase.Name = "gridControlKeywordBase";
-            this.gridControlKeywordBase.Size = new System.Drawing.Size(996, 449);
+            this.gridControlKeywordBase.Size = new System.Drawing.Size(996, 404);
             this.gridControlKeywordBase.TabIndex = 0;
             this.gridControlKeywordBase.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewKeywordBase});
@@ -223,6 +224,14 @@
             this.gridControlWordsData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewWordsData});
             // 
+            // gridViewWordsData
+            // 
+            this.gridViewWordsData.GridControl = this.gridControlWordsData;
+            this.gridViewWordsData.Name = "gridViewWordsData";
+            this.gridViewWordsData.OptionsSelection.MultiSelect = true;
+            this.gridViewWordsData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewWordsData.OptionsView.ShowGroupPanel = false;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.gridControlWordsSubData);
@@ -253,14 +262,6 @@
             this.gridViewWordsSubData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
             this.gridViewWordsSubData.OptionsView.ShowGroupPanel = false;
             // 
-            // gridViewWordsData
-            // 
-            this.gridViewWordsData.GridControl = this.gridControlWordsData;
-            this.gridViewWordsData.Name = "gridViewWordsData";
-            this.gridViewWordsData.OptionsSelection.MultiSelect = true;
-            this.gridViewWordsData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
-            this.gridViewWordsData.OptionsView.ShowGroupPanel = false;
-            // 
             // FrmWord
             // 
             this.AcceptButton = this.btnGetKeywordIndex;
@@ -282,10 +283,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewKeywordBase)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlWordsData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewWordsData)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlWordsSubData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewWordsSubData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewWordsData)).EndInit();
             this.ResumeLayout(false);
 
         }

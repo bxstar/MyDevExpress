@@ -25,6 +25,28 @@ namespace TaoBaoDataServer.WinClientData
             dynamic glossaryEntry = jss.Deserialize(jsonStr, typeof(object)) as dynamic;
             return glossaryEntry;
         }
+
+
+        /// <summary>
+        /// 从对象到json字符串
+        /// </summary>
+        public static string FromObject(object o)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            serializer.MaxJsonLength = 99999999;
+            String json = serializer.Serialize(o);
+            return json;
+        }
+
+        /// <summary>
+        /// 从json字符串到对象
+        /// </summary>
+        public static T ToObject<T>(string str)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = 99999999;
+            return js.Deserialize<T>(str);
+        }
     }
 
     public class DynamicJsonConverter : JavaScriptConverter

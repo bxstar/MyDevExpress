@@ -22,6 +22,10 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         private static WService.WebServiceForKeywordForecast wsKeywordForecastProxy = new WService.WebServiceForKeywordForecast();
 
+        /// <summary>
+        /// 分词服务代理类
+        /// </summary>
+        private static WService.ServiceSplitWord wsSplitWordProxy = new WService.ServiceSplitWord();
 
         /// <summary>
         /// 优化策略，删除所有的关键词，换一批新词
@@ -39,6 +43,43 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public const string Const_MajorizationConfig浮动降价 = "花费过高浮动降价策略";
 
         /// <summary>
+        /// 线上，获取宝贝信息
+        /// </summary>
+        public static EntityItem GetItemOnline(string itemIdOrUrl)
+        {
+            EntityItem result = null;
+            try
+            {
+                string strItem = wsKeywordForecastProxy.GetItemInfoCache("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), itemIdOrUrl);
+                result = DynamicJsonParser.ToObject<EntityItem>(strItem);
+            }
+            catch (Exception se)
+            {
+                logger.Error("缓存，获取宝贝信息错误", se);
+                return null;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 获取宝贝的找词结果
+        /// </summary>
+        public static string GetItemFindKeyword(long itemId)
+        {
+            string result = null;
+            string cacheKey = string.Format("top_findkeyword_itemid_{0}", itemId);
+            try
+            {
+                result = wsKeywordForecastProxy.GetValue(cacheKey);
+            }
+            catch (Exception se)
+            {
+                logger.Error("缓存，获取宝贝的找词结果错误", se);
+            }
+            return result;
+        }
+
+        /// <summary>
         /// 线上，类目TOP100关键词
         /// </summary>
         public static List<string> GetCatTop100Keyword(long catId)
@@ -46,7 +87,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             List<string> result = null;
             try
             {
-                string strItem = wsKeywordForecastProxy.GetCatTop100Keyword(null, catId.ToString());
+                string strItem = wsKeywordForecastProxy.GetCatTop100Keyword("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), catId.ToString());
                 result = strItem.Split(',').ToList();
             }
             catch (Exception se)
@@ -65,7 +106,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             string result = null;
             try
             {
-                result = wsKeywordForecastProxy.GetItemCatsOnline(null, catIds);
+                result = wsKeywordForecastProxy.GetItemCatsOnline("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), catIds);
             }
             catch (Exception se)
             {
@@ -89,10 +130,20 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public static List<InsightWordDataDTO> GetWordsDataFromWs(string keywords, string startDate, string endDate)
         {
+            List<InsightWordDataDTO> result = new List<InsightWordDataDTO>();
 
-            string strResponse = wsKeywordForecastProxy.GetWordsDataCache(null, keywords, startDate, endDate);
-            SimbaInsightWordsdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordsdataGetResponse>(strResponse);
-            return response.WordDataList;
+            List<string> lstKeywords = CommonFunction.SplitterGroupList(keywords.Split(',').ToList(), ',', 10);
+            foreach (var itemKeywords in lstKeywords)
+            {
+                string strResponse = wsKeywordForecastProxy.GetWordsDataCache("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), itemKeywords, startDate, endDate);
+                SimbaInsightWordsdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordsdataGetResponse>(strResponse);
+                if (!response.IsError)
+                {
+                    result.AddRange(response.WordDataList);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -100,11 +151,38 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public static List<InsightWordSubDataDTO> GetWordsSubDataFromWs(string keywords, string startDate, string endDate)
         {
-            string strResponse = wsKeywordForecastProxy.GetWordsSubDataCache(null, keywords, startDate, endDate);
-            SimbaInsightWordssubdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordssubdataGetResponse>(strResponse);
-            return response.WordSubdataList;
+            List<InsightWordSubDataDTO> result = new List<InsightWordSubDataDTO>();
+
+            List<string> lstKeywords = CommonFunction.SplitterGroupList(keywords.Split(',').ToList(), ',', 10);
+            foreach (var itemKeywords in lstKeywords)
+            {
+                string strResponse = wsKeywordForecastProxy.GetWordsSubDataCache("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), itemKeywords, startDate, endDate);
+                SimbaInsightWordssubdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordssubdataGetResponse>(strResponse);
+                if (!response.IsError)
+                {
+                    result.AddRange(response.WordSubdataList);
+                }
+            }
+
+            return result;
         }
 
+        /// <summary>
+        /// 分词
+        /// </summary>
+        public static string SplitWordFromWs(string keywords)
+        {
+            string result = null;
+            try
+            {
+                result = wsSplitWordProxy.SplitWordPanGu(keywords);
+            }
+            catch (Exception se)
+            {
+                logger.Error("分词调用错误", se);
+            }
+            return result;
+        }
 
         /// <summary>
         /// 获取策略
