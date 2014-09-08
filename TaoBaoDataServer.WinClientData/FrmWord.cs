@@ -64,7 +64,9 @@ namespace TaoBaoDataServer.WinClientData
 
             frmOutPut.OutPutMsgFormat("类目名次：{0}", itemOnline.categroy_name);
 
-            List<string> lstTitleWord = titleSplit.Split(',').ToList();
+            //将宝贝标题的分词按长度排序，在类目名称中的关键词作为核心词
+            List<string> lstTitleWord = titleSplit.Split(',').OrderByDescending(o => o.Length).ToList();
+            //TODO标题分词在类目中出现的词，除按长度排序外，还要按照找词统计来排序
             string firstMainWord = lstTitleWord.Find(o => itemOnline.categroy_name.Contains(o));
             if (firstMainWord != null)
             {
@@ -75,16 +77,16 @@ namespace TaoBaoDataServer.WinClientData
             //是否通过蜘蛛找到了同款和相似宝贝的关键词
             Boolean isFindKeywordBySpider = false;
             while ((!isFindFirstMainWord) && (!isFindKeywordBySpider) && (dtStartFind.AddSeconds(30) >= DateTime.Now))
-            {
-                string result = CommonHandler.GetItemFindKeyword(itemOnline.item_id);
-                if (string.IsNullOrEmpty(result))
+            {//30秒内没找到放弃
+                string strFindKeywordResult = CommonHandler.GetItemFindKeyword(itemOnline.item_id);
+                if (string.IsNullOrEmpty(strFindKeywordResult))
                 {//暂时没有找到
                     Thread.Sleep(2000);
                     continue;
                 }
                 isFindKeywordBySpider = true;
 
-                List<string> lstFindWord = result.Split(' ').ToList();
+                List<string> lstFindWord = strFindKeywordResult.Split(',').ToList();
                 firstMainWord = lstFindWord.Find(o => itemOnline.categroy_name.Contains(o));
                 if (firstMainWord == null)
                 {
