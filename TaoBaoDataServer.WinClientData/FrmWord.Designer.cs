@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btnClearCache = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.dtEndDate = new System.Windows.Forms.DateTimePicker();
             this.dtStartDate = new System.Windows.Forms.DateTimePicker();
@@ -63,6 +64,7 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.btnClearCache);
             this.panelTop.Controls.Add(this.label3);
             this.panelTop.Controls.Add(this.dtEndDate);
             this.panelTop.Controls.Add(this.dtStartDate);
@@ -77,6 +79,16 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(1010, 147);
             this.panelTop.TabIndex = 0;
+            // 
+            // btnClearCache
+            // 
+            this.btnClearCache.Location = new System.Drawing.Point(27, 72);
+            this.btnClearCache.Name = "btnClearCache";
+            this.btnClearCache.Size = new System.Drawing.Size(48, 59);
+            this.btnClearCache.TabIndex = 10;
+            this.btnClearCache.Text = "清空缓存";
+            this.btnClearCache.UseVisualStyleBackColor = true;
+            this.btnClearCache.Click += new System.EventHandler(this.btnClearCache_Click);
             // 
             // label3
             // 
@@ -207,7 +219,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1002, 455);
+            this.tabPage2.Size = new System.Drawing.Size(1002, 410);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "关键词大盘指数";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -219,7 +231,7 @@
             this.gridControlWordsData.Location = new System.Drawing.Point(3, 3);
             this.gridControlWordsData.MainView = this.gridViewWordsData;
             this.gridControlWordsData.Name = "gridControlWordsData";
-            this.gridControlWordsData.Size = new System.Drawing.Size(996, 449);
+            this.gridControlWordsData.Size = new System.Drawing.Size(996, 404);
             this.gridControlWordsData.TabIndex = 1;
             this.gridControlWordsData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewWordsData});
@@ -237,7 +249,7 @@
             this.tabPage3.Controls.Add(this.gridControlWordsSubData);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1002, 455);
+            this.tabPage3.Size = new System.Drawing.Size(1002, 410);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "关键词流量细分指数";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -313,6 +325,7 @@
         private DevExpress.XtraGrid.GridControl gridControlWordsSubData;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewWordsSubData;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewWordsData;
+        private System.Windows.Forms.Button btnClearCache;
     }
 }
 

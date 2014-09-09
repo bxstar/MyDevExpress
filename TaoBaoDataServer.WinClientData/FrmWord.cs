@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using TaoBaoDataServer.WinClientData.Model;
 using TaoBaoDataServer.WinClientData.BusinessLayer;
 using WeifenLuo.WinFormsUI.Docking;
+using iclickpro.AccessCommon;
 
 namespace TaoBaoDataServer.WinClientData
 {
@@ -51,13 +52,16 @@ namespace TaoBaoDataServer.WinClientData
         {
             string strItemId = txtNumID.Text.Trim();
             EntityItem itemOnline = CommonHandler.GetItemOnline(strItemId);
-
+            
             Boolean isFindFirstMainWord = false;        //是否找到了第一核心词
             DateTime dtStartFind = DateTime.Now;
-            //发送宝贝找词消息
-            string exchangeName = "ex_taobao_spider_samesimilar_item";
-            BusinessMQ.SendMsgToExchange(null, exchangeName, string.Format("{0},{1},{2}", itemOnline.item_id, itemOnline.item_title, itemOnline.nick));
 
+            string strFindKeywordResult = CommonHandler.GetItemFindKeyword(itemOnline.item_id);
+            if (string.IsNullOrEmpty(strFindKeywordResult))
+            {//发送宝贝找词消息
+                string exchangeName = "ex_taobao_spider_samesimilar_item";
+                BusinessMQ.SendMsgToExchange(null, exchangeName, string.Format("{0},{1},{2}", itemOnline.item_id, itemOnline.item_title, itemOnline.nick));
+            }
 
             string titleSplit = CommonHandler.SplitWordFromWs(itemOnline.item_title);
             frmOutPut.OutPutMsg(titleSplit);
@@ -66,19 +70,45 @@ namespace TaoBaoDataServer.WinClientData
 
             //将宝贝标题的分词按长度排序，在类目名称中的关键词作为核心词
             List<string> lstTitleWord = titleSplit.Split(',').OrderByDescending(o => o.Length).ToList();
-            //TODO标题分词在类目中出现的词，除按长度排序外，还要按照找词统计来排序
-            string firstMainWord = lstTitleWord.Find(o => itemOnline.categroy_name.Contains(o));
-            if (firstMainWord != null)
+            //标题分词在类目中出现的词，按重复字符数*长度排序，还要按照找词统计来排序
+            List<string> lstMainWord = new List<string>();
+            //核心词排序字典
+            Dictionary<string, int> dicMainWord = new Dictionary<string, int>();
+            foreach (var item in lstTitleWord)
             {
-                frmOutPut.OutPutMsgFormat("宝贝第一核心词：{0}", firstMainWord);
-                isFindFirstMainWord = true;
+                if (item.Length > 1 && itemOnline.categroy_name.Contains(item) && !lstMainWord.Contains(item))
+                {
+                    lstMainWord.Add(item);
+                    isFindFirstMainWord = true;
+                }
             }
+
+            //if (!isFindFirstMainWord)
+            //{
+                foreach (var item in lstTitleWord)
+                { 
+                    int sameCharCount=item.ToCharArray().Intersect(itemOnline.categroy_name.ToCharArray()).Count();
+                    if (item.Length > 1 && sameCharCount > 0 && !dicMainWord.ContainsKey(item))
+                        dicMainWord.Add(item, sameCharCount * item.Length);
+                }
+
+                if (dicMainWord.Count > 0)
+                {//排序值最大，放最前
+                    lstMainWord = lstMainWord.Union(dicMainWord.OrderByDescending(o => o.Value).Select(o => o.Key).ToList()).ToList();
+                    isFindFirstMainWord = true;
+                    dicMainWord = new Dictionary<string, int>();
+                }
+            //}
 
             //是否通过蜘蛛找到了同款和相似宝贝的关键词
             Boolean isFindKeywordBySpider = false;
-            while ((!isFindFirstMainWord) && (!isFindKeywordBySpider) && (dtStartFind.AddSeconds(30) >= DateTime.Now))
-            {//30秒内没找到放弃
-                string strFindKeywordResult = CommonHandler.GetItemFindKeyword(itemOnline.item_id);
+            while ((lstMainWord.Count != 1) && (!isFindKeywordBySpider) && (dtStartFind.AddSeconds(30) >= DateTime.Now))
+            {//类目找不到词或找到不只一个词，30秒内没找到放弃
+                if (string.IsNullOrEmpty(strFindKeywordResult))
+                {
+                    strFindKeywordResult = CommonHandler.GetItemFindKeyword(itemOnline.item_id);
+                }
+                
                 if (string.IsNullOrEmpty(strFindKeywordResult))
                 {//暂时没有找到
                     Thread.Sleep(2000);
@@ -87,15 +117,24 @@ namespace TaoBaoDataServer.WinClientData
                 isFindKeywordBySpider = true;
 
                 List<string> lstFindWord = strFindKeywordResult.Split(',').ToList();
-                firstMainWord = lstFindWord.Find(o => itemOnline.categroy_name.Contains(o));
-                if (firstMainWord == null)
+                if (isFindFirstMainWord)
                 {
-                    firstMainWord = lstFindWord.First();
+                    //使用找词结果排序
+                    foreach (var item in lstMainWord)
+                    {
+                        int intWordIndex = lstFindWord.FindIndex(o => o == item);
+                        dicMainWord.Add(item, intWordIndex == -1 ? 9 : intWordIndex);   //不存在找词结果中的词，排最后
+                    }
+                    //排序值最小，放最前
+                    lstMainWord = dicMainWord.OrderBy(o => o.Value).Select(o => o.Key).ToList();
                 }
-
-                frmOutPut.OutPutMsgFormat("宝贝第一核心词：{0}", firstMainWord);
+                else
+                {
+                    lstMainWord = lstFindWord.Take(2).ToList();
+                }
             }
 
+            frmOutPut.OutPutMsgFormat("宝贝第核心词：{0}", string.Join(",", lstMainWord));
         }
 
 
@@ -131,6 +170,13 @@ namespace TaoBaoDataServer.WinClientData
             {
                 e.Info.DisplayText = Convert.ToString(e.RowHandle + 1);
             }
+        }
+
+        private void btnClearCache_Click(object sender, EventArgs e)
+        {
+            long itemId = Strings.GetItemId(txtNumID.Text);
+            CommonHandler.RemoveItemFindKeywordCache(itemId);
+            frmOutPut.OutPutMsgFormat("宝贝:{0},缓存清除完成", itemId);
         }
 
     }

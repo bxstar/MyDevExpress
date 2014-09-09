@@ -80,6 +80,22 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
+        /// 清除宝贝的找词缓存
+        /// </summary>
+        public static void RemoveItemFindKeywordCache(long itemId)
+        {
+            string cacheKey = string.Format("top_findkeyword_itemid_{0}", itemId);
+            try
+            {
+                wsKeywordForecastProxy.RemoveKey(cacheKey);
+            }
+            catch (Exception se)
+            {
+                logger.Error("缓存，清除宝贝的找词结果错误", se);
+            }
+        }
+
+        /// <summary>
         /// 线上，类目TOP100关键词
         /// </summary>
         public static List<string> GetCatTop100Keyword(long catId)
