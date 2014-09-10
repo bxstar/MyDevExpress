@@ -42,10 +42,15 @@ namespace TaoBaoDataServer.WinClientData
             dtStartDate.Value = DateTime.Now.AddDays(-1);
             dtEndDate.Value = DateTime.Now.AddDays(-1);
 
-            gridViewKeywordBase.IndicatorWidth = gridViewWordsData.IndicatorWidth = gridViewWordsSubData.IndicatorWidth = 30;
+            //显示行号
+            gridViewKeywordBase.IndicatorWidth = gridViewWordsData.IndicatorWidth = gridViewWordsSubData.IndicatorWidth = 40;
             gridViewKeywordBase.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
             gridViewWordsData.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
             gridViewWordsSubData.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
+            //排序完显示第一行
+            gridViewKeywordBase.EndSorting += new EventHandler(gridViewEndSorting);
+            gridViewWordsData.EndSorting += new EventHandler(gridViewEndSorting);
+            gridViewWordsSubData.EndSorting += new EventHandler(gridViewEndSorting);
         }
 
         private void btnGetWord_Click(object sender, EventArgs e)
@@ -72,6 +77,7 @@ namespace TaoBaoDataServer.WinClientData
             List<string> lstTitleWord = titleSplit.Split(',').OrderByDescending(o => o.Length).ToList();
             //标题分词在类目中出现的词，按重复字符数*长度排序，还要按照找词统计来排序
             List<string> lstMainWord = new List<string>();
+            List<string> lstFindWord = new List<string>();
             //核心词排序字典
             Dictionary<string, int> dicMainWord = new Dictionary<string, int>();
             foreach (var item in lstTitleWord)
@@ -116,7 +122,7 @@ namespace TaoBaoDataServer.WinClientData
                 }
                 isFindKeywordBySpider = true;
 
-                List<string> lstFindWord = strFindKeywordResult.Split(',').ToList();
+                lstFindWord = strFindKeywordResult.Split(',').ToList();
                 if (isFindFirstMainWord)
                 {
                     //使用找词结果排序
@@ -135,6 +141,11 @@ namespace TaoBaoDataServer.WinClientData
             }
 
             frmOutPut.OutPutMsgFormat("宝贝第核心词：{0}", string.Join(",", lstMainWord));
+
+            txtKeywords.Text = strFindKeywordResult;
+
+            //CombineWord(lstMainWord, lstFindWord.Union(lstTitleWord).Except(lstMainWord).ToList());
+            CombineWord(lstMainWord, lstFindWord.Union(lstTitleWord).ToList());
         }
 
 
@@ -164,12 +175,47 @@ namespace TaoBaoDataServer.WinClientData
         }
 
 
-        private void gridViewCustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        private void CombineWord(List<string> lstMainWord, List<string> lstOtherWord)
         {
-            if (e.Info.IsRowIndicator)
+            //关键词字典：键关键词，值权重
+            Dictionary<string, int> dicResult = new Dictionary<string, int>();
+
+            //属性词+核心词
+            foreach (var itemMainWord in lstMainWord)
             {
-                e.Info.DisplayText = Convert.ToString(e.RowHandle + 1);
+                foreach (var itemOtherWord in lstOtherWord)
+                {
+                    if (itemOtherWord != itemMainWord)
+                        dicResult.Add(itemOtherWord + itemMainWord, 1);
+                }
             }
+
+
+            string strKeywords = string.Join(",", dicResult.Select(o => o.Key));
+            gridControlKeywordBase.DataSource = null;
+
+            List<dynamic> lstKeywordBase = new List<dynamic>();
+            var responseWordBase = CommonHandler.GetKeyWordBaseFromWs(strKeywords);
+            for (int i = 0; i < responseWordBase.Count; i++)
+            {
+                if (responseWordBase[i].reord_base != null)
+                {
+                    List<TaoBaoDataServer.WinClientData.BusinessLayer.WService.EntityBaseInfo> lstEntityBaseInfo = responseWordBase[i].reord_base.ToList();
+                    var tempLst = new
+                    {
+                        word = responseWordBase[i].word,
+                        impression = (long)lstEntityBaseInfo.Average(o => o.impression),
+                        click = (long)lstEntityBaseInfo.Average(o => o.click),
+                        ctr = Math.Round(lstEntityBaseInfo.Average(o => o.impression) == 0 ? 0 : lstEntityBaseInfo.Average(o => o.click) / lstEntityBaseInfo.Average(o => o.impression), 2),
+                        avg_price = (long)lstEntityBaseInfo.Average(o => o.avg_price),
+                        competition = (long)lstEntityBaseInfo.Average(o => o.competition)
+                    };
+
+                    lstKeywordBase.Add(tempLst);
+                }
+            }
+            gridControlKeywordBase.DataSource = lstKeywordBase;
+
         }
 
         private void btnClearCache_Click(object sender, EventArgs e)
@@ -179,6 +225,19 @@ namespace TaoBaoDataServer.WinClientData
             frmOutPut.OutPutMsgFormat("宝贝:{0},缓存清除完成", itemId);
         }
 
+        private void gridViewCustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator)
+            {
+                e.Info.DisplayText = Convert.ToString(e.RowHandle + 1);
+            }
+        }
+
+        private void gridViewEndSorting(object sender, EventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Grid.GridView gv = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            gv.FocusedRowHandle = 0;
+        }
     }
 
 

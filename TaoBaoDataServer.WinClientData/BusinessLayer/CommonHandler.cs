@@ -153,7 +153,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             {
                 string strResponse = wsKeywordForecastProxy.GetWordsDataCache("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), itemKeywords, startDate, endDate);
                 SimbaInsightWordsdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordsdataGetResponse>(strResponse);
-                if (!response.IsError)
+                if (!response.IsError && response.WordDataList != null)
                 {
                     result.AddRange(response.WordDataList);
                 }
@@ -174,7 +174,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             {
                 string strResponse = wsKeywordForecastProxy.GetWordsSubDataCache("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), itemKeywords, startDate, endDate);
                 SimbaInsightWordssubdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordssubdataGetResponse>(strResponse);
-                if (!response.IsError)
+                if (!response.IsError && response.WordSubdataList != null)
                 {
                     result.AddRange(response.WordSubdataList);
                 }
