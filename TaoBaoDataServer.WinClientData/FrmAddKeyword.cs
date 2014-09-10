@@ -85,7 +85,7 @@ namespace TaoBaoDataServer.WinClientData
                         gridView1.MoveLastVisible();
                         RowNumber = gridView1.FocusedRowHandle;
                         gridView1.SetRowCellValue(RowNumber, gridView1.Columns["keyword"], _arrayStr2[0]);
-                        gridView1.SetRowCellValue(RowNumber, gridView1.Columns["max_price"], _arrayStr2[1]);
+                        gridView1.SetRowCellValue(RowNumber, gridView1.Columns["max_price"], (int)Convert.ToDecimal(_arrayStr2[1]));
                     }
                     isCancel = true;
                 }

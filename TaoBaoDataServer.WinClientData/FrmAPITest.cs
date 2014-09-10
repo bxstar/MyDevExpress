@@ -77,8 +77,8 @@ namespace TaoBaoDataServer.WinClientData
             //txtNickName.Text = "tp_世奇广告";
             //txtNickName.Text = "365style";
             //txtSession.Text = "61019215373bc02fd52c6184b07e1166003464abfeaf0f01077912345";
-            txtNickName.Text = "tp_世奇广告";
-            txtSession.Text = "6102b26dab87ad6ec74c528f3b24efa26f113b6d024410a499456566";
+            txtNickName.Text = "尚好沉香阁";
+            txtSession.Text = "6101509776cd299571fc75fh868031a2c7c67f2198b12351854178218";
             txtArticleCode.Text = Config.ArticleCode;
             //txtNickName.Text = "卓尚数码";
             //txtSession.Text = "61024253f01dda55629ab21465a819ebc12d96d3af049cd859748204";
