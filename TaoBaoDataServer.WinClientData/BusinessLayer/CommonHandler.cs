@@ -43,7 +43,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public const string Const_MajorizationConfig浮动降价 = "花费过高浮动降价策略";
 
         /// <summary>
-        /// 线上，获取宝贝信息
+        /// 线上，获取宝贝信息，类目名称小写
         /// </summary>
         public static EntityItem GetItemOnline(string itemIdOrUrl)
         {
@@ -52,6 +52,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             {
                 string strItem = wsKeywordForecastProxy.GetItemInfoCache("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), itemIdOrUrl);
                 result = DynamicJsonParser.ToObject<EntityItem>(strItem);
+                result.categroy_name = result.categroy_name.ToLower();
             }
             catch (Exception se)
             {
@@ -169,17 +170,35 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         {
             List<InsightWordSubDataDTO> result = new List<InsightWordSubDataDTO>();
 
-            List<string> lstKeywords = CommonFunction.SplitterGroupList(keywords.Split(',').ToList(), ',', 10);
+            List<string> lstKeywords = CommonFunction.SplitterGroupList(keywords.Split(',').ToList(), ',', 500);
             foreach (var itemKeywords in lstKeywords)
             {
                 string strResponse = wsKeywordForecastProxy.GetWordsSubDataCache("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), itemKeywords, startDate, endDate);
-                SimbaInsightWordssubdataGetResponse response = Top.Api.Util.TopUtils.ParseResponse<SimbaInsightWordssubdataGetResponse>(strResponse);
-                if (!response.IsError && response.WordSubdataList != null)
+
+                if (!string.IsNullOrEmpty(strResponse))
                 {
-                    result.AddRange(response.WordSubdataList);
+                    List<InsightWordSubDataDTO> lstResponse = DynamicJsonParser.ToObject<List<InsightWordSubDataDTO>>(strResponse);
+                    result.AddRange(lstResponse);
                 }
             }
 
+            return result;
+        }
+
+        /// <summary>
+        /// 关键词拓词
+        /// </summary>
+        public static string GetRelatedwordsByKeyword(string keywords)
+        {
+            string result = null;
+            try
+            {
+                result = wsKeywordForecastProxy.GetRelatedwordsByKeyword(null, keywords, 1);
+            }
+            catch (Exception se)
+            {
+                logger.Error("获取相关词错误", se);
+            }
             return result;
         }
 

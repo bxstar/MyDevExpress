@@ -35,6 +35,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtMd5Encrypt = new System.Windows.Forms.TextBox();
             this.btnMd5Encrypt = new System.Windows.Forms.Button();
+            this.txtDecrypt = new System.Windows.Forms.TextBox();
+            this.txtEncrypt = new System.Windows.Forms.TextBox();
+            this.txtOrign = new System.Windows.Forms.TextBox();
+            this.btnDecrypt = new System.Windows.Forms.Button();
+            this.btnEncrypt = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ultraButton1
@@ -97,11 +105,87 @@
             this.btnMd5Encrypt.UseVisualStyleBackColor = true;
             this.btnMd5Encrypt.Click += new System.EventHandler(this.btnMd5Encrypt_Click);
             // 
+            // txtDecrypt
+            // 
+            this.txtDecrypt.Location = new System.Drawing.Point(819, 515);
+            this.txtDecrypt.Name = "txtDecrypt";
+            this.txtDecrypt.Size = new System.Drawing.Size(156, 21);
+            this.txtDecrypt.TabIndex = 13;
+            // 
+            // txtEncrypt
+            // 
+            this.txtEncrypt.Location = new System.Drawing.Point(433, 515);
+            this.txtEncrypt.Name = "txtEncrypt";
+            this.txtEncrypt.Size = new System.Drawing.Size(173, 21);
+            this.txtEncrypt.TabIndex = 14;
+            // 
+            // txtOrign
+            // 
+            this.txtOrign.Location = new System.Drawing.Point(126, 515);
+            this.txtOrign.Name = "txtOrign";
+            this.txtOrign.Size = new System.Drawing.Size(147, 21);
+            this.txtOrign.TabIndex = 15;
+            // 
+            // btnDecrypt
+            // 
+            this.btnDecrypt.Location = new System.Drawing.Point(650, 515);
+            this.btnDecrypt.Name = "btnDecrypt";
+            this.btnDecrypt.Size = new System.Drawing.Size(75, 23);
+            this.btnDecrypt.TabIndex = 12;
+            this.btnDecrypt.Text = "解密";
+            this.btnDecrypt.UseVisualStyleBackColor = true;
+            this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
+            // 
+            // btnEncrypt
+            // 
+            this.btnEncrypt.Location = new System.Drawing.Point(292, 515);
+            this.btnEncrypt.Name = "btnEncrypt";
+            this.btnEncrypt.Size = new System.Drawing.Size(75, 23);
+            this.btnEncrypt.TabIndex = 11;
+            this.btnEncrypt.Text = "加密";
+            this.btnEncrypt.UseVisualStyleBackColor = true;
+            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(741, 520);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "解密文：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(373, 520);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "密文：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(55, 520);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "明文：";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1258, 612);
+            this.ClientSize = new System.Drawing.Size(1025, 567);
+            this.Controls.Add(this.txtDecrypt);
+            this.Controls.Add(this.txtEncrypt);
+            this.Controls.Add(this.txtOrign);
+            this.Controls.Add(this.btnDecrypt);
+            this.Controls.Add(this.btnEncrypt);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnMd5Encrypt);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -109,8 +193,9 @@
             this.Controls.Add(this.txtPwd);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.ultraButton1);
+            this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "工具";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,6 +210,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMd5Encrypt;
         private System.Windows.Forms.Button btnMd5Encrypt;
+        private System.Windows.Forms.TextBox txtDecrypt;
+        private System.Windows.Forms.TextBox txtEncrypt;
+        private System.Windows.Forms.TextBox txtOrign;
+        private System.Windows.Forms.Button btnDecrypt;
+        private System.Windows.Forms.Button btnEncrypt;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
 

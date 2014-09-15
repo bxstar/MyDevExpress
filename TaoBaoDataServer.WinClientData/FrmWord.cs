@@ -57,7 +57,17 @@ namespace TaoBaoDataServer.WinClientData
         {
             string strItemId = txtNumID.Text.Trim();
             EntityItem itemOnline = CommonHandler.GetItemOnline(strItemId);
-            
+            if (itemOnline == null || itemOnline.item_id == 0)
+            {//获取宝贝失败，再次调用
+                System.Threading.Thread.Sleep(100);
+                itemOnline = CommonHandler.GetItemOnline(strItemId);
+            }
+
+            //标题分词在类目中出现的词，按重复字符数*长度排序，还要按照找词统计来排序
+            List<string> lstMainWord = new List<string>();
+            //蜘蛛抓取的关键词
+            List<string> lstFindWord = new List<string>();
+
             Boolean isFindFirstMainWord = false;        //是否找到了第一核心词
             DateTime dtStartFind = DateTime.Now;
 
@@ -67,6 +77,10 @@ namespace TaoBaoDataServer.WinClientData
                 string exchangeName = "ex_taobao_spider_samesimilar_item";
                 BusinessMQ.SendMsgToExchange(null, exchangeName, string.Format("{0},{1},{2}", itemOnline.item_id, itemOnline.item_title, itemOnline.nick));
             }
+            else
+            {//缓存中获取抓取词
+                lstFindWord = strFindKeywordResult.Split(',').ToList();
+            }
 
             string titleSplit = CommonHandler.SplitWordFromWs(itemOnline.item_title);
             frmOutPut.OutPutMsg(titleSplit);
@@ -75,9 +89,7 @@ namespace TaoBaoDataServer.WinClientData
 
             //将宝贝标题的分词按长度排序，在类目名称中的关键词作为核心词
             List<string> lstTitleWord = titleSplit.Split(',').OrderByDescending(o => o.Length).ToList();
-            //标题分词在类目中出现的词，按重复字符数*长度排序，还要按照找词统计来排序
-            List<string> lstMainWord = new List<string>();
-            List<string> lstFindWord = new List<string>();
+
             //核心词排序字典
             Dictionary<string, int> dicMainWord = new Dictionary<string, int>();
             foreach (var item in lstTitleWord)
@@ -186,19 +198,44 @@ namespace TaoBaoDataServer.WinClientData
                 foreach (var itemOtherWord in lstOtherWord)
                 {
                     if (itemOtherWord != itemMainWord)
-                        dicResult.Add(itemOtherWord + itemMainWord, 1);
+                    {
+                        if (!dicResult.ContainsKey(itemOtherWord + itemMainWord))
+                        {
+                            dicResult.Add(itemOtherWord + itemMainWord, 10);
+                        }
+                    }
                 }
             }
 
+            //属性词+核心词，淘宝拓展
+            string strKeywordTopExtend = string.Join(",", dicResult.Select(o => o.Key));
+            string strExtendWords = CommonHandler.GetRelatedwordsByKeyword(strKeywordTopExtend);
+            if (!string.IsNullOrEmpty(strExtendWords))
+            {
+                string[] arrRelWord = strExtendWords.Split(',');
+                foreach (var itemRelWord in arrRelWord)
+                {
+                    if (!dicResult.ContainsKey(itemRelWord))
+                    {
+                        dicResult.Add(itemRelWord, 7);
+                    }
+                }
+            }
 
-            string strKeywords = string.Join(",", dicResult.Select(o => o.Key));
+            //TODO淘宝拓词后，没有核心词的词可以和核心词组词
+            //TODO标题词的分词，可以用属性词+属性词+核心词组
+
+            int wordCount = dicResult.Count;
+            frmOutPut.OutPutMsgFormat("组词总数量：{0}", wordCount);
+
+            string strKeywords = string.Join(",", dicResult.Select(o => o.Key).Distinct());
             gridControlKeywordBase.DataSource = null;
 
             List<dynamic> lstKeywordBase = new List<dynamic>();
             var responseWordBase = CommonHandler.GetKeyWordBaseFromWs(strKeywords);
             for (int i = 0; i < responseWordBase.Count; i++)
             {
-                if (responseWordBase[i].reord_base != null)
+                if (responseWordBase[i].reord_base != null && responseWordBase[i].word.ToCharArray().Intersect(string.Join("", lstMainWord).ToCharArray()).Count() > 0)
                 {
                     List<TaoBaoDataServer.WinClientData.BusinessLayer.WService.EntityBaseInfo> lstEntityBaseInfo = responseWordBase[i].reord_base.ToList();
                     var tempLst = new

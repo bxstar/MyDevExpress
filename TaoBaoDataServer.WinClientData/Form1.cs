@@ -98,5 +98,17 @@ namespace TaoBaoDataServer.WinClientData
         {
             txtMd5Encrypt.Text = CommonFunction.Md5Encrypt(txtPwd.Text.Trim());
         }
+
+        private void btnEncrypt_Click(object sender, EventArgs e)
+        {
+            string strOrign = txtOrign.Text.Trim();
+            txtEncrypt.Text = CryptHelper.Encrypt(strOrign);
+            txtDecrypt.Clear();
+        }
+
+        private void btnDecrypt_Click(object sender, EventArgs e)
+        {
+            txtDecrypt.Text = CryptHelper.Decrypt(txtEncrypt.Text);
+        }
     }
 }
