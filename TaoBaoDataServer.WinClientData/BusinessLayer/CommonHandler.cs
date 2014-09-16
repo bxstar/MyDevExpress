@@ -18,6 +18,11 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         private static ILog logger = log4net.LogManager.GetLogger("Logger");
 
         /// <summary>
+        /// 找词服务代理类
+        /// </summary>
+        private static WService.FindWord.WebServiceForKeywordForecast wsFindKeywordProxy = new WService.FindWord.WebServiceForKeywordForecast();
+
+        /// <summary>
         /// 缓存获取淘宝词指数和类目预测代理类
         /// </summary>
         private static WService.WebServiceForKeywordForecast wsKeywordForecastProxy = new WService.WebServiceForKeywordForecast();
@@ -71,7 +76,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             string cacheKey = string.Format("top_findkeyword_itemid_{0}", itemId);
             try
             {
-                result = wsKeywordForecastProxy.GetValue(cacheKey);
+                result = wsFindKeywordProxy.GetValue(cacheKey);
             }
             catch (Exception se)
             {
@@ -88,7 +93,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             string cacheKey = string.Format("top_findkeyword_itemid_{0}", itemId);
             try
             {
-                wsKeywordForecastProxy.RemoveKey(cacheKey);
+                wsFindKeywordProxy.RemoveKey(cacheKey);
             }
             catch (Exception se)
             {

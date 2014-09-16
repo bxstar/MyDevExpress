@@ -97,6 +97,7 @@
     <Compile Include="BusinessLayer\BusinessUserHandler.cs" />
     <Compile Include="BusinessLayer\CommonHandler.cs" />
     <Compile Include="BusinessLayer\BusinessTaobaoApiHandler.cs" />
+    <Compile Include="BusinessLayer\ServiceFindWord.cs" />
     <Compile Include="BusinessLayer\ServiceSplitWord.cs" />
     <Compile Include="BusinessLayer\ServiceWord.cs" />
     <Compile Include="Config.cs" />
