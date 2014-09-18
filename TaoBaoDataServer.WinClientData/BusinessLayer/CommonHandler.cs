@@ -198,7 +198,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             string result = null;
             try
             {
-                result = wsKeywordForecastProxy.GetRelatedwordsByKeyword(null, keywords, 1);
+                result = wsFindKeywordProxy.GetRelatedwordsByKeyword(null, keywords, 1);
             }
             catch (Exception se)
             {

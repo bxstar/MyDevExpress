@@ -66,7 +66,7 @@ namespace TaoBaoDataServer.WinClientData
             //标题分词在类目中出现的词，按重复字符数*长度排序，还要按照找词统计来排序
             List<string> lstMainWord = new List<string>();
             //蜘蛛抓取的关键词
-            List<string> lstFindWord = new List<string>();
+            List<string> lstSpiderFindWord = new List<string>();
 
             Boolean isFindFirstMainWord = false;        //是否找到了第一核心词
             DateTime dtStartFind = DateTime.Now;
@@ -79,7 +79,7 @@ namespace TaoBaoDataServer.WinClientData
             }
             else
             {//缓存中获取抓取词
-                lstFindWord = strFindKeywordResult.Split(',').ToList();
+                lstSpiderFindWord = strFindKeywordResult.Split(',').ToList();
             }
 
             string titleSplit = CommonHandler.SplitWordFromWs(itemOnline.item_title);
@@ -93,7 +93,7 @@ namespace TaoBaoDataServer.WinClientData
             //核心词排序字典
             Dictionary<string, int> dicMainWord = new Dictionary<string, int>();
             foreach (var item in lstTitleWord)
-            {
+            {//标题分词中，被类目名称包含的为核心词
                 if (item.Length > 1 && itemOnline.categroy_name.Contains(item) && !lstMainWord.Contains(item))
                 {
                     lstMainWord.Add(item);
@@ -101,26 +101,24 @@ namespace TaoBaoDataServer.WinClientData
                 }
             }
 
-            //if (!isFindFirstMainWord)
-            //{
-                foreach (var item in lstTitleWord)
-                { 
-                    int sameCharCount=item.ToCharArray().Intersect(itemOnline.categroy_name.ToCharArray()).Count();
-                    if (item.Length > 1 && sameCharCount > 0 && !dicMainWord.ContainsKey(item))
-                        dicMainWord.Add(item, sameCharCount * item.Length);
-                }
+            foreach (var item in lstTitleWord)
+            {//标题分词中，和类目名称有交集的，为核心词 
+                int sameCharCount=item.ToCharArray().Intersect(itemOnline.categroy_name.ToCharArray()).Count();
+                if (item.Length > 1 && sameCharCount > 0 && !dicMainWord.ContainsKey(item))
+                    dicMainWord.Add(item, sameCharCount * item.Length);
+            }
 
-                if (dicMainWord.Count > 0)
-                {//排序值最大，放最前
-                    lstMainWord = lstMainWord.Union(dicMainWord.OrderByDescending(o => o.Value).Select(o => o.Key).ToList()).ToList();
-                    isFindFirstMainWord = true;
-                    dicMainWord = new Dictionary<string, int>();
-                }
-            //}
+            if (dicMainWord.Count > 0)
+            {//核心词汇总，交集中重复字符越多，排序值最大，放最前
+                lstMainWord = lstMainWord.Union(dicMainWord.OrderByDescending(o => o.Value).Select(o => o.Key).ToList()).ToList();
+                isFindFirstMainWord = true;
+                dicMainWord = new Dictionary<string, int>();
+            }
+
 
             //是否通过蜘蛛找到了同款和相似宝贝的关键词
             Boolean isFindKeywordBySpider = false;
-            while ((lstMainWord.Count != 1) && (!isFindKeywordBySpider) && (dtStartFind.AddSeconds(30) >= DateTime.Now))
+            while ((!isFindKeywordBySpider) && (dtStartFind.AddSeconds(30) >= DateTime.Now))
             {//类目找不到词或找到不只一个词，30秒内没找到放弃
                 if (string.IsNullOrEmpty(strFindKeywordResult))
                 {
@@ -134,13 +132,13 @@ namespace TaoBaoDataServer.WinClientData
                 }
                 isFindKeywordBySpider = true;
 
-                lstFindWord = strFindKeywordResult.Split(',').ToList();
+                lstSpiderFindWord = strFindKeywordResult.Split(',').ToList();
                 if (isFindFirstMainWord)
                 {
                     //使用找词结果排序
                     foreach (var item in lstMainWord)
                     {
-                        int intWordIndex = lstFindWord.FindIndex(o => o == item);
+                        int intWordIndex = lstSpiderFindWord.FindIndex(o => o == item);
                         dicMainWord.Add(item, intWordIndex == -1 ? 9 : intWordIndex);   //不存在找词结果中的词，排最后
                     }
                     //排序值最小，放最前
@@ -148,7 +146,7 @@ namespace TaoBaoDataServer.WinClientData
                 }
                 else
                 {
-                    lstMainWord = lstFindWord.Take(2).ToList();
+                    lstMainWord = lstSpiderFindWord.Take(2).ToList();
                 }
             }
 
@@ -157,7 +155,7 @@ namespace TaoBaoDataServer.WinClientData
             txtKeywords.Text = strFindKeywordResult;
 
             //CombineWord(lstMainWord, lstFindWord.Union(lstTitleWord).Except(lstMainWord).ToList());
-            CombineWord(lstMainWord, lstFindWord.Union(lstTitleWord).ToList());
+            CombineWord(lstMainWord, lstSpiderFindWord.Union(lstTitleWord).ToList());
         }
 
 
