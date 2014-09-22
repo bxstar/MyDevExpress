@@ -110,5 +110,10 @@ namespace TaoBaoDataServer.WinClientData
         {
             txtDecrypt.Text = CryptHelper.Decrypt(txtEncrypt.Text);
         }
+
+        private void btnDepress_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = CommonFunction.Decompress(richTextBox1.Text);
+        }
     }
 }

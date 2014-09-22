@@ -43,11 +43,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnDepress = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ultraButton1
             // 
-            this.ultraButton1.Location = new System.Drawing.Point(743, 61);
+            this.ultraButton1.Location = new System.Drawing.Point(217, 371);
             this.ultraButton1.Name = "ultraButton1";
             this.ultraButton1.Size = new System.Drawing.Size(75, 23);
             this.ultraButton1.TabIndex = 0;
@@ -57,9 +58,11 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(55, 61);
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(592, 353);
+            this.richTextBox1.Size = new System.Drawing.Size(1001, 353);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -173,11 +176,22 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "明文：";
             // 
+            // btnDepress
+            // 
+            this.btnDepress.Location = new System.Drawing.Point(37, 370);
+            this.btnDepress.Name = "btnDepress";
+            this.btnDepress.Size = new System.Drawing.Size(75, 23);
+            this.btnDepress.TabIndex = 16;
+            this.btnDepress.Text = "解压";
+            this.btnDepress.UseVisualStyleBackColor = true;
+            this.btnDepress.Click += new System.EventHandler(this.btnDepress_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1025, 567);
+            this.Controls.Add(this.btnDepress);
             this.Controls.Add(this.txtDecrypt);
             this.Controls.Add(this.txtEncrypt);
             this.Controls.Add(this.txtOrign);
@@ -218,6 +232,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnDepress;
     }
 }
 
