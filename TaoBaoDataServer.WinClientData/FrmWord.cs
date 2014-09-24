@@ -55,6 +55,8 @@ namespace TaoBaoDataServer.WinClientData
 
         private void btnGetWord_Click(object sender, EventArgs e)
         {
+            gridControlKeywordBase.DataSource = null;
+
             string strItemId = txtNumID.Text.Trim();
             EntityItem itemOnline = CommonHandler.GetItemOnline(strItemId);
             if (itemOnline == null || itemOnline.item_id == 0)
@@ -81,6 +83,9 @@ namespace TaoBaoDataServer.WinClientData
             {//缓存中获取抓取词
                 lstSpiderFindWord = strFindKeywordResult.Split(',').ToList();
             }
+
+            //获取类目top100词
+            List<string> lstCategoryWord = CommonHandler.GetCatTop100Keyword(itemOnline.cid);
 
             string titleSplit = CommonHandler.SplitWordFromWs(itemOnline.item_title);
             frmOutPut.OutPutMsg(titleSplit);
@@ -155,7 +160,7 @@ namespace TaoBaoDataServer.WinClientData
             txtKeywords.Text = strFindKeywordResult;
 
             //CombineWord(lstMainWord, lstFindWord.Union(lstTitleWord).Except(lstMainWord).ToList());
-            CombineWord(lstMainWord, lstSpiderFindWord.Union(lstTitleWord).ToList());
+            CombineWord(itemOnline.item_title, lstMainWord, lstSpiderFindWord.Union(lstTitleWord).Union(lstCategoryWord).ToList());
         }
 
 
@@ -184,8 +189,14 @@ namespace TaoBaoDataServer.WinClientData
 
         }
 
-
-        private void CombineWord(List<string> lstMainWord, List<string> lstOtherWord)
+        /// <summary>
+        /// 组词，返回词指数
+        /// </summary>
+        /// <param name="itemTitle">宝贝标题</param>
+        /// <param name="lstMainWord">核心词</param>
+        /// <param name="lstOtherWord">属性词或类目热词</param>
+        /// <returns></returns>
+        private void CombineWord(string itemTitle, List<string> lstMainWord, List<string> lstOtherWord)
         {
             //关键词字典：键关键词，值权重
             Dictionary<string, int> dicResult = new Dictionary<string, int>();
@@ -203,9 +214,15 @@ namespace TaoBaoDataServer.WinClientData
                         }
                     }
                 }
+
+                //核心词
+                if (!dicResult.ContainsKey(itemMainWord))
+                {
+                    dicResult.Add(itemMainWord, 8);
+                }
             }
 
-            //属性词+核心词，淘宝拓展
+            //核心词，属性词+核心词，淘宝拓展
             string strKeywordTopExtend = string.Join(",", dicResult.Select(o => o.Key));
             string strExtendWords = CommonHandler.GetRelatedwordsByKeyword(strKeywordTopExtend);
             if (!string.IsNullOrEmpty(strExtendWords))
@@ -225,17 +242,21 @@ namespace TaoBaoDataServer.WinClientData
 
             int wordCount = dicResult.Count;
             frmOutPut.OutPutMsgFormat("组词总数量：{0}", wordCount);
-
+            string strMainWord = string.Join("", lstMainWord);
             string strKeywords = string.Join(",", dicResult.Select(o => o.Key).Distinct());
-            gridControlKeywordBase.DataSource = null;
 
             List<dynamic> lstKeywordBase = new List<dynamic>();
             var responseWordBase = CommonHandler.GetKeyWordBaseFromWs(strKeywords);
             for (int i = 0; i < responseWordBase.Count; i++)
             {
-                if (responseWordBase[i].reord_base != null && responseWordBase[i].word.ToCharArray().Intersect(string.Join("", lstMainWord).ToCharArray()).Count() > 0)
+                if (responseWordBase[i].reord_base != null)
                 {
                     List<TaoBaoDataServer.WinClientData.BusinessLayer.WService.EntityBaseInfo> lstEntityBaseInfo = responseWordBase[i].reord_base.ToList();
+                    //关键词相似度
+                    char[] arrItemWord = responseWordBase[i].word.ToCharArray();
+                    decimal matchDegree = strMainWord.ToCharArray().Intersect(arrItemWord).Count() / strMainWord.Length * 1.00M
+                                            + 0.1M * (itemTitle.ToCharArray().Intersect(arrItemWord).Count());
+
                     var tempLst = new
                     {
                         word = responseWordBase[i].word,
@@ -243,13 +264,16 @@ namespace TaoBaoDataServer.WinClientData
                         click = (long)lstEntityBaseInfo.Average(o => o.click),
                         ctr = Math.Round(lstEntityBaseInfo.Average(o => o.impression) == 0 ? 0 : lstEntityBaseInfo.Average(o => o.click) / lstEntityBaseInfo.Average(o => o.impression), 2),
                         avg_price = (long)lstEntityBaseInfo.Average(o => o.avg_price),
-                        competition = (long)lstEntityBaseInfo.Average(o => o.competition)
+                        competition = (long)lstEntityBaseInfo.Average(o => o.competition),
+                        order = Math.Round(matchDegree, 2)
                     };
 
                     lstKeywordBase.Add(tempLst);
                 }
             }
-            gridControlKeywordBase.DataSource = lstKeywordBase;
+
+            //按照相似度，展现排序
+            gridControlKeywordBase.DataSource = lstKeywordBase.OrderByDescending(o => o.impression).OrderByDescending(o => o.order).ToList();
 
         }
 
