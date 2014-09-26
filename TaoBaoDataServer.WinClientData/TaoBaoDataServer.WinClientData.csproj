@@ -49,6 +49,7 @@
     </Reference>
     <Reference Include="DevExpress.XtraPrinting.v14.1">
     </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="GlassButton">
       <HintPath>..\..\..\虚拟货币\DianChe\Dll\GlassButton.dll</HintPath>
     </Reference>
@@ -150,6 +151,7 @@
     <Compile Include="Model\EntityAdgroupReport.cs" />
     <Compile Include="Model\EntityCampaign.cs" />
     <Compile Include="Model\EntityCampaignRpt.cs" />
+    <Compile Include="Model\EntityCategoryEx.cs" />
     <Compile Include="Model\EntityItem.cs" />
     <Compile Include="Model\EntityKeywordCustom.cs" />
     <Compile Include="Model\EntityKeywordEx.cs" />

@@ -121,6 +121,54 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
+        /// 获取所有的类目信息，包括类目路径
+        /// </summary>
+        /// <param name="catLevel">0：获取所有一级类目，1：获取该类目的信息，2：获取该类目下子类目的信息</param>
+        /// <param name="categoryIds">类目id，多个用“,”隔开，如果catLevel为0，此参数不要值</param>
+        /// <returns></returns>
+        public static List<InsightCategoryInfoDTO> GetCatsFullInfo(string catLevel, string categoryIds)
+        {
+            List<InsightCategoryInfoDTO> result = null;
+            try
+            {
+                string strResponse = wsKeywordForecastProxy.GetCatsFullInfoOnline(null, catLevel, categoryIds);
+                if (!string.IsNullOrEmpty(strResponse))
+                {
+                    result = DynamicJsonParser.ToObject<List<InsightCategoryInfoDTO>>(strResponse);
+                }
+            }
+            catch (Exception se)
+            {
+                logger.Error("缓存，获取所有的类目信息，包括类目路径错误", se);
+                return null;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 获取类目的大盘数据
+        /// </summary>
+        public static List<InsightCategoryDataDTO> GetCatsData(string categoryIds)
+        {
+            List<InsightCategoryDataDTO> result = null;
+            try
+            {
+                string strResponse = wsKeywordForecastProxy.GetCatsdata(null, categoryIds, null, null);
+                if (!string.IsNullOrEmpty(strResponse))
+                {
+                    result = DynamicJsonParser.ToObject<List<InsightCategoryDataDTO>>(strResponse);
+                }
+            }
+            catch (Exception se)
+            {
+                logger.Error("缓存，获取类目的大盘数据错误", se);
+                return null;
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// 线上，获取类目名称
         /// </summary>
         public static string GetItemCatsOnline(string catIds)

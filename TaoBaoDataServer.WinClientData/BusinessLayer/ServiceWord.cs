@@ -71,6 +71,8 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
         private System.Threading.SendOrPostCallback GetCatTopKeywordOperationCompleted;
 
+        private System.Threading.SendOrPostCallback GetCatsdataOperationCompleted;
+
         private System.Threading.SendOrPostCallback GetItemInfoCacheOperationCompleted;
 
         private System.Threading.SendOrPostCallback GetWordsDataCacheOperationCompleted;
@@ -151,6 +153,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
         /// <remarks/>
         public event GetCatTopKeywordCompletedEventHandler GetCatTopKeywordCompleted;
+
+        /// <remarks/>
+        public event GetCatsdataCompletedEventHandler GetCatsdataCompleted;
 
         /// <remarks/>
         public event GetItemInfoCacheCompletedEventHandler GetItemInfoCacheCompleted;
@@ -1215,6 +1220,64 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetCatTopKeywordCompleted(this, new GetCatTopKeywordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetCatsdata", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetCatsdata(string access_token, string categoryIds, string startDate, string endDate)
+        {
+            object[] results = this.Invoke("GetCatsdata", new object[] {
+                        access_token,
+                        categoryIds,
+                        startDate,
+                        endDate});
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetCatsdata(string access_token, string categoryIds, string startDate, string endDate, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetCatsdata", new object[] {
+                        access_token,
+                        categoryIds,
+                        startDate,
+                        endDate}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public string EndGetCatsdata(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetCatsdataAsync(string access_token, string categoryIds, string startDate, string endDate)
+        {
+            this.GetCatsdataAsync(access_token, categoryIds, startDate, endDate, null);
+        }
+
+        /// <remarks/>
+        public void GetCatsdataAsync(string access_token, string categoryIds, string startDate, string endDate, object userState)
+        {
+            if ((this.GetCatsdataOperationCompleted == null))
+            {
+                this.GetCatsdataOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCatsdataOperationCompleted);
+            }
+            this.InvokeAsync("GetCatsdata", new object[] {
+                        access_token,
+                        categoryIds,
+                        startDate,
+                        endDate}, this.GetCatsdataOperationCompleted, userState);
+        }
+
+        private void OnGetCatsdataOperationCompleted(object arg)
+        {
+            if ((this.GetCatsdataCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCatsdataCompleted(this, new GetCatsdataCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -2408,6 +2471,36 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
         private object[] results;
 
         internal GetCatTopKeywordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public string Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    public delegate void GetCatsdataCompletedEventHandler(object sender, GetCatsdataCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetCatsdataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetCatsdataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;
