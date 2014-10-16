@@ -37,7 +37,7 @@ namespace TaoBaoDataServer.WinClientData
             frmContent5.Show(dockPanel1);
             frmTool.Show(dockPanel1);
             frmDB.Show(dockPanel1);
-            frmContent4.BringToFront();
+            frmContent1.BringToFront();
         }
 
         public void SetMainTitle(string title)

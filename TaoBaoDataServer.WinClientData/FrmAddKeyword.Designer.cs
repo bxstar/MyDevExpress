@@ -39,17 +39,16 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnDel);
-            this.panel1.Controls.Add(this.btnAdd);
-            this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.txtAdGroupId);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -60,7 +59,7 @@
             // 
             // btnDel
             // 
-            this.btnDel.Location = new System.Drawing.Point(335, 12);
+            this.btnDel.Location = new System.Drawing.Point(155, 10);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(75, 23);
             this.btnDel.TabIndex = 9;
@@ -70,7 +69,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(238, 12);
+            this.btnAdd.Location = new System.Drawing.Point(53, 10);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 9;
@@ -80,7 +79,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(494, 12);
+            this.btnSave.Location = new System.Drawing.Point(288, 10);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 8;
@@ -90,9 +89,11 @@
             // 
             // txtAdGroupId
             // 
+            this.txtAdGroupId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAdGroupId.Location = new System.Drawing.Point(82, 13);
             this.txtAdGroupId.Name = "txtAdGroupId";
-            this.txtAdGroupId.Size = new System.Drawing.Size(100, 21);
+            this.txtAdGroupId.Size = new System.Drawing.Size(653, 21);
             this.txtAdGroupId.TabIndex = 7;
             // 
             // label6
@@ -110,16 +111,17 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(747, 431);
+            this.panel2.Size = new System.Drawing.Size(747, 386);
             this.panel2.TabIndex = 1;
             // 
             // gridControl1
             // 
+            this.gridControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(747, 431);
+            this.gridControl1.Size = new System.Drawing.Size(747, 386);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -157,14 +159,27 @@
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnDel);
+            this.panel3.Controls.Add(this.btnAdd);
+            this.panel3.Controls.Add(this.btnSave);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 431);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(747, 45);
+            this.panel3.TabIndex = 1;
+            // 
             // FrmAddKeyword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 476);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "FrmAddKeyword";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "增加关键词";
             this.Load += new System.EventHandler(this.FrmAddKeyword_Load);
             this.panel1.ResumeLayout(false);
@@ -172,6 +187,7 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -189,5 +205,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDel;
+        private System.Windows.Forms.Panel panel3;
     }
 }

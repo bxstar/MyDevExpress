@@ -940,6 +940,24 @@ namespace TaoBaoDataServer.WinClientData
             frm.Show();
         }
 
+        private void btnAdgroupsAddKeyword_Click(object sender, EventArgs e)
+        {
+            FrmAddKeyword frm = new FrmAddKeyword();
+            frm.CurrentSession = GetSession();
+            int[] selectedRows = gridViewAdgroup.GetSelectedRows();
+            if (selectedRows.Count() == 0) return;
+
+            List<long> lstAdgroupId = new List<long>();
+            foreach (var rowIndex in selectedRows)
+            {
+                ADGroup adgroup = gridViewAdgroup.GetRow(rowIndex) as ADGroup;
+                lstAdgroupId.Add(adgroup.AdgroupId);
+            }
+
+            frm.SetCurrentAdgrupIds(string.Join(",", lstAdgroupId));
+            frm.Show();
+        }
+
         private void gridViewUser_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
         {
             if (e.RowHandle != -1)

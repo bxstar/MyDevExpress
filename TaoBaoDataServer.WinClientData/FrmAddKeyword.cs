@@ -48,6 +48,11 @@ namespace TaoBaoDataServer.WinClientData
             txtAdGroupId.Text = adgroupId.ToString();
         }
 
+        public void SetCurrentAdgrupIds(string adgroupIds)
+        {
+            txtAdGroupId.Text = adgroupIds;
+        }
+
         bool isCancel = true;
         private void gridView1_ShowingEditor(object sender, CancelEventArgs e)
         {
@@ -108,16 +113,52 @@ namespace TaoBaoDataServer.WinClientData
                 lstKeyword.Add(k);
             }
 
-            var response = keywordHandler.AddKeywordOnline(CurrentSession, Convert.ToInt64(txtAdGroupId.Text), lstKeyword);
-            if (response.IsError)
-            {
-                MessageBox.Show(response.ErrorMessage + "\r\n" + response.SubErrorMessage);
+            ResponseKeyword response = null;
+            if (txtAdGroupId.Text.Contains(","))
+            {//多个推广组加词
+                StringBuilder sbMsg = new StringBuilder();
+                int resultSuccAddKeyword = 0; int resultFailAddKeyword = 0;
+                List<long> lstAdgroupId = txtAdGroupId.Text.Split(',').Select(o => Convert.ToInt64(o)).ToList();
+                foreach (var adgroupId in lstAdgroupId)
+                {
+                    response = keywordHandler.AddKeywordOnline(CurrentSession, adgroupId, lstKeyword);
+                    if (response.IsError)
+                    {
+                        sbMsg.AppendFormat("errormsg:{0},suberrormsg:{1} \r\n", response.ErrorMessage, response.SubErrorMessage);
+                        resultFailAddKeyword += lstKeyword.Count;
+                    }
+                    else
+                    {
+                        resultSuccAddKeyword += response.listResponseKeyword.Count;
+                    }
+                }
+                if (sbMsg.Length == 0)
+                {
+                    MessageBox.Show("关键词添加成功，添加成功的关键词数量：" + resultSuccAddKeyword);
+                    
+                }
+                else
+                {
+                    string strMsg = string.Format("关键词添加完成，部分失败，成功数量：{0}，失败数量：{1}\r\n失败信息：{2}", resultSuccAddKeyword, sbMsg.ToString());
+                    MessageBox.Show(strMsg);
+                }
+
             }
             else
-            {
-                MessageBox.Show("关键词添加成功，添加成功的关键词数量：" + response.listResponseKeyword.Count);
-                this.Close();
+            {//单个推广组加词 
+                response = keywordHandler.AddKeywordOnline(CurrentSession, Convert.ToInt64(txtAdGroupId.Text), lstKeyword);
+                if (response.IsError)
+                {
+                    MessageBox.Show(response.ErrorMessage + "\r\n" + response.SubErrorMessage);
+                }
+                else
+                {
+                    MessageBox.Show("关键词添加成功，添加成功的关键词数量：" + response.listResponseKeyword.Count);
+                    
+                }
             }
+
+            this.Close();
         }
 
 
