@@ -23,11 +23,11 @@ namespace TaoBaoDataServer.WinClientData
             FrmOutPut frmOutPut = new FrmOutPut();
             FrmDataBaseTest frmDB = new FrmDataBaseTest();
             FrmAPITest frmContent1 = new FrmAPITest(frmOutPut, this);
-            FrmFindWordByAdgroup frmContent2 = new FrmFindWordByAdgroup(frmOutPut);
-            FrmFindWord frmContent3 = new FrmFindWord();
-            FrmWord frmContent4 = new FrmWord(frmOutPut);
+            FrmAdgroupFindWord frmContent2 = new FrmAdgroupFindWord(frmOutPut);
+            FrmFindWordTest frmContent3 = new FrmFindWordTest();
+            FrmItemFindWord frmContent4 = new FrmItemFindWord(frmOutPut);
             FrmReport frmContent5 = new FrmReport();
-            Form1 frmTool = new Form1();
+            FrmTool frmTool = new FrmTool();
 
             frmOutPut.Show(dockPanel1, DockState.DockLeftAutoHide);
             frmContent1.Show(dockPanel1);

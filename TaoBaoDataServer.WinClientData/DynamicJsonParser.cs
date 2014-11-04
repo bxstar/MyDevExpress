@@ -103,5 +103,10 @@ namespace TaoBaoDataServer.WinClientData
 
             return this.Dictionary.ContainsKey(binder.Name);
         }
+
+        public IDictionary<string, object> GetDictionary()
+        {
+            return this.Dictionary;
+        }
     }
 }

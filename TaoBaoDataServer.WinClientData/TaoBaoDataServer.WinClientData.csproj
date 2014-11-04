@@ -155,11 +155,11 @@
     <Compile Include="Model\EntityItem.cs" />
     <Compile Include="Model\EntityKeywordCustom.cs" />
     <Compile Include="Model\EntityKeywordEx.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FrmTool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FrmTool.Designer.cs">
+      <DependentUpon>FrmTool.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmAPITest.cs">
       <SubType>Form</SubType>
@@ -167,29 +167,27 @@
     <Compile Include="FrmAPITest.Designer.cs">
       <DependentUpon>FrmAPITest.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmDataBaseTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FrmDataBaseTest.cs" />
     <Compile Include="FrmDataBaseTest.Designer.cs">
       <DependentUpon>FrmDataBaseTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmFindWord.cs">
+    <Compile Include="FrmFindWordTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmFindWord.Designer.cs">
-      <DependentUpon>FrmFindWord.cs</DependentUpon>
+    <Compile Include="FrmFindWordTest.Designer.cs">
+      <DependentUpon>FrmFindWordTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmFindWordByAdgroup.cs">
+    <Compile Include="FrmAdgroupFindWord.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmFindWordByAdgroup.Designer.cs">
-      <DependentUpon>FrmFindWordByAdgroup.cs</DependentUpon>
+    <Compile Include="FrmAdgroupFindWord.Designer.cs">
+      <DependentUpon>FrmAdgroupFindWord.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmWord.cs">
+    <Compile Include="FrmItemFindWord.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmWord.Designer.cs">
-      <DependentUpon>FrmWord.cs</DependentUpon>
+    <Compile Include="FrmItemFindWord.Designer.cs">
+      <DependentUpon>FrmItemFindWord.cs</DependentUpon>
     </Compile>
     <Compile Include="Frm类目预测.cs">
       <SubType>Form</SubType>
@@ -214,8 +212,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UsingWithSystemAPI.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FrmTool.resx">
+      <DependentUpon>FrmTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddKeyword.resx">
       <DependentUpon>FrmAddKeyword.cs</DependentUpon>
@@ -226,11 +224,11 @@
     <EmbeddedResource Include="FrmDataBaseTest.resx">
       <DependentUpon>FrmDataBaseTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmFindWord.resx">
-      <DependentUpon>FrmFindWord.cs</DependentUpon>
+    <EmbeddedResource Include="FrmFindWordTest.resx">
+      <DependentUpon>FrmFindWordTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmFindWordByAdgroup.resx">
-      <DependentUpon>FrmFindWordByAdgroup.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAdgroupFindWord.resx">
+      <DependentUpon>FrmAdgroupFindWord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmOutPut.resx">
       <DependentUpon>FrmOutPut.cs</DependentUpon>
@@ -244,8 +242,8 @@
     <EmbeddedResource Include="FrmSetKeywordRank.resx">
       <DependentUpon>FrmSetKeywordRank.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmWord.resx">
-      <DependentUpon>FrmWord.cs</DependentUpon>
+    <EmbeddedResource Include="FrmItemFindWord.resx">
+      <DependentUpon>FrmItemFindWord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm类目预测.resx">
       <DependentUpon>Frm类目预测.cs</DependentUpon>

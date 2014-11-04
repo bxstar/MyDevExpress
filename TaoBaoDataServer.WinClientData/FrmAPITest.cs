@@ -22,7 +22,7 @@ namespace TaoBaoDataServer.WinClientData
     /// <summary>
     /// DevExpress控件绑定数据，暂未实现变动的数据颜色标识
     /// </summary>
-    public partial class FrmAPITest : DockContent
+    public partial class FrmAPITest : MyDockContent
     {
         private static log4net.ILog logger = LogManager.GetLogger("Logger");
         BusinessTaobaoApiHandler taobaoApiHandler = new BusinessTaobaoApiHandler();
@@ -1060,20 +1060,6 @@ namespace TaoBaoDataServer.WinClientData
                 Config.MajorizationPath = string.Empty;
             }
             frmMain.SetMainTitle(Config.App_Title);
-        }
-
-        private void gridViewEndSorting(object sender, EventArgs e)
-        {
-            DevExpress.XtraGrid.Views.Grid.GridView gv = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            gv.FocusedRowHandle = 0;
-        }
-
-        private void gridViewCustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
-        {
-            if (e.Info.IsRowIndicator)
-            {
-                e.Info.DisplayText = Convert.ToString(e.RowHandle + 1);
-            }
         }
 
         private void btnNickAndSession_Click(object sender, EventArgs e)

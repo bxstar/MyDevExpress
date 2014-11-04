@@ -16,7 +16,7 @@ using TaoBaoDataServer.WinClientData.BusinessLayer;
 
 namespace TaoBaoDataServer.WinClientData
 {
-    public partial class FrmFindWordByAdgroup : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class FrmAdgroupFindWord : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         IOutPut frmOutPut;
         private static log4net.ILog logger = LogManager.GetLogger("Logger");
@@ -25,12 +25,12 @@ namespace TaoBaoDataServer.WinClientData
         BusinessKeywordHandler keywordHandler = new BusinessKeywordHandler();
         BusinessUserHandler userHandler = new BusinessUserHandler();
 
-        public FrmFindWordByAdgroup()
+        public FrmAdgroupFindWord()
         {
             InitializeComponent();
         }
 
-        public FrmFindWordByAdgroup(IOutPut _frmOutPut)
+        public FrmAdgroupFindWord(IOutPut _frmOutPut)
         {
             frmOutPut = _frmOutPut;
             InitializeComponent();

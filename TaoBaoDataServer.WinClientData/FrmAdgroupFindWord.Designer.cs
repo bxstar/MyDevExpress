@@ -1,6 +1,6 @@
 ﻿namespace TaoBaoDataServer.WinClientData
 {
-    partial class FrmFindWordByAdgroup
+    partial class FrmAdgroupFindWord
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.panelTop = new System.Windows.Forms.Panel();
+            this.txtMaxPrice = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNickName = new System.Windows.Forms.TextBox();
             this.btnLocate = new System.Windows.Forms.Button();
             this.txtKeyword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,10 +49,6 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNickName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtMaxPrice = new System.Windows.Forms.TextBox();
             this.panelTop.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -71,6 +71,38 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(977, 101);
             this.panelTop.TabIndex = 0;
+            // 
+            // txtMaxPrice
+            // 
+            this.txtMaxPrice.Location = new System.Drawing.Point(725, 12);
+            this.txtMaxPrice.Name = "txtMaxPrice";
+            this.txtMaxPrice.Size = new System.Drawing.Size(76, 21);
+            this.txtMaxPrice.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(619, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "单次点击限价：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(101, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "用户名（Nick）：";
+            // 
+            // txtNickName
+            // 
+            this.txtNickName.Location = new System.Drawing.Point(131, 13);
+            this.txtNickName.Name = "txtNickName";
+            this.txtNickName.Size = new System.Drawing.Size(183, 21);
+            this.txtNickName.TabIndex = 7;
             // 
             // btnLocate
             // 
@@ -214,38 +246,6 @@
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 12);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "用户名（Nick）：";
-            // 
-            // txtNickName
-            // 
-            this.txtNickName.Location = new System.Drawing.Point(131, 13);
-            this.txtNickName.Name = "txtNickName";
-            this.txtNickName.Size = new System.Drawing.Size(183, 21);
-            this.txtNickName.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(619, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 12);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "单次点击限价：";
-            // 
-            // txtMaxPrice
-            // 
-            this.txtMaxPrice.Location = new System.Drawing.Point(725, 12);
-            this.txtMaxPrice.Name = "txtMaxPrice";
-            this.txtMaxPrice.Size = new System.Drawing.Size(76, 21);
-            this.txtMaxPrice.TabIndex = 9;
-            // 
             // FrmFindWordByAdgroup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -255,7 +255,7 @@
             this.Controls.Add(this.panelTop);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Name = "FrmFindWordByAdgroup";
-            this.Text = "根据推广组找词";
+            this.Text = "推广组找词";
             this.Load += new System.EventHandler(this.FrmFindWordByAdgroup_Load);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();

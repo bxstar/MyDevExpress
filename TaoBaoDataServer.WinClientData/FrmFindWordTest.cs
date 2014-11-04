@@ -12,9 +12,9 @@ using TaoBaoDataServer.WinClientData.Model;
 
 namespace TaoBaoDataServer.WinClientData
 {
-    public partial class FrmFindWord : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class FrmFindWordTest : WeifenLuo.WinFormsUI.Docking.DockContent
     {
-        public FrmFindWord()
+        public FrmFindWordTest()
         {
             InitializeComponent();
         }

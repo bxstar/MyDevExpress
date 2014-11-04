@@ -17,13 +17,13 @@ using iclickpro.AccessCommon;
 
 namespace TaoBaoDataServer.WinClientData
 {
-    public partial class FrmWord : DockContent
+    public partial class FrmItemFindWord : MyDockContent
     {
         IOutPut frmOutPut;
         BusinessTaobaoApiHandler TaobaoApiHandler = new BusinessTaobaoApiHandler();
         BusinessKeywordHandler keywordHandler = new BusinessKeywordHandler();
 
-        public FrmWord(IOutPut _frmOutPut)
+        public FrmItemFindWord(IOutPut _frmOutPut)
         {
             frmOutPut = _frmOutPut;
             InitializeComponent();
@@ -284,19 +284,6 @@ namespace TaoBaoDataServer.WinClientData
             frmOutPut.OutPutMsgFormat("宝贝:{0},缓存清除完成", itemId);
         }
 
-        private void gridViewCustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
-        {
-            if (e.Info.IsRowIndicator)
-            {
-                e.Info.DisplayText = Convert.ToString(e.RowHandle + 1);
-            }
-        }
-
-        private void gridViewEndSorting(object sender, EventArgs e)
-        {
-            DevExpress.XtraGrid.Views.Grid.GridView gv = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            gv.FocusedRowHandle = 0;
-        }
     }
 
 

@@ -1,6 +1,6 @@
 ﻿namespace TaoBaoDataServer.WinClientData
 {
-    partial class FrmWord
+    partial class FrmItemFindWord
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -261,7 +261,7 @@
             this.gridControlWordsSubData.Location = new System.Drawing.Point(0, 0);
             this.gridControlWordsSubData.MainView = this.gridViewWordsSubData;
             this.gridControlWordsSubData.Name = "gridControlWordsSubData";
-            this.gridControlWordsSubData.Size = new System.Drawing.Size(1002, 455);
+            this.gridControlWordsSubData.Size = new System.Drawing.Size(1002, 410);
             this.gridControlWordsSubData.TabIndex = 2;
             this.gridControlWordsSubData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewWordsSubData});
@@ -284,7 +284,7 @@
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Name = "FrmWord";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "取词";
+            this.Text = "宝贝找词";
             this.Load += new System.EventHandler(this.FrmWord_Load);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();

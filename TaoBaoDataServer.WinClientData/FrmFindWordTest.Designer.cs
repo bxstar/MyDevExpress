@@ -1,6 +1,6 @@
 ﻿namespace TaoBaoDataServer.WinClientData
 {
-    partial class FrmFindWord
+    partial class FrmFindWordTest
     {
         /// <summary>
         /// Required designer variable.

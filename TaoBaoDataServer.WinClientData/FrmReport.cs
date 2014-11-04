@@ -16,7 +16,7 @@ namespace TaoBaoDataServer.WinClientData
     /// <summary>
     /// 报表数据呈现窗口
     /// </summary>
-    public partial class FrmReport : DockContent
+    public partial class FrmReport : MyDockContent
     {
         /// <summary>
         /// 窗口标题
@@ -74,20 +74,6 @@ namespace TaoBaoDataServer.WinClientData
             TopSession user = gridView1.GetFocusedRow() as TopSession;
 
             MessageBox.Show(user.ProxyUserName);
-        }
-
-        private void gridViewEndSorting(object sender, EventArgs e)
-        {
-            DevExpress.XtraGrid.Views.Grid.GridView gv = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            gv.FocusedRowHandle = 0;
-        }
-
-        private void gridViewCustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
-        {
-            if (e.Info.IsRowIndicator)
-            {
-                e.Info.DisplayText = Convert.ToString(e.RowHandle + 1);
-            }
         }
     }
 }
