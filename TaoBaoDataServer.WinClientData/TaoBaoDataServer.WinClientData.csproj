@@ -167,7 +167,9 @@
     <Compile Include="FrmAPITest.Designer.cs">
       <DependentUpon>FrmAPITest.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmDataBaseTest.cs" />
+    <Compile Include="FrmDataBaseTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmDataBaseTest.Designer.cs">
       <DependentUpon>FrmDataBaseTest.cs</DependentUpon>
     </Compile>

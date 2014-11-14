@@ -63,6 +63,8 @@ namespace TaoBaoDataServer.WinClientData
 
         private void btnJsonToList_Click(object sender, EventArgs e)
         {
+            gridJsonList.DataSource = null;
+
             var data = new DynamicJsonParser().FromJson(richTextBox1.Text);
             if (data is Array)
             {
