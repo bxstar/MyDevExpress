@@ -889,6 +889,28 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
+        /// 取得某个推广组的创意报表的基础数据
+        /// </summary>
+        public SimbaRptAdgroupcreativebaseGetResponse TaobaoSimbaRptAdgroupcreativebaseGet(TopSession session, long campaignId, long adgroupId, string starttime, string endtime)
+        {
+            string subtoken = GetSubwayToken(session);
+            var req = new SimbaRptAdgroupcreativebaseGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, AdgroupId = adgroupId, StartTime = starttime, EndTime = endtime, Source = "SUMMARY", PageNo = 1, PageSize = 500, SearchType = "SUMMARY" };
+            var response = _client.Execute(req, session.TopSessions);
+            return response;
+        }
+
+        /// <summary>
+        /// 取得某个推广组的创意报表的效果数据
+        /// </summary>
+        public SimbaRptAdgroupcreativeeffectGetResponse TaobaoSimbaRptAdgroupcreativeeffectGet(TopSession session, long campaignId, long adgroupId, string starttime, string endtime)
+        {
+            string subtoken = GetSubwayToken(session);
+            var req = new SimbaRptAdgroupcreativeeffectGetRequest { SubwayToken = subtoken, Nick = session.UserName, CampaignId = campaignId, AdgroupId = adgroupId, StartTime = starttime, EndTime = endtime, Source = "SUMMARY", PageNo = 1, PageSize = 500, SearchType = "SUMMARY" };
+            var response = _client.Execute(req, session.TopSessions);
+            return response;
+        }
+
+        /// <summary>
         /// 获取系统推荐词
         /// </summary>
         /// <param name="session"></param>

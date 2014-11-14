@@ -370,7 +370,7 @@ insert into ad_adgroup
         private string DownLoadAdgroupBaseReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupbaseGet, session, campaignId, adgroupId, strStartDay, strEndDay);
-            return response.RptAdgroupBaseList;
+            return response.RptAdgroupBaseList ?? string.Empty;
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ insert into ad_adgroup
         private string DownLoadAdgroupEffectReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupeffectGet, session, campaignId, adgroupId, strStartDay, strEndDay);
-            return response.RptAdgroupEffectList;
+            return response.RptAdgroupEffectList ?? string.Empty;
         }
 
         /// <summary>
@@ -481,7 +481,7 @@ insert into ad_adgroup
         private string DownLoadAdgroupBaseReportByCampaign(TopSession session, long campaignId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptCampadgroupbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampadgroupbaseGet, session, campaignId, strStartDay, strEndDay);
-            return response.RptCampadgroupBaseList;
+            return response.RptCampadgroupBaseList ?? string.Empty;
         }
 
         /// <summary>
@@ -490,7 +490,119 @@ insert into ad_adgroup
         private string DownLoadAdgroupEffectReportByCampaign(TopSession session, long campaignId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptCampadgroupeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampadgroupeffectGet, session, campaignId, strStartDay, strEndDay);
-            return response.RptCampadgroupEffectList;
+            return response.RptCampadgroupEffectList ?? string.Empty;
         }
+
+        /// <summary>
+        /// 下载推广组的创意报表，最近多少天
+        /// </summary>
+        public List<EntityCreativeReport> DownLoadCreativeReport(TopSession session, long campaignId, long adgroupId, int days)
+        {
+            string strStartDay = DateTime.Now.AddDays(0 - days).Date.ToString("yyyy-MM-dd");
+            string strEndDay = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd");
+            return DownLoadCreativeReport(session, campaignId, adgroupId, strStartDay, strEndDay);
+        }
+
+        /// <summary>
+        /// 下载推广组的创意报表，时间段
+        /// </summary>
+        public List<EntityCreativeReport> DownLoadCreativeReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
+        {
+            List<EntityCreativeReport> lstAll = new List<EntityCreativeReport>();
+            //获取推广组的创意基础数据
+            long pageSize = 500;
+            long i = 0;
+            while (true)
+            {
+                i = i + 1;
+                int returnPageSize = 0;
+                string jsonBaseRpt = DownLoadCreativeBaseReport(session, campaignId, adgroupId, strStartDay, strEndDay).ToLower();
+                if (!string.IsNullOrEmpty(jsonBaseRpt) && jsonBaseRpt.Length > 2)
+                {
+                    var data = new DynamicJsonParser().FromJson(jsonBaseRpt);
+                    foreach (var item in data)
+                    {
+                        EntityCreativeReport rpt = new EntityCreativeReport();
+                        rpt.date = item.date;
+                        rpt.campaign_id = item.campaignid;
+                        rpt.adgroup_id = item.adgroupid;
+                        rpt.creative_id = item.creativeid;
+                        rpt.impressions = item.impressions == null ? 0 : item.impressions;
+                        rpt.click = item.click == null ? 0 : item.click;
+                        rpt.ctr = item.ctr == null ? 0M : item.ctr;
+                        rpt.cost = item.cost == null ? 0M : item.cost;
+                        rpt.cpc = item.cpc == null ? 0M : item.cpc;
+                        rpt.source = item.source == null ? string.Empty : item.source;
+                        rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
+                        rpt.source = item.source;
+                        lstAll.Add(rpt);
+                        returnPageSize++;
+                    }
+                }
+
+                // 返回的行数小于500的时候，说明到了最后一页，返回
+                if (returnPageSize < pageSize)
+                {
+                    break;
+                }
+            }
+
+            //获取推广组效果数据
+            i = 0;
+            while (true)
+            {
+                i = i + 1;
+                int returnPageSize = 0;
+                string jsonEffectRpt = DownLoadCreativeEffectReport(session, campaignId, adgroupId, strStartDay, strEndDay).ToLower();
+                if (!string.IsNullOrEmpty(jsonEffectRpt) && jsonEffectRpt.Length > 2)
+                {
+                    var data = new DynamicJsonParser().FromJson(jsonEffectRpt);
+                    foreach (var item in data)
+                    {
+                        EntityCreativeReport rpt = lstAll.Find(o => o.adgroup_id == item.adgroupid && o.creative_id == item.creativeid && o.date == item.date);
+                        if (rpt == null)
+                        {
+                            logger.ErrorFormat("获取推广组创意报表有误，{0}", jsonEffectRpt);
+                            continue;
+                        }
+                        rpt.directpay = item.directpay == null ? 0M : item.directpay;
+                        rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
+                        rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
+                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
+                        rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
+                        rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
+                        rpt.roi = rpt.cost == 0M ? 0M : Math.Round((rpt.directpay + rpt.indirectpay) / rpt.cost, 2);
+                        returnPageSize++;
+                    }
+                }
+
+                // 返回的行数小于500的时候，说明到了最后一页，返回
+                if (returnPageSize < pageSize)
+                {
+                    break;
+                }
+            }
+
+            return lstAll;
+        }
+
+        /// <summary>
+        /// 下载推广组的创意基础报表
+        /// </summary>
+        private string DownLoadCreativeBaseReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
+        {
+            var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupcreativebaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupcreativebaseGet, session, campaignId, adgroupId, strStartDay, strEndDay);
+            return response.RptAdgroupcreativeBaseList ?? string.Empty;
+        }
+
+        /// <summary>
+        /// 下载推广组的创意效果报表
+        /// </summary>
+        private string DownLoadCreativeEffectReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
+        {
+            var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupcreativeeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupcreativeeffectGet, session, campaignId, adgroupId, strStartDay, strEndDay);
+            return response.RptAdgroupcreativeEffectList ?? string.Empty;
+        }
+
     }
 }

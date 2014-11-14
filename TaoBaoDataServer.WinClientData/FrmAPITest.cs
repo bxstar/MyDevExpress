@@ -77,8 +77,8 @@ namespace TaoBaoDataServer.WinClientData
             //txtNickName.Text = "tp_世奇广告";
             //txtNickName.Text = "365style";
             //txtSession.Text = "61019215373bc02fd52c6184b07e1166003464abfeaf0f01077912345";
-            txtNickName.Text = "尚好沉香阁";
-            txtSession.Text = "6101509776cd299571fc75fh868031a2c7c67f2198b12351854178218";
+            txtNickName.Text = "dongyangerba";
+            txtSession.Text = "6101213128cd7d38043e51b45cZZ98cceb63c259e80106c906597473";
             txtArticleCode.Text = Config.ArticleCode;
             //txtNickName.Text = "卓尚数码";
             //txtSession.Text = "61024253f01dda55629ab21465a819ebc12d96d3af049cd859748204";
@@ -91,7 +91,7 @@ namespace TaoBaoDataServer.WinClientData
                 cbxApp.SelectedIndex = 2;
                 
             gridViewUser.IndicatorWidth = 50;
-            gridViewAdgroup.IndicatorWidth = gridViewKeyword.IndicatorWidth = gridViewKeywordRpt.IndicatorWidth = gridViewCampaignRpt.IndicatorWidth = gridViewAdgroupRpt.IndicatorWidth = 30;
+            gridViewAdgroup.IndicatorWidth = gridViewKeyword.IndicatorWidth = gridViewKeywordRpt.IndicatorWidth = gridViewCampaignRpt.IndicatorWidth = gridViewAdgroupRpt.IndicatorWidth = gridViewCreativeRpt.IndicatorWidth = 30;
 
             //显示行号
             gridViewUser.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
@@ -100,6 +100,7 @@ namespace TaoBaoDataServer.WinClientData
             gridViewKeywordRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
             gridViewCampaignRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
             gridViewAdgroupRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
+            gridViewCreativeRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
 
             //排序完成后显示第一行
             gridViewUser.EndSorting += new EventHandler(gridViewEndSorting);
@@ -108,6 +109,7 @@ namespace TaoBaoDataServer.WinClientData
             gridViewKeywordRpt.EndSorting += new EventHandler(gridViewEndSorting);
             gridViewCampaignRpt.EndSorting += new EventHandler(gridViewEndSorting);
             gridViewAdgroupRpt.EndSorting += new EventHandler(gridViewEndSorting);
+            gridViewCreativeRpt.EndSorting += new EventHandler(gridViewEndSorting);
         }
 
         private TopSession GetSession()
@@ -491,7 +493,7 @@ namespace TaoBaoDataServer.WinClientData
             List<EntityCampaignReport> lstAll = new List<EntityCampaignReport>();
             lstAll = campaignHandler.DownLoadCampaignReport(session, campaignId, 30);
 
-            gridControlCampaignRpt.DataSource = new SortableBindingList<EntityCampaignReport>(lstAll);
+            gridControlCampaignRpt.DataSource = lstAll;
         }
 
         private void btnGetCategory_Click(object sender, EventArgs e)
@@ -1124,6 +1126,7 @@ namespace TaoBaoDataServer.WinClientData
 
         private void btnGetAdgroupRpt_Click(object sender, EventArgs e)
         {
+            gridControlAdgroupRpt.DataSource = null;
             TopSession user = GetSession();
             int intReportDays = Convert.ToInt32(txtAdgroupReportDays.Text.Trim());
             List<EntityAdgroupReport> lstRpt = new List<EntityAdgroupReport>();
@@ -1135,11 +1138,12 @@ namespace TaoBaoDataServer.WinClientData
             {
                 lstRpt = adgroupHandler.DownLoadAdgroupReport(user, selectedCampaign.CampaignId, selectedAdGroup.AdgroupId, dtpAdgroupRptStartDay.Value.ToString("yyyy-MM-dd"), dtpAdgroupRptEndDay.Value.ToString("yyyy-MM-dd"));
             }
-            gridControlAdgroupRpt.DataSource = new SortableBindingList<EntityAdgroupReport>(lstRpt);
+            gridControlAdgroupRpt.DataSource = lstRpt;
         }
 
         private void btnGetAllAdgroupRpt_Click(object sender, EventArgs e)
         {
+            gridControlAdgroupRpt.DataSource = null;
             TopSession user = GetSession();
             int intReportDays = Convert.ToInt32(txtAdgroupReportDays.Text.Trim());
             List<EntityAdgroupReport> lstRpt = new List<EntityAdgroupReport>();
@@ -1151,7 +1155,7 @@ namespace TaoBaoDataServer.WinClientData
             {
                 lstRpt = adgroupHandler.DownLoadAdgroupReportByCampaign(user, selectedCampaign.CampaignId, dtpAdgroupRptStartDay.Value.ToString("yyyy-MM-dd"), dtpAdgroupRptEndDay.Value.ToString("yyyy-MM-dd"));
             }
-            gridControlAdgroupRpt.DataSource = new SortableBindingList<EntityAdgroupReport>(lstRpt);
+            gridControlAdgroupRpt.DataSource = lstRpt;
         }
 
         private void chkAdgroupRptRecentDays_CheckedChanged(object sender, EventArgs e)
@@ -1175,6 +1179,51 @@ namespace TaoBaoDataServer.WinClientData
             frm.ReportData = reportData;
             frm.Show();
         }
+
+        private void btnGetCreativeRpt_Click(object sender, EventArgs e)
+        {
+            gridControlCreativeRpt.DataSource = null;
+            TopSession user = GetSession();
+            int intReportDays = Convert.ToInt32(txtCreativeReportDays.Text.Trim());
+            List<EntityCreativeReport> lstRpt = new List<EntityCreativeReport>();
+            if (chkCreativeRptRecentDays.Checked)
+            {
+                lstRpt = adgroupHandler.DownLoadCreativeReport(user, selectedCampaign.CampaignId, selectedAdGroup.AdgroupId, intReportDays);
+            }
+            else if (chkCreativeRptDtp.Checked)
+            {
+                lstRpt = adgroupHandler.DownLoadCreativeReport(user, selectedCampaign.CampaignId, selectedAdGroup.AdgroupId, dtpCreativeRptStartDay.Value.ToString("yyyy-MM-dd"), dtpCreativeRptEndDay.Value.ToString("yyyy-MM-dd"));
+            }
+            gridControlCreativeRpt.DataSource = lstRpt;
+        }
+
+        private void btnGetAllCreativeRpt_Click(object sender, EventArgs e)
+        {
+            gridControlCreativeRpt.DataSource = null;
+            TopSession user = GetSession();
+            int intReportDays = Convert.ToInt32(txtCreativeReportDays.Text.Trim());
+            List<EntityAdgroupReport> lstRpt = new List<EntityAdgroupReport>();
+            for (int i = 0; i < gridViewAdgroup.DataRowCount; i++)
+            {
+                ADGroup item = gridViewAdgroup.GetRow(gridViewAdgroup.GetRowHandle(i)) as ADGroup;
+                if (item != null)
+                {
+                    if (chkCreativeRptRecentDays.Checked)
+                    {
+                        var adgroupRpt = adgroupHandler.DownLoadCreativeReport(user, selectedCampaign.CampaignId, item.AdgroupId, intReportDays);
+                        lstRpt.AddRange(adgroupRpt);
+                    }
+                    else if (chkCreativeRptDtp.Checked)
+                    {
+                        var adgroupRpt = adgroupHandler.DownLoadCreativeReport(user, selectedCampaign.CampaignId, item.AdgroupId, dtpCreativeRptStartDay.Value.ToString("yyyy-MM-dd"), dtpCreativeRptEndDay.Value.ToString("yyyy-MM-dd"));
+                        lstRpt.AddRange(adgroupRpt);
+                    }
+                }
+            }
+
+            gridControlCreativeRpt.DataSource = lstRpt;
+        }
+
 
         private void 网页打开宝贝ToolStripMenuItem1_Click(object sender, EventArgs e)
         {

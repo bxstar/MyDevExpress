@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.gridControlUser = new DevExpress.XtraGrid.GridControl();
@@ -96,6 +96,7 @@
             this.网页打开宝贝ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewAdgroup = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnAdgroupsAddKeyword = new System.Windows.Forms.Button();
             this.btnNewAdgrougForm = new System.Windows.Forms.Button();
             this.btnAdgroupChange = new System.Windows.Forms.Button();
             this.btnGetOneItem = new System.Windows.Forms.Button();
@@ -180,6 +181,23 @@
             this.chkAdgroupRptDtp = new System.Windows.Forms.CheckBox();
             this.btnGetAllAdgroupRpt = new System.Windows.Forms.Button();
             this.btnGetAdgroupRpt = new System.Windows.Forms.Button();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.gridControlCreativeRpt = new DevExpress.XtraGrid.GridControl();
+            this.gridViewCreativeRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.btnNewCreativeRptForm = new System.Windows.Forms.Button();
+            this.gbxCreativeRptDtp = new System.Windows.Forms.GroupBox();
+            this.dtpCreativeRptEndDay = new System.Windows.Forms.DateTimePicker();
+            this.label25 = new System.Windows.Forms.Label();
+            this.dtpCreativeRptStartDay = new System.Windows.Forms.DateTimePicker();
+            this.gbxCreatvieRptRecentDays = new System.Windows.Forms.GroupBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txtCreativeReportDays = new System.Windows.Forms.TextBox();
+            this.chkCreativeRptRecentDays = new System.Windows.Forms.CheckBox();
+            this.chkCreativeRptDtp = new System.Windows.Forms.CheckBox();
+            this.btnGetAllCreativeRpt = new System.Windows.Forms.Button();
+            this.btnGetCreativeRpt = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.gridControlCampaignRpt = new DevExpress.XtraGrid.GridControl();
             this.gridViewCampaignRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -203,7 +221,6 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.btnAdgroupsAddKeyword = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -242,6 +259,12 @@
             this.panel10.SuspendLayout();
             this.gbxAdgroupRptDtp.SuspendLayout();
             this.gbxAdgroupRptRecentDays.SuspendLayout();
+            this.tabPage11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlCreativeRpt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewCreativeRpt)).BeginInit();
+            this.panel11.SuspendLayout();
+            this.gbxCreativeRptDtp.SuspendLayout();
+            this.gbxCreatvieRptRecentDays.SuspendLayout();
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCampaignRpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCampaignRpt)).BeginInit();
@@ -262,6 +285,7 @@
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage10);
+            this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -758,35 +782,35 @@
             // 
             // dgvCampaign
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvCampaign.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCampaign.ContextMenuStrip = this.cMenuDgvCampaign;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCampaign.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvCampaign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCampaign.Location = new System.Drawing.Point(3, 3);
             this.dgvCampaign.Name = "dgvCampaign";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvCampaign.RowTemplate.Height = 23;
             this.dgvCampaign.Size = new System.Drawing.Size(1062, 352);
             this.dgvCampaign.TabIndex = 0;
@@ -797,12 +821,12 @@
             this.cMenuDgvCampaign.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.同步推广组ToolStripMenuItem});
             this.cMenuDgvCampaign.Name = "cMenuSynAdgroup";
-            this.cMenuDgvCampaign.Size = new System.Drawing.Size(131, 26);
+            this.cMenuDgvCampaign.Size = new System.Drawing.Size(137, 26);
             // 
             // 同步推广组ToolStripMenuItem
             // 
             this.同步推广组ToolStripMenuItem.Name = "同步推广组ToolStripMenuItem";
-            this.同步推广组ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.同步推广组ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.同步推广组ToolStripMenuItem.Text = "同步推广组";
             this.同步推广组ToolStripMenuItem.Click += new System.EventHandler(this.同步推广组ToolStripMenuItem_Click);
             // 
@@ -837,26 +861,26 @@
             this.同步关键词ToolStripMenuItem,
             this.网页打开宝贝ToolStripMenuItem});
             this.cMenuDgvAdgroup.Name = "cMenuSetKeywordCustom";
-            this.cMenuDgvAdgroup.Size = new System.Drawing.Size(143, 70);
+            this.cMenuDgvAdgroup.Size = new System.Drawing.Size(149, 70);
             // 
             // 设置黑白名单ToolStripMenuItem
             // 
             this.设置黑白名单ToolStripMenuItem.Name = "设置黑白名单ToolStripMenuItem";
-            this.设置黑白名单ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.设置黑白名单ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.设置黑白名单ToolStripMenuItem.Text = "设置黑白名单";
             this.设置黑白名单ToolStripMenuItem.Click += new System.EventHandler(this.设置黑白名单ToolStripMenuItem_Click);
             // 
             // 同步关键词ToolStripMenuItem
             // 
             this.同步关键词ToolStripMenuItem.Name = "同步关键词ToolStripMenuItem";
-            this.同步关键词ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.同步关键词ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.同步关键词ToolStripMenuItem.Text = "同步关键词";
             this.同步关键词ToolStripMenuItem.Click += new System.EventHandler(this.同步关键词ToolStripMenuItem_Click);
             // 
             // 网页打开宝贝ToolStripMenuItem
             // 
             this.网页打开宝贝ToolStripMenuItem.Name = "网页打开宝贝ToolStripMenuItem";
-            this.网页打开宝贝ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.网页打开宝贝ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.网页打开宝贝ToolStripMenuItem.Text = "网页打开宝贝";
             this.网页打开宝贝ToolStripMenuItem.Click += new System.EventHandler(this.网页打开宝贝ToolStripMenuItem_Click);
             // 
@@ -885,6 +909,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1062, 62);
             this.panel3.TabIndex = 7;
+            // 
+            // btnAdgroupsAddKeyword
+            // 
+            this.btnAdgroupsAddKeyword.Location = new System.Drawing.Point(834, 20);
+            this.btnAdgroupsAddKeyword.Name = "btnAdgroupsAddKeyword";
+            this.btnAdgroupsAddKeyword.Size = new System.Drawing.Size(75, 23);
+            this.btnAdgroupsAddKeyword.TabIndex = 8;
+            this.btnAdgroupsAddKeyword.Text = "新增关键词";
+            this.btnAdgroupsAddKeyword.UseVisualStyleBackColor = true;
+            this.btnAdgroupsAddKeyword.Click += new System.EventHandler(this.btnAdgroupsAddKeyword_Click);
             // 
             // btnNewAdgrougForm
             // 
@@ -987,12 +1021,12 @@
             this.cMenuDgvKeyword.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.查询排名ToolStripMenuItem});
             this.cMenuDgvKeyword.Name = "cMenuDgvKeyword";
-            this.cMenuDgvKeyword.Size = new System.Drawing.Size(119, 26);
+            this.cMenuDgvKeyword.Size = new System.Drawing.Size(125, 26);
             // 
             // 查询排名ToolStripMenuItem
             // 
             this.查询排名ToolStripMenuItem.Name = "查询排名ToolStripMenuItem";
-            this.查询排名ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.查询排名ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.查询排名ToolStripMenuItem.Text = "查询排名";
             this.查询排名ToolStripMenuItem.Click += new System.EventHandler(this.查询排名ToolStripMenuItem_Click);
             // 
@@ -1114,35 +1148,35 @@
             // 
             this.dgvQscore.AllowUserToAddRows = false;
             this.dgvQscore.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvQscore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvQscore.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvQscore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvQscore.Location = new System.Drawing.Point(3, 3);
             this.dgvQscore.Name = "dgvQscore";
             this.dgvQscore.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvQscore.RowTemplate.Height = 23;
             this.dgvQscore.Size = new System.Drawing.Size(1062, 296);
             this.dgvQscore.TabIndex = 0;
@@ -1201,6 +1235,7 @@
             // gridControlKeywordRpt
             // 
             this.gridControlKeywordRpt.ContextMenuStrip = this.cMenuDgvKeywordRpt;
+            this.gridControlKeywordRpt.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridControlKeywordRpt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlKeywordRpt.Location = new System.Drawing.Point(3, 3);
             this.gridControlKeywordRpt.MainView = this.gridViewKeywordRpt;
@@ -1215,12 +1250,12 @@
             this.cMenuDgvKeywordRpt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.查看推广组ToolStripMenuItem});
             this.cMenuDgvKeywordRpt.Name = "cMenuDgvKeywordRpt";
-            this.cMenuDgvKeywordRpt.Size = new System.Drawing.Size(131, 26);
+            this.cMenuDgvKeywordRpt.Size = new System.Drawing.Size(137, 26);
             // 
             // 查看推广组ToolStripMenuItem
             // 
             this.查看推广组ToolStripMenuItem.Name = "查看推广组ToolStripMenuItem";
-            this.查看推广组ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.查看推广组ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.查看推广组ToolStripMenuItem.Text = "查看推广组";
             this.查看推广组ToolStripMenuItem.Click += new System.EventHandler(this.查看推广组ToolStripMenuItem_Click);
             // 
@@ -1574,6 +1609,7 @@
             // gridControlAdgroupRpt
             // 
             this.gridControlAdgroupRpt.ContextMenuStrip = this.cMenuDgvAdgroupRpt;
+            this.gridControlAdgroupRpt.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridControlAdgroupRpt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlAdgroupRpt.Location = new System.Drawing.Point(3, 3);
             this.gridControlAdgroupRpt.MainView = this.gridViewAdgroupRpt;
@@ -1588,12 +1624,12 @@
             this.cMenuDgvAdgroupRpt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.网页打开宝贝ToolStripMenuItem1});
             this.cMenuDgvAdgroupRpt.Name = "cMenuDgvAdgroupRpt";
-            this.cMenuDgvAdgroupRpt.Size = new System.Drawing.Size(153, 48);
+            this.cMenuDgvAdgroupRpt.Size = new System.Drawing.Size(149, 26);
             // 
             // 网页打开宝贝ToolStripMenuItem1
             // 
             this.网页打开宝贝ToolStripMenuItem1.Name = "网页打开宝贝ToolStripMenuItem1";
-            this.网页打开宝贝ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.网页打开宝贝ToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.网页打开宝贝ToolStripMenuItem1.Text = "网页打开宝贝";
             this.网页打开宝贝ToolStripMenuItem1.Click += new System.EventHandler(this.网页打开宝贝ToolStripMenuItem1_Click);
             // 
@@ -1727,7 +1763,7 @@
             this.btnGetAllAdgroupRpt.Name = "btnGetAllAdgroupRpt";
             this.btnGetAllAdgroupRpt.Size = new System.Drawing.Size(194, 23);
             this.btnGetAllAdgroupRpt.TabIndex = 4;
-            this.btnGetAllAdgroupRpt.Text = "获取所有推广组的关键词报表";
+            this.btnGetAllAdgroupRpt.Text = "获取所有推广组报表";
             this.btnGetAllAdgroupRpt.UseVisualStyleBackColor = true;
             this.btnGetAllAdgroupRpt.Click += new System.EventHandler(this.btnGetAllAdgroupRpt_Click);
             // 
@@ -1737,9 +1773,174 @@
             this.btnGetAdgroupRpt.Name = "btnGetAdgroupRpt";
             this.btnGetAdgroupRpt.Size = new System.Drawing.Size(219, 23);
             this.btnGetAdgroupRpt.TabIndex = 1;
-            this.btnGetAdgroupRpt.Text = "获取选中推广组的关键词报表";
+            this.btnGetAdgroupRpt.Text = "获取选中推广组报表";
             this.btnGetAdgroupRpt.UseVisualStyleBackColor = true;
             this.btnGetAdgroupRpt.Click += new System.EventHandler(this.btnGetAdgroupRpt_Click);
+            // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.gridControlCreativeRpt);
+            this.tabPage11.Controls.Add(this.panel11);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage11.TabIndex = 10;
+            this.tabPage11.Text = "获取创意报表数据";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // gridControlCreativeRpt
+            // 
+            this.gridControlCreativeRpt.ContextMenuStrip = this.cMenuDgvAdgroupRpt;
+            this.gridControlCreativeRpt.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gridControlCreativeRpt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlCreativeRpt.Location = new System.Drawing.Point(0, 0);
+            this.gridControlCreativeRpt.MainView = this.gridViewCreativeRpt;
+            this.gridControlCreativeRpt.Name = "gridControlCreativeRpt";
+            this.gridControlCreativeRpt.Size = new System.Drawing.Size(1068, 302);
+            this.gridControlCreativeRpt.TabIndex = 6;
+            this.gridControlCreativeRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewCreativeRpt});
+            // 
+            // gridViewCreativeRpt
+            // 
+            this.gridViewCreativeRpt.GridControl = this.gridControlCreativeRpt;
+            this.gridViewCreativeRpt.Name = "gridViewCreativeRpt";
+            this.gridViewCreativeRpt.OptionsSelection.MultiSelect = true;
+            this.gridViewCreativeRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewCreativeRpt.OptionsView.ShowGroupPanel = false;
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.btnNewCreativeRptForm);
+            this.panel11.Controls.Add(this.gbxCreativeRptDtp);
+            this.panel11.Controls.Add(this.gbxCreatvieRptRecentDays);
+            this.panel11.Controls.Add(this.chkCreativeRptRecentDays);
+            this.panel11.Controls.Add(this.chkCreativeRptDtp);
+            this.panel11.Controls.Add(this.btnGetAllCreativeRpt);
+            this.panel11.Controls.Add(this.btnGetCreativeRpt);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel11.Location = new System.Drawing.Point(0, 302);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(1068, 56);
+            this.panel11.TabIndex = 7;
+            // 
+            // btnNewCreativeRptForm
+            // 
+            this.btnNewCreativeRptForm.Location = new System.Drawing.Point(1010, 16);
+            this.btnNewCreativeRptForm.Name = "btnNewCreativeRptForm";
+            this.btnNewCreativeRptForm.Size = new System.Drawing.Size(75, 23);
+            this.btnNewCreativeRptForm.TabIndex = 12;
+            this.btnNewCreativeRptForm.Text = "新开窗口";
+            this.btnNewCreativeRptForm.UseVisualStyleBackColor = true;
+            // 
+            // gbxCreativeRptDtp
+            // 
+            this.gbxCreativeRptDtp.Controls.Add(this.dtpCreativeRptEndDay);
+            this.gbxCreativeRptDtp.Controls.Add(this.label25);
+            this.gbxCreativeRptDtp.Controls.Add(this.dtpCreativeRptStartDay);
+            this.gbxCreativeRptDtp.Location = new System.Drawing.Point(260, 6);
+            this.gbxCreativeRptDtp.Name = "gbxCreativeRptDtp";
+            this.gbxCreativeRptDtp.Size = new System.Drawing.Size(305, 39);
+            this.gbxCreativeRptDtp.TabIndex = 11;
+            this.gbxCreativeRptDtp.TabStop = false;
+            // 
+            // dtpCreativeRptEndDay
+            // 
+            this.dtpCreativeRptEndDay.Location = new System.Drawing.Point(164, 12);
+            this.dtpCreativeRptEndDay.Name = "dtpCreativeRptEndDay";
+            this.dtpCreativeRptEndDay.Size = new System.Drawing.Size(118, 21);
+            this.dtpCreativeRptEndDay.TabIndex = 8;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(141, 16);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(17, 12);
+            this.label25.TabIndex = 7;
+            this.label25.Text = "至";
+            // 
+            // dtpCreativeRptStartDay
+            // 
+            this.dtpCreativeRptStartDay.Location = new System.Drawing.Point(29, 12);
+            this.dtpCreativeRptStartDay.Name = "dtpCreativeRptStartDay";
+            this.dtpCreativeRptStartDay.Size = new System.Drawing.Size(106, 21);
+            this.dtpCreativeRptStartDay.TabIndex = 6;
+            // 
+            // gbxCreatvieRptRecentDays
+            // 
+            this.gbxCreatvieRptRecentDays.Controls.Add(this.label26);
+            this.gbxCreatvieRptRecentDays.Controls.Add(this.label27);
+            this.gbxCreatvieRptRecentDays.Controls.Add(this.txtCreativeReportDays);
+            this.gbxCreatvieRptRecentDays.Location = new System.Drawing.Point(49, 6);
+            this.gbxCreatvieRptRecentDays.Name = "gbxCreatvieRptRecentDays";
+            this.gbxCreatvieRptRecentDays.Size = new System.Drawing.Size(150, 39);
+            this.gbxCreatvieRptRecentDays.TabIndex = 10;
+            this.gbxCreatvieRptRecentDays.TabStop = false;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(19, 17);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(41, 12);
+            this.label26.TabIndex = 2;
+            this.label26.Text = "最近：";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(113, 17);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(17, 12);
+            this.label27.TabIndex = 2;
+            this.label27.Text = "天";
+            // 
+            // txtCreativeReportDays
+            // 
+            this.txtCreativeReportDays.Location = new System.Drawing.Point(66, 13);
+            this.txtCreativeReportDays.Name = "txtCreativeReportDays";
+            this.txtCreativeReportDays.Size = new System.Drawing.Size(41, 21);
+            this.txtCreativeReportDays.TabIndex = 3;
+            this.txtCreativeReportDays.Text = "15";
+            // 
+            // chkCreativeRptRecentDays
+            // 
+            this.chkCreativeRptRecentDays.AutoSize = true;
+            this.chkCreativeRptRecentDays.Location = new System.Drawing.Point(28, 18);
+            this.chkCreativeRptRecentDays.Name = "chkCreativeRptRecentDays";
+            this.chkCreativeRptRecentDays.Size = new System.Drawing.Size(15, 14);
+            this.chkCreativeRptRecentDays.TabIndex = 9;
+            this.chkCreativeRptRecentDays.UseVisualStyleBackColor = true;
+            // 
+            // chkCreativeRptDtp
+            // 
+            this.chkCreativeRptDtp.AutoSize = true;
+            this.chkCreativeRptDtp.Location = new System.Drawing.Point(239, 18);
+            this.chkCreativeRptDtp.Name = "chkCreativeRptDtp";
+            this.chkCreativeRptDtp.Size = new System.Drawing.Size(15, 14);
+            this.chkCreativeRptDtp.TabIndex = 5;
+            this.chkCreativeRptDtp.UseVisualStyleBackColor = true;
+            // 
+            // btnGetAllCreativeRpt
+            // 
+            this.btnGetAllCreativeRpt.Location = new System.Drawing.Point(810, 16);
+            this.btnGetAllCreativeRpt.Name = "btnGetAllCreativeRpt";
+            this.btnGetAllCreativeRpt.Size = new System.Drawing.Size(194, 23);
+            this.btnGetAllCreativeRpt.TabIndex = 4;
+            this.btnGetAllCreativeRpt.Text = "获取所有推广组的创意报表";
+            this.btnGetAllCreativeRpt.UseVisualStyleBackColor = true;
+            this.btnGetAllCreativeRpt.Click += new System.EventHandler(this.btnGetAllCreativeRpt_Click);
+            // 
+            // btnGetCreativeRpt
+            // 
+            this.btnGetCreativeRpt.Location = new System.Drawing.Point(585, 16);
+            this.btnGetCreativeRpt.Name = "btnGetCreativeRpt";
+            this.btnGetCreativeRpt.Size = new System.Drawing.Size(219, 23);
+            this.btnGetCreativeRpt.TabIndex = 1;
+            this.btnGetCreativeRpt.Text = "获取选中推广组的创意报表";
+            this.btnGetCreativeRpt.UseVisualStyleBackColor = true;
+            this.btnGetCreativeRpt.Click += new System.EventHandler(this.btnGetCreativeRpt_Click);
             // 
             // tabPage7
             // 
@@ -1972,16 +2173,6 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // btnAdgroupsAddKeyword
-            // 
-            this.btnAdgroupsAddKeyword.Location = new System.Drawing.Point(834, 20);
-            this.btnAdgroupsAddKeyword.Name = "btnAdgroupsAddKeyword";
-            this.btnAdgroupsAddKeyword.Size = new System.Drawing.Size(75, 23);
-            this.btnAdgroupsAddKeyword.TabIndex = 8;
-            this.btnAdgroupsAddKeyword.Text = "新增关键词";
-            this.btnAdgroupsAddKeyword.UseVisualStyleBackColor = true;
-            this.btnAdgroupsAddKeyword.Click += new System.EventHandler(this.btnAdgroupsAddKeyword_Click);
-            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2043,6 +2234,15 @@
             this.gbxAdgroupRptDtp.PerformLayout();
             this.gbxAdgroupRptRecentDays.ResumeLayout(false);
             this.gbxAdgroupRptRecentDays.PerformLayout();
+            this.tabPage11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlCreativeRpt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewCreativeRpt)).EndInit();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            this.gbxCreativeRptDtp.ResumeLayout(false);
+            this.gbxCreativeRptDtp.PerformLayout();
+            this.gbxCreatvieRptRecentDays.ResumeLayout(false);
+            this.gbxCreatvieRptRecentDays.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCampaignRpt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCampaignRpt)).EndInit();
@@ -2228,5 +2428,22 @@
         private System.Windows.Forms.TextBox txtInvestmentChange;
         private DevExpress.XtraTreeList.TreeList treeListCats;
         private System.Windows.Forms.Button btnAdgroupsAddKeyword;
+        private System.Windows.Forms.TabPage tabPage11;
+        private DevExpress.XtraGrid.GridControl gridControlCreativeRpt;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewCreativeRpt;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Button btnNewCreativeRptForm;
+        private System.Windows.Forms.GroupBox gbxCreativeRptDtp;
+        private System.Windows.Forms.DateTimePicker dtpCreativeRptEndDay;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.DateTimePicker dtpCreativeRptStartDay;
+        private System.Windows.Forms.GroupBox gbxCreatvieRptRecentDays;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox txtCreativeReportDays;
+        private System.Windows.Forms.CheckBox chkCreativeRptRecentDays;
+        private System.Windows.Forms.CheckBox chkCreativeRptDtp;
+        private System.Windows.Forms.Button btnGetAllCreativeRpt;
+        private System.Windows.Forms.Button btnGetCreativeRpt;
     }
 }

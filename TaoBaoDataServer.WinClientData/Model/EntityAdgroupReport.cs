@@ -111,4 +111,12 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// </summary>
         public string source { get; set; }
     }
+
+    /// <summary>
+    /// 推广组下的创意报表
+    /// </summary>
+    public class EntityCreativeReport : EntityAdgroupReport
+    {
+        public long creative_id { get; set; }
+    }
 }
