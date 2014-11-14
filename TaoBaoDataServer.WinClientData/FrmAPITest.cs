@@ -1202,7 +1202,7 @@ namespace TaoBaoDataServer.WinClientData
             gridControlCreativeRpt.DataSource = null;
             TopSession user = GetSession();
             int intReportDays = Convert.ToInt32(txtCreativeReportDays.Text.Trim());
-            List<EntityAdgroupReport> lstRpt = new List<EntityAdgroupReport>();
+            List<EntityCreativeReport> lstRpt = new List<EntityCreativeReport>();
             for (int i = 0; i < gridViewAdgroup.DataRowCount; i++)
             {
                 ADGroup item = gridViewAdgroup.GetRow(gridViewAdgroup.GetRowHandle(i)) as ADGroup;
@@ -1227,7 +1227,13 @@ namespace TaoBaoDataServer.WinClientData
 
         private void 网页打开宝贝ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            EntityAdgroupReport rpt = gridViewAdgroupRpt.GetFocusedRow() as EntityAdgroupReport;
+            EntityAdgroupReport rpt = null;
+            rpt = gridViewAdgroupRpt.GetFocusedRow() as EntityAdgroupReport;
+            if (rpt == null)
+            {
+                rpt = gridViewCreativeRpt.GetFocusedRow() as EntityAdgroupReport;
+            }
+
             long itemId = 0;
             List<ADGroup> lstAdgroup = gridControlAdgroup.DataSource as List<ADGroup>;
             if (lstAdgroup != null)
