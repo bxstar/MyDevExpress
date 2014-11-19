@@ -255,51 +255,11 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public Boolean GetKeywordOnline(TopSession session, long adgroupId, ref List<Keyword> listkeyword)
         {
-            DateTime dtStart = DateTime.Now;
-            SimbaKeywordsbyadgroupidGetResponse lstKeywordReponse = null;
-            try
+            var lstKeywordReponse = CommonHandler.DoTaoBaoApi<SimbaKeywordsbyadgroupidGetResponse>(TaobaoApiHandler.TaoBaoSimbaKeywordsGet, session, adgroupId);
+
+            if (lstKeywordReponse != null && lstKeywordReponse.Keywords != null)
             {
-                // 获取关键词
-                lstKeywordReponse = TaobaoApiHandler.TaoBaoSimbaKeywordsGet(session, adgroupId);
-                if (lstKeywordReponse.IsError)
-                {
-                    if (CommonHandler.IsBanMsg(lstKeywordReponse))
-                    {//遇到频繁访问的错误，需要多次访问
-                        Boolean isBanError = true;
-                        while (isBanError)
-                        {
-                            System.Threading.Thread.Sleep(2000);
-                            lstKeywordReponse = TaobaoApiHandler.TaoBaoSimbaKeywordsGet(session, adgroupId);
-                            if (lstKeywordReponse.IsError && CommonHandler.IsBanMsg(lstKeywordReponse) && dtStart.AddMinutes(5) > DateTime.Now)
-                            {//超过5分钟放弃
-                                isBanError = true;
-                            }
-                            else
-                            {
-                                if (dtStart.AddMinutes(5) <= DateTime.Now)
-                                {
-                                    logger.Error("线上获取推广组下的关键词出错，已重试5分钟" + lstKeywordReponse.Body);
-                                    return false;
-                                }
-                                isBanError = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        logger.Error("线上获取推广组下的关键词出错" + lstKeywordReponse.Body);
-                        return false;
-                    }
-                }
-                if (lstKeywordReponse != null && lstKeywordReponse.Keywords != null)
-                {
-                    listkeyword.AddRange(lstKeywordReponse.Keywords);
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error("BusinessBatchHandler/GetKeyword,淘宝API获取推广组下的关键词信息 失败：", ex);
-                return false;
+                listkeyword.AddRange(lstKeywordReponse.Keywords);
             }
             return true;
         }
@@ -519,101 +479,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 }
             }
             return lstAll;
-        }
-
-        public List<KeywordAndCategory> ForecastCategory(TopSession user, List<string> listWord, long categoryId)
-        {
-            //匿名函数，设置关键词的类目匹配（类目预测结果中符合推广组类目）
-            Func<List<string>, List<Top.Api.Domain.INCategoryTop>, List<KeywordAndCategory>> funSetCategory = (group, lstCategoryTop) =>
-            {
-                List<KeywordAndCategory> lst = new List<KeywordAndCategory>();
-                if (lstCategoryTop == null) return lst;
-                // 循环所取得的类目信息
-                for (int n = 0; n < lstCategoryTop.Count; n++)
-                {
-                    // 初始化类目等级
-                    int level = 0;
-                    // 定义变量，存储预测的类目信息
-                    var CategoryTop = lstCategoryTop[n];
-                    //  如果类目存在的情况下
-                    if (CategoryTop.CategoryChildTopList.Count > 0)
-                    {
-                        var ChildTopCategoryList = CategoryTop.CategoryChildTopList;
-                        for (int i = 0; i < ChildTopCategoryList.Count; i++)
-                        {
-                            // 判断预测的类目是否有等于已知的类目
-                            if (ChildTopCategoryList[i].CategoryId == Convert.ToInt64(categoryId))
-                            {
-                                // 设置等级
-                                level = i + 1;
-                                break;
-                            }
-                        }
-                    }
-                    KeywordAndCategory kac = new KeywordAndCategory();
-                    kac.Word = group[n].ToString();
-                    kac.CategoryLevel = level;
-                    lst.Add(kac);
-                }
-                return lst;
-            };
-
-            List<KeywordAndCategory> lstResult = new List<KeywordAndCategory>();
-            // 对关键词进行分组，每组最多200个
-            List<List<string>> groupLstword = CommonHandler.SplitLst<string>(listWord, 200);
-
-            foreach (List<string> group in groupLstword)
-            {
-                // 存储拼接后的关键词
-                string strKeywords = string.Join(",", group.ToArray());
-                var response = TaobaoApiHandler.TaobaoSimbaInsightCatsforecastGet(user, strKeywords);
-                if (response == null || response.InCategoryTops == null || response.InCategoryTops.Count == 0)
-                {
-                    continue;
-                }
-                else
-                {
-                    int notFindCount = 0;                                       //没有找到预测类目的关键词个数
-                    int batchFindedCount = response.InCategoryTops.Count;       //批量找到的关键词个数
-                    int allCount = group.Count;                                   //所有需要预测类目的关键词个数
-                    if (batchFindedCount == allCount)
-                    {//全部找到了预测类目
-                        List<KeywordAndCategory> lstAllGet = funSetCategory(group, response.InCategoryTops);
-                        lstResult.AddRange(lstAllGet);
-                    }
-                    else
-                    {
-                        for (int i = 0; i < allCount; i++)
-                        {//一个个预测类目 
-                            if (notFindCount != (allCount - batchFindedCount))
-                            {//还有无法预测类目的关键词
-                                response = TaobaoApiHandler.TaobaoSimbaInsightCatsforecastGet(user, group[i]);
-                                if (response == null || response.InCategoryTops == null || response.InCategoryTops.Count == 0)
-                                {
-                                    notFindCount++;
-                                    continue;
-                                }
-                                List<KeywordAndCategory> lstOneGet = funSetCategory(group.GetRange(i, 1), response.InCategoryTops);
-                                lstResult.AddRange(lstOneGet);
-                            }
-                            else
-                            {//没有无法预测类目的关键词，可以开始批量查找
-                                response = TaobaoApiHandler.TaobaoSimbaInsightCatsforecastGet(user, string.Join(",", group.GetRange(i, allCount - i).ToArray()));
-                                if (response == null || response.InCategoryTops == null || response.InCategoryTops.Count == 0)
-                                {
-                                    break;
-                                }
-                                List<KeywordAndCategory> lstOtherGet = funSetCategory(group.GetRange(i, allCount - i), response.InCategoryTops);
-                                lstResult.AddRange(lstOtherGet);
-                                break;
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            return lstResult;
         }
 
         /// <summary>

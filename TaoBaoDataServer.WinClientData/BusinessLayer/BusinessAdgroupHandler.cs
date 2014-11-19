@@ -23,64 +23,41 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public List<ADGroup> GetAdgroupOnline(TopSession session, long campaignId)
         {
             // 定义返回值
-            List<ADGroup> listADGroup = new List<ADGroup>();
+            List<ADGroup> lstAdgroup = null;
 
             // 按照一页取200条数据，获取计划下的推广组信息
-            int pageSize = 200;
+            long pageIndex = 1;
+            long pageSize = 200;
             // 取得第一页的推广组信息
             DateTime dtStart = DateTime.Now;
-            var response = taobaoApiHandler.TaobaoSimbaAdgroupsGetByCampaignId(session, campaignId, pageSize, 1);
-            if (response.IsError)
+            var response = CommonHandler.DoTaoBaoApi<SimbaAdgroupsbycampaignidGetResponse>(taobaoApiHandler.TaobaoSimbaAdgroupsGetByCampaignId, session, campaignId, pageSize, pageIndex);
+            if (response == null || response.IsError)
             {
-                if (CommonHandler.IsBanMsg(response))
-                {//遇到频繁访问的错误，需要多次访问
-                    Boolean isBanError = true;
-                    while (isBanError)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        response = taobaoApiHandler.TaobaoSimbaAdgroupsGetByCampaignId(session, campaignId, pageSize, 1);
-                        if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
-                        {//超过5分钟放弃
-                            isBanError = true;
-                        }
-                        else
-                        {
-                            if (dtStart.AddMinutes(5) <= DateTime.Now)
-                            {
-                                logger.Error("线上创建一批关键词出错，已重试5分钟" + response.Body);
-                            }
-                            isBanError = false;
-                        }
-                    }
-                }
-                else
-                {
-                    logger.Error("BusinessBatchHandler/GetAdgroup,淘宝API下载推广组数据 失败：" + response.Body);
-                }
+                logger.Error("线上获取计划的推广组失败：" + response.Body);
+                return lstAdgroup;
             }
 
             // 循环取得推广组信息
-            if (response != null && response.Adgroups != null && response.Adgroups.AdgroupList.Count > 0)
+            if (response != null && response.Adgroups != null && response.Adgroups.AdgroupList != null && response.Adgroups.AdgroupList.Count > 0)
             {
-                listADGroup.AddRange(response.Adgroups.AdgroupList);
-                int nCount = (Int32)response.Adgroups.TotalItem;
+                lstAdgroup = response.Adgroups.AdgroupList;
                 // 计算页数，按照计算的页数，分页获取推广组信息
-                var rowCount = CommonFunction.getPageCount(nCount, pageSize);
+                int rowCount = CommonFunction.getPageCount(Convert.ToInt32(response.Adgroups.TotalItem), Convert.ToInt32(pageSize));
                 if (rowCount > 1)
                 {
                     // 循环获取第二页后面的推广组数据
-                    for (int i = 2; i < rowCount + 1; i++)
+                    for (pageIndex = 2; pageIndex < rowCount + 1; pageIndex++)
                     {
-                        var nextAdgroupList = taobaoApiHandler.TaobaoSimbaAdgroupsGetByCampaignId(session, campaignId, pageSize, i);
-                        if (nextAdgroupList != null && nextAdgroupList.Adgroups != null && nextAdgroupList.Adgroups.AdgroupList.Count > 0)
+                        var nextAdgroupList = CommonHandler.DoTaoBaoApi<SimbaAdgroupsbycampaignidGetResponse>(taobaoApiHandler.TaobaoSimbaAdgroupsGetByCampaignId, session, campaignId, pageSize, pageIndex);
+                        if (nextAdgroupList != null && nextAdgroupList.Adgroups != null && nextAdgroupList.Adgroups.AdgroupList != null && nextAdgroupList.Adgroups.AdgroupList.Count > 0)
                         {
-                            listADGroup.AddRange(nextAdgroupList.Adgroups.AdgroupList);
+                            lstAdgroup.AddRange(nextAdgroupList.Adgroups.AdgroupList);
                         }
                     }
                 }
             }
 
-            return listADGroup;
+            return lstAdgroup;
         }
 
         /// <summary>
@@ -90,7 +67,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         {
             List<long> adgroupIds = new List<long>();
             adgroupIds.Add(adgroupId);
-            var response = taobaoApiHandler.TaobaoSimbaAdgroupsByAdgroupIds(session, adgroupIds);
+            var response = CommonHandler.DoTaoBaoApi<SimbaAdgroupsbyadgroupidsGetResponse>(taobaoApiHandler.TaobaoSimbaAdgroupsByAdgroupIds, session, adgroupIds);
             if (response != null && !response.IsError && response.Adgroups != null && response.Adgroups.AdgroupList != null && response.Adgroups.AdgroupList.Count > 0)
                 return response.Adgroups.AdgroupList[0];
             else
@@ -601,7 +578,32 @@ insert into ad_adgroup
         private string DownLoadCreativeEffectReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupcreativeeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupcreativeeffectGet, session, campaignId, adgroupId, strStartDay, strEndDay);
-            return response.RptAdgroupcreativeEffectList ?? string.Empty;
+
+            if (!string.IsNullOrEmpty(response.RptAdgroupcreativeEffectList))
+            {
+                return response.RptAdgroupcreativeEffectList;
+            }
+            else
+            {//RptAdgroupcreativeEffectList属性为空，但是body可能有值，原因是Response的注释有误，不应该注释为rpt_adgroupcreative_list
+                if (!string.IsNullOrEmpty(response.Body))
+                {
+                    string json = response.Body;
+                    try
+                    {
+                        var r = new DynamicJsonParser().FromJson(json);
+                        return DynamicJsonParser.FromObject(r.simba_rpt_adgroupcreativeeffect_get_response.rpt_adgroupcreative_list);
+                    }
+                    catch (Exception se)
+                    {
+                        logger.Error(string.Format("用户：{0}，推广组：{1}，创意效果报表数据解析出错", session.UserName, adgroupId), se);
+                    }
+                    return json;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
     }

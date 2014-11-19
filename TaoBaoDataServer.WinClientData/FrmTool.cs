@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Threading;
 using iclickpro.AccessCommon;
 using WeifenLuo.WinFormsUI.Docking;
+using DevExpress.Data;
 
 namespace TaoBaoDataServer.WinClientData
 {
@@ -17,6 +18,55 @@ namespace TaoBaoDataServer.WinClientData
     /// </summary>
     public class MyDockContent : DockContent
     {
+        double totalImp = 0; double totalClick = 0; double totalPay = 0; double totalCost = 0;
+        protected void gridViewCustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            if (((DevExpress.XtraGrid.GridSummaryItem)e.Item).FieldName.CompareTo("ctr") == 0)
+            {
+                if (e.SummaryProcess == CustomSummaryProcess.Start)
+                {//初始化起始值，防止多次统计后起始值发生变化
+                    totalImp = 0;
+                    totalClick = 0;
+                }
+                if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+                {//每行数据的统计
+                    dynamic entity = e.Row as dynamic;
+                    totalImp += entity.impressions;
+                    totalClick += entity.click;
+                }
+                if (e.SummaryProcess == CustomSummaryProcess.Finalize)
+                {//最终结果计算
+                    if (totalImp != 0)
+                        e.TotalValue = string.Format("AVG={0}", Math.Round(totalClick / totalImp * 100, 2));
+                    else
+                        e.TotalValue = "AVG=0.00";
+                }
+            }
+
+            if (((DevExpress.XtraGrid.GridSummaryItem)e.Item).FieldName.CompareTo("roi") == 0)
+            {
+                if (e.SummaryProcess == CustomSummaryProcess.Start)
+                {//初始化起始值，防止多次统计后起始值发生变化
+                    totalPay = 0;
+                    totalCost = 0;
+                }
+                if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+                {//每行数据的统计
+                    dynamic entity = e.Row as dynamic;
+                    totalCost += Convert.ToDouble(entity.cost);
+                    totalPay += Convert.ToDouble(entity.directpay + entity.indirectpay);
+                }
+                if (e.SummaryProcess == CustomSummaryProcess.Finalize)
+                {//最终结果计算
+                    if (totalCost != 0)
+                        e.TotalValue = string.Format("AVG={0}", Math.Round(totalPay / totalCost, 2));
+                    else
+                        e.TotalValue = "AVG=0.00";
+                }
+            }
+
+        }
+
         public void gridViewCustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
         {
             if (e.Info.IsRowIndicator)
@@ -79,21 +129,23 @@ namespace TaoBaoDataServer.WinClientData
                         foreach (var entry in dic)
                         {
                             string columnName = entry.Key.ToLower();
-                            
-                            if (columnName.Contains("date") || columnName.Contains("time"))
+                            if (entry.Value != null)
                             {
-                                DateTime dtType ;
-                                if (DateTime.TryParse(entry.Value.ToString(), out dtType))
+                                if (columnName.Contains("date") || columnName.Contains("time"))
                                 {
-                                    dt.Columns.Add(columnName, typeof(System.DateTime));
+                                    DateTime dtType;
+                                    if (DateTime.TryParse(entry.Value.ToString(), out dtType))
+                                    {
+                                        dt.Columns.Add(columnName, typeof(System.DateTime));
+                                        continue;
+                                    }
+                                }
+                                double dType;
+                                if (double.TryParse(entry.Value.ToString(), out dType))
+                                {
+                                    dt.Columns.Add(columnName, typeof(System.Double));
                                     continue;
                                 }
-                            }
-                            double dType;
-                            if (double.TryParse(entry.Value.ToString(), out dType))
-                            {
-                                dt.Columns.Add(columnName, typeof(System.Double));
-                                continue;
                             }
 
                             dt.Columns.Add(columnName, typeof(System.String));

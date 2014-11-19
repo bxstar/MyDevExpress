@@ -225,97 +225,97 @@ namespace TaoBaoDataServer.WinClientData
             }
             DateTime dtStart = new DateTime();
             //预估的出价排名区间，在max_price下1毛和上8毛之间
-            var response = TaobaoApiHandler.TaobaoSimbaKeywordKeywordforecastGet(session, keywordId, max_price);
-            if (response.IsError)
-            {
-                if (CommonHandler.IsBanMsg(response))
-                {//遇到频繁访问的错误，需要多次访问
-                    Boolean isBanError = true;
-                    while (isBanError)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        response = TaobaoApiHandler.TaobaoSimbaKeywordKeywordforecastGet(session, keywordId, max_price);
-                        if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
-                        {//超过5分钟放弃
-                            isBanError = true;
-                        }
-                        else
-                        {
-                            if (dtStart.AddMinutes(5) <= DateTime.Now)
-                            {
-                                logger.Error("预估排名失败，已重试5分钟" + response.Body);
-                                return "竞价失败，" + response.Body;
-                            }
-                            isBanError = false;
-                        }
-                    }
-                }
-                else
-                {
-                    logger.Error("预估排名失败：" + response.Body);
-                    return "竞价失败，" + response.Body;
-                }
-            }
+            //var response = TaobaoApiHandler.TaobaoSimbaKeywordKeywordforecastGet(session, keywordId, max_price);
+            //if (response.IsError)
+            //{
+            //    if (CommonHandler.IsBanMsg(response))
+            //    {//遇到频繁访问的错误，需要多次访问
+            //        Boolean isBanError = true;
+            //        while (isBanError)
+            //        {
+            //            System.Threading.Thread.Sleep(2000);
+            //            response = TaobaoApiHandler.TaobaoSimbaKeywordKeywordforecastGet(session, keywordId, max_price);
+            //            if (response.IsError && CommonHandler.IsBanMsg(response) && dtStart.AddMinutes(5) > DateTime.Now)
+            //            {//超过5分钟放弃
+            //                isBanError = true;
+            //            }
+            //            else
+            //            {
+            //                if (dtStart.AddMinutes(5) <= DateTime.Now)
+            //                {
+            //                    logger.Error("预估排名失败，已重试5分钟" + response.Body);
+            //                    return "竞价失败，" + response.Body;
+            //                }
+            //                isBanError = false;
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        logger.Error("预估排名失败：" + response.Body);
+            //        return "竞价失败，" + response.Body;
+            //    }
+            //}
 
-            string strPriceRank = response.KeywordForecast.PriceRank;
-            string[] arrPriceRank = strPriceRank.Split(',');
-            List<EntityPriceRank> lstPriceRank = new List<EntityPriceRank>();
+            //string strPriceRank = response.KeywordForecast.PriceRank;
+            //string[] arrPriceRank = strPriceRank.Split(',');
+            //List<EntityPriceRank> lstPriceRank = new List<EntityPriceRank>();
 
-            foreach (var itemPriceRank in arrPriceRank)
-            {
-                string[] arr = itemPriceRank.Split(':');
+            //foreach (var itemPriceRank in arrPriceRank)
+            //{
+            //    string[] arr = itemPriceRank.Split(':');
 
-                EntityPriceRank pr = new EntityPriceRank();
-                pr.max_price = Convert.ToInt64(arr[0]);
-                pr.rank = Convert.ToInt32(arr[1]);
+            //    EntityPriceRank pr = new EntityPriceRank();
+            //    pr.max_price = Convert.ToInt64(arr[0]);
+            //    pr.rank = Convert.ToInt32(arr[1]);
 
-                lstPriceRank.Add(pr);
-            }
+            //    lstPriceRank.Add(pr);
+            //}
 
-            int minReturnRank = lstPriceRank.Min(o => o.rank);
-            int maxReturnRank = lstPriceRank.Max(o => o.rank);
+            //int minReturnRank = lstPriceRank.Min(o => o.rank);
+            //int maxReturnRank = lstPriceRank.Max(o => o.rank);
 
-            if (rank < minReturnRank)
-            {//返回的排名靠后，需要加价继续预估
-                if (max_price != 9999)
-                {
-                    max_price = lstPriceRank.Max(o => o.max_price) + 10;            //加10分是根据淘宝返回的列表范围而定
-                    strErrorMsg = SetKeywordRank(session, keywordId, ref max_price, rank);
-                }
-                else
-                {//超过9999的价格 
-                    return "所在排名价格超过99.99元，竞价失败";
-                }
-            }
-            else if (rank <= maxReturnRank && rank >= minReturnRank)
-            {//找到符合的排名 
-                double avg_price = 0;
-                List<EntityPriceRank> lstRankEqual = lstPriceRank.Where(o => o.rank == rank).ToList();
-                if (lstRankEqual.Count > 0)
-                {//找到刚好匹配排名的，直接使用其平均出价
-                    avg_price = lstPriceRank.Where(o => o.rank == rank).Average(o => o.max_price);
-                }
-                else
-                {//找出和需要的排名最接近的排名，使用它的最高出价 
-                    int nearestRank = GetNearestNum(lstPriceRank.Select(o => o.rank).ToList(), rank);
-                    lstRankEqual = lstPriceRank.Where(o => o.rank == nearestRank).ToList();
-                    avg_price = lstRankEqual.Max(o => o.max_price);
-                }
-                max_price = Convert.ToInt64(avg_price);
-                return string.Empty ;
-            }
-            else
-            {//返回的排名靠前，需要降价继续预估
-                if (max_price != 10)
-                {
-                    max_price = lstPriceRank.Min(o => o.max_price) - 80;            //减80分是根据淘宝返回的列表范围而定
-                    strErrorMsg = SetKeywordRank(session, keywordId, ref max_price, rank);
-                }
-                else
-                {//1毛钱以上才能预估 
-                    return "所在排名不足1毛，竞价失败";
-                }
-            }
+            //if (rank < minReturnRank)
+            //{//返回的排名靠后，需要加价继续预估
+            //    if (max_price != 9999)
+            //    {
+            //        max_price = lstPriceRank.Max(o => o.max_price) + 10;            //加10分是根据淘宝返回的列表范围而定
+            //        strErrorMsg = SetKeywordRank(session, keywordId, ref max_price, rank);
+            //    }
+            //    else
+            //    {//超过9999的价格 
+            //        return "所在排名价格超过99.99元，竞价失败";
+            //    }
+            //}
+            //else if (rank <= maxReturnRank && rank >= minReturnRank)
+            //{//找到符合的排名 
+            //    double avg_price = 0;
+            //    List<EntityPriceRank> lstRankEqual = lstPriceRank.Where(o => o.rank == rank).ToList();
+            //    if (lstRankEqual.Count > 0)
+            //    {//找到刚好匹配排名的，直接使用其平均出价
+            //        avg_price = lstPriceRank.Where(o => o.rank == rank).Average(o => o.max_price);
+            //    }
+            //    else
+            //    {//找出和需要的排名最接近的排名，使用它的最高出价 
+            //        int nearestRank = GetNearestNum(lstPriceRank.Select(o => o.rank).ToList(), rank);
+            //        lstRankEqual = lstPriceRank.Where(o => o.rank == nearestRank).ToList();
+            //        avg_price = lstRankEqual.Max(o => o.max_price);
+            //    }
+            //    max_price = Convert.ToInt64(avg_price);
+            //    return string.Empty ;
+            //}
+            //else
+            //{//返回的排名靠前，需要降价继续预估
+            //    if (max_price != 10)
+            //    {
+            //        max_price = lstPriceRank.Min(o => o.max_price) - 80;            //减80分是根据淘宝返回的列表范围而定
+            //        strErrorMsg = SetKeywordRank(session, keywordId, ref max_price, rank);
+            //    }
+            //    else
+            //    {//1毛钱以上才能预估 
+            //        return "所在排名不足1毛，竞价失败";
+            //    }
+            //}
 
             return strErrorMsg;
         }

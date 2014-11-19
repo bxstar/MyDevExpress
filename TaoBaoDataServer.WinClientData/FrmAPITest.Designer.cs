@@ -1296,11 +1296,21 @@
             this.colKeywordRptAvgPos,
             this.colKeywordRptSource});
             this.gridViewKeywordRpt.GridControl = this.gridControlKeywordRpt;
+            this.gridViewKeywordRpt.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "impressions", this.colKeywordRptImpressions, "(Sum={0:N})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "click", this.colKeywordRptClick, "(Sum={0:N})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "cost", this.colKeywordRptCost, "(Sum={0:C})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ctr", this.colKeywordRptCtr, ""),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pay", this.colKeywordRptPay, "(Sum={0:C})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "paycount", this.colKeywordRptPayCount, "(Sum={0:N})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favcount", this.colKeywordRptFavcount, "(Sum={0:N})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "roi", this.colKeywordRptRoi, "")});
             this.gridViewKeywordRpt.Name = "gridViewKeywordRpt";
+            this.gridViewKeywordRpt.OptionsMenu.ShowGroupSummaryEditorItem = true;
             this.gridViewKeywordRpt.OptionsSelection.MultiSelect = true;
             this.gridViewKeywordRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewKeywordRpt.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
             this.gridViewKeywordRpt.OptionsView.ShowFooter = true;
-            this.gridViewKeywordRpt.OptionsView.ShowGroupPanel = false;
             // 
             // colKeywordRptDate
             // 
@@ -1839,18 +1849,25 @@
             this.gridViewCreativeRpt.GridControl = this.gridControlCreativeRpt;
             this.gridViewCreativeRpt.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "impressions", this.colCreativeRptImpressions, "(Avg={0:N})"),
-            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "click", this.colCreativeRptClick, "(Avg={0:N})")});
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "click", this.colCreativeRptClick, "(Avg={0:N})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ctr", this.colCreativeRptCtr, ""),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "cost", this.colCreativeRptCost, "(Avg={0:C})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "totalpay", this.colCreativeRptPay, "(Avg={0:C})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Custom, "roi", this.colCreativeRptRoi, "")});
             this.gridViewCreativeRpt.Name = "gridViewCreativeRpt";
             this.gridViewCreativeRpt.OptionsMenu.ShowGroupSummaryEditorItem = true;
             this.gridViewCreativeRpt.OptionsSelection.MultiSelect = true;
             this.gridViewCreativeRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
             this.gridViewCreativeRpt.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
+            this.gridViewCreativeRpt.OptionsView.ShowFooter = true;
             // 
             // colCreativeRptDate
             // 
             this.colCreativeRptDate.Caption = "date";
             this.colCreativeRptDate.FieldName = "date";
             this.colCreativeRptDate.Name = "colCreativeRptDate";
+            this.colCreativeRptDate.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "(个数={0:N})")});
             this.colCreativeRptDate.Visible = true;
             this.colCreativeRptDate.VisibleIndex = 0;
             // 
@@ -1875,6 +1892,8 @@
             this.colCreativeRptImpressions.Caption = "imp";
             this.colCreativeRptImpressions.FieldName = "impressions";
             this.colCreativeRptImpressions.Name = "colCreativeRptImpressions";
+            this.colCreativeRptImpressions.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "impressions", "(Sum={0:N})")});
             this.colCreativeRptImpressions.Visible = true;
             this.colCreativeRptImpressions.VisibleIndex = 3;
             // 
@@ -1883,6 +1902,8 @@
             this.colCreativeRptClick.Caption = "click";
             this.colCreativeRptClick.FieldName = "click";
             this.colCreativeRptClick.Name = "colCreativeRptClick";
+            this.colCreativeRptClick.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "click", "(Sum={0:N})")});
             this.colCreativeRptClick.Visible = true;
             this.colCreativeRptClick.VisibleIndex = 4;
             // 
@@ -1891,6 +1912,8 @@
             this.colCreativeRptCost.Caption = "cost";
             this.colCreativeRptCost.FieldName = "cost";
             this.colCreativeRptCost.Name = "colCreativeRptCost";
+            this.colCreativeRptCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "cost", "(Sum={0:C})")});
             this.colCreativeRptCost.Visible = true;
             this.colCreativeRptCost.VisibleIndex = 5;
             // 
@@ -1915,6 +1938,8 @@
             this.colCreativeRptPay.Caption = "totalpay";
             this.colCreativeRptPay.FieldName = "totalpay";
             this.colCreativeRptPay.Name = "colCreativeRptPay";
+            this.colCreativeRptPay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "totalpay", "(Sum={0:C})")});
             this.colCreativeRptPay.Visible = true;
             this.colCreativeRptPay.VisibleIndex = 8;
             // 
@@ -1951,6 +1976,8 @@
             this.colCreativeRptFavItemCount.Caption = "favitemcount";
             this.colCreativeRptFavItemCount.FieldName = "favitemcount";
             this.colCreativeRptFavItemCount.Name = "colCreativeRptFavItemCount";
+            this.colCreativeRptFavItemCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favitemcount", "(Sum={0:N})")});
             this.colCreativeRptFavItemCount.Visible = true;
             this.colCreativeRptFavItemCount.VisibleIndex = 11;
             // 
@@ -1959,6 +1986,8 @@
             this.colCreativeRptFavShopCount.Caption = "favshopcount";
             this.colCreativeRptFavShopCount.FieldName = "favshopcount";
             this.colCreativeRptFavShopCount.Name = "colCreativeRptFavShopCount";
+            this.colCreativeRptFavShopCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favshopcount", "(Sum={0:N})")});
             this.colCreativeRptFavShopCount.Visible = true;
             this.colCreativeRptFavShopCount.VisibleIndex = 12;
             // 
@@ -1993,6 +2022,7 @@
             this.btnNewCreativeRptForm.TabIndex = 12;
             this.btnNewCreativeRptForm.Text = "新开窗口";
             this.btnNewCreativeRptForm.UseVisualStyleBackColor = true;
+            this.btnNewCreativeRptForm.Click += new System.EventHandler(this.btnNewCreativeRptForm_Click);
             // 
             // gbxCreativeRptDtp
             // 
@@ -2068,6 +2098,8 @@
             // chkCreativeRptRecentDays
             // 
             this.chkCreativeRptRecentDays.AutoSize = true;
+            this.chkCreativeRptRecentDays.Checked = true;
+            this.chkCreativeRptRecentDays.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCreativeRptRecentDays.Location = new System.Drawing.Point(28, 18);
             this.chkCreativeRptRecentDays.Name = "chkCreativeRptRecentDays";
             this.chkCreativeRptRecentDays.Size = new System.Drawing.Size(15, 14);

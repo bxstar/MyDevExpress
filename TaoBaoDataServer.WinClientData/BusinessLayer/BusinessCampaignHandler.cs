@@ -112,25 +112,15 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public List<Campaign> GetCampaignOnline(TopSession session)
         {
-            // 定义返回值
-            List<Campaign> listCampaign = new List<Campaign>();
-            try
+            //推广计划
+            List<Campaign> lstCampaign = null;
+
+            var response = CommonHandler.DoTaoBaoApi<SimbaCampaignsGetResponse>(taobaoApiHandler.TaobaoSimbaCampaignsGet, session);
+            if (!response.IsError && response.Campaigns != null)
             {
-                var response = taobaoApiHandler.TaobaoSimbaCampaignsGet(session);
-                if (response.IsError)
-                {
-                    logger.Error(string.Format("用户{0}，ID={1} 线上，淘宝API下载推广计划数据 失败：{2}", session.ProxyUserName, session.UserID, response.Body));
-                }
-                else
-                {
-                    listCampaign = response.Campaigns;
-                }
+                lstCampaign = response.Campaigns;
             }
-            catch (Exception ex)
-            {
-                logger.Error("线上，淘宝API下载推广计划数据 失败：", ex);
-            }
-            return listCampaign;
+            return lstCampaign;
         }
 
         /// <summary>
@@ -463,7 +453,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         {
 
             var response = CommonHandler.DoTaoBaoApi<SimbaRptCampaignbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampaignbaseGet, session, campaignId, strStartDay, strEndDay);
-            return response.RptCampaignBaseList;
+            return response.RptCampaignBaseList ?? string.Empty; ;
         }
 
         /// <summary>
@@ -472,7 +462,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public string DownLoadCampaignEffectReport(TopSession session, long campaignId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptCampaigneffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampaigneffectGet, session, campaignId, strStartDay, strEndDay);
-            return response.RptCampaignEffectList;
+            return response.RptCampaignEffectList ?? string.Empty; ;
         }
     }
 }

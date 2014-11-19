@@ -347,16 +347,7 @@ namespace TaoBaoDataServer.WinClientData
             try
             {
                 // 从线上获取Top100的关键词
-                var response = TaobaoApiHandler.TaobaoSimbaInsightCatstopwordGet(session, categoryId);
-                // 获取Top100的关键词
-                if (response != null && response.TopWords != null && response.TopWords.Count > 0)
-                {
-                    // 循环加入返回值
-                    for (int i = 0; i < response.TopWords.Count; i++)
-                    {
-                        result.Add(response.TopWords[i]);
-                    }
-                }
+
             }
             catch (Exception ex)
             {
@@ -691,14 +682,7 @@ namespace TaoBaoDataServer.WinClientData
         private List<string> GetTaobaoApiList(TopSession session, string keyword)
         {
             var listResult = new List<string>();
-            var listTaobao = TaobaoApiHandler.TaobaoSimbaInsightCatsrelatedwordGet(session, keyword);
-            if (listTaobao != null && listTaobao.RelatedWords != null)
-            {
-                foreach (var strAntistop in listTaobao.RelatedWords)
-                {
-                    listResult.Add(strAntistop);
-                }
-            }
+            //查找类目相关词
             return listResult;
         }
 
@@ -828,60 +812,60 @@ namespace TaoBaoDataServer.WinClientData
         #endregion
 
         #region 计算关键词的平均数据
-        /// <summary>
-        /// 取得一周内平均值
-        /// </summary>
-        /// <param name="param">一周关键词信息</param>
-        /// <returns></returns>
-        private KeywordAvgData GetKeywordAvgData(List<INRecordBase> param)
-        {
-            var avgData = new KeywordAvgData();
-            decimal pv = 0;
-            decimal cpc = 0;
-            decimal click = 0;
-            decimal competition = 0;
-            // 求和
-            foreach (var inRecordBase in param)
-            {
-                pv = pv + inRecordBase.Pv;
-                cpc = cpc + inRecordBase.AvgPrice;
-                click = click + inRecordBase.Click;
-                competition = competition + inRecordBase.Competition;
-            }
-            // 天数
-            avgData.Days = param.Count;
+        ///// <summary>
+        ///// 取得一周内平均值
+        ///// </summary>
+        ///// <param name="param">一周关键词信息</param>
+        ///// <returns></returns>
+        //private KeywordAvgData GetKeywordAvgData(List<INRecordBase> param)
+        //{
+        //    var avgData = new KeywordAvgData();
+        //    decimal pv = 0;
+        //    decimal cpc = 0;
+        //    decimal click = 0;
+        //    decimal competition = 0;
+        //    // 求和
+        //    foreach (var inRecordBase in param)
+        //    {
+        //        pv = pv + inRecordBase.Pv;
+        //        cpc = cpc + inRecordBase.AvgPrice;
+        //        click = click + inRecordBase.Click;
+        //        competition = competition + inRecordBase.Competition;
+        //    }
+        //    // 天数
+        //    avgData.Days = param.Count;
 
-            var avgPv = Math.Round((pv / param.Count), 0);
-            // 取平均值
-            avgData.Pv = Convert.ToInt64(avgPv);
-            // 算取平均价格
-            decimal avgPrice = Math.Round(cpc / param.Count, 2);
+        //    var avgPv = Math.Round((pv / param.Count), 0);
+        //    // 取平均值
+        //    avgData.Pv = Convert.ToInt64(avgPv);
+        //    // 算取平均价格
+        //    decimal avgPrice = Math.Round(cpc / param.Count, 2);
 
-            avgData.AvgPrice = Convert.ToInt64(avgPrice);
-            // 计算点击量
-            var avgClick = Math.Round((click / param.Count), 0);
+        //    avgData.AvgPrice = Convert.ToInt64(avgPrice);
+        //    // 计算点击量
+        //    var avgClick = Math.Round((click / param.Count), 0);
 
-            avgData.Click = Convert.ToInt64(avgClick);
-            // 计算宝贝竞争数
-            var avgCompetition = Math.Round((competition / param.Count), 0);
+        //    avgData.Click = Convert.ToInt64(avgClick);
+        //    // 计算宝贝竞争数
+        //    var avgCompetition = Math.Round((competition / param.Count), 0);
 
-            avgData.Competition = Convert.ToInt64(avgCompetition);
-            // 计算点击率
-            if (avgData.Pv > 0)
-            {
-                var ctr = Convert.ToDecimal(avgData.Click) / Convert.ToDecimal(avgData.Pv);
+        //    avgData.Competition = Convert.ToInt64(avgCompetition);
+        //    // 计算点击率
+        //    if (avgData.Pv > 0)
+        //    {
+        //        var ctr = Convert.ToDecimal(avgData.Click) / Convert.ToDecimal(avgData.Pv);
 
-                avgData.Ctr = Math.Round(ctr, 4).ToString();
-            }
-            else
-            {
-                avgData.Ctr = "0";
-            }
-            // 转化成Double类型的建议出价
-            avgData.SuggestPrice = GetSuggestPrice(Convert.ToDouble(avgData.AvgPrice) / 100);
+        //        avgData.Ctr = Math.Round(ctr, 4).ToString();
+        //    }
+        //    else
+        //    {
+        //        avgData.Ctr = "0";
+        //    }
+        //    // 转化成Double类型的建议出价
+        //    avgData.SuggestPrice = GetSuggestPrice(Convert.ToDouble(avgData.AvgPrice) / 100);
 
-            return avgData;
-        }
+        //    return avgData;
+        //}
 
         /// <summary>
         /// 获取建议出价
@@ -953,41 +937,8 @@ namespace TaoBaoDataServer.WinClientData
         {
             //存储结果集
             var resultLst = new List<KeywordAvgData>();
-            //对关键词进行分组，每组最多170个
-            List<List<string>> groupLstword = TechNet.SplitLst<string>(lstword, 170);
+            //TODO使用WebService获取指数
 
-            // 循环取得每组关键词获得基础数据和类目
-            foreach (List<string> group in groupLstword)
-            {
-                // 存储拼接后的关键词
-                string strKeywords = string.Join(",", group.ToArray());
-                // 词基础数据查询
-                var response = TaobaoApiHandler.TaobaoSimbaInsightWordsbaseGetByWeek(session, strKeywords);
-                // 判断取得的指数信息是否正确返回
-
-                if (response != null && response.InWordBases != null && response.InWordBases.Count > 0)
-                {
-                    List<string> lstKeyword = new List<string>();
-                    foreach (var wordBase in response.InWordBases)
-                    {
-                        lstKeyword.Add(wordBase.Word);
-                        // 计算词的平均值
-                        KeywordAvgData keywordAvgData = GetKeywordAvgData(wordBase.InRecordBaseList);
-                        keywordAvgData.Word = wordBase.Word;
-                        resultLst.Add(keywordAvgData);
-                    }
-                    // 预测关键词类目，将关键词按照长度排序，长度最小的可能拿不到类目，放在前面
-                    List<KeywordAndCategory> lstCategory = keywordHandler.ForecastCategory(session, lstKeyword.OrderBy(o => o.Length).ToList(), Convert.ToInt64(categoryId));
-                    foreach (var item in lstCategory)
-                    {
-                        KeywordAvgData k = resultLst.Find(o => o.Word == item.Word);
-                        if (k != null)
-                        {
-                            k.CategoryLevel = item.CategoryLevel;
-                        }
-                    }
-                }
-            }
             // 去掉重复
             return resultLst.Distinct(new KeywordAvgDataComparer()).ToList();
         }

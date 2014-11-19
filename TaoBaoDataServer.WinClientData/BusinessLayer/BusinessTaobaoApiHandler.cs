@@ -280,7 +280,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <param name="pageSize">页面行数</param>
         /// <param name="pageNo">当前页</param>
         /// <returns></returns>
-        public SimbaAdgroupsbycampaignidGetResponse TaobaoSimbaAdgroupsGetByCampaignId(TopSession session, long campaignId, int pageSize, int pageNo)
+        public SimbaAdgroupsbycampaignidGetResponse TaobaoSimbaAdgroupsGetByCampaignId(TopSession session, long campaignId, long pageSize, long pageNo)
         {
             var req = new SimbaAdgroupsbycampaignidGetRequest
             {
@@ -326,7 +326,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             var req = new SimbaAdgroupsbyadgroupidsGetRequest
             {
                 Nick = session.UserName,
-                AdgroupIds = String.Join(",", adgroupIds.ConvertAll<string>(new Converter<long, string>(m => m.ToString())).ToArray()),
+                AdgroupIds = String.Join(",", adgroupIds),
                 PageNo = 1,
                 PageSize = 200
             };
@@ -616,64 +616,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         #endregion
 
         /// <summary>
-        /// 取得类目属性预测
-        /// </summary>
-        /// <param name="strkeywords">关键词</param>
-        /// <returns>取得类目</returns>
-        public SimbaInsightCatsforecastGetResponse TaobaoSimbaInsightCatsforecastGet(TopSession session, string strkeywords)
-        {
-            var req = new SimbaInsightCatsforecastGetRequest { Nick = session.UserName, Words = strkeywords };
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
-        /// 词和类目查询
-        /// </summary>
-        /// <param name="strtypeids">用户选择的类别编号</param>
-        /// <returns></returns>
-        public SimbaInsightWordscatsGetResponse TaobaoSimbaInsightWordscatsGet(TopSession session, string strtypeids)
-        {
-            var req = new SimbaInsightWordscatsGetRequest { Nick = session.UserName, WordCategories = strtypeids, Filter = "PV,CLICK" };
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
-        /// 类目相关词查询
-        /// </summary>
-        /// <param name="strkeywords">用户关键词</param>
-        /// <returns></returns>
-        public SimbaInsightCatsrelatedwordGetResponse TaobaoSimbaInsightCatsrelatedwordGet(TopSession session, string strkeywords)
-        {
-            var req = new SimbaInsightCatsrelatedwordGetRequest { Nick = session.UserName, Words = strkeywords, ResultNum = 10 };
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
-        /// 类目TOP词查询
-        /// </summary>
-        /// <returns></returns>
-        public SimbaInsightCatstopwordGetResponse TaobaoSimbaInsightCatstopwordGet(TopSession session, string strTypeIds)
-        {
-            var req = new SimbaInsightCatstopwordGetRequest { Nick = session.UserName, CategoryIds = strTypeIds, ResultNum = 100 };
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
-        /// taobao.simba.insight.wordsanalysis.get 词分析数据查询 
-        /// </summary>
-        /// <returns></returns>
-        public SimbaInsightWordsanalysisGetResponse TaobaoSimbaInsightWordsanalysisGet(TopSession session, string strWords, string stu)
-        {
-            var req = new SimbaInsightWordsanalysisGetRequest { Nick = session.UserName, Words = strWords, Stu = stu };
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
         /// taobao.simba.tools.items.top.get 取得一个关键词的推广组排名列表 
         /// </summary>
         /// <param name="strWords">关键词</param>
@@ -682,89 +624,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public SimbaToolsItemsTopGetResponse TaobaoSimbaToolsItemsTopGet(TopSession session, string strWords, string ip)
         {
             var req = new SimbaToolsItemsTopGetRequest { Nick = session.UserName, Keyword = strWords, Ip = ip };
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
-        /// taobao.simba.insight.wordsbase.get 词基础数据查询 
-        /// </summary>
-        /// <param name="strWords">关键词</param>
-        /// <returns></returns>
-        public SimbaInsightWordsbaseGetResponse TaobaoSimbaInsightWordsbaseGetByDay(TopSession session, string strWords)
-        {
-            var req = new SimbaInsightWordsbaseGetRequest
-            {
-                Nick = session.UserName,
-                Words = strWords,
-                Time = "DAY",
-                Filter = "PV,CLICK,AVGCPC,COMPETITION,CTR"
-            };
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
-        /// taobao.simba.insight.wordsbase.get 词基础数据查询 
-        /// </summary>
-        /// <param name="strWords">关键词</param>
-        /// <returns></returns>
-        public SimbaInsightWordsbaseGetResponse TaobaoSimbaInsightWordsbaseGetByWeek(TopSession session, string strWords)
-        {
-            var req = new SimbaInsightWordsbaseGetRequest
-            {
-                Nick = session.UserName,
-                Words = strWords,
-                Time = "WEEK",
-                Filter = "PV,CLICK,AVGCPC,COMPETITION,CTR"
-            };
-            var response = _client.Execute(req, session.TopSessions);
-            if (response.InWordBases == null)
-            {
-                var reqDay = new SimbaInsightWordsbaseGetRequest
-                {
-                    Nick = session.UserName,
-                    Words = strWords,
-                    Time = "DAY",
-                    Filter = "PV,CLICK,AVGCPC,COMPETITION,CTR"
-                };
-                response = _client.Execute(reqDay, session.TopSessions);
-            }
-            return response;
-        }
-
-
-        /// <summary>
-        /// taobao.simba.insight.wordsbase.get 词基础数据查询 
-        /// </summary>
-        /// <param name="strWords">关键词</param>
-        /// <returns></returns>
-        public SimbaInsightWordsbaseGetResponse TaobaoSimbaInsightWordsbaseGetByMonth(TopSession session, string strWords)
-        {
-            var req = new SimbaInsightWordsbaseGetRequest
-            {
-                Nick = session.UserName,
-                Words = strWords,
-                Time = "MONTH",
-                Filter = "PV,CLICK,AVGCPC,COMPETITION,CTR"
-            };
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
-        /// taobao.simba.insight.catsbase.get 获取类目的基础数据
-        /// </summary>
-        /// <param name="session"></param>
-        /// <param name="strCategoryIds"></param>
-        /// <returns></returns>
-        public SimbaInsightCatsbaseGetResponse TaobaoSimbaInsightCatsbaseGet(TopSession session, string strCategoryIds)
-        {
-            var req = new SimbaInsightCatsbaseGetRequest();
-            req.Nick = session.UserName;
-            req.CategoryIds = strCategoryIds;
-            req.Time = "WEEK";
-            req.Filter = "PV,CLICK,AVGCPC,COMPETITION,CTR";
             var response = _client.Execute(req, session.TopSessions);
             return response;
         }
@@ -926,18 +785,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
-        /// 获取类目id对应的类目名称
-        /// </summary>
-        /// <param name="session"></param>
-        /// <param name="categoryIds">完整的类目id，用,分隔比如 123,345,678</param>
-        /// <returns></returns>
-        public SimbaInsightCatsGetResponse TaobaoSimbaInsightCatsGet(TopSession session, string categoryIds)
-        {
-            var req = new SimbaInsightCatsGetRequest { Nick = session.UserName, CategoryIds = categoryIds };
-            return _client.Execute(req, session.TopSessions);
-        }
-
-        /// <summary>
         /// 取得线上用户的信息
         /// </summary>
         /// <param name="session">session</param>
@@ -1066,24 +913,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             return response;
         }
 
-
-        /// <summary>
-        /// 预估排名信息
-        /// </summary>
-        /// <param name="session"></param>
-        /// <param name="keywordId"></param>
-        /// <param name="bidwordPrice"></param>
-        /// <returns></returns>
-        public SimbaKeywordKeywordforecastGetResponse TaobaoSimbaKeywordKeywordforecastGet(TopSession session, long keywordId, long bidwordPrice)
-        {
-            var req = new SimbaKeywordKeywordforecastGetRequest();
-            req.Nick = session.UserName;
-            req.KeywordId = keywordId;
-            req.BidwordPrice = bidwordPrice;
-            var response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
         /// <summary>
         /// taobao.simba.adgroups.changed.get 分页获取修改的推广组ID和修改时间
         /// </summary>
@@ -1143,17 +972,6 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             req.PageSize = page_size;
             req.Source = "SUMMARY";
             SimbaRptCusteffectGetResponse response = _client.Execute(req, session.TopSessions);
-            return response;
-        }
-
-        /// <summary>
-        /// taobao.simba.insight.toplevelcats.get 获取全部类目，一级类目
-        /// </summary>
-        public SimbaInsightToplevelcatsGetResponse TaobaoSimbaInsightToplevelcatsGet(TopSession session)
-        {
-            SimbaInsightToplevelcatsGetRequest req = new SimbaInsightToplevelcatsGetRequest();
-            req.Nick = session.UserName;
-            var response = _client.Execute(req, session.TopSessions);
             return response;
         }
 

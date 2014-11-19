@@ -36,7 +36,7 @@ namespace TaoBaoDataServer.WinClientData
         {
             long categoryId = 50016819;
             List<string> lstKeyword = richTextBox1.Text.Split('\n').ToList();
-            List<KeywordAndCategory> lstResult = keywordHandler.ForecastCategory(session, lstKeyword, categoryId);
+            //List<KeywordAndCategory> lstResult = keywordHandler.ForecastCategory(session, lstKeyword, categoryId);
 
         }
 

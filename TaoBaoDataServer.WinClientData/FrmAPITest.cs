@@ -15,6 +15,7 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using TaoBaoDataServer.WinClientData.BusinessLayer;
 using iclickpro.AccessCommon;
+using DevExpress.Data;
 
 
 namespace TaoBaoDataServer.WinClientData
@@ -110,6 +111,10 @@ namespace TaoBaoDataServer.WinClientData
             gridViewCampaignRpt.EndSorting += new EventHandler(gridViewEndSorting);
             gridViewAdgroupRpt.EndSorting += new EventHandler(gridViewEndSorting);
             gridViewCreativeRpt.EndSorting += new EventHandler(gridViewEndSorting);
+
+            //自定义分组计算
+            gridViewCreativeRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
+            gridViewKeywordRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
         }
 
         private TopSession GetSession()
@@ -1224,6 +1229,13 @@ namespace TaoBaoDataServer.WinClientData
             gridControlCreativeRpt.DataSource = lstRpt;
         }
 
+        private void btnNewCreativeRptForm_Click(object sender, EventArgs e)
+        {
+            object reportData = gridControlCreativeRpt.DataSource;
+            FrmReport frm = new FrmReport(string.Format("计划：{0}，ID：{1}，推广组的创意报表", selectedCampaign.Title, selectedCampaign.CampaignId));
+            frm.ReportData = reportData;
+            frm.Show();
+        }
 
         private void 网页打开宝贝ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -1247,14 +1259,7 @@ namespace TaoBaoDataServer.WinClientData
             if (itemId == 0)
             {
                 TopSession session = GetSession();
-                List<long> lstAdgroupId = new List<long>();
-                lstAdgroupId.Add(rpt.adgroup_id);
-                var response = taobaoApiHandler.TaobaoSimbaAdgroupsByAdgroupIds(session, lstAdgroupId);
-                if (!response.IsError)
-                {
-                    ADGroup adgroup = response.Adgroups.AdgroupList.Find(o => o.AdgroupId == rpt.adgroup_id);
-                    itemId = adgroup.NumIid;
-                }
+                itemId = adgroupHandler.GetAdgroupOnlineByAdgroupId(session, rpt.adgroup_id).NumIid;
             }
             string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", itemId);
             System.Diagnostics.Process.Start("iexplore.exe", itemUrl);

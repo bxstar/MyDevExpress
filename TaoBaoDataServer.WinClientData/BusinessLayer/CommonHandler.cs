@@ -430,49 +430,230 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <returns></returns>
         public static T DoTaoBaoApi<T>(Func<TopSession, T> apiMethod, TopSession user, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
-            var response = apiMethod(user);
-            DateTime dtStart = DateTime.Now;
-            int banCount = 0;
-            if (response.IsError)
+            T response = default(T);
+            try
             {
-                if (CommonHandler.IsBanMsg(response))
-                {//遇到频繁访问的错误，需要多次访问
-                    Boolean isBanError = true;
-                    while (isBanError)
-                    {
-                        banCount++;
-                        System.Threading.Thread.Sleep(2000 * banCount);
-                        response = apiMethod(user);
-                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
-                        {//默认，超过1分钟放弃
-                            isBanError = true;
-                        }
-                        else
-                        {
-                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
-                            {
-                                return response;
-                            }
-                            isBanError = false;
-                        }
-                    }
-                }
-                else if (reDoTimes > 0)
-                {//遇到一般性错误重试
-                    int times = 1;
-                    while (response.IsError && times <= reDoTimes)
-                    {
-                        times++;
-                        System.Threading.Thread.Sleep(300);
-                        response = apiMethod(user);
-                    }
-                }
-                else
+                response = apiMethod(user);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
                 {
-                    return response;
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
                 }
             }
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0}", user.TopSessions), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0}", user.TopSessions), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0}", user.TopSessions), se3);
+                        return null;
+                    }
+                }
+            }
+            return response;
+        }
 
+        /// <summary>
+        /// 调用淘宝API封装，参数类型TopSession,long
+        /// </summary>
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, T> apiMethod, TopSession user, long longPara, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        {
+            T response = default(T);
+            try
+            {
+                response = apiMethod(user, longPara);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
+                {
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user, longPara);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user, longPara);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
+                }
+            }
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0}", user.TopSessions), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user, longPara);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0}", user.TopSessions), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user, longPara);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0}", user.TopSessions), se3);
+                        return null;
+                    }
+                }
+            }
+            return response;
+        }
+
+
+        /// <summary>
+        /// 调用淘宝API封装，参数类型TopSession,List<long>
+        /// </summary>
+        public static T DoTaoBaoApi<T>(Func<TopSession, List<long>, T> apiMethod, TopSession user, List<long> lstLongPara, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        {
+            T response = default(T);
+            try
+            {
+                response = apiMethod(user, lstLongPara);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
+                {
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user, lstLongPara);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user, lstLongPara);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
+                }
+            }
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0}", user.TopSessions), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user, lstLongPara);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0}", user.TopSessions), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user,lstLongPara);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0}", user.TopSessions), se3);
+                        return null;
+                    }
+                }
+            }
             return response;
         }
 
@@ -481,49 +662,75 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public static T DoTaoBaoApi<T>(Func<TopSession, string, T> apiMethod, TopSession user, string strPara, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
-            var response = apiMethod(user, strPara);
-            DateTime dtStart = DateTime.Now;
-            int banCount = 0;
-            if (response.IsError)
+            T response = default(T);
+            try
             {
-                if (CommonHandler.IsBanMsg(response))
-                {//遇到频繁访问的错误，需要多次访问
-                    Boolean isBanError = true;
-                    while (isBanError)
-                    {
-                        banCount++;
-                        System.Threading.Thread.Sleep(2000 * banCount);
-                        response = apiMethod(user, strPara);
-                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
-                        {//默认，超过1分钟放弃
-                            isBanError = true;
-                        }
-                        else
-                        {
-                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
-                            {
-                                return response;
-                            }
-                            isBanError = false;
-                        }
-                    }
-                }
-                else if (reDoTimes > 0)
-                {//遇到一般性错误重试
-                    int times = 1;
-                    while (response.IsError && times <= reDoTimes)
-                    {
-                        times++;
-                        System.Threading.Thread.Sleep(300);
-                        response = apiMethod(user, strPara);
-                    }
-                }
-                else
+                response = apiMethod(user, strPara);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
                 {
-                    return response;
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user, strPara);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user, strPara);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
                 }
             }
-
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0},{1}", user.TopSessions, strPara), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user,strPara);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0},{1}", user.TopSessions, strPara), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user, strPara);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0},{1}", user.TopSessions, strPara), se3);
+                        return null;
+                    }
+                }
+            }
             return response;
         }
 
@@ -532,49 +739,152 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public static T DoTaoBaoApi<T>(Func<TopSession, string, string, T> apiMethod, TopSession user, string strPara1, string strPara2, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
-            var response = apiMethod(user, strPara1, strPara2);
-            DateTime dtStart = DateTime.Now;
-            int banCount = 0;
-            if (response.IsError)
+            T response = default(T);
+            try
             {
-                if (CommonHandler.IsBanMsg(response))
-                {//遇到频繁访问的错误，需要多次访问
-                    Boolean isBanError = true;
-                    while (isBanError)
-                    {
-                        banCount++;
-                        System.Threading.Thread.Sleep(2000 * banCount);
-                        response = apiMethod(user, strPara1, strPara2);
-                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
-                        {//默认，超过1分钟放弃
-                            isBanError = true;
-                        }
-                        else
-                        {
-                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
-                            {
-                                return response;
-                            }
-                            isBanError = false;
-                        }
-                    }
-                }
-                else if (reDoTimes > 0)
-                {//遇到一般性错误重试
-                    int times = 1;
-                    while (response.IsError && times <= reDoTimes)
-                    {
-                        times++;
-                        System.Threading.Thread.Sleep(300);
-                        response = apiMethod(user, strPara1, strPara2);
-                    }
-                }
-                else
+                response = apiMethod(user, strPara1, strPara2);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
                 {
-                    return response;
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user, strPara1, strPara2);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user, strPara1, strPara2);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
                 }
             }
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0}", user.TopSessions), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user, strPara1, strPara2);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0}", user.TopSessions), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user, strPara1, strPara2);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0}", user.TopSessions), se3);
+                        return null;
+                    }
+                }
+            }
+            return response;
+        }
 
+        /// <summary>
+        /// 调用淘宝API封装，参数类型TopSession,long,long,long
+        /// </summary>
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, long, T> apiMethod, TopSession user, long longPara1, long longPara2, long longPara3, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        {
+            T response = default(T);
+            try
+            {
+                response = apiMethod(user, longPara1, longPara2, longPara3);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
+                {
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user, longPara1, longPara2, longPara3);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user, longPara1, longPara2, longPara3);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
+                }
+            }
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0},{1},{2},{3}", user.TopSessions, longPara1, longPara2, longPara3), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user, longPara1, longPara2, longPara3);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0},{1},{2},{3}", user.TopSessions, longPara1, longPara2, longPara3), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user, longPara1, longPara2, longPara3);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0},{1},{2},{3}", user.TopSessions, longPara1, longPara2, longPara3), se3);
+                        return null;
+                    }
+                }
+            }
             return response;
         }
 
@@ -583,49 +893,75 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public static T DoTaoBaoApi<T>(Func<TopSession, long, long, string, string, T> apiMethod, TopSession user, long longPara1, long longPara2, string strPara3, string strPara4, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
-            var response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
-            DateTime dtStart = DateTime.Now;
-            int banCount = 0;
-            if (response.IsError)
+            T response = default(T);
+            try
             {
-                if (CommonHandler.IsBanMsg(response))
-                {//遇到频繁访问的错误，需要多次访问
-                    Boolean isBanError = true;
-                    while (isBanError)
-                    {
-                        banCount++;
-                        System.Threading.Thread.Sleep(2000 * banCount);
-                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
-                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
-                        {//默认，超过1分钟放弃
-                            isBanError = true;
-                        }
-                        else
-                        {
-                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
-                            {
-                                return response;
-                            }
-                            isBanError = false;
-                        }
-                    }
-                }
-                else if (reDoTimes > 0)
-                {//遇到一般性错误重试
-                    int times = 1;
-                    while (response.IsError && times <= reDoTimes)
-                    {
-                        times++;
-                        System.Threading.Thread.Sleep(300);
-                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
-                    }
-                }
-                else
+                response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
                 {
-                    return response;
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
                 }
             }
-
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0},{1},{2},{3},{4}", user.TopSessions, longPara1, longPara2, strPara3,strPara4), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0},{1},{2},{3},{4}", user.TopSessions, longPara1, longPara2, strPara3, strPara4), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0},{1},{2},{3},{4}", user.TopSessions, longPara1, longPara2, strPara3, strPara4), se3);
+                        return null;
+                    }
+                }
+            }
             return response;
         }
 
@@ -634,49 +970,75 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public static T DoTaoBaoApi<T>(Func<TopSession, long, string, string, T> apiMethod, TopSession user, long longPara1, string strPara2, string strPara3, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
-            var response = apiMethod(user, longPara1, strPara2, strPara3);
-            DateTime dtStart = DateTime.Now;
-            int banCount = 0;
-            if (response.IsError)
+            T response = default(T);
+            try
             {
-                if (CommonHandler.IsBanMsg(response))
-                {//遇到频繁访问的错误，需要多次访问
-                    Boolean isBanError = true;
-                    while (isBanError)
-                    {
-                        banCount++;
-                        System.Threading.Thread.Sleep(2000 * banCount);
-                        response = apiMethod(user, longPara1, strPara2, strPara3);
-                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
-                        {//默认，超过1分钟放弃
-                            isBanError = true;
-                        }
-                        else
-                        {
-                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
-                            {
-                                return response;
-                            }
-                            isBanError = false;
-                        }
-                    }
-                }
-                else if (reDoTimes > 0)
-                {//遇到一般性错误重试
-                    int times = 1;
-                    while (response.IsError && times <= reDoTimes)
-                    {
-                        times++;
-                        System.Threading.Thread.Sleep(300);
-                        response = apiMethod(user, longPara1, strPara2, strPara3);
-                    }
-                }
-                else
+                response = apiMethod(user, longPara1, strPara2, strPara3);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
                 {
-                    return response;
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user, longPara1, strPara2, strPara3);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user, longPara1, strPara2, strPara3);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
                 }
             }
-
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0},{1},{2},{3}", user.TopSessions, longPara1, strPara2, strPara3), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user, longPara1, strPara2, strPara3);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0},{1},{2},{3}", user.TopSessions, longPara1, strPara2, strPara3), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user, longPara1, strPara2, strPara3);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0},{1},{2},{3}", user.TopSessions, longPara1, strPara2, strPara3), se3);
+                        return null;
+                    }
+                }
+            }
             return response;
         }
 
@@ -685,50 +1047,77 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// </summary>
         public static T DoTaoBaoApi<T>(Func<TopSession, long, long, string, string, string, long, long, string, T> apiMethod, TopSession user, long longPara1, long longPara2, string strPara3, string strPara4, string strPara5, long longPara6, long longPara7, string strPara8, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
-            var response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
-            DateTime dtStart = DateTime.Now;
-            int banCount = 0;
-            if (response.IsError)
+            T response = default(T);
+            try
             {
-                if (CommonHandler.IsBanMsg(response))
-                {//遇到频繁访问的错误，需要多次访问
-                    Boolean isBanError = true;
-                    while (isBanError)
-                    {
-                        banCount++;
-                        System.Threading.Thread.Sleep(2000 * banCount);
-                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
-                        if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
-                        {//默认，超过1分钟放弃
-                            isBanError = true;
-                        }
-                        else
-                        {
-                            if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
-                            {
-                                return response;
-                            }
-                            isBanError = false;
-                        }
-                    }
-                }
-                else if (reDoTimes > 0)
-                {//遇到一般性错误重试
-                    int times = 1;
-                    while (response.IsError && times <= reDoTimes)
-                    {
-                        times++;
-                        System.Threading.Thread.Sleep(300);
-                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
-                    }
-                }
-                else
+                response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
+                DateTime dtStart = DateTime.Now;
+                int banCount = 0;
+                if (response.IsError)
                 {
-                    return response;
+                    if (CommonHandler.IsBanMsg(response))
+                    {//遇到频繁访问的错误，需要多次访问
+                        Boolean isBanError = true;
+                        while (isBanError)
+                        {
+                            banCount++;
+                            System.Threading.Thread.Sleep(2000 * banCount);
+                            response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
+                            if (response.IsError && IsBanMsg(response) && dtStart.AddSeconds(executionTimeout) > DateTime.Now)
+                            {//默认，超过1分钟放弃
+                                isBanError = true;
+                            }
+                            else
+                            {
+                                if (dtStart.AddSeconds(executionTimeout) <= DateTime.Now)
+                                {
+                                    return response;
+                                }
+                                isBanError = false;
+                            }
+                        }
+                    }
+                    else if (reDoTimes > 0)
+                    {//遇到一般性错误重试
+                        int times = 1;
+                        while (response.IsError && times <= reDoTimes)
+                        {
+                            times++;
+                            System.Threading.Thread.Sleep(300);
+                            response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
+                        }
+                    }
+                    else
+                    {
+                        return response;
+                    }
                 }
             }
-
+            catch (Exception se1)
+            {
+                logger.Error(string.Format("taobao api 1次出错:{0},{1}", user.TopSessions, apiMethod.ToString()), se1);
+                System.Threading.Thread.Sleep(100);
+                try
+                {
+                    response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
+                }
+                catch (Exception se2)
+                {
+                    logger.Error(string.Format("taobao api 2次出错:{0},{1}", user.TopSessions, apiMethod.ToString()), se2);
+                    System.Threading.Thread.Sleep(200);
+                    try
+                    {
+                        response = apiMethod(user, longPara1, longPara2, strPara3, strPara4, strPara5, longPara6, longPara7, strPara8);
+                    }
+                    catch (Exception se3)
+                    {
+                        logger.Error(string.Format("taobao api 3次出错:{0},{1}", user.TopSessions, apiMethod.ToString()), se3);
+                        return null;
+                    }
+                }
+            }
             return response;
         }
+
     }
 }
