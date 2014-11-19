@@ -444,7 +444,10 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 pageIndex = pageIndex + 1;
                 // 下载推广组效果报表
                 var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupkeywordeffectGetResponse>(TaobaoApiHandler.TaobaoSimbaRptAdgroupkeywordeffectGet, session, campaignId, adgroupId, startDay, endDay, "SUMMARY", pageSize, pageIndex, "SUMMARY");
-
+                if (response == null || String.IsNullOrEmpty(response.RptAdgroupkeywordEffectList) || response.RptAdgroupkeywordEffectList == "[]" || response.RptAdgroupkeywordEffectList == "{}")
+                {
+                    break;
+                }
                 int returnPageSize = 0;
                 string jsonEffectRpt = response.RptAdgroupkeywordEffectList.ToLower();
                 if (!string.IsNullOrEmpty(jsonEffectRpt) && jsonEffectRpt.Length > 2)

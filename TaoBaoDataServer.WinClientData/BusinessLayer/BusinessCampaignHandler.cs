@@ -116,7 +116,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             List<Campaign> lstCampaign = null;
 
             var response = CommonHandler.DoTaoBaoApi<SimbaCampaignsGetResponse>(taobaoApiHandler.TaobaoSimbaCampaignsGet, session);
-            if (!response.IsError && response.Campaigns != null)
+            if (response != null && !response.IsError && response.Campaigns != null)
             {
                 lstCampaign = response.Campaigns;
             }
@@ -453,7 +453,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         {
 
             var response = CommonHandler.DoTaoBaoApi<SimbaRptCampaignbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampaignbaseGet, session, campaignId, strStartDay, strEndDay);
-            return response.RptCampaignBaseList ?? string.Empty; ;
+            return response == null ? string.Empty : response.RptCampaignBaseList ?? string.Empty; ;
         }
 
         /// <summary>
@@ -462,7 +462,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public string DownLoadCampaignEffectReport(TopSession session, long campaignId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptCampaigneffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampaigneffectGet, session, campaignId, strStartDay, strEndDay);
-            return response.RptCampaignEffectList ?? string.Empty; ;
+            return response == null ? string.Empty : response.RptCampaignEffectList ?? string.Empty; ;
         }
     }
 }

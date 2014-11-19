@@ -347,7 +347,7 @@ insert into ad_adgroup
         private string DownLoadAdgroupBaseReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupbaseGet, session, campaignId, adgroupId, strStartDay, strEndDay);
-            return response.RptAdgroupBaseList ?? string.Empty;
+            return response == null ? string.Empty : response.RptAdgroupBaseList ?? string.Empty;
         }
 
         /// <summary>
@@ -356,7 +356,7 @@ insert into ad_adgroup
         private string DownLoadAdgroupEffectReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupeffectGet, session, campaignId, adgroupId, strStartDay, strEndDay);
-            return response.RptAdgroupEffectList ?? string.Empty;
+            return response == null ? string.Empty : response.RptAdgroupEffectList ?? string.Empty;
         }
 
         /// <summary>
@@ -458,7 +458,7 @@ insert into ad_adgroup
         private string DownLoadAdgroupBaseReportByCampaign(TopSession session, long campaignId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptCampadgroupbaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampadgroupbaseGet, session, campaignId, strStartDay, strEndDay);
-            return response.RptCampadgroupBaseList ?? string.Empty;
+            return response == null ? string.Empty : response.RptCampadgroupBaseList ?? string.Empty;
         }
 
         /// <summary>
@@ -467,7 +467,7 @@ insert into ad_adgroup
         private string DownLoadAdgroupEffectReportByCampaign(TopSession session, long campaignId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptCampadgroupeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptCampadgroupeffectGet, session, campaignId, strStartDay, strEndDay);
-            return response.RptCampadgroupEffectList ?? string.Empty;
+            return response == null ? string.Empty : response.RptCampadgroupEffectList ?? string.Empty;
         }
 
         /// <summary>
@@ -569,7 +569,8 @@ insert into ad_adgroup
         private string DownLoadCreativeBaseReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupcreativebaseGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupcreativebaseGet, session, campaignId, adgroupId, strStartDay, strEndDay);
-            return response.RptAdgroupcreativeBaseList ?? string.Empty;
+
+            return response == null ? string.Empty : response.RptAdgroupcreativeBaseList ?? string.Empty;
         }
 
         /// <summary>
@@ -578,6 +579,7 @@ insert into ad_adgroup
         private string DownLoadCreativeEffectReport(TopSession session, long campaignId, long adgroupId, string strStartDay, string strEndDay)
         {
             var response = CommonHandler.DoTaoBaoApi<SimbaRptAdgroupcreativeeffectGetResponse>(taobaoApiHandler.TaobaoSimbaRptAdgroupcreativeeffectGet, session, campaignId, adgroupId, strStartDay, strEndDay);
+            if (response == null) return string.Empty;
 
             if (!string.IsNullOrEmpty(response.RptAdgroupcreativeEffectList))
             {

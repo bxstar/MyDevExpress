@@ -428,7 +428,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <param name="reDoTimes">遇到一般性错误的重做次数（不包括ban），默认为0</param>
         /// <param name="executionTimeout">遇到ban时，重做的时间长度</param>
         /// <returns></returns>
-        public static T DoTaoBaoApi<T>(Func<TopSession, T> apiMethod, TopSession user, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, T> apiMethod, TopSession user, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
@@ -505,7 +505,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 调用淘宝API封装，参数类型TopSession,long
         /// </summary>
-        public static T DoTaoBaoApi<T>(Func<TopSession, long, T> apiMethod, TopSession user, long longPara, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, T> apiMethod, TopSession user, long longPara, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
@@ -583,7 +583,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 调用淘宝API封装，参数类型TopSession,List<long>
         /// </summary>
-        public static T DoTaoBaoApi<T>(Func<TopSession, List<long>, T> apiMethod, TopSession user, List<long> lstLongPara, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, List<long>, T> apiMethod, TopSession user, List<long> lstLongPara, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
@@ -660,7 +660,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 调用淘宝API封装，参数类型TopSession,String
         /// </summary>
-        public static T DoTaoBaoApi<T>(Func<TopSession, string, T> apiMethod, TopSession user, string strPara, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, string, T> apiMethod, TopSession user, string strPara, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
@@ -737,7 +737,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 调用淘宝API封装，参数类型TopSession,String,String
         /// </summary>
-        public static T DoTaoBaoApi<T>(Func<TopSession, string, string, T> apiMethod, TopSession user, string strPara1, string strPara2, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, string, string, T> apiMethod, TopSession user, string strPara1, string strPara2, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
@@ -814,7 +814,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 调用淘宝API封装，参数类型TopSession,long,long,long
         /// </summary>
-        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, long, T> apiMethod, TopSession user, long longPara1, long longPara2, long longPara3, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, long, T> apiMethod, TopSession user, long longPara1, long longPara2, long longPara3, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
@@ -891,7 +891,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 调用淘宝API封装，参数类型TopSession,long,long,String,String
         /// </summary>
-        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, string, string, T> apiMethod, TopSession user, long longPara1, long longPara2, string strPara3, string strPara4, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, string, string, T> apiMethod, TopSession user, long longPara1, long longPara2, string strPara3, string strPara4, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
@@ -968,7 +968,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 调用淘宝API封装，参数类型TopSession,long,String,String
         /// </summary>
-        public static T DoTaoBaoApi<T>(Func<TopSession, long, string, string, T> apiMethod, TopSession user, long longPara1, string strPara2, string strPara3, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, string, string, T> apiMethod, TopSession user, long longPara1, string strPara2, string strPara3, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
@@ -1045,7 +1045,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         /// <summary>
         /// 调用淘宝API封装，参数类型TopSession,long,long,String,String,String,long,long,String
         /// </summary>
-        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, string, string, string, long, long, string, T> apiMethod, TopSession user, long longPara1, long longPara2, string strPara3, string strPara4, string strPara5, long longPara6, long longPara7, string strPara8, int reDoTimes = 0, int executionTimeout = 60) where T : Top.Api.TopResponse
+        public static T DoTaoBaoApi<T>(Func<TopSession, long, long, string, string, string, long, long, string, T> apiMethod, TopSession user, long longPara1, long longPara2, string strPara3, string strPara4, string strPara5, long longPara6, long longPara7, string strPara8, int reDoTimes = 3, int executionTimeout = 60) where T : Top.Api.TopResponse
         {
             T response = default(T);
             try
