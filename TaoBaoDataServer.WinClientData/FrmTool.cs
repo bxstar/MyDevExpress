@@ -18,6 +18,11 @@ namespace TaoBaoDataServer.WinClientData
     /// </summary>
     public class MyDockContent : DockContent
     {
+        /// <summary>
+        /// 浏览器路径
+        /// </summary>
+        protected static readonly string Const_BrowserPath = CommonFunction.GetAppSetting("BrowserPath");
+
         double totalImp = 0; double totalClick = 0; double totalPay = 0; double totalCost = 0;
         protected void gridViewCustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
         {

@@ -33,7 +33,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             var response = CommonHandler.DoTaoBaoApi<SimbaAdgroupsbycampaignidGetResponse>(taobaoApiHandler.TaobaoSimbaAdgroupsGetByCampaignId, session, campaignId, pageSize, pageIndex);
             if (response == null || response.IsError)
             {
-                logger.Error("线上获取计划的推广组失败：" + response.Body);
+                logger.Error("线上获取计划的推广组失败：" + response != null ? response.Body : string.Empty);
                 return lstAdgroup;
             }
 

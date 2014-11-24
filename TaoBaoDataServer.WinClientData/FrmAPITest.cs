@@ -1029,7 +1029,7 @@ namespace TaoBaoDataServer.WinClientData
         private void 网页打开宝贝ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", txtItemId.Text);
-            System.Diagnostics.Process.Start("iexplore.exe", itemUrl);
+            System.Diagnostics.Process.Start(Const_BrowserPath, itemUrl);
         }
 
         private void cbxApp_SelectedIndexChanged(object sender, EventArgs e)
@@ -1262,6 +1262,7 @@ namespace TaoBaoDataServer.WinClientData
                 itemId = adgroupHandler.GetAdgroupOnlineByAdgroupId(session, rpt.adgroup_id).NumIid;
             }
             string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", itemId);
+
             System.Diagnostics.Process.Start("iexplore.exe", itemUrl);
         }
 
