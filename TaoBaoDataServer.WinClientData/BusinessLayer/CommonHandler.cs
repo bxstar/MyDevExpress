@@ -102,20 +102,19 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
-        /// 线上，类目TOP100关键词
+        /// 线上，获取类目热词
         /// </summary>
-        public static List<string> GetCatTop100Keyword(long catId)
+        public static List<string> GetCatTopKeyword(long catId)
         {
-            List<string> result = null;
+            List<string> result = new List<string>();
             try
             {
-                string strItem = wsKeywordForecastProxy.GetCatTop100Keyword("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), catId.ToString());
+                string strItem = wsKeywordForecastProxy.GetCatTopKeyword("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), catId.ToString());
                 result = strItem.Split(',').ToList();
             }
             catch (Exception se)
             {
                 logger.Error("缓存，获取类目TOP100关键词错误", se);
-                return null;
             }
             return result;
         }

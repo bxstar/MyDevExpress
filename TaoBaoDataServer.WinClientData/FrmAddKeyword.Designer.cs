@@ -29,17 +29,20 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtAdGroupId = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.txtAdGroupId = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cbxUnitFen = new System.Windows.Forms.CheckBox();
+            this.cbxUnitYuan = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -56,6 +59,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(747, 45);
             this.panel1.TabIndex = 0;
+            // 
+            // txtAdGroupId
+            // 
+            this.txtAdGroupId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAdGroupId.Location = new System.Drawing.Point(82, 13);
+            this.txtAdGroupId.Name = "txtAdGroupId";
+            this.txtAdGroupId.Size = new System.Drawing.Size(653, 21);
+            this.txtAdGroupId.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 17);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "推广组ID：";
             // 
             // btnDel
             // 
@@ -86,24 +107,6 @@
             this.btnSave.Text = "确定";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // txtAdGroupId
-            // 
-            this.txtAdGroupId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAdGroupId.Location = new System.Drawing.Point(82, 13);
-            this.txtAdGroupId.Name = "txtAdGroupId";
-            this.txtAdGroupId.Size = new System.Drawing.Size(653, 21);
-            this.txtAdGroupId.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 17);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "推广组ID：";
             // 
             // panel2
             // 
@@ -161,6 +164,9 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.cbxUnitYuan);
+            this.panel3.Controls.Add(this.cbxUnitFen);
             this.panel3.Controls.Add(this.btnDel);
             this.panel3.Controls.Add(this.btnAdd);
             this.panel3.Controls.Add(this.btnSave);
@@ -169,6 +175,39 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(747, 45);
             this.panel3.TabIndex = 1;
+            // 
+            // cbxUnitFen
+            // 
+            this.cbxUnitFen.AutoSize = true;
+            this.cbxUnitFen.Checked = true;
+            this.cbxUnitFen.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxUnitFen.Location = new System.Drawing.Point(503, 16);
+            this.cbxUnitFen.Name = "cbxUnitFen";
+            this.cbxUnitFen.Size = new System.Drawing.Size(36, 16);
+            this.cbxUnitFen.TabIndex = 10;
+            this.cbxUnitFen.Text = "分";
+            this.cbxUnitFen.UseVisualStyleBackColor = true;
+            this.cbxUnitFen.CheckedChanged += new System.EventHandler(this.cbxUnitFen_CheckedChanged);
+            // 
+            // cbxUnitYuan
+            // 
+            this.cbxUnitYuan.AutoSize = true;
+            this.cbxUnitYuan.Location = new System.Drawing.Point(545, 16);
+            this.cbxUnitYuan.Name = "cbxUnitYuan";
+            this.cbxUnitYuan.Size = new System.Drawing.Size(36, 16);
+            this.cbxUnitYuan.TabIndex = 11;
+            this.cbxUnitYuan.Text = "元";
+            this.cbxUnitYuan.UseVisualStyleBackColor = true;
+            this.cbxUnitYuan.CheckedChanged += new System.EventHandler(this.cbxUnitYuan_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(427, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "出价单位：";
             // 
             // FrmAddKeyword
             // 
@@ -188,6 +227,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -206,5 +246,8 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbxUnitYuan;
+        private System.Windows.Forms.CheckBox cbxUnitFen;
     }
 }

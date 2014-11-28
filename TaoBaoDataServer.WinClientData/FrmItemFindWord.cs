@@ -84,8 +84,8 @@ namespace TaoBaoDataServer.WinClientData
                 lstSpiderFindWord = strFindKeywordResult.Split(',').ToList();
             }
 
-            //获取类目top100词
-            List<string> lstCategoryWord = CommonHandler.GetCatTop100Keyword(itemOnline.cid);
+            //获取类目热词
+            List<string> lstCategoryWord = CommonHandler.GetCatTopKeyword(itemOnline.cid);
 
             string titleSplit = CommonHandler.SplitWordFromWs(itemOnline.item_title);
             frmOutPut.OutPutMsg(titleSplit);

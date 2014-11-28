@@ -86,11 +86,19 @@ namespace TaoBaoDataServer.WinClientData
                     for (int i = 0; i < _arrayStr.Length; i++)
                     {
                         string[] _arrayStr2 = _arrayStr[i].Split('\t');
-                        gridView1.AddNewRow();
-                        gridView1.MoveLastVisible();
-                        RowNumber = gridView1.FocusedRowHandle;
-                        gridView1.SetRowCellValue(RowNumber, gridView1.Columns["keyword"], _arrayStr2[0]);
-                        gridView1.SetRowCellValue(RowNumber, gridView1.Columns["max_price"], (int)Convert.ToDecimal(_arrayStr2[1]));
+
+                        string strMaxPrice = _arrayStr2[1].ToString();
+                        double maxPrice = 0;
+                        Boolean isPrice = double.TryParse(strMaxPrice, out maxPrice);
+                        if (isPrice)
+                        {
+                            gridView1.AddNewRow();
+                            gridView1.MoveLastVisible();
+                            RowNumber = gridView1.FocusedRowHandle;
+                            gridView1.SetRowCellValue(RowNumber, gridView1.Columns["keyword"], _arrayStr2[0]);
+                            gridView1.SetRowCellValue(RowNumber, gridView1.Columns["max_price"], maxPrice);
+                        }
+                        
                     }
                     isCancel = true;
                 }
@@ -109,8 +117,23 @@ namespace TaoBaoDataServer.WinClientData
                 k.MatchScope = "4";
 
                 k.Word = gridView1.GetRowCellValue(i, "keyword").ToString();
-                k.MaxPrice = Convert.ToInt64(gridView1.GetRowCellValue(i, "max_price"));
-                lstKeyword.Add(k);
+
+                string strMaxPrice = gridView1.GetRowCellValue(i, "max_price").ToString();
+                double maxPrice = 0;
+                Boolean isPrice = double.TryParse(strMaxPrice, out maxPrice);
+                if (isPrice)
+                {
+                    if (cbxUnitFen.Checked)
+                    {//单位：分
+                        k.MaxPrice = Convert.ToInt64(maxPrice);
+                    }
+                    else
+                    {//单位：元
+                        k.MaxPrice = Convert.ToInt64(maxPrice * 100);
+                    }
+                    lstKeyword.Add(k);
+                }
+                
             }
 
             ResponseKeyword response = null;
@@ -182,6 +205,32 @@ namespace TaoBaoDataServer.WinClientData
                 {
                     e.Info.DisplayText = (e.RowHandle + 1).ToString();
                 }
+            }
+        }
+
+        private void cbxUnitFen_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxUnitYuan.Checked = !cbxUnitFen.Checked;
+            if (cbxUnitFen.Checked)
+            {
+                this.gridColumn2.Caption = "出价（分）";
+            }
+            else
+            {
+                this.gridColumn2.Caption = "出价（元）";
+            }
+        }
+
+        private void cbxUnitYuan_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxUnitFen.Checked = !cbxUnitYuan.Checked;
+            if (cbxUnitFen.Checked)
+            {
+                this.gridColumn2.Caption = "出价（分）";
+            }
+            else
+            {
+                this.gridColumn2.Caption = "出价（元）";
             }
         }
 
