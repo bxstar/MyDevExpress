@@ -115,6 +115,7 @@ namespace TaoBaoDataServer.WinClientData
             //自定义分组计算
             gridViewCreativeRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewKeywordRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
+            gridViewCampaignRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
         }
 
         private TopSession GetSession()
@@ -496,9 +497,10 @@ namespace TaoBaoDataServer.WinClientData
             TopSession session = GetSession();
             long campaignId = Convert.ToInt64(txtCampaignId.Text);
             List<EntityCampaignReport> lstAll = new List<EntityCampaignReport>();
-            lstAll = campaignHandler.DownLoadCampaignReport(session, campaignId, 30);
+            lstAll = campaignHandler.DownLoadCampaignReport(session, campaignId, 90);
 
-            gridControlCampaignRpt.DataSource = lstAll;
+            gridControlCampaignRpt.DataSource = lstAll.OrderByDescending(o => o.date);
+            
         }
 
         private void btnGetCategory_Click(object sender, EventArgs e)

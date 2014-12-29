@@ -217,6 +217,22 @@
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.gridControlCampaignRpt = new DevExpress.XtraGrid.GridControl();
             this.gridViewCampaignRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCampaignRptDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptImp = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptClick = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptCost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptCtr = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptCpc = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptDirectpay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptIndirectpay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignTotalpay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptDirectpaycount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptIndirectpaycount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptFavitemcount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptFavshopcount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptRoi = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptAvgpos = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCampaignRptCampaignId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnNewCampaignRptForm = new System.Windows.Forms.Button();
             this.btnGetCampaignRpt = new System.Windows.Forms.Button();
@@ -1451,6 +1467,8 @@
             this.colKeywordRptRoi.Caption = "roi";
             this.colKeywordRptRoi.FieldName = "roi";
             this.colKeywordRptRoi.Name = "colKeywordRptRoi";
+            this.colKeywordRptRoi.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.colKeywordRptRoi.Visible = true;
             this.colKeywordRptRoi.VisibleIndex = 11;
             this.colKeywordRptRoi.Width = 39;
@@ -1996,6 +2014,8 @@
             this.colCreativeRptRoi.Caption = "roi";
             this.colCreativeRptRoi.FieldName = "roi";
             this.colCreativeRptRoi.Name = "colCreativeRptRoi";
+            this.colCreativeRptRoi.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.colCreativeRptRoi.Visible = true;
             this.colCreativeRptRoi.VisibleIndex = 13;
             // 
@@ -2160,11 +2180,172 @@
             // 
             // gridViewCampaignRpt
             // 
+            this.gridViewCampaignRpt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colCampaignRptDate,
+            this.colCampaignRptImp,
+            this.colCampaignRptClick,
+            this.colCampaignRptCost,
+            this.colCampaignRptCtr,
+            this.colCampaignRptCpc,
+            this.colCampaignRptDirectpay,
+            this.colCampaignRptIndirectpay,
+            this.colCampaignTotalpay,
+            this.colCampaignRptDirectpaycount,
+            this.colCampaignRptIndirectpaycount,
+            this.colCampaignRptFavitemcount,
+            this.colCampaignRptFavshopcount,
+            this.colCampaignRptRoi,
+            this.colCampaignRptAvgpos,
+            this.colCampaignRptCampaignId});
             this.gridViewCampaignRpt.GridControl = this.gridControlCampaignRpt;
             this.gridViewCampaignRpt.Name = "gridViewCampaignRpt";
             this.gridViewCampaignRpt.OptionsSelection.MultiSelect = true;
             this.gridViewCampaignRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewCampaignRpt.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
+            this.gridViewCampaignRpt.OptionsView.ShowFooter = true;
             this.gridViewCampaignRpt.OptionsView.ShowGroupPanel = false;
+            // 
+            // colCampaignRptDate
+            // 
+            this.colCampaignRptDate.Caption = "date";
+            this.colCampaignRptDate.FieldName = "date";
+            this.colCampaignRptDate.Name = "colCampaignRptDate";
+            this.colCampaignRptDate.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "(个数={0:N})")});
+            this.colCampaignRptDate.Visible = true;
+            this.colCampaignRptDate.VisibleIndex = 0;
+            // 
+            // colCampaignRptImp
+            // 
+            this.colCampaignRptImp.Caption = "imp";
+            this.colCampaignRptImp.FieldName = "impressions";
+            this.colCampaignRptImp.Name = "colCampaignRptImp";
+            this.colCampaignRptImp.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "impressions", "(Avg={0:N})")});
+            this.colCampaignRptImp.Visible = true;
+            this.colCampaignRptImp.VisibleIndex = 1;
+            // 
+            // colCampaignRptClick
+            // 
+            this.colCampaignRptClick.Caption = "click";
+            this.colCampaignRptClick.FieldName = "click";
+            this.colCampaignRptClick.Name = "colCampaignRptClick";
+            this.colCampaignRptClick.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "click", "(Avg={0:N})")});
+            this.colCampaignRptClick.Visible = true;
+            this.colCampaignRptClick.VisibleIndex = 2;
+            // 
+            // colCampaignRptCost
+            // 
+            this.colCampaignRptCost.Caption = "cost";
+            this.colCampaignRptCost.FieldName = "cost";
+            this.colCampaignRptCost.Name = "colCampaignRptCost";
+            this.colCampaignRptCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "cost", "(Avg={0:C})")});
+            this.colCampaignRptCost.Visible = true;
+            this.colCampaignRptCost.VisibleIndex = 3;
+            // 
+            // colCampaignRptCtr
+            // 
+            this.colCampaignRptCtr.Caption = "ctr";
+            this.colCampaignRptCtr.FieldName = "ctr";
+            this.colCampaignRptCtr.Name = "colCampaignRptCtr";
+            this.colCampaignRptCtr.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
+            this.colCampaignRptCtr.Visible = true;
+            this.colCampaignRptCtr.VisibleIndex = 4;
+            // 
+            // colCampaignRptCpc
+            // 
+            this.colCampaignRptCpc.Caption = "cpc";
+            this.colCampaignRptCpc.FieldName = "cpc";
+            this.colCampaignRptCpc.Name = "colCampaignRptCpc";
+            this.colCampaignRptCpc.Visible = true;
+            this.colCampaignRptCpc.VisibleIndex = 5;
+            // 
+            // colCampaignRptDirectpay
+            // 
+            this.colCampaignRptDirectpay.Caption = "directpay";
+            this.colCampaignRptDirectpay.FieldName = "directpay";
+            this.colCampaignRptDirectpay.Name = "colCampaignRptDirectpay";
+            this.colCampaignRptDirectpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "directpay", "(Avg={0:C})")});
+            // 
+            // colCampaignRptIndirectpay
+            // 
+            this.colCampaignRptIndirectpay.Caption = "indirectpay";
+            this.colCampaignRptIndirectpay.FieldName = "indirectpay";
+            this.colCampaignRptIndirectpay.Name = "colCampaignRptIndirectpay";
+            this.colCampaignRptIndirectpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "indirectpay", "(Avg={0:C})")});
+            // 
+            // colCampaignTotalpay
+            // 
+            this.colCampaignTotalpay.Caption = "totalpay";
+            this.colCampaignTotalpay.FieldName = "totalpay";
+            this.colCampaignTotalpay.Name = "colCampaignTotalpay";
+            this.colCampaignTotalpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "totalpay", "(Avg={0:C})")});
+            this.colCampaignTotalpay.Visible = true;
+            this.colCampaignTotalpay.VisibleIndex = 6;
+            // 
+            // colCampaignRptDirectpaycount
+            // 
+            this.colCampaignRptDirectpaycount.Caption = "directpaycount";
+            this.colCampaignRptDirectpaycount.FieldName = "directpaycount";
+            this.colCampaignRptDirectpaycount.Name = "colCampaignRptDirectpaycount";
+            this.colCampaignRptDirectpaycount.Visible = true;
+            this.colCampaignRptDirectpaycount.VisibleIndex = 7;
+            // 
+            // colCampaignRptIndirectpaycount
+            // 
+            this.colCampaignRptIndirectpaycount.Caption = "indirectpaycount";
+            this.colCampaignRptIndirectpaycount.FieldName = "indirectpaycount";
+            this.colCampaignRptIndirectpaycount.Name = "colCampaignRptIndirectpaycount";
+            this.colCampaignRptIndirectpaycount.Visible = true;
+            this.colCampaignRptIndirectpaycount.VisibleIndex = 8;
+            // 
+            // colCampaignRptFavitemcount
+            // 
+            this.colCampaignRptFavitemcount.Caption = "favitemcount";
+            this.colCampaignRptFavitemcount.FieldName = "favitemcount";
+            this.colCampaignRptFavitemcount.Name = "colCampaignRptFavitemcount";
+            this.colCampaignRptFavitemcount.Visible = true;
+            this.colCampaignRptFavitemcount.VisibleIndex = 9;
+            // 
+            // colCampaignRptFavshopcount
+            // 
+            this.colCampaignRptFavshopcount.Caption = "favshopcount";
+            this.colCampaignRptFavshopcount.FieldName = "favshopcount";
+            this.colCampaignRptFavshopcount.Name = "colCampaignRptFavshopcount";
+            this.colCampaignRptFavshopcount.Visible = true;
+            this.colCampaignRptFavshopcount.VisibleIndex = 10;
+            // 
+            // colCampaignRptRoi
+            // 
+            this.colCampaignRptRoi.Caption = "roi";
+            this.colCampaignRptRoi.FieldName = "roi";
+            this.colCampaignRptRoi.Name = "colCampaignRptRoi";
+            this.colCampaignRptRoi.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
+            this.colCampaignRptRoi.Visible = true;
+            this.colCampaignRptRoi.VisibleIndex = 11;
+            // 
+            // colCampaignRptAvgpos
+            // 
+            this.colCampaignRptAvgpos.Caption = "avgpos";
+            this.colCampaignRptAvgpos.FieldName = "avgpos";
+            this.colCampaignRptAvgpos.Name = "colCampaignRptAvgpos";
+            this.colCampaignRptAvgpos.Visible = true;
+            this.colCampaignRptAvgpos.VisibleIndex = 12;
+            // 
+            // colCampaignRptCampaignId
+            // 
+            this.colCampaignRptCampaignId.Caption = "campaignId";
+            this.colCampaignRptCampaignId.FieldName = "campaign_id";
+            this.colCampaignRptCampaignId.Name = "colCampaignRptCampaignId";
+            this.colCampaignRptCampaignId.Visible = true;
+            this.colCampaignRptCampaignId.VisibleIndex = 13;
             // 
             // panel5
             // 
@@ -2654,5 +2835,21 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCreativeRptFavItemCount;
         private DevExpress.XtraGrid.Columns.GridColumn colCreativeRptFavShopCount;
         private DevExpress.XtraGrid.Columns.GridColumn colCreativeRptRoi;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptImp;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptClick;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCost;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCtr;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCpc;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptDirectpay;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptIndirectpay;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignTotalpay;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptDirectpaycount;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptIndirectpaycount;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptFavitemcount;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptFavshopcount;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptRoi;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptAvgpos;
+        private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCampaignId;
     }
 }
