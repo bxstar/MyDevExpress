@@ -253,6 +253,7 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
+            this.删除推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -891,28 +892,29 @@
             this.cMenuDgvAdgroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.设置黑白名单ToolStripMenuItem,
             this.同步关键词ToolStripMenuItem,
-            this.网页打开宝贝ToolStripMenuItem});
+            this.网页打开宝贝ToolStripMenuItem,
+            this.删除推广组ToolStripMenuItem});
             this.cMenuDgvAdgroup.Name = "cMenuSetKeywordCustom";
-            this.cMenuDgvAdgroup.Size = new System.Drawing.Size(149, 70);
+            this.cMenuDgvAdgroup.Size = new System.Drawing.Size(153, 114);
             // 
             // 设置黑白名单ToolStripMenuItem
             // 
             this.设置黑白名单ToolStripMenuItem.Name = "设置黑白名单ToolStripMenuItem";
-            this.设置黑白名单ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.设置黑白名单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.设置黑白名单ToolStripMenuItem.Text = "设置黑白名单";
             this.设置黑白名单ToolStripMenuItem.Click += new System.EventHandler(this.设置黑白名单ToolStripMenuItem_Click);
             // 
             // 同步关键词ToolStripMenuItem
             // 
             this.同步关键词ToolStripMenuItem.Name = "同步关键词ToolStripMenuItem";
-            this.同步关键词ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.同步关键词ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.同步关键词ToolStripMenuItem.Text = "同步关键词";
             this.同步关键词ToolStripMenuItem.Click += new System.EventHandler(this.同步关键词ToolStripMenuItem_Click);
             // 
             // 网页打开宝贝ToolStripMenuItem
             // 
             this.网页打开宝贝ToolStripMenuItem.Name = "网页打开宝贝ToolStripMenuItem";
-            this.网页打开宝贝ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.网页打开宝贝ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.网页打开宝贝ToolStripMenuItem.Text = "网页打开宝贝";
             this.网页打开宝贝ToolStripMenuItem.Click += new System.EventHandler(this.网页打开宝贝ToolStripMenuItem_Click);
             // 
@@ -2547,6 +2549,13 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
+            // 删除推广组ToolStripMenuItem
+            // 
+            this.删除推广组ToolStripMenuItem.Name = "删除推广组ToolStripMenuItem";
+            this.删除推广组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除推广组ToolStripMenuItem.Text = "删除推广组";
+            this.删除推广组ToolStripMenuItem.Click += new System.EventHandler(this.删除推广组ToolStripMenuItem_Click);
+            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2851,5 +2860,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptRoi;
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptAvgpos;
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCampaignId;
+        private System.Windows.Forms.ToolStripMenuItem 删除推广组ToolStripMenuItem;
     }
 }

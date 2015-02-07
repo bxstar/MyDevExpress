@@ -786,6 +786,20 @@ namespace TaoBaoDataServer.WinClientData
             frmOutPut.OutPutMsg("同步成功");
         }
 
+        private void 删除推广组ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            long adgroupId = Convert.ToInt64(txtAdGroupId.Text);
+            var response = taobaoApiHandler.TaobaoSimbaAdgroupDelete(GetSession(), adgroupId);
+            if (response != null && !response.IsError)
+            {
+                MessageBox.Show(string.Format("推广组:{0}，线上删除成功", adgroupId));
+            }
+            else
+            {
+                frmOutPut.OutPutMsgFormat("推广组:{0}，线上删除失败，{1}", adgroupId, response != null ? response.ErrMsg : string.Empty);
+            }
+        }
+
         private void 查询排名ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dynamic k = gridViewKeyword.GetFocusedRow() as dynamic;
@@ -1346,5 +1360,6 @@ namespace TaoBaoDataServer.WinClientData
                 System.Diagnostics.Process.Start("cmd.exe", string.Format("/k {0} {1} /a", Config.MajorizationPath, param));
             }
         }
+
     }
 }
