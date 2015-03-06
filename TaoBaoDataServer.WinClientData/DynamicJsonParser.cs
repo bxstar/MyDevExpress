@@ -77,36 +77,42 @@ namespace TaoBaoDataServer.WinClientData
 
     public class DynamicJsonObject : DynamicObject
     {
-        private IDictionary<string, object> Dictionary { get; set; }
+        private IDictionary<string, object> dicProperties { get; set; }
 
         public DynamicJsonObject(IDictionary<string, object> dictionary)
         {
-            this.Dictionary = dictionary;
+            this.dicProperties = dictionary;
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            result = this.Dictionary[binder.Name];
-
-            if (result is IDictionary<string, object>)
+            if (this.dicProperties.ContainsKey(binder.Name))
             {
-                result = new DynamicJsonObject(result as IDictionary<string, object>);
+                result = this.dicProperties[binder.Name];
+                if (result is IDictionary<string, object>)
+                {
+                    result = new DynamicJsonObject(result as IDictionary<string, object>);
+                }
+                else if (result is ArrayList && (result as ArrayList) is IDictionary<string, object>)
+                {
+                    result = new List<DynamicJsonObject>((result as ArrayList).ToArray().Select(x => new DynamicJsonObject(x as IDictionary<string, object>)));
+                }
+                else if (result is ArrayList)
+                {
+                    result = new List<object>((result as ArrayList).ToArray());
+                }
+                return true;
             }
-            else if (result is ArrayList && (result as ArrayList) is IDictionary<string, object>)
+            else
             {
-                result = new List<DynamicJsonObject>((result as ArrayList).ToArray().Select(x => new DynamicJsonObject(x as IDictionary<string, object>)));
+                result = null;
+                return true;
             }
-            else if (result is ArrayList)
-            {
-                result = new List<object>((result as ArrayList).ToArray());
-            }
-
-            return this.Dictionary.ContainsKey(binder.Name);
         }
 
         public IDictionary<string, object> GetDictionary()
         {
-            return this.Dictionary;
+            return this.dicProperties;
         }
     }
 }
