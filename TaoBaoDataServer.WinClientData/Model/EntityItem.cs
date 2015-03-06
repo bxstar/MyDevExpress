@@ -38,7 +38,7 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// <summary>
         /// 类目名称
         /// </summary>
-        public string categroy_name { get; set; }
+        public string category_name { get; set; }
 
         /// <summary>
         /// 宝贝的主图地址

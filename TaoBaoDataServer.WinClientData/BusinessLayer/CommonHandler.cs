@@ -57,7 +57,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             {
                 string strItem = wsKeywordForecastProxy.GetItemInfoCache("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), itemIdOrUrl);
                 result = DynamicJsonParser.ToObject<EntityItem>(strItem);
-                result.categroy_name = result.categroy_name.ToLower();
+                result.category_name = result.category_name.ToLower();
             }
             catch (Exception se)
             {

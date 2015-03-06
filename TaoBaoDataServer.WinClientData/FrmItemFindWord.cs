@@ -90,7 +90,7 @@ namespace TaoBaoDataServer.WinClientData
             string titleSplit = CommonHandler.SplitWordFromWs(itemOnline.item_title);
             frmOutPut.OutPutMsg(titleSplit);
 
-            frmOutPut.OutPutMsgFormat("类目名次：{0}", itemOnline.categroy_name);
+            frmOutPut.OutPutMsgFormat("类目名次：{0}", itemOnline.category_name);
 
             //将宝贝标题的分词按长度排序，在类目名称中的关键词作为核心词
             List<string> lstTitleWord = titleSplit.Split(',').OrderByDescending(o => o.Length).ToList();
@@ -99,7 +99,7 @@ namespace TaoBaoDataServer.WinClientData
             Dictionary<string, int> dicMainWord = new Dictionary<string, int>();
             foreach (var item in lstTitleWord)
             {//标题分词中，被类目名称包含的为核心词
-                if (item.Length > 1 && itemOnline.categroy_name.Contains(item) && !lstMainWord.Contains(item))
+                if (item.Length > 1 && itemOnline.category_name.Contains(item) && !lstMainWord.Contains(item))
                 {
                     lstMainWord.Add(item);
                     isFindFirstMainWord = true;
@@ -108,7 +108,7 @@ namespace TaoBaoDataServer.WinClientData
 
             foreach (var item in lstTitleWord)
             {//标题分词中，和类目名称有交集的，为核心词 
-                int sameCharCount=item.ToCharArray().Intersect(itemOnline.categroy_name.ToCharArray()).Count();
+                int sameCharCount=item.ToCharArray().Intersect(itemOnline.category_name.ToCharArray()).Count();
                 if (item.Length > 1 && sameCharCount > 0 && !dicMainWord.ContainsKey(item))
                     dicMainWord.Add(item, sameCharCount * item.Length);
             }

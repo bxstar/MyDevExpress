@@ -243,7 +243,7 @@ insert into ad_adgroup
                     Int64.TryParse(dr["cid"].ToString(), out cid);
                     item.cid = cid;
                 }
-                item.categroy_name = dr["category_name"].ToString();
+                item.category_name = dr["category_name"].ToString();
             }
 
             return item;
