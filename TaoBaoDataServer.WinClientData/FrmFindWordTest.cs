@@ -86,23 +86,8 @@ namespace TaoBaoDataServer.WinClientData
         /// <returns></returns>
         private List<string> GetTaobaoSearchList(string keyword)
         {
-            var listResult = new List<string>();
-
             string strJson = TechNet.DownLoadString("http://suggest.taobao.com/sug?code=utf-8&extras=1&callback=jsoncallback&q=" + keyword, Encoding.UTF8);
-
-            strJson = TechNet.AnalysisTaoBaoJson(strJson);
-            // 解析推广组json数据
-            JsonObject data;
-            // 解析推广组
-            using (JsonParser parser = new JsonParser(new System.IO.StringReader(strJson), true))
-            {
-                data = parser.ParseObject();
-            }
-            JsonArray array = data["result"] as NetServ.Net.Json.JsonArray;
-            foreach (JsonArray service in array)
-            {
-                listResult.Add(service[0].ToString());
-            }
+            List<string> listResult = TechNet.GetKeywordFromTaoBaoJson(strJson);
             return listResult;
         }
 

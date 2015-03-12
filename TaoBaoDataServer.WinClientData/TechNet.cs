@@ -675,6 +675,30 @@ namespace TaoBaoDataServer.WinClientData
         }
 
         /// <summary>
+        /// 解析淘宝返回带result的json字符串，返回其中的字典内容
+        /// </summary>
+        public static List<string> GetKeywordFromTaoBaoJson(string json)
+        {
+            try
+            {
+                string result = AnalysisTaoBaoJson(json);
+                dynamic o = DynamicJsonParser.ToObject<dynamic>(result);
+
+                dynamic[] arr = o["result"];
+                List<string> lstKeyword = new List<string>();
+                foreach (var d in arr)
+                {
+                    lstKeyword.Add(d[0]);
+                }
+                return lstKeyword;
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
+        /// <summary>
         /// 转成整型
         /// </summary>
         /// <param name="obj"></param>
