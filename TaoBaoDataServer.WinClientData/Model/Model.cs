@@ -88,6 +88,11 @@ namespace TaoBaoDataServer.WinClientData.Model
         public DateTime CreateDate { get; set; }
 
         /// <summary>
+        /// 更新时间
+        /// </summary>
+        public DateTime UpdateDate { get; set; }
+
+        /// <summary>
         /// 是否托管中
         /// </summary>
         public bool DeleteFlag { get; set; }

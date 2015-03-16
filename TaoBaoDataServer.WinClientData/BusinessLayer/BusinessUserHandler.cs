@@ -23,16 +23,35 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             TopSession session = new TopSession();
             var param = new Dictionary<string, object>();
             param.Add("nick", nick);
-            DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user WHERE proxy_user_name=[user_name] AND proxy_user_name=@nick", SqlNameAndParamer.ConvertSqlParameter(param));
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            System.Data.SqlClient.SqlConnection strSqlCon = SqlDataProvider.GetAPSqlConnection();
+            DataSet ds = new DataSet();
+            if (!strSqlCon.ConnectionString.Contains("Che2015"))
             {
-                session.UserID = Convert.ToInt32(ds.Tables[0].Rows[0]["local_user_id"]);
-                session.ProxyUserName = ds.Tables[0].Rows[0]["proxy_user_name"].ToString();
-                session.UserName = ds.Tables[0].Rows[0]["user_name"].ToString();
-                session.TopSessions = ds.Tables[0].Rows[0]["user_session"].ToString();
-                session.IsEnableMajorization = Convert.ToBoolean(ds.Tables[0].Rows[0]["IsEnableMajorization"]);
-                session.MajorConfigs = GetUserMajorConfigs(session.UserID);
-                session.CreateDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["create_date"]);
+                ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user WHERE proxy_user_name=[user_name] AND proxy_user_name=@nick", SqlNameAndParamer.ConvertSqlParameter(param));
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    session.UserID = Convert.ToInt32(ds.Tables[0].Rows[0]["local_user_id"]);
+                    session.ProxyUserName = ds.Tables[0].Rows[0]["proxy_user_name"].ToString();
+                    session.UserName = ds.Tables[0].Rows[0]["user_name"].ToString();
+                    session.TopSessions = ds.Tables[0].Rows[0]["user_session"].ToString();
+                    session.IsEnableMajorization = Convert.ToBoolean(ds.Tables[0].Rows[0]["IsEnableMajorization"]);
+                    //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
+                    session.CreateDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["create_date"]);
+                }
+            }
+            else
+            {
+                ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user WHERE actual_name=[user_name] AND actual_name=@nick", SqlNameAndParamer.ConvertSqlParameter(param));
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    session.UserID = Convert.ToInt32(ds.Tables[0].Rows[0]["local_user_id"]);
+                    session.ProxyUserName = ds.Tables[0].Rows[0]["actual_name"].ToString();
+                    session.UserName = ds.Tables[0].Rows[0]["user_name"].ToString();
+                    session.TopSessions = ds.Tables[0].Rows[0]["user_session"].ToString();
+                    session.IsEnableMajorization = Convert.ToBoolean(ds.Tables[0].Rows[0]["is_enable"]);
+                    //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
+                    session.CreateDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["create_date"]);
+                }
             }
             return session;
         }
@@ -105,34 +124,65 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public List<TopSession> GetUserInfo(int? userId)
         {
             List<TopSession> lstUser = new List<TopSession>();
-            try
+            // 读取数据库，从数据库中取得数据
+            string strSql = string.Empty;
+            if (userId == null)
             {
-                // 读取数据库，从数据库中取得数据
-                string strSql = string.Empty;
-                if (userId == null)
+                strSql = "SELECT a.* ,b.campaign_id,b.title campaign_name FROM ad_user a left join ad_campaign b on a.local_user_id=b.user_id where a.delete_flag = '1' and b.campaign_id is not null";
+            }
+            else
+            {
+                strSql = string.Format("SELECT a.* ,b.campaign_id,b.title campaign_name FROM ad_user a left join ad_campaign b on a.local_user_id=b.user_id where local_user_id={0} ", userId);
+            }
+            DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), strSql);
+            // 从数据库中读取用户信息
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    strSql = "SELECT a.* ,b.campaign_id,b.title campaign_name FROM ad_user a left join ad_campaign b on a.local_user_id=b.user_id where a.delete_flag = '1' and b.campaign_id is not null";
-                }
-                else
-                {
-                    strSql = string.Format("SELECT a.* ,b.campaign_id,b.title campaign_name FROM ad_user a left join ad_campaign b on a.local_user_id=b.user_id where local_user_id={0} ", userId);
-                }
-                DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), strSql);
-                // 从数据库中读取用户信息
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    {
-                        TopSession session = new TopSession();
-                        DataRow drUser = ds.Tables[0].Rows[i];
-                        SetModelByDataRow(drUser, session);
-                        lstUser.Add(session);
-                    }
+                    TopSession session = new TopSession();
+                    DataRow drUser = ds.Tables[0].Rows[i];
+                    SetModelByDataRow(drUser, session);
+                    lstUser.Add(session);
                 }
             }
-            catch (Exception ex)
+            return lstUser;
+        }
+
+        /// <summary>
+        /// 获取淘快车数据库用户信息
+        /// </summary>
+        public List<TopSession> GetCheServerUserInfo(int? userId)
+        {
+            List<TopSession> lstUser = new List<TopSession>();
+            // 读取数据库，从数据库中取得数据
+            string strSql = string.Empty;
+            if (userId == null)
+                strSql = "SELECT * FROM ad_user ";
+            else
+                strSql = string.Format("SELECT * FROM ad_user where local_user_id={0} ", userId);
+            DataSet ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), strSql);
+            // 从数据库中读取用户信息
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                logger.Error("BusinessUserHandler/GetUserInfo,获取所有用户信息错误：", ex);
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    TopSession session = new TopSession();
+                    DataRow drUser = ds.Tables[0].Rows[i];
+
+                    session.UserID = Convert.ToInt32(drUser["local_user_id"]);
+                    session.ProxyUserName = drUser["actual_name"].ToString();
+                    session.UserName = drUser["user_name"].ToString();
+                    session.TopSessions = drUser["user_session"].ToString();
+                    session.ItemCodes = drUser["item_codes"].ToString();
+                    session.DeadLine = drUser["deadline"].ToString();
+                    session.IsEnableMajorization = Convert.ToBoolean(drUser["is_enable"]);
+                    session.UserQQ = drUser["user_qq"].ToString();
+                    session.UserEMail = drUser["user_email"].ToString();
+                    session.CreateDate = Convert.ToDateTime(drUser["create_date"]);
+                    session.UpdateDate = Convert.ToDateTime(drUser["update_date"]);
+                    lstUser.Add(session);
+                }
             }
             return lstUser;
         }
@@ -194,8 +244,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             session.ItemCodes = drUser["item_codes"].ToString();
             session.DeadLine = drUser["deadline"].ToString();
             session.IsEnableMajorization = Convert.ToBoolean(drUser["IsEnableMajorization"]);
-            session.MajorConfigs = GetUserMajorConfigs(session.UserID);
+            //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
             session.CreateDate = Convert.ToDateTime(drUser["create_date"]);
+            session.UpdateDate = Convert.ToDateTime(drUser["update_date"]);
             if (drUser["auth2_date"] != null && drUser["auth2_date"] != DBNull.Value)
             {
                 session.IsAuth2 = true;
