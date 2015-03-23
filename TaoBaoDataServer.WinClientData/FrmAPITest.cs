@@ -513,13 +513,14 @@ namespace TaoBaoDataServer.WinClientData
             if (strCatIds.Length == 0)
             {
                 lstCatInfo = CommonHandler.GetCatsFullInfo("0", null);
+                if (lstCatInfo == null) return;
+                lstCatData = CommonHandler.GetCatsData(string.Join(",", lstCatInfo.Select(o => o.CatId)));
             }
             else
             {
                 lstCatInfo = CommonHandler.GetCatsFullInfo("1", strCatIds);
+                lstCatData = CommonHandler.GetCatsData(strCatIds);
             }
-
-            lstCatData = CommonHandler.GetCatsData(strCatIds);
 
             //类目信息，大盘数据合并
             List<EntityCategoryEx> lstCatEx = new List<EntityCategoryEx>();

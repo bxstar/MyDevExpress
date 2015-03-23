@@ -35,6 +35,8 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
         private System.Threading.SendOrPostCallback KeywordBaseLongTimeCacheOperationCompleted;
 
+        private System.Threading.SendOrPostCallback GetKeywordBaseLongTimeCacheOperationCompleted;
+
         private System.Threading.SendOrPostCallback GetAdgroupUseWordOperationCompleted;
 
         private System.Threading.SendOrPostCallback SetAdgroupUseWordOperationCompleted;
@@ -97,6 +99,9 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
 
         /// <remarks/>
         public event KeywordBaseLongTimeCacheCompletedEventHandler KeywordBaseLongTimeCacheCompleted;
+
+        /// <remarks/>
+        public event GetKeywordBaseLongTimeCacheCompletedEventHandler GetKeywordBaseLongTimeCacheCompleted;
 
         /// <remarks/>
         public event GetAdgroupUseWordCompletedEventHandler GetAdgroupUseWordCompleted;
@@ -314,6 +319,61 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.KeywordBaseLongTimeCacheCompleted(this, new KeywordBaseLongTimeCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetKeywordBaseLongTimeCache", RequestNamespace = "http://tempuri.org/", ResponseNamespace = "http://tempuri.org/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public EntityWordBase[] GetKeywordBaseLongTimeCache(string nick, string itemId, string strKeywords)
+        {
+            object[] results = this.Invoke("GetKeywordBaseLongTimeCache", new object[] {
+                        nick,
+                        itemId,
+                        strKeywords});
+            return ((EntityWordBase[])(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetKeywordBaseLongTimeCache(string nick, string itemId, string strKeywords, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetKeywordBaseLongTimeCache", new object[] {
+                        nick,
+                        itemId,
+                        strKeywords}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public EntityWordBase[] EndGetKeywordBaseLongTimeCache(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((EntityWordBase[])(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetKeywordBaseLongTimeCacheAsync(string nick, string itemId, string strKeywords)
+        {
+            this.GetKeywordBaseLongTimeCacheAsync(nick, itemId, strKeywords, null);
+        }
+
+        /// <remarks/>
+        public void GetKeywordBaseLongTimeCacheAsync(string nick, string itemId, string strKeywords, object userState)
+        {
+            if ((this.GetKeywordBaseLongTimeCacheOperationCompleted == null))
+            {
+                this.GetKeywordBaseLongTimeCacheOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetKeywordBaseLongTimeCacheOperationCompleted);
+            }
+            this.InvokeAsync("GetKeywordBaseLongTimeCache", new object[] {
+                        nick,
+                        itemId,
+                        strKeywords}, this.GetKeywordBaseLongTimeCacheOperationCompleted, userState);
+        }
+
+        private void OnGetKeywordBaseLongTimeCacheOperationCompleted(object arg)
+        {
+            if ((this.GetKeywordBaseLongTimeCacheCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetKeywordBaseLongTimeCacheCompleted(this, new GetKeywordBaseLongTimeCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
 
@@ -2116,6 +2176,36 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService
         private object[] results;
 
         internal KeywordBaseLongTimeCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public EntityWordBase[] Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((EntityWordBase[])(this.results[0]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    public delegate void GetKeywordBaseLongTimeCacheCompletedEventHandler(object sender, GetKeywordBaseLongTimeCacheCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetKeywordBaseLongTimeCacheCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetKeywordBaseLongTimeCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
             base(exception, cancelled, userState)
         {
             this.results = results;

@@ -90,7 +90,7 @@ namespace TaoBaoDataServer.WinClientData
             string titleSplit = CommonHandler.SplitWordFromWs(itemOnline.item_title);
             frmOutPut.OutPutMsg(titleSplit);
 
-            frmOutPut.OutPutMsgFormat("类目名次：{0}", itemOnline.category_name);
+            frmOutPut.OutPutMsgFormat("类目ID:{0},名称:{1}", itemOnline.cid, itemOnline.category_name);
 
             //将宝贝标题的分词按长度排序，在类目名称中的关键词作为核心词
             List<string> lstTitleWord = titleSplit.Split(',').OrderByDescending(o => o.Length).ToList();
@@ -128,6 +128,10 @@ namespace TaoBaoDataServer.WinClientData
                 if (string.IsNullOrEmpty(strFindKeywordResult))
                 {
                     strFindKeywordResult = CommonHandler.GetItemFindKeyword(itemOnline.item_id);
+                }
+                else
+                {
+                    frmOutPut.OutPutMsgFormat("宝贝抓取词：{0}", strFindKeywordResult);
                 }
                 
                 if (string.IsNullOrEmpty(strFindKeywordResult))
