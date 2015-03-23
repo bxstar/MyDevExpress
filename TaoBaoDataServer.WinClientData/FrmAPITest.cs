@@ -551,9 +551,13 @@ namespace TaoBaoDataServer.WinClientData
                 lstCatEx.Add(catEx);
             }
 
+            EntityCategoryEx exRoot = new EntityCategoryEx() { CatId = 0, CatName = "顶级类目", ParentCatId = -1 };
+            lstCatEx.Add(exRoot);
+
+            treeListCats.KeyFieldName = "CatId";
+            treeListCats.ParentFieldName = "ParentCatId";
             treeListCats.OptionsView.ShowSummaryFooter = true;
-
-
+            treeListCats.OptionsView.ShowRoot = true;
             treeListCats.DataSource = lstCatEx;
             treeListCats.Columns["Cpc"].SummaryFooterStrFormat = "平均值：{0:n0}";
             treeListCats.Columns["Cpc"].SummaryFooter = DevExpress.XtraTreeList.SummaryItemType.Average;
