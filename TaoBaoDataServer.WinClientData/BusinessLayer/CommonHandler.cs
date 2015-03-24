@@ -109,7 +109,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             List<string> result = new List<string>();
             try
             {
-                string strItem = wsKeywordForecastProxy.GetCatTopKeyword("test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), catId.ToString());
+                string strItem = wsKeywordForecastProxy.GetCatTopKeyword(GetAccessToken(), catId.ToString());
                 result = strItem.Split(',').ToList();
             }
             catch (Exception se)
@@ -130,7 +130,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             List<InsightCategoryInfoDTO> result = null;
             try
             {
-                string strResponse = wsKeywordForecastProxy.GetCatsFullInfoOnline(null, catLevel, categoryIds);
+                string strResponse = wsKeywordForecastProxy.GetCatsFullInfoOnline(GetAccessToken(), catLevel, categoryIds);
                 if (!string.IsNullOrEmpty(strResponse))
                 {
                     result = DynamicJsonParser.ToObject<List<InsightCategoryInfoDTO>>(strResponse);
@@ -152,7 +152,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             List<InsightCategoryDataDTO> result = null;
             try
             {
-                string strResponse = wsKeywordForecastProxy.GetCatsdata(null, categoryIds, null, null);
+                string strResponse = wsKeywordForecastProxy.GetCatsdata(GetAccessToken(), categoryIds, null, null);
                 if (!string.IsNullOrEmpty(strResponse))
                 {
                     result = DynamicJsonParser.ToObject<List<InsightCategoryDataDTO>>(strResponse);
@@ -370,6 +370,14 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             }
             rpt.campaign_id = lstUserReport[0].campaign_id;
             return rpt;
+        }
+
+        /// <summary>
+        /// 获取用户授权
+        /// </summary>
+        private static string GetAccessToken()
+        {
+            return "test?" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         /// <summary>

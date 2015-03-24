@@ -529,6 +529,42 @@ namespace TaoBaoDataServer.WinClientData
             {
                 e.CellData = catEx.CatName;
             }
+            else if (e.Column == treeListImpression)
+            {
+                e.CellData = catEx.Impression;
+            }
+            else if (e.Column == treeListClick)
+            {
+                e.CellData = catEx.Click;
+            }
+            else if (e.Column == treeListCompetition)
+            {
+                e.CellData = catEx.Competition;
+            }
+            else if (e.Column == treeListCost)
+            {
+                e.CellData = catEx.Cost;
+            }
+            else if (e.Column == treeListCtr)
+            {
+                e.CellData = catEx.Ctr;
+            }
+            else if (e.Column == treeListTransactiontotal)
+            {
+                e.CellData = catEx.Transactiontotal;
+            }
+            else if (e.Column == treeListCpc)
+            {
+                e.CellData = catEx.Cpc;
+            }
+            else if (e.Column == treeListRoi)
+            {
+                e.CellData = catEx.Roi;
+            }
+            else if (e.Column == treeListFavtotal)
+            {
+                e.CellData = catEx.Favtotal;
+            }
         }
 
         void treeListCats_VirtualTreeGetChildNodes(object sender, DevExpress.XtraTreeList.VirtualTreeGetChildNodesInfo e)
