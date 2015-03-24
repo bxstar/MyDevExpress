@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace TaoBaoDataServer.WinClientData.Model
 {
@@ -56,5 +57,10 @@ namespace TaoBaoDataServer.WinClientData.Model
         public long Transactionshippingtotal { get; set; }
         
         public long Transactiontotal { get; set; }
+
+        /// <summary>
+        /// 子类目数据
+        /// </summary>
+        public BindingList<EntityCategoryEx> Children;
     }
 }

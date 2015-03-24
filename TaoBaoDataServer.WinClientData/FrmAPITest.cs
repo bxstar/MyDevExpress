@@ -16,6 +16,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using TaoBaoDataServer.WinClientData.BusinessLayer;
 using iclickpro.AccessCommon;
 using DevExpress.Data;
+using DevExpress.XtraTreeList.Columns;
 
 
 namespace TaoBaoDataServer.WinClientData
@@ -73,11 +74,6 @@ namespace TaoBaoDataServer.WinClientData
         {
             chkKeywordRptRecentDays.Checked = true;
             chkAdgroupRptRecentDays.Checked = true;
-            //txtNickName.Text = Config.UserName;
-            //txtSession.Text = Config.TopSessions;
-            //txtNickName.Text = "tp_世奇广告";
-            //txtNickName.Text = "365style";
-            //txtSession.Text = "61019215373bc02fd52c6184b07e1166003464abfeaf0f01077912345";
             txtNickName.Text = "dongyangerba";
             txtSession.Text = "6101213128cd7d38043e51b45cZZ98cceb63c259e80106c906597473";
             txtArticleCode.Text = Config.ArticleCode;
@@ -116,6 +112,11 @@ namespace TaoBaoDataServer.WinClientData
             gridViewCreativeRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewKeywordRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewCampaignRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
+
+            //TreeList绑定
+            treeListCats.VirtualTreeGetCellValue += treeListCats_VirtualTreeGetCellValue;
+            treeListCats.VirtualTreeGetChildNodes += treeListCats_VirtualTreeGetChildNodes;
+            treeListCats.OptionsView.ShowSummaryFooter = true;
         }
 
         private TopSession GetSession()
@@ -507,56 +508,95 @@ namespace TaoBaoDataServer.WinClientData
         {
             treeListCats.DataSource = null;
 
-            string strCatIds = txtCategoryIds.Text.Trim();
+            treeListCats.DataSource = new EntityCategoryEx() { CatLevel = 0 };
+            //treeListCats.Columns["Cpc"].SummaryFooterStrFormat = "平均值：{0:n0}";
+            //treeListCats.Columns["Cpc"].SummaryFooter = DevExpress.XtraTreeList.SummaryItemType.Average;
+        }
+
+        void treeListCats_VirtualTreeGetCellValue(object sender, DevExpress.XtraTreeList.VirtualTreeGetCellValueInfo e)
+        {
+            EntityCategoryEx catEx = e.Node as EntityCategoryEx;
+
+            if (e.Column == treeListCatId)
+            {
+                e.CellData = catEx.CatId;
+            }
+            else if (e.Column == treeListCatLevel)
+            {
+                e.CellData = catEx.CatLevel;
+            }
+            else if (e.Column == treeListCatName)
+            {
+                e.CellData = catEx.CatName;
+            }
+        }
+
+        void treeListCats_VirtualTreeGetChildNodes(object sender, DevExpress.XtraTreeList.VirtualTreeGetChildNodesInfo e)
+        {
+            EntityCategoryEx data = (EntityCategoryEx)e.Node;
+
             List<InsightCategoryInfoDTO> lstCatInfo = null;
             List<InsightCategoryDataDTO> lstCatData = null;
-            if (strCatIds.Length == 0)
+
+            if (data.Children == null)
             {
-                lstCatInfo = CommonHandler.GetCatsFullInfo("0", null);
-                if (lstCatInfo == null) return;
-                lstCatData = CommonHandler.GetCatsData(string.Join(",", lstCatInfo.Select(o => o.CatId)));
+                data.Children = new BindingList<EntityCategoryEx>();
+                if (data.CatLevel == 0)
+                {//加载顶级类目 
+                    lstCatInfo = CommonHandler.GetCatsFullInfo("0", null);
+                }
+                else
+                {//加载子类目 
+                    lstCatInfo = CommonHandler.GetCatsFullInfo("2", data.CatId.ToString());
+                }
+                if (lstCatInfo != null && lstCatInfo.Count > 0)
+                {//存在子类目
+                    string strCatIds = string.Join(",", lstCatInfo.Select(o => o.CatId));
+                    frmOutPut.OutPutMsgFormat("api catIds:{0}", strCatIds);
+                    lstCatData = CommonHandler.GetCatsData(strCatIds);
+                }
+                else
+                {
+                    return;
+                }
+
+                foreach (var itemCatInfo in lstCatInfo)
+                {
+                    frmOutPut.OutPutMsgFormat("catId:{0},catName:{1},catLevel:{2}", itemCatInfo.CatId, itemCatInfo.CatName, itemCatInfo.CatLevel);
+                    EntityCategoryEx catEx = new EntityCategoryEx() { CatId = itemCatInfo.CatId, CatLevel = itemCatInfo.CatLevel, CatName = itemCatInfo.CatName, CatPathId = itemCatInfo.CatPathId, CatPathName = itemCatInfo.CatPathName, ParentCatId = itemCatInfo.ParentCatId };
+                    var itemCatData = lstCatData.Find(o => o.CatId == itemCatInfo.CatId);
+                    if (itemCatData != null)
+                    {
+                        catEx.Impression = itemCatData.Impression;
+                        catEx.Click = itemCatData.Click;
+                        catEx.Cost = itemCatData.Cost;
+                        catEx.Ctr = itemCatData.Ctr;
+                        catEx.Cpc = itemCatData.Cpc;
+                        catEx.Roi = itemCatData.Roi;
+                        catEx.Competition = itemCatData.Competition;
+                        catEx.Coverage = itemCatData.Coverage;
+                        catEx.Directtransaction = itemCatData.Directtransaction;
+                        catEx.Directtransactionshipping = itemCatData.Directtransactionshipping;
+                        catEx.Indirecttransaction = itemCatData.Indirecttransaction;
+                        catEx.Indirecttransactionshipping = itemCatData.Indirecttransactionshipping;
+                        catEx.Favitemtotal = itemCatData.Favitemtotal;
+                        catEx.Favshoptotal = itemCatData.Favshoptotal;
+                        catEx.Favtotal = itemCatData.Favtotal;
+                        catEx.Transactionshippingtotal = itemCatData.Transactionshippingtotal;
+                        catEx.Transactiontotal = itemCatData.Transactiontotal;
+                    }
+                    data.Children.Add(catEx);
+                }
+            }
+
+            if (data.Children.Count != 0)
+            {
+                e.Children = data.Children;
             }
             else
-            {
-                lstCatInfo = CommonHandler.GetCatsFullInfo("1", strCatIds);
-                lstCatData = CommonHandler.GetCatsData(strCatIds);
+            {//没有子节点 
+                e.Children = null;
             }
-
-            //类目信息，大盘数据合并
-            List<EntityCategoryEx> lstCatEx = new List<EntityCategoryEx>();
-            foreach (var itemCatInfo in lstCatInfo)
-            {
-                EntityCategoryEx catEx = new EntityCategoryEx() { CatId = itemCatInfo.CatId, CatLevel = itemCatInfo.CatLevel, CatName = itemCatInfo.CatName, CatPathId = itemCatInfo.CatPathId, CatPathName = itemCatInfo.CatPathName, ParentCatId = itemCatInfo.ParentCatId };
-                var itemCatData = lstCatData.Find(o => o.CatId == itemCatInfo.CatId);
-                if (itemCatData != null)
-                {
-                    catEx.Impression = itemCatData.Impression;
-                    catEx.Click = itemCatData.Click;
-                    catEx.Cost = itemCatData.Cost;
-                    catEx.Ctr = itemCatData.Ctr;
-                    catEx.Cpc = itemCatData.Cpc;
-                    catEx.Roi = itemCatData.Roi;
-                    catEx.Competition = itemCatData.Competition;
-                    catEx.Coverage = itemCatData.Coverage;
-                    catEx.Directtransaction = itemCatData.Directtransaction;
-                    catEx.Directtransactionshipping = itemCatData.Directtransactionshipping;
-                    catEx.Indirecttransaction = itemCatData.Indirecttransaction;
-                    catEx.Indirecttransactionshipping = itemCatData.Indirecttransactionshipping;
-                    catEx.Favitemtotal = itemCatData.Favitemtotal;
-                    catEx.Favshoptotal = itemCatData.Favshoptotal;
-                    catEx.Favtotal = itemCatData.Favtotal;
-                    catEx.Transactionshippingtotal = itemCatData.Transactionshippingtotal;
-                    catEx.Transactiontotal = itemCatData.Transactiontotal;
-                }
-                lstCatEx.Add(catEx);
-            }
-
-            treeListCats.OptionsView.ShowSummaryFooter = true;
-
-
-            treeListCats.DataSource = lstCatEx;
-            treeListCats.Columns["Cpc"].SummaryFooterStrFormat = "平均值：{0:n0}";
-            treeListCats.Columns["Cpc"].SummaryFooter = DevExpress.XtraTreeList.SummaryItemType.Average;
         }
 
         private void btnGetAllUser_Click(object sender, EventArgs e)

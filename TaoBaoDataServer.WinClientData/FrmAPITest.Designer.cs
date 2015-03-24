@@ -94,6 +94,7 @@
             this.设置黑白名单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.同步关键词ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.网页打开宝贝ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewAdgroup = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAdgroupsAddKeyword = new System.Windows.Forms.Button();
@@ -240,6 +241,9 @@
             this.btnGetCampaignBaseRpt = new System.Windows.Forms.Button();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.treeListCats = new DevExpress.XtraTreeList.TreeList();
+            this.treeListCatId = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListCatLevel = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListCatName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnGetCategory = new System.Windows.Forms.Button();
             this.txtCategoryIds = new System.Windows.Forms.TextBox();
@@ -253,7 +257,18 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.删除推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeListParentCatId = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListImpression = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListClick = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListCompetition = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListCost = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListCtr = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListCpc = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListDirecttransaction = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListIndirecttransaction = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListTransactiontotal = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListFavtotal = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListRoi = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -895,28 +910,35 @@
             this.网页打开宝贝ToolStripMenuItem,
             this.删除推广组ToolStripMenuItem});
             this.cMenuDgvAdgroup.Name = "cMenuSetKeywordCustom";
-            this.cMenuDgvAdgroup.Size = new System.Drawing.Size(153, 114);
+            this.cMenuDgvAdgroup.Size = new System.Drawing.Size(149, 92);
             // 
             // 设置黑白名单ToolStripMenuItem
             // 
             this.设置黑白名单ToolStripMenuItem.Name = "设置黑白名单ToolStripMenuItem";
-            this.设置黑白名单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.设置黑白名单ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.设置黑白名单ToolStripMenuItem.Text = "设置黑白名单";
             this.设置黑白名单ToolStripMenuItem.Click += new System.EventHandler(this.设置黑白名单ToolStripMenuItem_Click);
             // 
             // 同步关键词ToolStripMenuItem
             // 
             this.同步关键词ToolStripMenuItem.Name = "同步关键词ToolStripMenuItem";
-            this.同步关键词ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.同步关键词ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.同步关键词ToolStripMenuItem.Text = "同步关键词";
             this.同步关键词ToolStripMenuItem.Click += new System.EventHandler(this.同步关键词ToolStripMenuItem_Click);
             // 
             // 网页打开宝贝ToolStripMenuItem
             // 
             this.网页打开宝贝ToolStripMenuItem.Name = "网页打开宝贝ToolStripMenuItem";
-            this.网页打开宝贝ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.网页打开宝贝ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.网页打开宝贝ToolStripMenuItem.Text = "网页打开宝贝";
             this.网页打开宝贝ToolStripMenuItem.Click += new System.EventHandler(this.网页打开宝贝ToolStripMenuItem_Click);
+            // 
+            // 删除推广组ToolStripMenuItem
+            // 
+            this.删除推广组ToolStripMenuItem.Name = "删除推广组ToolStripMenuItem";
+            this.删除推广组ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.删除推广组ToolStripMenuItem.Text = "删除推广组";
+            this.删除推广组ToolStripMenuItem.Click += new System.EventHandler(this.删除推广组ToolStripMenuItem_Click);
             // 
             // gridViewAdgroup
             // 
@@ -2415,11 +2437,60 @@
             // 
             // treeListCats
             // 
+            this.treeListCats.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListCatId,
+            this.treeListCatLevel,
+            this.treeListCatName,
+            this.treeListParentCatId,
+            this.treeListImpression,
+            this.treeListClick,
+            this.treeListCtr,
+            this.treeListCompetition,
+            this.treeListCost,
+            this.treeListCpc,
+            this.treeListDirecttransaction,
+            this.treeListIndirecttransaction,
+            this.treeListTransactiontotal,
+            this.treeListFavtotal,
+            this.treeListRoi});
             this.treeListCats.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeListCats.Location = new System.Drawing.Point(3, 3);
             this.treeListCats.Name = "treeListCats";
+            this.treeListCats.OptionsBehavior.EnableFiltering = true;
+            this.treeListCats.OptionsFind.AllowFindPanel = true;
+            this.treeListCats.OptionsView.ShowAutoFilterRow = true;
             this.treeListCats.Size = new System.Drawing.Size(1062, 285);
             this.treeListCats.TabIndex = 2;
+            // 
+            // treeListCatId
+            // 
+            this.treeListCatId.Caption = "CatId";
+            this.treeListCatId.FieldName = "CatId";
+            this.treeListCatId.Name = "treeListCatId";
+            this.treeListCatId.OptionsColumn.AllowEdit = false;
+            this.treeListCatId.OptionsColumn.ReadOnly = true;
+            this.treeListCatId.Visible = true;
+            this.treeListCatId.VisibleIndex = 0;
+            // 
+            // treeListCatLevel
+            // 
+            this.treeListCatLevel.Caption = "CatLevel";
+            this.treeListCatLevel.FieldName = "CatLevel";
+            this.treeListCatLevel.Name = "treeListCatLevel";
+            this.treeListCatLevel.OptionsColumn.AllowEdit = false;
+            this.treeListCatLevel.OptionsColumn.ReadOnly = true;
+            this.treeListCatLevel.Visible = true;
+            this.treeListCatLevel.VisibleIndex = 1;
+            // 
+            // treeListCatName
+            // 
+            this.treeListCatName.Caption = "CatName";
+            this.treeListCatName.FieldName = "CatName";
+            this.treeListCatName.Name = "treeListCatName";
+            this.treeListCatName.OptionsColumn.AllowEdit = false;
+            this.treeListCatName.OptionsColumn.ReadOnly = true;
+            this.treeListCatName.Visible = true;
+            this.treeListCatName.VisibleIndex = 2;
             // 
             // panel6
             // 
@@ -2549,12 +2620,106 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // 删除推广组ToolStripMenuItem
+            // treeListParentCatId
             // 
-            this.删除推广组ToolStripMenuItem.Name = "删除推广组ToolStripMenuItem";
-            this.删除推广组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.删除推广组ToolStripMenuItem.Text = "删除推广组";
-            this.删除推广组ToolStripMenuItem.Click += new System.EventHandler(this.删除推广组ToolStripMenuItem_Click);
+            this.treeListParentCatId.Caption = "ParentCatId";
+            this.treeListParentCatId.FieldName = "ParentCatId";
+            this.treeListParentCatId.Name = "treeListParentCatId";
+            // 
+            // treeListImpression
+            // 
+            this.treeListImpression.Caption = "Impression";
+            this.treeListImpression.FieldName = "Impression";
+            this.treeListImpression.Name = "treeListImpression";
+            this.treeListImpression.OptionsColumn.AllowEdit = false;
+            this.treeListImpression.Visible = true;
+            this.treeListImpression.VisibleIndex = 3;
+            // 
+            // treeListClick
+            // 
+            this.treeListClick.Caption = "Click";
+            this.treeListClick.FieldName = "Click";
+            this.treeListClick.Name = "treeListClick";
+            this.treeListClick.OptionsColumn.AllowEdit = false;
+            this.treeListClick.Visible = true;
+            this.treeListClick.VisibleIndex = 4;
+            // 
+            // treeListCompetition
+            // 
+            this.treeListCompetition.Caption = "Competition";
+            this.treeListCompetition.FieldName = "Competition";
+            this.treeListCompetition.Name = "treeListCompetition";
+            this.treeListCompetition.OptionsColumn.AllowEdit = false;
+            this.treeListCompetition.Visible = true;
+            this.treeListCompetition.VisibleIndex = 5;
+            // 
+            // treeListCost
+            // 
+            this.treeListCost.Caption = "Cost";
+            this.treeListCost.FieldName = "Cost";
+            this.treeListCost.Name = "treeListCost";
+            this.treeListCost.OptionsColumn.AllowEdit = false;
+            this.treeListCost.Visible = true;
+            this.treeListCost.VisibleIndex = 6;
+            // 
+            // treeListCtr
+            // 
+            this.treeListCtr.Caption = "Ctr";
+            this.treeListCtr.FieldName = "Ctr";
+            this.treeListCtr.Name = "treeListCtr";
+            this.treeListCtr.OptionsColumn.AllowEdit = false;
+            this.treeListCtr.Visible = true;
+            this.treeListCtr.VisibleIndex = 7;
+            // 
+            // treeListCpc
+            // 
+            this.treeListCpc.Caption = "Cpc";
+            this.treeListCpc.FieldName = "Cpc";
+            this.treeListCpc.Name = "treeListCpc";
+            this.treeListCpc.OptionsColumn.AllowEdit = false;
+            this.treeListCpc.Visible = true;
+            this.treeListCpc.VisibleIndex = 8;
+            // 
+            // treeListDirecttransaction
+            // 
+            this.treeListDirecttransaction.Caption = "直接转化";
+            this.treeListDirecttransaction.FieldName = "Directtransaction";
+            this.treeListDirecttransaction.Name = "treeListDirecttransaction";
+            this.treeListDirecttransaction.OptionsColumn.AllowEdit = false;
+            // 
+            // treeListIndirecttransaction
+            // 
+            this.treeListIndirecttransaction.Caption = "间接转化";
+            this.treeListIndirecttransaction.FieldName = "Indirecttransaction";
+            this.treeListIndirecttransaction.Name = "treeListIndirecttransaction";
+            this.treeListIndirecttransaction.OptionsColumn.AllowEdit = false;
+            // 
+            // treeListTransactiontotal
+            // 
+            this.treeListTransactiontotal.Caption = "转化";
+            this.treeListTransactiontotal.FieldName = "Transactiontotal";
+            this.treeListTransactiontotal.Name = "treeListTransactiontotal";
+            this.treeListTransactiontotal.OptionsColumn.AllowEdit = false;
+            this.treeListTransactiontotal.Visible = true;
+            this.treeListTransactiontotal.VisibleIndex = 9;
+            // 
+            // treeListFavtotal
+            // 
+            this.treeListFavtotal.Caption = "Favtotal";
+            this.treeListFavtotal.FieldName = "Favtotal";
+            this.treeListFavtotal.Name = "treeListFavtotal";
+            this.treeListFavtotal.OptionsColumn.AllowEdit = false;
+            this.treeListFavtotal.Visible = true;
+            this.treeListFavtotal.VisibleIndex = 10;
+            // 
+            // treeListRoi
+            // 
+            this.treeListRoi.Caption = "Roi";
+            this.treeListRoi.FieldName = "Roi";
+            this.treeListRoi.Name = "treeListRoi";
+            this.treeListRoi.OptionsColumn.AllowEdit = false;
+            this.treeListRoi.Visible = true;
+            this.treeListRoi.VisibleIndex = 11;
             // 
             // FrmAPITest
             // 
@@ -2861,5 +3026,20 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptAvgpos;
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCampaignId;
         private System.Windows.Forms.ToolStripMenuItem 删除推广组ToolStripMenuItem;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCatId;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCatLevel;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCatName;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListParentCatId;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListImpression;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListClick;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCtr;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCompetition;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCost;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCpc;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListDirecttransaction;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListIndirecttransaction;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListTransactiontotal;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListFavtotal;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListRoi;
     }
 }
