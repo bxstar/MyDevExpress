@@ -66,7 +66,9 @@
       <HintPath>..\Dll\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
@@ -138,6 +140,12 @@
     </Compile>
     <Compile Include="FrmSetKeywordRank.Designer.cs">
       <DependentUpon>FrmSetKeywordRank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm类目分析.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm类目分析.Designer.cs">
+      <DependentUpon>Frm类目分析.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -246,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmItemFindWord.resx">
       <DependentUpon>FrmItemFindWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm类目分析.resx">
+      <DependentUpon>Frm类目分析.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm类目预测.resx">
       <DependentUpon>Frm类目预测.cs</DependentUpon>

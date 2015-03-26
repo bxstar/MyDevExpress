@@ -27,6 +27,7 @@ namespace TaoBaoDataServer.WinClientData
             FrmFindWordTest frmContent3 = new FrmFindWordTest();
             FrmItemFindWord frmContent4 = new FrmItemFindWord(frmOutPut);
             FrmReport frmContent5 = new FrmReport();
+            Frm类目分析 frmContent6 = new Frm类目分析(frmOutPut);
             FrmTool frmTool = new FrmTool();
 
             frmOutPut.Show(dockPanel1, DockState.DockLeftAutoHide);
@@ -35,6 +36,7 @@ namespace TaoBaoDataServer.WinClientData
             frmContent3.Show(dockPanel1);
             frmContent4.Show(dockPanel1);
             frmContent5.Show(dockPanel1);
+            frmContent6.Show(dockPanel1);
             frmTool.Show(dockPanel1);
             frmDB.Show(dockPanel1);
             frmContent1.BringToFront();

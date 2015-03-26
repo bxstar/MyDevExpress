@@ -239,15 +239,6 @@
             this.btnGetCampaignRpt = new System.Windows.Forms.Button();
             this.btnGetCampaignEffectRpt = new System.Windows.Forms.Button();
             this.btnGetCampaignBaseRpt = new System.Windows.Forms.Button();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.treeListCats = new DevExpress.XtraTreeList.TreeList();
-            this.treeListCatId = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListCatLevel = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListCatName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.btnGetCategory = new System.Windows.Forms.Button();
-            this.txtCategoryIds = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNickName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -257,18 +248,6 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.treeListParentCatId = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListImpression = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListClick = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListCompetition = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListCost = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListCtr = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListCpc = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListDirecttransaction = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListIndirecttransaction = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListTransactiontotal = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListFavtotal = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListRoi = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -317,9 +296,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCampaignRpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCampaignRpt)).BeginInit();
             this.panel5.SuspendLayout();
-            this.tabPage8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.treeListCats)).BeginInit();
-            this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -335,7 +311,6 @@
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 83);
             this.tabControl1.Name = "tabControl1";
@@ -2423,112 +2398,6 @@
             this.btnGetCampaignBaseRpt.UseVisualStyleBackColor = true;
             this.btnGetCampaignBaseRpt.Click += new System.EventHandler(this.btnGetCampaignBaseRpt_Click);
             // 
-            // tabPage8
-            // 
-            this.tabPage8.Controls.Add(this.treeListCats);
-            this.tabPage8.Controls.Add(this.panel6);
-            this.tabPage8.Location = new System.Drawing.Point(4, 22);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1068, 358);
-            this.tabPage8.TabIndex = 7;
-            this.tabPage8.Text = "类目分析";
-            this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // treeListCats
-            // 
-            this.treeListCats.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.treeListCatId,
-            this.treeListCatLevel,
-            this.treeListCatName,
-            this.treeListParentCatId,
-            this.treeListImpression,
-            this.treeListClick,
-            this.treeListCtr,
-            this.treeListCompetition,
-            this.treeListCost,
-            this.treeListCpc,
-            this.treeListDirecttransaction,
-            this.treeListIndirecttransaction,
-            this.treeListTransactiontotal,
-            this.treeListFavtotal,
-            this.treeListRoi});
-            this.treeListCats.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeListCats.Location = new System.Drawing.Point(3, 3);
-            this.treeListCats.Name = "treeListCats";
-            this.treeListCats.OptionsBehavior.EnableFiltering = true;
-            this.treeListCats.OptionsFind.AllowFindPanel = true;
-            this.treeListCats.OptionsView.ShowAutoFilterRow = true;
-            this.treeListCats.Size = new System.Drawing.Size(1062, 285);
-            this.treeListCats.TabIndex = 2;
-            // 
-            // treeListCatId
-            // 
-            this.treeListCatId.Caption = "CatId";
-            this.treeListCatId.FieldName = "CatId";
-            this.treeListCatId.Name = "treeListCatId";
-            this.treeListCatId.OptionsColumn.AllowEdit = false;
-            this.treeListCatId.OptionsColumn.ReadOnly = true;
-            this.treeListCatId.Visible = true;
-            this.treeListCatId.VisibleIndex = 0;
-            // 
-            // treeListCatLevel
-            // 
-            this.treeListCatLevel.Caption = "CatLevel";
-            this.treeListCatLevel.FieldName = "CatLevel";
-            this.treeListCatLevel.Name = "treeListCatLevel";
-            this.treeListCatLevel.OptionsColumn.AllowEdit = false;
-            this.treeListCatLevel.OptionsColumn.ReadOnly = true;
-            this.treeListCatLevel.Visible = true;
-            this.treeListCatLevel.VisibleIndex = 1;
-            // 
-            // treeListCatName
-            // 
-            this.treeListCatName.Caption = "CatName";
-            this.treeListCatName.FieldName = "CatName";
-            this.treeListCatName.Name = "treeListCatName";
-            this.treeListCatName.OptionsColumn.AllowEdit = false;
-            this.treeListCatName.OptionsColumn.ReadOnly = true;
-            this.treeListCatName.Visible = true;
-            this.treeListCatName.VisibleIndex = 2;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.btnGetCategory);
-            this.panel6.Controls.Add(this.txtCategoryIds);
-            this.panel6.Controls.Add(this.label11);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(3, 288);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1062, 67);
-            this.panel6.TabIndex = 1;
-            // 
-            // btnGetCategory
-            // 
-            this.btnGetCategory.Location = new System.Drawing.Point(463, 26);
-            this.btnGetCategory.Name = "btnGetCategory";
-            this.btnGetCategory.Size = new System.Drawing.Size(75, 23);
-            this.btnGetCategory.TabIndex = 2;
-            this.btnGetCategory.Text = "获取数据";
-            this.btnGetCategory.UseVisualStyleBackColor = true;
-            this.btnGetCategory.Click += new System.EventHandler(this.btnGetCategory_Click);
-            // 
-            // txtCategoryIds
-            // 
-            this.txtCategoryIds.Location = new System.Drawing.Point(104, 26);
-            this.txtCategoryIds.Name = "txtCategoryIds";
-            this.txtCategoryIds.Size = new System.Drawing.Size(285, 21);
-            this.txtCategoryIds.TabIndex = 1;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(57, 29);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 12);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "类目：";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -2620,107 +2489,6 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // treeListParentCatId
-            // 
-            this.treeListParentCatId.Caption = "ParentCatId";
-            this.treeListParentCatId.FieldName = "ParentCatId";
-            this.treeListParentCatId.Name = "treeListParentCatId";
-            // 
-            // treeListImpression
-            // 
-            this.treeListImpression.Caption = "Impression";
-            this.treeListImpression.FieldName = "Impression";
-            this.treeListImpression.Name = "treeListImpression";
-            this.treeListImpression.OptionsColumn.AllowEdit = false;
-            this.treeListImpression.Visible = true;
-            this.treeListImpression.VisibleIndex = 3;
-            // 
-            // treeListClick
-            // 
-            this.treeListClick.Caption = "Click";
-            this.treeListClick.FieldName = "Click";
-            this.treeListClick.Name = "treeListClick";
-            this.treeListClick.OptionsColumn.AllowEdit = false;
-            this.treeListClick.Visible = true;
-            this.treeListClick.VisibleIndex = 4;
-            // 
-            // treeListCompetition
-            // 
-            this.treeListCompetition.Caption = "Competition";
-            this.treeListCompetition.FieldName = "Competition";
-            this.treeListCompetition.Name = "treeListCompetition";
-            this.treeListCompetition.OptionsColumn.AllowEdit = false;
-            this.treeListCompetition.Visible = true;
-            this.treeListCompetition.VisibleIndex = 5;
-            // 
-            // treeListCost
-            // 
-            this.treeListCost.Caption = "Cost";
-            this.treeListCost.FieldName = "Cost";
-            this.treeListCost.Name = "treeListCost";
-            this.treeListCost.OptionsColumn.AllowEdit = false;
-            this.treeListCost.Visible = true;
-            this.treeListCost.VisibleIndex = 6;
-            // 
-            // treeListCtr
-            // 
-            this.treeListCtr.Caption = "Ctr";
-            this.treeListCtr.FieldName = "Ctr";
-            this.treeListCtr.Name = "treeListCtr";
-            this.treeListCtr.OptionsColumn.AllowEdit = false;
-            this.treeListCtr.Visible = true;
-            this.treeListCtr.VisibleIndex = 7;
-            // 
-            // treeListCpc
-            // 
-            this.treeListCpc.Caption = "Cpc";
-            this.treeListCpc.FieldName = "Cpc";
-            this.treeListCpc.Name = "treeListCpc";
-            this.treeListCpc.OptionsColumn.AllowEdit = false;
-            this.treeListCpc.Visible = true;
-            this.treeListCpc.VisibleIndex = 8;
-            // 
-            // treeListDirecttransaction
-            // 
-            this.treeListDirecttransaction.Caption = "直接转化";
-            this.treeListDirecttransaction.FieldName = "Directtransaction";
-            this.treeListDirecttransaction.Name = "treeListDirecttransaction";
-            this.treeListDirecttransaction.OptionsColumn.AllowEdit = false;
-            // 
-            // treeListIndirecttransaction
-            // 
-            this.treeListIndirecttransaction.Caption = "间接转化";
-            this.treeListIndirecttransaction.FieldName = "Indirecttransaction";
-            this.treeListIndirecttransaction.Name = "treeListIndirecttransaction";
-            this.treeListIndirecttransaction.OptionsColumn.AllowEdit = false;
-            // 
-            // treeListTransactiontotal
-            // 
-            this.treeListTransactiontotal.Caption = "转化";
-            this.treeListTransactiontotal.FieldName = "Transactiontotal";
-            this.treeListTransactiontotal.Name = "treeListTransactiontotal";
-            this.treeListTransactiontotal.OptionsColumn.AllowEdit = false;
-            this.treeListTransactiontotal.Visible = true;
-            this.treeListTransactiontotal.VisibleIndex = 9;
-            // 
-            // treeListFavtotal
-            // 
-            this.treeListFavtotal.Caption = "Favtotal";
-            this.treeListFavtotal.FieldName = "Favtotal";
-            this.treeListFavtotal.Name = "treeListFavtotal";
-            this.treeListFavtotal.OptionsColumn.AllowEdit = false;
-            this.treeListFavtotal.Visible = true;
-            this.treeListFavtotal.VisibleIndex = 10;
-            // 
-            // treeListRoi
-            // 
-            this.treeListRoi.Caption = "Roi";
-            this.treeListRoi.FieldName = "Roi";
-            this.treeListRoi.Name = "treeListRoi";
-            this.treeListRoi.OptionsColumn.AllowEdit = false;
-            this.treeListRoi.Visible = true;
-            this.treeListRoi.VisibleIndex = 11;
-            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2795,10 +2563,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCampaignRpt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCampaignRpt)).EndInit();
             this.panel5.ResumeLayout(false);
-            this.tabPage8.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.treeListCats)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -2850,11 +2614,6 @@
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnGetCampaignBaseRpt;
-        private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Button btnGetCategory;
-        private System.Windows.Forms.TextBox txtCategoryIds;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnGetCampaignEffectRpt;
         private System.Windows.Forms.Button btnGetCampaignRpt;
         private System.Windows.Forms.Button btnGetAllKeywordRpt;
@@ -2974,7 +2733,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button btnInvestmentChange;
         private System.Windows.Forms.TextBox txtInvestmentChange;
-        private DevExpress.XtraTreeList.TreeList treeListCats;
         private System.Windows.Forms.Button btnAdgroupsAddKeyword;
         private System.Windows.Forms.TabPage tabPage11;
         private DevExpress.XtraGrid.GridControl gridControlCreativeRpt;
@@ -3026,20 +2784,5 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptAvgpos;
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCampaignId;
         private System.Windows.Forms.ToolStripMenuItem 删除推广组ToolStripMenuItem;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCatId;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCatLevel;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCatName;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListParentCatId;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListImpression;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListClick;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCtr;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCompetition;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCost;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListCpc;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListDirecttransaction;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListIndirecttransaction;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListTransactiontotal;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListFavtotal;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListRoi;
     }
 }
