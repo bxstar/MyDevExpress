@@ -23,7 +23,7 @@ namespace TaoBaoDataServer.WinClientData
         /// </summary>
         protected static readonly string Const_BrowserPath = CommonFunction.GetAppSetting("BrowserPath");
 
-        double totalImp = 0; double totalClick = 0; double totalPay = 0; double totalCost = 0;
+        double totalImp = 0; double totalClick = 0; double totalPay = 0; double totalCost = 0; double totalClickForCpc = 0; double totalCostForCpc = 0;
         protected void gridViewCustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
         {
             if (((DevExpress.XtraGrid.GridSummaryItem)e.Item).FieldName.CompareTo("ctr") == 0)
@@ -43,6 +43,29 @@ namespace TaoBaoDataServer.WinClientData
                 {//最终结果计算
                     if (totalImp != 0)
                         e.TotalValue = string.Format("AVG={0}", Math.Round(totalClick / totalImp * 100, 2));
+                    else
+                        e.TotalValue = "AVG=0.00";
+                }
+            }
+
+            if (((DevExpress.XtraGrid.GridSummaryItem)e.Item).FieldName.CompareTo("cpc") == 0)
+            {
+                if (e.SummaryProcess == CustomSummaryProcess.Start)
+                {//初始化起始值，防止多次统计后起始值发生变化
+                    totalClickForCpc = 0;
+                    totalCostForCpc = 0;
+                }
+                if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+                {//每行数据的统计
+                    dynamic entity = e.Row as dynamic;
+                    totalClickForCpc += entity.click;
+                    totalCostForCpc += Convert.ToDouble(entity.cost);
+                }
+
+                if (e.SummaryProcess == CustomSummaryProcess.Finalize)
+                {//最终结果计算
+                    if (totalClickForCpc != 0)
+                        e.TotalValue = string.Format("AVG={0}", Math.Round(totalCostForCpc / totalClickForCpc, 2));
                     else
                         e.TotalValue = "AVG=0.00";
                 }
@@ -69,6 +92,7 @@ namespace TaoBaoDataServer.WinClientData
                         e.TotalValue = "AVG=0.00";
                 }
             }
+
 
         }
 

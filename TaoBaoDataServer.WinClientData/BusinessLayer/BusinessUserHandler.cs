@@ -7,6 +7,7 @@ using TaoBaoDataServer.WinClientData.Model;
 using System.Data;
 using iclickpro.AccessCommon;
 using Top.Api.Response;
+using TaoBaoDataServer.WinClientData.DataBase;
 
 namespace TaoBaoDataServer.WinClientData.BusinessLayer
 {
@@ -23,34 +24,52 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             TopSession session = new TopSession();
             var param = new Dictionary<string, object>();
             param.Add("nick", nick);
-            System.Data.SqlClient.SqlConnection strSqlCon = SqlDataProvider.GetAPSqlConnection();
+            
             DataSet ds = new DataSet();
-            if (!strSqlCon.ConnectionString.Contains("Che2015"))
-            {
-                ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user WHERE proxy_user_name=[user_name] AND proxy_user_name=@nick", SqlNameAndParamer.ConvertSqlParameter(param));
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    session.UserID = Convert.ToInt32(ds.Tables[0].Rows[0]["local_user_id"]);
-                    session.ProxyUserName = ds.Tables[0].Rows[0]["proxy_user_name"].ToString();
-                    session.UserName = ds.Tables[0].Rows[0]["user_name"].ToString();
-                    session.TopSessions = ds.Tables[0].Rows[0]["user_session"].ToString();
-                    session.IsEnableMajorization = Convert.ToBoolean(ds.Tables[0].Rows[0]["IsEnableMajorization"]);
-                    //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
-                    session.CreateDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["create_date"]);
+            if (Config.ConnectionAP.Contains("data source"))
+            {//sqlserver
+                System.Data.SqlClient.SqlConnection strSqlCon = SqlDataProvider.GetAPSqlConnection();
+                if (!strSqlCon.ConnectionString.Contains("Che2015"))
+                {//淘快词，安心代驾
+                    ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user WHERE proxy_user_name=[user_name] AND proxy_user_name=@nick", SqlNameAndParamer.ConvertSqlParameter(param));
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        session.UserID = Convert.ToInt32(ds.Tables[0].Rows[0]["local_user_id"]);
+                        session.ProxyUserName = ds.Tables[0].Rows[0]["proxy_user_name"].ToString();
+                        session.UserName = ds.Tables[0].Rows[0]["user_name"].ToString();
+                        session.TopSessions = ds.Tables[0].Rows[0]["user_session"].ToString();
+                        session.IsEnableMajorization = Convert.ToBoolean(ds.Tables[0].Rows[0]["IsEnableMajorization"]);
+                        //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
+                        session.CreateDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["create_date"]);
+                    }
+                }
+                else
+                {//老关快车
+                    ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user WHERE actual_name=[user_name] AND actual_name=@nick", SqlNameAndParamer.ConvertSqlParameter(param));
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        session.UserID = Convert.ToInt32(ds.Tables[0].Rows[0]["local_user_id"]);
+                        session.ProxyUserName = ds.Tables[0].Rows[0]["actual_name"].ToString();
+                        session.UserName = ds.Tables[0].Rows[0]["user_name"].ToString();
+                        session.TopSessions = ds.Tables[0].Rows[0]["user_session"].ToString();
+                        session.IsEnableMajorization = Convert.ToBoolean(ds.Tables[0].Rows[0]["is_enable"]);
+                        //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
+                        session.CreateDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["create_date"]);
+                    }
                 }
             }
-            else
-            {
-                ds = SqlHelper.ExecuteDataSet(SqlDataProvider.GetAPSqlConnection(), "SELECT * FROM ad_user WHERE actual_name=[user_name] AND actual_name=@nick", SqlNameAndParamer.ConvertSqlParameter(param));
+            else if (Config.ConnectionAP.Contains("Host"))
+            {//mysql 
+                ds = MySqlHelper.ExecuteDataSet(string.Format("SELECT * FROM account_seesion WHERE accountName='{0}'", nick));
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    session.UserID = Convert.ToInt32(ds.Tables[0].Rows[0]["local_user_id"]);
-                    session.ProxyUserName = ds.Tables[0].Rows[0]["actual_name"].ToString();
-                    session.UserName = ds.Tables[0].Rows[0]["user_name"].ToString();
-                    session.TopSessions = ds.Tables[0].Rows[0]["user_session"].ToString();
-                    session.IsEnableMajorization = Convert.ToBoolean(ds.Tables[0].Rows[0]["is_enable"]);
+                    session.UserID = Convert.ToInt32(ds.Tables[0].Rows[0]["localId"]);
+                    session.ProxyUserName = ds.Tables[0].Rows[0]["accountName"].ToString();
+                    session.UserName = session.ProxyUserName;
+                    session.TopSessions = ds.Tables[0].Rows[0]["seesionkey"].ToString();
+                    session.IsEnableMajorization = Convert.ToBoolean(ds.Tables[0].Rows[0]["isenable"]);
                     //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
-                    session.CreateDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["create_date"]);
+                    session.CreateDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["lastupdatetime"]);
                 }
             }
             return session;
@@ -150,9 +169,42 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         }
 
         /// <summary>
-        /// 获取淘快车数据库用户信息
+        /// 获取淘快车数据库用户信息,mysql数据库
         /// </summary>
-        public List<TopSession> GetCheServerUserInfo(int? userId)
+        public List<TopSession> GetCheUserInfo(int? userId)
+        {
+            List<TopSession> lstUser = new List<TopSession>();
+            string strSql = string.Empty;
+            if (userId == null)
+                strSql = "SELECT * FROM account_seesion ";
+            else
+                strSql = string.Format("SELECT * FROM account_seesion where localId={0} ", userId);
+            DataSet ds = MySqlHelper.ExecuteDataSet(strSql);
+            
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    TopSession session = new TopSession();
+                    DataRow drUser = ds.Tables[0].Rows[i];
+
+                    session.UserID = Convert.ToInt32(drUser["localId"]);
+                    session.ProxyUserName = drUser["accountName"].ToString();
+                    session.UserName = session.ProxyUserName;
+                    session.TopSessions = drUser["seesionkey"].ToString();
+                    session.IsEnableMajorization = Convert.ToBoolean(drUser["isenable"]);
+                    //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
+                    session.CreateDate = Convert.ToDateTime(drUser["lastupdatetime"]);
+                    lstUser.Add(session);
+                }
+            }
+            return lstUser;
+        }
+
+        /// <summary>
+        /// 获取老关快车数据库用户信息
+        /// </summary>
+        public List<TopSession> GetLgUserInfo(int? userId)
         {
             List<TopSession> lstUser = new List<TopSession>();
             // 读取数据库，从数据库中取得数据

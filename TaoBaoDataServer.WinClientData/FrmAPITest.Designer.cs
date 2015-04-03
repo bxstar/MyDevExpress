@@ -2168,6 +2168,7 @@
             // 
             // gridControlCampaignRpt
             // 
+            this.gridControlCampaignRpt.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridControlCampaignRpt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlCampaignRpt.Location = new System.Drawing.Point(3, 3);
             this.gridControlCampaignRpt.MainView = this.gridViewCampaignRpt;
@@ -2259,6 +2260,8 @@
             this.colCampaignRptCpc.Caption = "cpc";
             this.colCampaignRptCpc.FieldName = "cpc";
             this.colCampaignRptCpc.Name = "colCampaignRptCpc";
+            this.colCampaignRptCpc.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.colCampaignRptCpc.Visible = true;
             this.colCampaignRptCpc.VisibleIndex = 5;
             // 
@@ -2472,6 +2475,7 @@
             this.cbxApp.Items.AddRange(new object[] {
             "安心代驾",
             "淘快词托管",
+            "老关快车",
             "淘快车"});
             this.cbxApp.Location = new System.Drawing.Point(563, 20);
             this.cbxApp.Name = "cbxApp";

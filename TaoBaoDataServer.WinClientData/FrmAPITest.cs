@@ -502,10 +502,13 @@ namespace TaoBaoDataServer.WinClientData
         private void btnGetAllUser_Click(object sender, EventArgs e)
         {
             gridControlUser.DataSource = null;
-            if (cbxApp.Text != "淘快车")
+            if (cbxApp.Text == "淘快词托管" || cbxApp.Text == "安心代驾")
                 lstUser = userHandler.GetUserInfo(null).Where(o => o.UserName == o.ProxyUserName).ToList();
-            else
-                lstUser = userHandler.GetCheServerUserInfo(null).Where(o => o.UserName == o.ProxyUserName).ToList();
+            else if (cbxApp.Text == "老关快车")
+                lstUser = userHandler.GetLgUserInfo(null).Where(o => o.UserName == o.ProxyUserName).ToList();
+            else if (cbxApp.Text == "淘快车")
+                lstUser = userHandler.GetCheUserInfo(null);
+
             gridControlUser.DataSource = lstUser;
         }
 
@@ -1017,11 +1020,22 @@ namespace TaoBaoDataServer.WinClientData
                 Config.MajorizationPath = @"D:\淘快词\AP\Majorization\Majorization.exe";
             }
             else if (cbxApp.SelectedIndex == 2)
-            {//淘快车 
+            {//老关快车 
+                Config.AppKey = "23089309";
+                Config.AppSecret = "b24366aa8696388313563698d237602d";
+                Config.App_Title = "老关快车数据分析";
+                Config.ConnectionAP = "packet size=4096;user id=sa; PWD ='ShiQiTaoKuaiChe20120302'; data source=.;persist security info=False;initial catalog='Che2015';Connect Timeout=30000;Asynchronous Processing=true;";
+                taobaoApiHandler.SetTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
+                txtArticleCode.Text = Config.ArticleCode = "ts-21434";
+                Config.ItemCode = string.Empty;
+                Config.MajorizationPath = @"D:\Source\CheServer\CheServer\Majorization\bin\Debug\Majorization.exe";
+            }
+            else if (cbxApp.SelectedIndex == 3)
+            {//淘快车 mysql
                 Config.AppKey = "12209394";
                 Config.AppSecret = "98fbb138ef7597283d798a42cb203103";
                 Config.App_Title = "淘快车数据分析";
-                Config.ConnectionAP = "packet size=4096;user id=sa; PWD ='ShiQiTaoKuaiChe20120302'; data source=.;persist security info=False;initial catalog='Che2015';Connect Timeout=30000;Asynchronous Processing=true;";
+                Config.ConnectionAP = "User Id=cowboy;Host=bull;Database=taokuaiche_cloud;Password=k0w60y;Port=30002";
                 taobaoApiHandler.SetTopClient(Config.C_Url, Config.AppKey, Config.AppSecret, "json");
                 txtArticleCode.Text = Config.ArticleCode = "ts-21434";
                 Config.ItemCode = string.Empty;

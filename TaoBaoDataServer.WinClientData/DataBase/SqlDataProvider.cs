@@ -33,6 +33,8 @@ namespace TaoBaoDataServer.WinClientData
             return new SqlConnection(Config.ConnectionAP);
         }
 
+
+
 		public SqlDataProvider()
 		{
 			try
