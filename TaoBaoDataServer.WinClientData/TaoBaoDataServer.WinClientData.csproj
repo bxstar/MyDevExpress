@@ -115,6 +115,12 @@
     <Compile Include="DataBase\SqlDataProvider.cs" />
     <Compile Include="DataBase\SqlHelper.cs" />
     <Compile Include="DynamicJsonParser.cs" />
+    <Compile Include="FrmAddgroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddgroup.Designer.cs">
+      <DependentUpon>FrmAddgroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAddKeyword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UsingWithSystemAPI.cs" />
+    <EmbeddedResource Include="FrmAddgroup.resx">
+      <DependentUpon>FrmAddgroup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmTool.resx">
       <DependentUpon>FrmTool.cs</DependentUpon>
     </EmbeddedResource>

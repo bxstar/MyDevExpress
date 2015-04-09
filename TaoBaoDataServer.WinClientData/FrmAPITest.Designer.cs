@@ -248,6 +248,7 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
+            this.增加推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -842,14 +843,15 @@
             // cMenuDgvCampaign
             // 
             this.cMenuDgvCampaign.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.同步推广组ToolStripMenuItem});
+            this.同步推广组ToolStripMenuItem,
+            this.增加推广组ToolStripMenuItem});
             this.cMenuDgvCampaign.Name = "cMenuSynAdgroup";
-            this.cMenuDgvCampaign.Size = new System.Drawing.Size(137, 26);
+            this.cMenuDgvCampaign.Size = new System.Drawing.Size(153, 70);
             // 
             // 同步推广组ToolStripMenuItem
             // 
             this.同步推广组ToolStripMenuItem.Name = "同步推广组ToolStripMenuItem";
-            this.同步推广组ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.同步推广组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.同步推广组ToolStripMenuItem.Text = "同步推广组";
             this.同步推广组ToolStripMenuItem.Click += new System.EventHandler(this.同步推广组ToolStripMenuItem_Click);
             // 
@@ -2493,6 +2495,13 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
+            // 增加推广组ToolStripMenuItem
+            // 
+            this.增加推广组ToolStripMenuItem.Name = "增加推广组ToolStripMenuItem";
+            this.增加推广组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.增加推广组ToolStripMenuItem.Text = "增加推广组";
+            this.增加推广组ToolStripMenuItem.Click += new System.EventHandler(this.增加推广组ToolStripMenuItem_Click);
+            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2788,5 +2797,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptAvgpos;
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCampaignId;
         private System.Windows.Forms.ToolStripMenuItem 删除推广组ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 增加推广组ToolStripMenuItem;
     }
 }

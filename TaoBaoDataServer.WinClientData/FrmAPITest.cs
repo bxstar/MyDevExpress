@@ -733,6 +733,14 @@ namespace TaoBaoDataServer.WinClientData
             frmOutPut.OutPutMsg("同步成功");
         }
 
+        private void 增加推广组ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TopSession session = GetSession();
+            session.CampaignId = selectedCampaign.CampaignId;
+            FrmAddgroup frm = new FrmAddgroup(frmOutPut, session);
+            frm.Show();
+        }
+
         private void 删除推广组ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             long adgroupId = Convert.ToInt64(txtAdGroupId.Text);
