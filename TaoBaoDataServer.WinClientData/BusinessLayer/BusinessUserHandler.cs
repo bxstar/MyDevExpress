@@ -299,7 +299,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
             //session.MajorConfigs = GetUserMajorConfigs(session.UserID);
             session.CreateDate = Convert.ToDateTime(drUser["create_date"]);
             session.UpdateDate = Convert.ToDateTime(drUser["update_date"]);
-            if (drUser["auth2_date"] != null && drUser["auth2_date"] != DBNull.Value)
+            if (drUser.Table.Columns.Contains("auth2_date") && drUser["auth2_date"] != null && drUser["auth2_date"] != DBNull.Value)
             {
                 session.IsAuth2 = true;
                 session.Auth2Date = Convert.ToDateTime(drUser["auth2_date"]);
