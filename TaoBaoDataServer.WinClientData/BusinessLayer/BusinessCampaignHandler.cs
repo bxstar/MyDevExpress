@@ -404,16 +404,16 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                 foreach (var item in arrBaseRpt)
                 {
                     EntityCampaignReport rpt = new EntityCampaignReport();
-                    rpt.date = item.date;
-                    rpt.campaign_id = item.campaignid;
-                    rpt.nick = item.nick;
-                    rpt.impressions = item.impressions == null ? 0 : item.impressions;
-                    rpt.click = item.click == null ? 0 : item.click;
-                    rpt.ctr = item.ctr == null ? 0M : item.ctr;
-                    rpt.cost = item.cost == null ? 0M : item.cost;
-                    rpt.cpc = item.cpc == null ? 0M : item.cpc;
-                    rpt.avgpos = item.avgpos == null ? 0M : item.avgpos;
-                    rpt.source = item.source;
+                    rpt.date = Convert.ToString(item.date);
+                    rpt.campaign_id = Convert.ToInt64(item.campaignid);
+                    rpt.nick = Convert.ToString(item.nick);
+                    rpt.impressions = item.impressions == null ? 0 : Convert.ToInt32(item.impressions);
+                    rpt.click = item.click == null ? 0 : Convert.ToInt32(item.click);
+                    rpt.ctr = item.ctr == null ? 0M : Convert.ToDecimal(item.ctr);
+                    rpt.cost = item.cost == null ? 0M : Convert.ToDecimal(item.cost);
+                    rpt.cpc = item.cpc == null ? 0M : Convert.ToDecimal(item.cpc);
+                    rpt.avgpos = item.avgpos == null ? 0M : Convert.ToDecimal(item.avgpos);
+                    rpt.source = Convert.ToString(item.source);
 
                     lstAll.Add(rpt);
                 }
@@ -431,12 +431,12 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         logger.ErrorFormat("base:{0}\r\n effect:{1}", jsonBaseRpt, jsonEffectRpt);
                         continue;
                     }
-                    rpt.directpay = item.directpay == null ? 0M : item.directpay;
-                    rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
-                    rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
-                    rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
-                    rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
-                    rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
+                    rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
+                    rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                    rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
+                    rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
+                    rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);
+                    rpt.favshopcount = item.favshopcount == null ? 0 : Convert.ToInt32(item.favshopcount);
                     rpt.totalpay = rpt.directpay + rpt.indirectpay;
                     rpt.totalpaycount = rpt.directpaycount + rpt.indirectpaycount;
                     rpt.roi = rpt.cost == 0M ? 0M : Math.Round((rpt.directpay + rpt.indirectpay) / rpt.cost, 2);

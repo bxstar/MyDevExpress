@@ -279,17 +279,16 @@ insert into ad_adgroup
                     foreach (var item in data)
                     {
                         EntityAdgroupReport rpt = new EntityAdgroupReport();
-                        rpt.date = item.date;
-                        rpt.campaign_id = item.campaignid;
-                        rpt.adgroup_id = item.adgroupid;
-                        rpt.impressions = item.impressions == null ? 0 : item.impressions;
-                        rpt.click = item.click == null ? 0 : item.click;
-                        rpt.ctr = item.ctr == null ? 0M : item.ctr;
-                        rpt.cost = item.cost == null ? 0M : item.cost;
-                        rpt.cpc = item.cpc == null ? 0M : item.cpc;
-                        rpt.source = item.source == null ? string.Empty : item.source;
-                        rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
-                        rpt.source = item.source;
+                        rpt.date = Convert.ToString(item.date);
+                        rpt.campaign_id = Convert.ToInt64(item.campaignid);
+                        rpt.adgroup_id = Convert.ToInt64(item.adgroupid);
+                        rpt.impressions = item.impressions == null ? 0 : Convert.ToInt32(item.impressions);
+                        rpt.click = item.click == null ? 0 : Convert.ToInt32(item.click);
+                        rpt.ctr = item.ctr == null ? 0M : Convert.ToDecimal(item.ctr);
+                        rpt.cost = item.cost == null ? 0M : Convert.ToDecimal(item.cost);
+                        rpt.cpc = item.cpc == null ? 0M : Convert.ToDecimal(item.cpc);
+                        rpt.avgpos = item.avgpos == null ? 0M : Convert.ToDecimal(item.avgpos);
+                        rpt.source = Convert.ToString(item.source);
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }
@@ -320,12 +319,12 @@ insert into ad_adgroup
                             logger.ErrorFormat("获取推广组报表有误，{0}", jsonEffectRpt);
                             continue;
                         }
-                        rpt.directpay = item.directpay == null ? 0M : item.directpay;
-                        rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
-                        rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
-                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
-                        rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
-                        rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
+                        rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
+                        rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                        rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
+                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
+                        rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);
+                        rpt.favshopcount = item.favshopcount == null ? 0 : Convert.ToInt32(item.favshopcount);
                         rpt.roi = rpt.cost == 0M ? 0M : Math.Round((rpt.directpay + rpt.indirectpay) / rpt.cost, 2);
                         returnPageSize++;
                     }
@@ -389,17 +388,16 @@ insert into ad_adgroup
                     foreach (var item in data)
                     {
                         EntityAdgroupReport rpt = new EntityAdgroupReport();
-                        rpt.date = item.date;
-                        rpt.campaign_id = item.campaignid;
-                        rpt.adgroup_id = item.adgroupid;
-                        rpt.impressions = item.impressions == null ? 0 : item.impressions;
-                        rpt.click = item.click == null ? 0 : item.click;
-                        rpt.ctr = item.ctr == null ? 0M : item.ctr;
-                        rpt.cost = item.cost == null ? 0M : item.cost;
-                        rpt.cpc = item.cpc == null ? 0M : item.cpc;
-                        rpt.source = item.source == null ? string.Empty : item.source;
-                        rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
-                        rpt.source = item.source;
+                        rpt.date = Convert.ToString(item.date);
+                        rpt.campaign_id = Convert.ToInt64(item.campaignid);
+                        rpt.adgroup_id = Convert.ToInt64(item.adgroupid);
+                        rpt.impressions = item.impressions == null ? 0 : Convert.ToInt32(item.impressions);
+                        rpt.click = item.click == null ? 0 : Convert.ToInt32(item.click);
+                        rpt.ctr = item.ctr == null ? 0M : Convert.ToDecimal(item.ctr);
+                        rpt.cost = item.cost == null ? 0M : Convert.ToDecimal(item.cost);
+                        rpt.cpc = item.cpc == null ? 0M : Convert.ToDecimal(item.cpc);
+                        rpt.avgpos = item.avgpos == null ? 0M : Convert.ToDecimal(item.avgpos);
+                        rpt.source = Convert.ToString(item.source);
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }
@@ -430,12 +428,12 @@ insert into ad_adgroup
                             logger.ErrorFormat("获取推广组报表有误，{0}", jsonEffectRpt);
                             continue;
                         }
-                        rpt.directpay = item.directpay == null ? 0M : item.directpay;
-                        rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
-                        rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
-                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
-                        rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
-                        rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
+                        rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
+                        rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                        rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
+                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
+                        rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);
+                        rpt.favshopcount = item.favshopcount == null ? 0 : Convert.ToInt32(item.favshopcount);
                         rpt.roi = rpt.cost == 0M ? 0M : Math.Round((rpt.directpay + rpt.indirectpay) / rpt.cost, 2);
                         returnPageSize++;
                     }
@@ -500,18 +498,17 @@ insert into ad_adgroup
                     foreach (var item in data)
                     {
                         EntityCreativeReport rpt = new EntityCreativeReport();
-                        rpt.date = item.date;
-                        rpt.campaign_id = item.campaignid;
-                        rpt.adgroup_id = item.adgroupid;
-                        rpt.creative_id = item.creativeid;
-                        rpt.impressions = item.impressions == null ? 0 : item.impressions;
-                        rpt.click = item.click == null ? 0 : item.click;
-                        rpt.ctr = item.ctr == null ? 0M : item.ctr;
-                        rpt.cost = item.cost == null ? 0M : item.cost;
-                        rpt.cpc = item.cpc == null ? 0M : item.cpc;
-                        rpt.source = item.source == null ? string.Empty : item.source;
-                        rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
-                        rpt.source = item.source;
+                        rpt.date = Convert.ToString(item.date);
+                        rpt.campaign_id = Convert.ToInt64(item.campaignid);
+                        rpt.adgroup_id = Convert.ToInt64(item.adgroupid);
+                        rpt.creative_id = Convert.ToInt64(item.creativeid);
+                        rpt.impressions = item.impressions == null ? 0 : Convert.ToInt32(item.impressions);
+                        rpt.click = item.click == null ? 0 : Convert.ToInt32(item.click);
+                        rpt.ctr = item.ctr == null ? 0M : Convert.ToDecimal(item.ctr);
+                        rpt.cost = item.cost == null ? 0M : Convert.ToDecimal(item.cost);
+                        rpt.cpc = item.cpc == null ? 0M : Convert.ToDecimal(item.cpc);
+                        rpt.avgpos = item.avgpos == null ? 0M : Convert.ToDecimal(item.avgpos);
+                        rpt.source = Convert.ToString(item.source);
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }
@@ -542,12 +539,12 @@ insert into ad_adgroup
                             logger.ErrorFormat("获取推广组创意报表有误，{0}", jsonEffectRpt);
                             continue;
                         }
-                        rpt.directpay = item.directpay == null ? 0M : item.directpay;
-                        rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
-                        rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
-                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
-                        rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
-                        rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
+                        rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
+                        rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                        rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
+                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
+                        rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);
+                        rpt.favshopcount = item.favshopcount == null ? 0 : Convert.ToInt32(item.favshopcount);
                         rpt.roi = rpt.cost == 0M ? 0M : Math.Round((rpt.directpay + rpt.indirectpay) / rpt.cost, 2);
                         returnPageSize++;
                     }

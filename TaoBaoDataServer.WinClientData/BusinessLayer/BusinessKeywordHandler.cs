@@ -391,19 +391,18 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                     foreach (var item in data)
                     {
                         EntityKeywordRpt rpt = new EntityKeywordRpt();
-                        rpt.date = item.date;
+                        rpt.date = Convert.ToString(item.date);
                         //rpt.nick = item.nick;                 //列太多暂时不显示
-                        rpt.campaignid = item.campaignid;
-                        rpt.adgroupid = item.adgroupid;
-                        rpt.keywordid = item.keywordid;
-                        rpt.keywordstr = item.keywordstr;
-                        rpt.impressions = item.impressions == null ? 0 : item.impressions;
-                        rpt.click = item.click == null ? 0 : item.click;
-                        rpt.cost = item.cost == null ? 0M : item.cost;
-                        rpt.source = item.source == null ? string.Empty : item.source;
-                        rpt.avgpos = item.avgpos == null ? 0 : item.avgpos;
-                        rpt.searchtype = item.searchtype;
-                        rpt.source = item.source;
+                        rpt.campaignid = Convert.ToInt64(item.campaignid);
+                        rpt.adgroupid = Convert.ToInt64(item.adgroupid);
+                        rpt.keywordid = Convert.ToInt64(item.keywordid);
+                        rpt.keywordstr = Convert.ToString(item.keywordstr);
+                        rpt.impressions = item.impressions == null ? 0 : Convert.ToInt32(item.impressions);
+                        rpt.click = item.click == null ? 0 : Convert.ToInt32(item.click);
+                        rpt.cost = item.cost == null ? 0M : Convert.ToDecimal(item.cost);
+                        rpt.avgpos = item.avgpos == null ? 0M : Convert.ToDecimal(item.avgpos);
+                        rpt.searchtype = Convert.ToString(item.searchtype);
+                        rpt.source = Convert.ToString(item.source);
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }
@@ -456,20 +455,20 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                     foreach (var item in data)
                     {
                         EntityKeywordRpt rpt = new EntityKeywordRpt();
-                        rpt.date = item.date;
+                        rpt.date = Convert.ToString(item.date);
                         //rpt.nick = item.nick;              //列太多暂时不显示
-                        rpt.campaignid = item.campaignid;
-                        rpt.adgroupid = item.adgroupid;
-                        rpt.keywordid = item.keywordid;
-                        rpt.keywordstr = item.keywordstr;
-                        rpt.directpay = item.directpay == null ? 0M : item.directpay;
-                        rpt.indirectpay = item.indirectpay == null ? 0M : item.indirectpay;
-                        rpt.directpaycount = item.directpaycount == null ? 0 : item.directpaycount;
-                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : item.indirectpaycount;
-                        rpt.favitemcount = item.favitemcount == null ? 0 : item.favitemcount;
-                        rpt.favshopcount = item.favshopcount == null ? 0 : item.favshopcount;
-                        rpt.searchtype = item.searchtype;
-                        rpt.source = item.source;
+                        rpt.campaignid = Convert.ToInt64(item.campaignid);
+                        rpt.adgroupid = Convert.ToInt64(item.adgroupid);
+                        rpt.keywordid = Convert.ToInt64(item.keywordid);
+                        rpt.keywordstr = Convert.ToString(item.keywordstr);
+                        rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
+                        rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                        rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
+                        rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
+                        rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);
+                        rpt.favshopcount = item.favshopcount == null ? 0 : Convert.ToInt32(item.favshopcount);
+                        rpt.searchtype = Convert.ToString(item.searchtype);
+                        rpt.source = Convert.ToString(item.source);
                         lstAll.Add(rpt);
                         returnPageSize++;
                     }

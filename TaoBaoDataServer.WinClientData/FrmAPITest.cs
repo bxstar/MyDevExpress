@@ -855,27 +855,13 @@ namespace TaoBaoDataServer.WinClientData
                 long newPrice = 0;
                 if (txtNewPrice.Text.StartsWith("+") || txtNewPrice.Text.StartsWith("-"))
                 {//调增或调减
-                    if (txtNewPrice.Text.StartsWith("+"))
-                    {//调增
-                        if (txtNewPrice.Text.EndsWith("%"))
-                        {
-                            newPrice = k.MaxPrice + Convert.ToInt64(k.MaxPrice * Convert.ToDecimal(txtNewPrice.Text.TrimEnd('%')) / 100);
-                        }
-                        else
-                        {
-                            newPrice = k.MaxPrice + Convert.ToInt64(txtNewPrice.Text);
-                        }
+                    if (txtNewPrice.Text.EndsWith("%"))
+                    {
+                        newPrice = k.MaxPrice + Convert.ToInt64(k.MaxPrice * Convert.ToDecimal(txtNewPrice.Text.TrimEnd('%')) / 100);
                     }
                     else
-                    {//调减 
-                        if (txtNewPrice.Text.EndsWith("%"))
-                        {
-                            newPrice = k.MaxPrice - Convert.ToInt64(k.MaxPrice * Convert.ToDecimal(txtNewPrice.Text.TrimEnd('%')) / 100);
-                        }
-                        else
-                        {
-                            newPrice = k.MaxPrice - Convert.ToInt64(txtNewPrice.Text);
-                        }
+                    {
+                        newPrice = k.MaxPrice + Convert.ToInt64(txtNewPrice.Text);
                     }
                 }
                 else
@@ -1246,7 +1232,7 @@ namespace TaoBaoDataServer.WinClientData
             }
             string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", itemId);
 
-            System.Diagnostics.Process.Start("iexplore.exe", itemUrl);
+            System.Diagnostics.Process.Start(Const_BrowserPath, itemUrl);
         }
 
         private void btnGetSchedule_Click(object sender, EventArgs e)
