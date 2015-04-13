@@ -88,6 +88,7 @@
             this.dgvCampaign = new System.Windows.Forms.DataGridView();
             this.cMenuDgvCampaign = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.同步推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.增加推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gridControlAdgroup = new DevExpress.XtraGrid.GridControl();
             this.cMenuDgvAdgroup = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -97,6 +98,7 @@
             this.删除推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewAdgroup = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnChangeAdgroupStatus = new System.Windows.Forms.Button();
             this.btnAdgroupsAddKeyword = new System.Windows.Forms.Button();
             this.btnNewAdgrougForm = new System.Windows.Forms.Button();
             this.btnAdgroupChange = new System.Windows.Forms.Button();
@@ -248,7 +250,6 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
-            this.增加推广组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -846,14 +847,21 @@
             this.同步推广组ToolStripMenuItem,
             this.增加推广组ToolStripMenuItem});
             this.cMenuDgvCampaign.Name = "cMenuSynAdgroup";
-            this.cMenuDgvCampaign.Size = new System.Drawing.Size(153, 70);
+            this.cMenuDgvCampaign.Size = new System.Drawing.Size(137, 48);
             // 
             // 同步推广组ToolStripMenuItem
             // 
             this.同步推广组ToolStripMenuItem.Name = "同步推广组ToolStripMenuItem";
-            this.同步推广组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.同步推广组ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.同步推广组ToolStripMenuItem.Text = "同步推广组";
             this.同步推广组ToolStripMenuItem.Click += new System.EventHandler(this.同步推广组ToolStripMenuItem_Click);
+            // 
+            // 增加推广组ToolStripMenuItem
+            // 
+            this.增加推广组ToolStripMenuItem.Name = "增加推广组ToolStripMenuItem";
+            this.增加推广组ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.增加推广组ToolStripMenuItem.Text = "增加推广组";
+            this.增加推广组ToolStripMenuItem.Click += new System.EventHandler(this.增加推广组ToolStripMenuItem_Click);
             // 
             // tabPage3
             // 
@@ -928,6 +936,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnChangeAdgroupStatus);
             this.panel3.Controls.Add(this.btnAdgroupsAddKeyword);
             this.panel3.Controls.Add(this.btnNewAdgrougForm);
             this.panel3.Controls.Add(this.btnAdgroupChange);
@@ -943,9 +952,19 @@
             this.panel3.Size = new System.Drawing.Size(1062, 62);
             this.panel3.TabIndex = 7;
             // 
+            // btnChangeAdgroupStatus
+            // 
+            this.btnChangeAdgroupStatus.Location = new System.Drawing.Point(975, 21);
+            this.btnChangeAdgroupStatus.Name = "btnChangeAdgroupStatus";
+            this.btnChangeAdgroupStatus.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeAdgroupStatus.TabIndex = 9;
+            this.btnChangeAdgroupStatus.Text = "启用或暂停";
+            this.btnChangeAdgroupStatus.UseVisualStyleBackColor = true;
+            this.btnChangeAdgroupStatus.Click += new System.EventHandler(this.btnChangeAdgroupStatus_Click);
+            // 
             // btnAdgroupsAddKeyword
             // 
-            this.btnAdgroupsAddKeyword.Location = new System.Drawing.Point(834, 20);
+            this.btnAdgroupsAddKeyword.Location = new System.Drawing.Point(813, 20);
             this.btnAdgroupsAddKeyword.Name = "btnAdgroupsAddKeyword";
             this.btnAdgroupsAddKeyword.Size = new System.Drawing.Size(75, 23);
             this.btnAdgroupsAddKeyword.TabIndex = 8;
@@ -955,7 +974,7 @@
             // 
             // btnNewAdgrougForm
             // 
-            this.btnNewAdgrougForm.Location = new System.Drawing.Point(966, 21);
+            this.btnNewAdgrougForm.Location = new System.Drawing.Point(894, 21);
             this.btnNewAdgrougForm.Name = "btnNewAdgrougForm";
             this.btnNewAdgrougForm.Size = new System.Drawing.Size(75, 23);
             this.btnNewAdgrougForm.TabIndex = 7;
@@ -977,9 +996,9 @@
             // 
             this.btnGetOneItem.Location = new System.Drawing.Point(553, 21);
             this.btnGetOneItem.Name = "btnGetOneItem";
-            this.btnGetOneItem.Size = new System.Drawing.Size(102, 23);
+            this.btnGetOneItem.Size = new System.Drawing.Size(112, 23);
             this.btnGetOneItem.TabIndex = 6;
-            this.btnGetOneItem.Text = "获取单个宝贝";
+            this.btnGetOneItem.Text = "输出宝贝相关信息";
             this.btnGetOneItem.UseVisualStyleBackColor = true;
             this.btnGetOneItem.Click += new System.EventHandler(this.btnGetOneItem_Click);
             // 
@@ -999,11 +1018,11 @@
             // 
             // btnGetAdGroup
             // 
-            this.btnGetAdGroup.Location = new System.Drawing.Point(450, 21);
+            this.btnGetAdGroup.Location = new System.Drawing.Point(436, 21);
             this.btnGetAdGroup.Name = "btnGetAdGroup";
-            this.btnGetAdGroup.Size = new System.Drawing.Size(75, 23);
+            this.btnGetAdGroup.Size = new System.Drawing.Size(89, 23);
             this.btnGetAdGroup.TabIndex = 2;
-            this.btnGetAdGroup.Text = "获取宝贝";
+            this.btnGetAdGroup.Text = "获取计划宝贝";
             this.btnGetAdGroup.UseVisualStyleBackColor = true;
             this.btnGetAdGroup.Click += new System.EventHandler(this.btnGetAdGroup_Click);
             // 
@@ -2495,13 +2514,6 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
-            // 增加推广组ToolStripMenuItem
-            // 
-            this.增加推广组ToolStripMenuItem.Name = "增加推广组ToolStripMenuItem";
-            this.增加推广组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.增加推广组ToolStripMenuItem.Text = "增加推广组";
-            this.增加推广组ToolStripMenuItem.Click += new System.EventHandler(this.增加推广组ToolStripMenuItem_Click);
-            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2798,5 +2810,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCampaignRptCampaignId;
         private System.Windows.Forms.ToolStripMenuItem 删除推广组ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 增加推广组ToolStripMenuItem;
+        private System.Windows.Forms.Button btnChangeAdgroupStatus;
     }
 }

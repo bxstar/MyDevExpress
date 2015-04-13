@@ -443,8 +443,28 @@ namespace TaoBaoDataServer.WinClientData
 
         private void btnGetOneItem_Click(object sender, EventArgs e)
         {
-            // 获取商品信息，不包含销量信息，已推广宝贝界面不需要显示，不保存销量信息，因为时刻在变
-            ItemGetResponse response = taobaoApiHandler.TaobaoItemGetByNumIid(GetSession(), "pic_url,title", 17126603843);
+            long itemId = 0;
+            Int64.TryParse(txtItemId.Text, out itemId);
+            if (itemId != 0)
+            {
+                string result = DynamicJsonParser.FromObject(CommonHandler.GetItemOnline(itemId.ToString()));
+                frmOutPut.OutPutMsg(result);
+            }
+            else
+            {
+                MessageBox.Show("选中宝贝后，再点击");
+            }
+        }
+
+        private void btnChangeAdgroupStatus_Click(object sender, EventArgs e)
+        {
+            TopSession session = GetSession();
+            var response = taobaoApiHandler.TaobaoSimbaAdgroupUpdate(session, selectedAdGroup.AdgroupId, selectedAdGroup.OnlineStatus == "online" ? "offline" : "online");
+            if (response != null && !response.IsError)
+            {
+                List<ADGroup> result = adgroupHandler.GetAdgroupOnline(session, selectedCampaign.CampaignId);
+                gridControlAdgroup.DataSource = result;
+            }
         }
 
         private void btnGetBalance_Click(object sender, EventArgs e)
