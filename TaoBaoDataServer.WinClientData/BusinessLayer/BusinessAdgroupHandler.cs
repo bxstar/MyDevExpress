@@ -23,7 +23,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public List<ADGroup> GetAdgroupOnline(TopSession session, long campaignId)
         {
             // 定义返回值
-            List<ADGroup> lstAdgroup = null;
+            List<ADGroup> lstAdgroup = new List<ADGroup>();
 
             // 按照一页取200条数据，获取计划下的推广组信息
             long pageIndex = 1;
