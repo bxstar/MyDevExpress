@@ -114,6 +114,8 @@
             this.查询排名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewKeyword = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnUpdateKeywordMatchscope = new System.Windows.Forms.Button();
+            this.cbxKeywordMatchscope = new System.Windows.Forms.ComboBox();
             this.btnDelKeyword = new System.Windows.Forms.Button();
             this.txtNewPrice = new DevExpress.XtraEditors.TextEdit();
             this.btnUpdateKeyword = new System.Windows.Forms.Button();
@@ -170,6 +172,21 @@
             this.cMenuDgvAdgroupRpt = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.网页打开宝贝ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewAdgroupRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colAdgroupRptDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptAdgroupId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptImp = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptClick = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptCost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptCtr = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptCpc = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptTotalpay = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptDirectpaycount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptIndirectpaycount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptFavitemcount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptFavshopcount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptRoi = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptAvgpos = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAdgroupRptCampaignid = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btnNewAdgroupRptForm = new System.Windows.Forms.Button();
             this.gbxAdgroupRptDtp = new System.Windows.Forms.GroupBox();
@@ -239,8 +256,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnNewCampaignRptForm = new System.Windows.Forms.Button();
             this.btnGetCampaignRpt = new System.Windows.Forms.Button();
-            this.btnGetCampaignEffectRpt = new System.Windows.Forms.Button();
-            this.btnGetCampaignBaseRpt = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNickName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -1092,6 +1107,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnUpdateKeywordMatchscope);
+            this.panel2.Controls.Add(this.cbxKeywordMatchscope);
             this.panel2.Controls.Add(this.btnDelKeyword);
             this.panel2.Controls.Add(this.txtNewPrice);
             this.panel2.Controls.Add(this.btnUpdateKeyword);
@@ -1106,9 +1123,31 @@
             this.panel2.Size = new System.Drawing.Size(1062, 69);
             this.panel2.TabIndex = 4;
             // 
+            // btnUpdateKeywordMatchscope
+            // 
+            this.btnUpdateKeywordMatchscope.Location = new System.Drawing.Point(844, 26);
+            this.btnUpdateKeywordMatchscope.Name = "btnUpdateKeywordMatchscope";
+            this.btnUpdateKeywordMatchscope.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateKeywordMatchscope.TabIndex = 13;
+            this.btnUpdateKeywordMatchscope.Text = "选中词更改匹配模式";
+            this.btnUpdateKeywordMatchscope.UseVisualStyleBackColor = true;
+            this.btnUpdateKeywordMatchscope.Click += new System.EventHandler(this.btnUpdateKeywordMatchscope_Click);
+            // 
+            // cbxKeywordMatchscope
+            // 
+            this.cbxKeywordMatchscope.FormattingEnabled = true;
+            this.cbxKeywordMatchscope.Items.AddRange(new object[] {
+            "广泛匹配",
+            "子串匹配",
+            "精确匹配"});
+            this.cbxKeywordMatchscope.Location = new System.Drawing.Point(764, 27);
+            this.cbxKeywordMatchscope.Name = "cbxKeywordMatchscope";
+            this.cbxKeywordMatchscope.Size = new System.Drawing.Size(74, 20);
+            this.cbxKeywordMatchscope.TabIndex = 12;
+            // 
             // btnDelKeyword
             // 
-            this.btnDelKeyword.Location = new System.Drawing.Point(331, 24);
+            this.btnDelKeyword.Location = new System.Drawing.Point(258, 24);
             this.btnDelKeyword.Name = "btnDelKeyword";
             this.btnDelKeyword.Size = new System.Drawing.Size(75, 23);
             this.btnDelKeyword.TabIndex = 11;
@@ -1118,7 +1157,7 @@
             // 
             // txtNewPrice
             // 
-            this.txtNewPrice.Location = new System.Drawing.Point(745, 25);
+            this.txtNewPrice.Location = new System.Drawing.Point(560, 27);
             this.txtNewPrice.Name = "txtNewPrice";
             this.txtNewPrice.Size = new System.Drawing.Size(100, 20);
             this.txtNewPrice.TabIndex = 10;
@@ -1126,7 +1165,7 @@
             // 
             // btnUpdateKeyword
             // 
-            this.btnUpdateKeyword.Location = new System.Drawing.Point(878, 24);
+            this.btnUpdateKeyword.Location = new System.Drawing.Point(666, 26);
             this.btnUpdateKeyword.Name = "btnUpdateKeyword";
             this.btnUpdateKeyword.Size = new System.Drawing.Size(75, 23);
             this.btnUpdateKeyword.TabIndex = 9;
@@ -1137,7 +1176,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(676, 29);
+            this.label18.Location = new System.Drawing.Point(501, 31);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(53, 12);
             this.label18.TabIndex = 7;
@@ -1145,7 +1184,7 @@
             // 
             // btnNewKeywordForm
             // 
-            this.btnNewKeywordForm.Location = new System.Drawing.Point(554, 24);
+            this.btnNewKeywordForm.Location = new System.Drawing.Point(420, 25);
             this.btnNewKeywordForm.Name = "btnNewKeywordForm";
             this.btnNewKeywordForm.Size = new System.Drawing.Size(75, 23);
             this.btnNewKeywordForm.TabIndex = 6;
@@ -1155,7 +1194,7 @@
             // 
             // btnAddKeyword
             // 
-            this.btnAddKeyword.Location = new System.Drawing.Point(437, 24);
+            this.btnAddKeyword.Location = new System.Drawing.Point(339, 24);
             this.btnAddKeyword.Name = "btnAddKeyword";
             this.btnAddKeyword.Size = new System.Drawing.Size(75, 23);
             this.btnAddKeyword.TabIndex = 5;
@@ -1165,7 +1204,7 @@
             // 
             // btnKeywordChange
             // 
-            this.btnKeywordChange.Location = new System.Drawing.Point(155, 24);
+            this.btnKeywordChange.Location = new System.Drawing.Point(133, 24);
             this.btnKeywordChange.Name = "btnKeywordChange";
             this.btnKeywordChange.Size = new System.Drawing.Size(119, 23);
             this.btnKeywordChange.TabIndex = 4;
@@ -1415,6 +1454,8 @@
             this.colKeywordRptCtr.Caption = "ctr";
             this.colKeywordRptCtr.FieldName = "ctr";
             this.colKeywordRptCtr.Name = "colKeywordRptCtr";
+            this.colKeywordRptCtr.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.colKeywordRptCtr.Visible = true;
             this.colKeywordRptCtr.VisibleIndex = 6;
             this.colKeywordRptCtr.Width = 50;
@@ -1424,6 +1465,8 @@
             this.colKeywordRptCpc.Caption = "cpc";
             this.colKeywordRptCpc.FieldName = "cpc";
             this.colKeywordRptCpc.Name = "colKeywordRptCpc";
+            this.colKeywordRptCpc.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.colKeywordRptCpc.Visible = true;
             this.colKeywordRptCpc.VisibleIndex = 7;
             this.colKeywordRptCpc.Width = 50;
@@ -1699,11 +1742,175 @@
             // 
             // gridViewAdgroupRpt
             // 
+            this.gridViewAdgroupRpt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colAdgroupRptDate,
+            this.colAdgroupRptAdgroupId,
+            this.colAdgroupRptImp,
+            this.colAdgroupRptClick,
+            this.colAdgroupRptCost,
+            this.colAdgroupRptCtr,
+            this.colAdgroupRptCpc,
+            this.colAdgroupRptTotalpay,
+            this.colAdgroupRptDirectpaycount,
+            this.colAdgroupRptIndirectpaycount,
+            this.colAdgroupRptFavitemcount,
+            this.colAdgroupRptFavshopcount,
+            this.colAdgroupRptRoi,
+            this.colAdgroupRptAvgpos,
+            this.colAdgroupRptCampaignid});
             this.gridViewAdgroupRpt.GridControl = this.gridControlAdgroupRpt;
             this.gridViewAdgroupRpt.Name = "gridViewAdgroupRpt";
             this.gridViewAdgroupRpt.OptionsSelection.MultiSelect = true;
             this.gridViewAdgroupRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewAdgroupRpt.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
+            this.gridViewAdgroupRpt.OptionsView.ShowFooter = true;
             this.gridViewAdgroupRpt.OptionsView.ShowGroupPanel = false;
+            // 
+            // colAdgroupRptDate
+            // 
+            this.colAdgroupRptDate.Caption = "date";
+            this.colAdgroupRptDate.FieldName = "date";
+            this.colAdgroupRptDate.Name = "colAdgroupRptDate";
+            this.colAdgroupRptDate.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "个数：{0}")});
+            this.colAdgroupRptDate.Visible = true;
+            this.colAdgroupRptDate.VisibleIndex = 0;
+            // 
+            // colAdgroupRptAdgroupId
+            // 
+            this.colAdgroupRptAdgroupId.Caption = "adgroupid";
+            this.colAdgroupRptAdgroupId.FieldName = "adgroup_id";
+            this.colAdgroupRptAdgroupId.Name = "colAdgroupRptAdgroupId";
+            this.colAdgroupRptAdgroupId.Visible = true;
+            this.colAdgroupRptAdgroupId.VisibleIndex = 1;
+            // 
+            // colAdgroupRptImp
+            // 
+            this.colAdgroupRptImp.Caption = "imp";
+            this.colAdgroupRptImp.FieldName = "impressions";
+            this.colAdgroupRptImp.Name = "colAdgroupRptImp";
+            this.colAdgroupRptImp.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.colAdgroupRptImp.Visible = true;
+            this.colAdgroupRptImp.VisibleIndex = 2;
+            // 
+            // colAdgroupRptClick
+            // 
+            this.colAdgroupRptClick.Caption = "click";
+            this.colAdgroupRptClick.FieldName = "click";
+            this.colAdgroupRptClick.Name = "colAdgroupRptClick";
+            this.colAdgroupRptClick.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.colAdgroupRptClick.Visible = true;
+            this.colAdgroupRptClick.VisibleIndex = 3;
+            // 
+            // colAdgroupRptCost
+            // 
+            this.colAdgroupRptCost.Caption = "cost";
+            this.colAdgroupRptCost.FieldName = "cost";
+            this.colAdgroupRptCost.Name = "colAdgroupRptCost";
+            this.colAdgroupRptCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.colAdgroupRptCost.Visible = true;
+            this.colAdgroupRptCost.VisibleIndex = 4;
+            // 
+            // colAdgroupRptCtr
+            // 
+            this.colAdgroupRptCtr.Caption = "ctr";
+            this.colAdgroupRptCtr.FieldName = "ctr";
+            this.colAdgroupRptCtr.Name = "colAdgroupRptCtr";
+            this.colAdgroupRptCtr.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
+            this.colAdgroupRptCtr.Visible = true;
+            this.colAdgroupRptCtr.VisibleIndex = 5;
+            // 
+            // colAdgroupRptCpc
+            // 
+            this.colAdgroupRptCpc.Caption = "cpc";
+            this.colAdgroupRptCpc.FieldName = "cpc";
+            this.colAdgroupRptCpc.Name = "colAdgroupRptCpc";
+            this.colAdgroupRptCpc.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
+            this.colAdgroupRptCpc.Visible = true;
+            this.colAdgroupRptCpc.VisibleIndex = 6;
+            // 
+            // colAdgroupRptTotalpay
+            // 
+            this.colAdgroupRptTotalpay.Caption = "totalpay";
+            this.colAdgroupRptTotalpay.FieldName = "totalpay";
+            this.colAdgroupRptTotalpay.Name = "colAdgroupRptTotalpay";
+            this.colAdgroupRptTotalpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.colAdgroupRptTotalpay.Visible = true;
+            this.colAdgroupRptTotalpay.VisibleIndex = 7;
+            // 
+            // colAdgroupRptDirectpaycount
+            // 
+            this.colAdgroupRptDirectpaycount.Caption = "directpaycount";
+            this.colAdgroupRptDirectpaycount.FieldName = "directpaycount";
+            this.colAdgroupRptDirectpaycount.Name = "colAdgroupRptDirectpaycount";
+            this.colAdgroupRptDirectpaycount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.colAdgroupRptDirectpaycount.Visible = true;
+            this.colAdgroupRptDirectpaycount.VisibleIndex = 8;
+            // 
+            // colAdgroupRptIndirectpaycount
+            // 
+            this.colAdgroupRptIndirectpaycount.Caption = "indirectpaycount";
+            this.colAdgroupRptIndirectpaycount.FieldName = "indirectpaycount";
+            this.colAdgroupRptIndirectpaycount.Name = "colAdgroupRptIndirectpaycount";
+            this.colAdgroupRptIndirectpaycount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.colAdgroupRptIndirectpaycount.Visible = true;
+            this.colAdgroupRptIndirectpaycount.VisibleIndex = 9;
+            // 
+            // colAdgroupRptFavitemcount
+            // 
+            this.colAdgroupRptFavitemcount.Caption = "favitemcount";
+            this.colAdgroupRptFavitemcount.FieldName = "favitemcount";
+            this.colAdgroupRptFavitemcount.Name = "colAdgroupRptFavitemcount";
+            this.colAdgroupRptFavitemcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.colAdgroupRptFavitemcount.Visible = true;
+            this.colAdgroupRptFavitemcount.VisibleIndex = 10;
+            // 
+            // colAdgroupRptFavshopcount
+            // 
+            this.colAdgroupRptFavshopcount.Caption = "favshopcount";
+            this.colAdgroupRptFavshopcount.FieldName = "favshopcount";
+            this.colAdgroupRptFavshopcount.Name = "colAdgroupRptFavshopcount";
+            this.colAdgroupRptFavshopcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            this.colAdgroupRptFavshopcount.Visible = true;
+            this.colAdgroupRptFavshopcount.VisibleIndex = 11;
+            // 
+            // colAdgroupRptRoi
+            // 
+            this.colAdgroupRptRoi.Caption = "roi";
+            this.colAdgroupRptRoi.FieldName = "roi";
+            this.colAdgroupRptRoi.Name = "colAdgroupRptRoi";
+            this.colAdgroupRptRoi.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
+            this.colAdgroupRptRoi.Visible = true;
+            this.colAdgroupRptRoi.VisibleIndex = 12;
+            // 
+            // colAdgroupRptAvgpos
+            // 
+            this.colAdgroupRptAvgpos.Caption = "avgpos";
+            this.colAdgroupRptAvgpos.FieldName = "avgpos";
+            this.colAdgroupRptAvgpos.Name = "colAdgroupRptAvgpos";
+            this.colAdgroupRptAvgpos.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
+            this.colAdgroupRptAvgpos.Visible = true;
+            this.colAdgroupRptAvgpos.VisibleIndex = 13;
+            // 
+            // colAdgroupRptCampaignid
+            // 
+            this.colAdgroupRptCampaignid.Caption = "campaignid";
+            this.colAdgroupRptCampaignid.FieldName = "campaign_id";
+            this.colAdgroupRptCampaignid.Name = "colAdgroupRptCampaignid";
+            this.colAdgroupRptCampaignid.Visible = true;
+            this.colAdgroupRptCampaignid.VisibleIndex = 14;
             // 
             // panel10
             // 
@@ -1905,7 +2112,7 @@
             this.colCreativeRptDate.FieldName = "date";
             this.colCreativeRptDate.Name = "colCreativeRptDate";
             this.colCreativeRptDate.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "(个数={0:N})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "个数：{0}")});
             this.colCreativeRptDate.Visible = true;
             this.colCreativeRptDate.VisibleIndex = 0;
             // 
@@ -1960,6 +2167,8 @@
             this.colCreativeRptCtr.Caption = "ctr";
             this.colCreativeRptCtr.FieldName = "ctr";
             this.colCreativeRptCtr.Name = "colCreativeRptCtr";
+            this.colCreativeRptCtr.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.colCreativeRptCtr.Visible = true;
             this.colCreativeRptCtr.VisibleIndex = 6;
             // 
@@ -1968,6 +2177,8 @@
             this.colCreativeRptCpc.Caption = "cpc";
             this.colCreativeRptCpc.FieldName = "cpc";
             this.colCreativeRptCpc.Name = "colCreativeRptCpc";
+            this.colCreativeRptCpc.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
             this.colCreativeRptCpc.Visible = true;
             this.colCreativeRptCpc.VisibleIndex = 7;
             // 
@@ -2232,7 +2443,7 @@
             this.colCampaignRptDate.FieldName = "date";
             this.colCampaignRptDate.Name = "colCampaignRptDate";
             this.colCampaignRptDate.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "(个数={0:N})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "个数：{0}")});
             this.colCampaignRptDate.Visible = true;
             this.colCampaignRptDate.VisibleIndex = 0;
             // 
@@ -2242,7 +2453,7 @@
             this.colCampaignRptImp.FieldName = "impressions";
             this.colCampaignRptImp.Name = "colCampaignRptImp";
             this.colCampaignRptImp.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "impressions", "(Avg={0:N})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "impressions", "Avg={0:N}")});
             this.colCampaignRptImp.Visible = true;
             this.colCampaignRptImp.VisibleIndex = 1;
             // 
@@ -2252,7 +2463,7 @@
             this.colCampaignRptClick.FieldName = "click";
             this.colCampaignRptClick.Name = "colCampaignRptClick";
             this.colCampaignRptClick.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "click", "(Avg={0:N})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "click", "Avg={0:N}")});
             this.colCampaignRptClick.Visible = true;
             this.colCampaignRptClick.VisibleIndex = 2;
             // 
@@ -2262,7 +2473,7 @@
             this.colCampaignRptCost.FieldName = "cost";
             this.colCampaignRptCost.Name = "colCampaignRptCost";
             this.colCampaignRptCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "cost", "(Avg={0:C})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "cost", "Avg={0:C}")});
             this.colCampaignRptCost.Visible = true;
             this.colCampaignRptCost.VisibleIndex = 3;
             // 
@@ -2292,7 +2503,7 @@
             this.colCampaignRptDirectpay.FieldName = "directpay";
             this.colCampaignRptDirectpay.Name = "colCampaignRptDirectpay";
             this.colCampaignRptDirectpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "directpay", "(Avg={0:C})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "directpay", "Avg={0:C}")});
             // 
             // colCampaignRptIndirectpay
             // 
@@ -2300,7 +2511,7 @@
             this.colCampaignRptIndirectpay.FieldName = "indirectpay";
             this.colCampaignRptIndirectpay.Name = "colCampaignRptIndirectpay";
             this.colCampaignRptIndirectpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "indirectpay", "(Avg={0:C})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "indirectpay", "Avg={0:C}")});
             // 
             // colCampaignTotalpay
             // 
@@ -2308,7 +2519,7 @@
             this.colCampaignTotalpay.FieldName = "totalpay";
             this.colCampaignTotalpay.Name = "colCampaignTotalpay";
             this.colCampaignTotalpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "totalpay", "(Avg={0:C})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "totalpay", "Avg={0:C}")});
             this.colCampaignTotalpay.Visible = true;
             this.colCampaignTotalpay.VisibleIndex = 6;
             // 
@@ -2317,6 +2528,8 @@
             this.colCampaignRptDirectpaycount.Caption = "directpaycount";
             this.colCampaignRptDirectpaycount.FieldName = "directpaycount";
             this.colCampaignRptDirectpaycount.Name = "colCampaignRptDirectpaycount";
+            this.colCampaignRptDirectpaycount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
             this.colCampaignRptDirectpaycount.Visible = true;
             this.colCampaignRptDirectpaycount.VisibleIndex = 7;
             // 
@@ -2325,6 +2538,8 @@
             this.colCampaignRptIndirectpaycount.Caption = "indirectpaycount";
             this.colCampaignRptIndirectpaycount.FieldName = "indirectpaycount";
             this.colCampaignRptIndirectpaycount.Name = "colCampaignRptIndirectpaycount";
+            this.colCampaignRptIndirectpaycount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
             this.colCampaignRptIndirectpaycount.Visible = true;
             this.colCampaignRptIndirectpaycount.VisibleIndex = 8;
             // 
@@ -2333,6 +2548,8 @@
             this.colCampaignRptFavitemcount.Caption = "favitemcount";
             this.colCampaignRptFavitemcount.FieldName = "favitemcount";
             this.colCampaignRptFavitemcount.Name = "colCampaignRptFavitemcount";
+            this.colCampaignRptFavitemcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
             this.colCampaignRptFavitemcount.Visible = true;
             this.colCampaignRptFavitemcount.VisibleIndex = 9;
             // 
@@ -2341,6 +2558,8 @@
             this.colCampaignRptFavshopcount.Caption = "favshopcount";
             this.colCampaignRptFavshopcount.FieldName = "favshopcount";
             this.colCampaignRptFavshopcount.Name = "colCampaignRptFavshopcount";
+            this.colCampaignRptFavshopcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
             this.colCampaignRptFavshopcount.Visible = true;
             this.colCampaignRptFavshopcount.VisibleIndex = 10;
             // 
@@ -2359,6 +2578,8 @@
             this.colCampaignRptAvgpos.Caption = "avgpos";
             this.colCampaignRptAvgpos.FieldName = "avgpos";
             this.colCampaignRptAvgpos.Name = "colCampaignRptAvgpos";
+            this.colCampaignRptAvgpos.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
             this.colCampaignRptAvgpos.Visible = true;
             this.colCampaignRptAvgpos.VisibleIndex = 12;
             // 
@@ -2374,8 +2595,6 @@
             // 
             this.panel5.Controls.Add(this.btnNewCampaignRptForm);
             this.panel5.Controls.Add(this.btnGetCampaignRpt);
-            this.panel5.Controls.Add(this.btnGetCampaignEffectRpt);
-            this.panel5.Controls.Add(this.btnGetCampaignBaseRpt);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(3, 293);
             this.panel5.Name = "panel5";
@@ -2384,7 +2603,7 @@
             // 
             // btnNewCampaignRptForm
             // 
-            this.btnNewCampaignRptForm.Location = new System.Drawing.Point(607, 25);
+            this.btnNewCampaignRptForm.Location = new System.Drawing.Point(193, 25);
             this.btnNewCampaignRptForm.Name = "btnNewCampaignRptForm";
             this.btnNewCampaignRptForm.Size = new System.Drawing.Size(75, 23);
             this.btnNewCampaignRptForm.TabIndex = 2;
@@ -2394,33 +2613,13 @@
             // 
             // btnGetCampaignRpt
             // 
-            this.btnGetCampaignRpt.Location = new System.Drawing.Point(416, 25);
+            this.btnGetCampaignRpt.Location = new System.Drawing.Point(38, 25);
             this.btnGetCampaignRpt.Name = "btnGetCampaignRpt";
             this.btnGetCampaignRpt.Size = new System.Drawing.Size(99, 23);
             this.btnGetCampaignRpt.TabIndex = 1;
             this.btnGetCampaignRpt.Text = "计划合并报表";
             this.btnGetCampaignRpt.UseVisualStyleBackColor = true;
             this.btnGetCampaignRpt.Click += new System.EventHandler(this.btnGetCampaignRpt_Click);
-            // 
-            // btnGetCampaignEffectRpt
-            // 
-            this.btnGetCampaignEffectRpt.Location = new System.Drawing.Point(249, 25);
-            this.btnGetCampaignEffectRpt.Name = "btnGetCampaignEffectRpt";
-            this.btnGetCampaignEffectRpt.Size = new System.Drawing.Size(132, 23);
-            this.btnGetCampaignEffectRpt.TabIndex = 0;
-            this.btnGetCampaignEffectRpt.Text = "获取计划效果报表";
-            this.btnGetCampaignEffectRpt.UseVisualStyleBackColor = true;
-            this.btnGetCampaignEffectRpt.Click += new System.EventHandler(this.btnGetCampaignEffectRpt_Click);
-            // 
-            // btnGetCampaignBaseRpt
-            // 
-            this.btnGetCampaignBaseRpt.Location = new System.Drawing.Point(90, 25);
-            this.btnGetCampaignBaseRpt.Name = "btnGetCampaignBaseRpt";
-            this.btnGetCampaignBaseRpt.Size = new System.Drawing.Size(132, 23);
-            this.btnGetCampaignBaseRpt.TabIndex = 0;
-            this.btnGetCampaignBaseRpt.Text = "获取计划基础报表";
-            this.btnGetCampaignBaseRpt.UseVisualStyleBackColor = true;
-            this.btnGetCampaignBaseRpt.Click += new System.EventHandler(this.btnGetCampaignBaseRpt_Click);
             // 
             // label1
             // 
@@ -2638,8 +2837,6 @@
         private System.Windows.Forms.TextBox txtBalance;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btnGetCampaignBaseRpt;
-        private System.Windows.Forms.Button btnGetCampaignEffectRpt;
         private System.Windows.Forms.Button btnGetCampaignRpt;
         private System.Windows.Forms.Button btnGetAllKeywordRpt;
         private System.Windows.Forms.TabPage tabPage9;
@@ -2811,5 +3008,22 @@
         private System.Windows.Forms.ToolStripMenuItem 删除推广组ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 增加推广组ToolStripMenuItem;
         private System.Windows.Forms.Button btnChangeAdgroupStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptAdgroupId;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptImp;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptClick;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptCost;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptCtr;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptCpc;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptTotalpay;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptDirectpaycount;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptIndirectpaycount;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptFavitemcount;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptFavshopcount;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptRoi;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptAvgpos;
+        private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptCampaignid;
+        private System.Windows.Forms.ComboBox cbxKeywordMatchscope;
+        private System.Windows.Forms.Button btnUpdateKeywordMatchscope;
     }
 }

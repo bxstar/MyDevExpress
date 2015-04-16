@@ -461,8 +461,8 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         rpt.adgroupid = Convert.ToInt64(item.adgroupid);
                         rpt.keywordid = Convert.ToInt64(item.keywordid);
                         rpt.keywordstr = Convert.ToString(item.keywordstr);
-                        rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
-                        rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                        rpt.directpay = item.directpay == null ? 0M : Math.Round(Convert.ToDecimal(item.directpay), 2);
+                        rpt.indirectpay = item.indirectpay == null ? 0M : Math.Round(Convert.ToDecimal(item.indirectpay), 2);
                         rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
                         rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
                         rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);

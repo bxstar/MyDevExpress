@@ -319,8 +319,8 @@ insert into ad_adgroup
                             logger.ErrorFormat("获取推广组报表有误，{0}", jsonEffectRpt);
                             continue;
                         }
-                        rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
-                        rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                        rpt.directpay = item.directpay == null ? 0M : Math.Round(Convert.ToDecimal(item.directpay), 2);
+                        rpt.indirectpay = item.indirectpay == null ? 0M : Math.Round(Convert.ToDecimal(item.indirectpay), 2);
                         rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
                         rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
                         rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);
@@ -428,8 +428,8 @@ insert into ad_adgroup
                             logger.ErrorFormat("获取推广组报表有误，{0}", jsonEffectRpt);
                             continue;
                         }
-                        rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
-                        rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                        rpt.directpay = item.directpay == null ? 0M : Math.Round(Convert.ToDecimal(item.directpay), 2);
+                        rpt.indirectpay = item.indirectpay == null ? 0M : Math.Round(Convert.ToDecimal(item.indirectpay), 2);
                         rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
                         rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
                         rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);
@@ -539,8 +539,8 @@ insert into ad_adgroup
                             logger.ErrorFormat("获取推广组创意报表有误，{0}", jsonEffectRpt);
                             continue;
                         }
-                        rpt.directpay = item.directpay == null ? 0M : Convert.ToDecimal(item.directpay);
-                        rpt.indirectpay = item.indirectpay == null ? 0M : Convert.ToDecimal(item.indirectpay);
+                        rpt.directpay = item.directpay == null ? 0M : Math.Round(Convert.ToDecimal(item.directpay), 2);
+                        rpt.indirectpay = item.indirectpay == null ? 0M : Math.Round(Convert.ToDecimal(item.indirectpay), 2);
                         rpt.directpaycount = item.directpaycount == null ? 0 : Convert.ToInt32(item.directpaycount);
                         rpt.indirectpaycount = item.indirectpaycount == null ? 0 : Convert.ToInt32(item.indirectpaycount);
                         rpt.favitemcount = item.favitemcount == null ? 0 : Convert.ToInt32(item.favitemcount);

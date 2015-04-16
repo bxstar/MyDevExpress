@@ -86,6 +86,8 @@ namespace TaoBaoDataServer.WinClientData
                 cbxApp.SelectedIndex = 1;
             else if (Config.AppKey == "12209394")
                 cbxApp.SelectedIndex = 2;
+
+            cbxKeywordMatchscope.SelectedIndex = 0;
                 
             gridViewUser.IndicatorWidth = 50;
             gridViewAdgroup.IndicatorWidth = gridViewKeyword.IndicatorWidth = gridViewKeywordRpt.IndicatorWidth = gridViewCampaignRpt.IndicatorWidth = gridViewAdgroupRpt.IndicatorWidth = gridViewCreativeRpt.IndicatorWidth = 30;
@@ -109,6 +111,7 @@ namespace TaoBaoDataServer.WinClientData
             gridViewCreativeRpt.EndSorting += new EventHandler(gridViewEndSorting);
 
             //自定义分组计算
+            gridViewAdgroupRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewCreativeRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewKeywordRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewCampaignRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
@@ -482,30 +485,6 @@ namespace TaoBaoDataServer.WinClientData
             {
                 MessageBox.Show("设置日限额成功");
             }
-        }
-
-        private void btnGetCampaignBaseRpt_Click(object sender, EventArgs e)
-        {
-            gridControlCampaignRpt.DataSource = null;
-            TopSession session = GetSession();
-            long campaignId = Convert.ToInt64(txtCampaignId.Text);
-            string strStartDay = DateTime.Now.AddDays(0 - 30).Date.ToString("yyyy-MM-dd");
-            string strEndDay = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd");
-            string json = campaignHandler.DownLoadCamapginBaseReport(session, campaignId, strStartDay, strEndDay);
-            List<adrptcampaignbase> lstRpt = TechNet.JsonDeserialize<List<adrptcampaignbase>>(json);
-            gridControlCampaignRpt.DataSource = lstRpt;
-        }
-
-        private void btnGetCampaignEffectRpt_Click(object sender, EventArgs e)
-        {
-            gridControlCampaignRpt.DataSource = null;
-            TopSession session = GetSession();
-            long campaignId = Convert.ToInt64(txtCampaignId.Text);
-            string strStartDay = DateTime.Now.AddDays(0 - 30).Date.ToString("yyyy-MM-dd");
-            string strEndDay = DateTime.Now.AddDays(-1).Date.ToString("yyyy-MM-dd");
-            string json = campaignHandler.DownLoadCampaignEffectReport(session, campaignId, strStartDay, strEndDay);
-            List<adrptcampaigneffect> lstRpt = TechNet.JsonDeserialize<List<adrptcampaigneffect>>(json);
-            gridControlCampaignRpt.DataSource = lstRpt;
         }
 
         private void btnGetCampaignRpt_Click(object sender, EventArgs e)
@@ -915,6 +894,44 @@ namespace TaoBaoDataServer.WinClientData
                 btnGetKeyword_Click(null, null);
             }
         }
+
+        private void btnUpdateKeywordMatchscope_Click(object sender, EventArgs e)
+        {
+            List<Keyword> lstKeywordNewPrice = new List<Keyword>();
+            int[] selectedRows = gridViewKeyword.GetSelectedRows();
+            if (selectedRows.Count() == 0) return;
+
+            string matchScope = "4";
+            if (cbxKeywordMatchscope.Text == "广泛匹配")
+                matchScope = "4";
+            else if (cbxKeywordMatchscope.Text == "子串匹配")
+                matchScope = "2";
+            else if (cbxKeywordMatchscope.Text == "精确匹配")
+                matchScope = "1";
+
+            foreach (var rowIndex in selectedRows)
+            {
+                dynamic k = gridViewKeyword.GetRow(rowIndex) as dynamic;
+                Keyword newKeywordPrice = new Keyword();
+                newKeywordPrice.KeywordId = k.KeywordId;
+                newKeywordPrice.MaxPrice = k.MaxPrice;
+                newKeywordPrice.MatchScope = matchScope;
+                newKeywordPrice.IsDefaultPrice = false;
+                lstKeywordNewPrice.Add(newKeywordPrice);
+            }
+            TopSession session = GetSession();
+            var response = keywordHandler.ModifyKeywordOnline(session, lstKeywordNewPrice);
+            if (response.IsError)
+            {
+                MessageBox.Show(response.ErrorMessage + "\r\n" + response.SubErrorMessage);
+            }
+            else
+            {
+                MessageBox.Show("关键词更改匹配模式成功");
+                btnGetKeyword_Click(null, null);
+            }
+        }
+
 
         private void btnAddKeyword_Click(object sender, EventArgs e)
         {

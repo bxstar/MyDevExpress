@@ -57,7 +57,7 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// <summary>
         /// 总转化金额，单位（元）
         /// </summary>
-        public decimal pay
+        public decimal totalpay
         {
             get { return directpay + indirectpay; }
         }
@@ -77,7 +77,7 @@ namespace TaoBaoDataServer.WinClientData.Model
         /// <summary>
         /// 总转化数
         /// </summary>
-        public int paycount
+        public int totalpaycount
         {
             get { return directpaycount + indirectpaycount; }
         }
