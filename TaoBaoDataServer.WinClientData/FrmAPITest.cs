@@ -90,7 +90,7 @@ namespace TaoBaoDataServer.WinClientData
             cbxKeywordMatchscope.SelectedIndex = 0;
                 
             gridViewUser.IndicatorWidth = 50;
-            gridViewAdgroup.IndicatorWidth = gridViewKeyword.IndicatorWidth = gridViewKeywordRpt.IndicatorWidth = gridViewCampaignRpt.IndicatorWidth = gridViewAdgroupRpt.IndicatorWidth = gridViewCreativeRpt.IndicatorWidth = 30;
+            gridViewAdgroup.IndicatorWidth = gridViewKeyword.IndicatorWidth = gridViewKeywordRpt.IndicatorWidth = gridViewCampaignRpt.IndicatorWidth = gridViewAdgroupRpt.IndicatorWidth = gridViewCreativeRpt.IndicatorWidth = gridViewUserItem.IndicatorWidth = gridViewUserRpt.IndicatorWidth = 30;
 
             //显示行号
             gridViewUser.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
@@ -100,6 +100,8 @@ namespace TaoBaoDataServer.WinClientData
             gridViewCampaignRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
             gridViewAdgroupRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
             gridViewCreativeRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
+            gridViewUserItem.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
+            gridViewUserRpt.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(gridViewCustomDrawRowIndicator);
 
             //排序完成后显示第一行
             gridViewUser.EndSorting += new EventHandler(gridViewEndSorting);
@@ -109,12 +111,15 @@ namespace TaoBaoDataServer.WinClientData
             gridViewCampaignRpt.EndSorting += new EventHandler(gridViewEndSorting);
             gridViewAdgroupRpt.EndSorting += new EventHandler(gridViewEndSorting);
             gridViewCreativeRpt.EndSorting += new EventHandler(gridViewEndSorting);
+            gridViewUserItem.EndSorting += new EventHandler(gridViewEndSorting);
+            gridViewUserRpt.EndSorting += new EventHandler(gridViewEndSorting);
 
             //自定义分组计算
             gridViewAdgroupRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewCreativeRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewKeywordRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
             gridViewCampaignRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
+            gridViewUserRpt.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(gridViewCustomSummaryCalculate);
         }
 
         private TopSession GetSession()
@@ -496,6 +501,18 @@ namespace TaoBaoDataServer.WinClientData
 
             gridControlCampaignRpt.DataSource = lstAll.OrderByDescending(o => o.date);
             
+        }
+
+        private void btnGetUserRpt_Click(object sender, EventArgs e)
+        {
+            TopSession session = GetSession();
+            List<EntityCampaignReport> lstAll = new List<EntityCampaignReport>();
+            string strMsg = string.Empty;
+            lstAll = reportHandler.GetAllCampaignRpt(session, 30, ref strMsg);
+            if (string.IsNullOrEmpty(strMsg))
+                gridControlUserRpt.DataSource = lstAll.OrderByDescending(o => o.date);
+            else
+                frmOutPut.OutPutMsg(strMsg);
         }
 
         private void btnGetAllUser_Click(object sender, EventArgs e)
@@ -1020,12 +1037,6 @@ namespace TaoBaoDataServer.WinClientData
             frm.Show();
         }
 
-        private void 网页打开宝贝ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", txtItemId.Text);
-            System.Diagnostics.Process.Start(Const_BrowserPath, itemUrl);
-        }
-
         private void cbxApp_SelectedIndexChanged(object sender, EventArgs e)
         {//硬编码
             if (cbxApp.SelectedIndex == 0)
@@ -1243,6 +1254,12 @@ namespace TaoBaoDataServer.WinClientData
             frm.Show();
         }
 
+        private void 网页打开宝贝ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", txtItemId.Text);
+            System.Diagnostics.Process.Start(Const_BrowserPath, itemUrl);
+        }
+
         private void 网页打开宝贝ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             EntityAdgroupReport rpt = null;
@@ -1270,6 +1287,20 @@ namespace TaoBaoDataServer.WinClientData
             string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", itemId);
 
             System.Diagnostics.Process.Start(Const_BrowserPath, itemUrl);
+        }
+
+        private void 网页打开宝贝ToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            EntityItem item = gridViewUserItem.GetFocusedRow() as EntityItem;
+            if (item != null && item.item_id != 0)
+            {
+                string itemUrl = string.Format("http://item.taobao.com/item.htm?id={0}", item.item_id);
+                System.Diagnostics.Process.Start(Const_BrowserPath, itemUrl);
+            }
+            else
+            {
+                MessageBox.Show("选选择宝贝后再打开");
+            }
         }
 
         private void btnGetSchedule_Click(object sender, EventArgs e)
@@ -1351,5 +1382,29 @@ namespace TaoBaoDataServer.WinClientData
             }
         }
 
+        private void btnGetUserAllItem_Click(object sender, EventArgs e)
+        {
+            TopSession session = GetSession();
+            string projectEngName = string.Empty;
+            if (cbxApp.SelectedIndex == 0)
+            {//安心代驾
+                projectEngName = "anxin";
+            }
+            else if (cbxApp.SelectedIndex == 1)
+            {//淘快词托管
+                projectEngName = "tkc";
+            }
+            else if (cbxApp.SelectedIndex == 2)
+            {//老关快车 
+                projectEngName = "lg";
+            }
+            else if (cbxApp.SelectedIndex == 3)
+            {//淘快车
+                projectEngName = "che";
+            }
+
+            List<EntityItem> lstItem = CommonHandler.GetUserOnlineItems(session, projectEngName, chkGetUserAllItemFromCache.Checked);
+            gridControlUserItem.DataSource = lstItem;
+        }
     }
 }

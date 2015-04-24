@@ -256,6 +256,33 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnNewCampaignRptForm = new System.Windows.Forms.Button();
             this.btnGetCampaignRpt = new System.Windows.Forms.Button();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.gridControlUserRpt = new DevExpress.XtraGrid.GridControl();
+            this.gridViewUserRpt = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.btnGetUserRpt = new System.Windows.Forms.Button();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.gridControlUserItem = new DevExpress.XtraGrid.GridControl();
+            this.gridViewUserItem = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.chkGetUserAllItemFromCache = new System.Windows.Forms.CheckBox();
+            this.btnGetUserAllItem = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNickName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -265,6 +292,8 @@
             this.btnNickAndSession = new System.Windows.Forms.Button();
             this.cbxApp = new System.Windows.Forms.ComboBox();
             this.btnGetTopSession = new System.Windows.Forms.Button();
+            this.cMenuDgvUserItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.网页打开宝贝ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUser)).BeginInit();
@@ -313,7 +342,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCampaignRpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCampaignRpt)).BeginInit();
             this.panel5.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlUserRpt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewUserRpt)).BeginInit();
+            this.panel6.SuspendLayout();
+            this.tabPage12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlUserItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewUserItem)).BeginInit();
+            this.panel12.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.cMenuDgvUserItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -328,11 +366,13 @@
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage12);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 83);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1076, 384);
+            this.tabControl1.Size = new System.Drawing.Size(1214, 445);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage9
@@ -342,7 +382,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage9.Size = new System.Drawing.Size(1206, 419);
             this.tabPage9.TabIndex = 8;
             this.tabPage9.Text = "用户";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -353,7 +393,7 @@
             this.gridControlUser.Location = new System.Drawing.Point(3, 3);
             this.gridControlUser.MainView = this.gridViewUser;
             this.gridControlUser.Name = "gridControlUser";
-            this.gridControlUser.Size = new System.Drawing.Size(1062, 303);
+            this.gridControlUser.Size = new System.Drawing.Size(1200, 364);
             this.gridControlUser.TabIndex = 2;
             this.gridControlUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewUser});
@@ -375,9 +415,9 @@
             this.panel7.Controls.Add(this.btnInvertSelectionUser);
             this.panel7.Controls.Add(this.btnGetAllUser);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(3, 306);
+            this.panel7.Location = new System.Drawing.Point(3, 367);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1062, 49);
+            this.panel7.Size = new System.Drawing.Size(1200, 49);
             this.panel7.TabIndex = 1;
             // 
             // btnCheckTuoguan
@@ -448,7 +488,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage1.Size = new System.Drawing.Size(1206, 419);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "获取Token";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -570,7 +610,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage2.Size = new System.Drawing.Size(1206, 419);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "获取计划及日限额";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -602,9 +642,9 @@
             this.panel8.Controls.Add(this.btnGetCampaign);
             this.panel8.Controls.Add(this.txtBudget);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(3, 232);
+            this.panel8.Location = new System.Drawing.Point(3, 293);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1062, 123);
+            this.panel8.Size = new System.Drawing.Size(1200, 123);
             this.panel8.TabIndex = 7;
             // 
             // label24
@@ -852,7 +892,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCampaign.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCampaign.RowTemplate.Height = 23;
-            this.dgvCampaign.Size = new System.Drawing.Size(1062, 352);
+            this.dgvCampaign.Size = new System.Drawing.Size(1200, 413);
             this.dgvCampaign.TabIndex = 0;
             this.dgvCampaign.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCampaign_CellClick);
             // 
@@ -885,7 +925,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage3.Size = new System.Drawing.Size(1206, 419);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "获取推广组及宝贝";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -897,7 +937,7 @@
             this.gridControlAdgroup.Location = new System.Drawing.Point(3, 3);
             this.gridControlAdgroup.MainView = this.gridViewAdgroup;
             this.gridControlAdgroup.Name = "gridControlAdgroup";
-            this.gridControlAdgroup.Size = new System.Drawing.Size(1062, 290);
+            this.gridControlAdgroup.Size = new System.Drawing.Size(1200, 351);
             this.gridControlAdgroup.TabIndex = 8;
             this.gridControlAdgroup.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAdgroup});
@@ -962,9 +1002,9 @@
             this.panel3.Controls.Add(this.label17);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(3, 293);
+            this.panel3.Location = new System.Drawing.Point(3, 354);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1062, 62);
+            this.panel3.Size = new System.Drawing.Size(1200, 62);
             this.panel3.TabIndex = 7;
             // 
             // btnChangeAdgroupStatus
@@ -1037,7 +1077,7 @@
             this.btnGetAdGroup.Name = "btnGetAdGroup";
             this.btnGetAdGroup.Size = new System.Drawing.Size(89, 23);
             this.btnGetAdGroup.TabIndex = 2;
-            this.btnGetAdGroup.Text = "获取计划宝贝";
+            this.btnGetAdGroup.Text = "获取推广组";
             this.btnGetAdGroup.UseVisualStyleBackColor = true;
             this.btnGetAdGroup.Click += new System.EventHandler(this.btnGetAdGroup_Click);
             // 
@@ -1066,7 +1106,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage4.Size = new System.Drawing.Size(1206, 419);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "获取关键词";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1078,7 +1118,7 @@
             this.gridControlKeyword.Location = new System.Drawing.Point(3, 3);
             this.gridControlKeyword.MainView = this.gridViewKeyword;
             this.gridControlKeyword.Name = "gridControlKeyword";
-            this.gridControlKeyword.Size = new System.Drawing.Size(1062, 283);
+            this.gridControlKeyword.Size = new System.Drawing.Size(1200, 344);
             this.gridControlKeyword.TabIndex = 5;
             this.gridControlKeyword.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewKeyword});
@@ -1118,9 +1158,9 @@
             this.panel2.Controls.Add(this.btnKeywordChange);
             this.panel2.Controls.Add(this.btnGetKeyword);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(3, 286);
+            this.panel2.Location = new System.Drawing.Point(3, 347);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1062, 69);
+            this.panel2.Size = new System.Drawing.Size(1200, 69);
             this.panel2.TabIndex = 4;
             // 
             // btnUpdateKeywordMatchscope
@@ -1230,7 +1270,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage5.Size = new System.Drawing.Size(1206, 419);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "获取质量得分";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1269,7 +1309,7 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvQscore.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvQscore.RowTemplate.Height = 23;
-            this.dgvQscore.Size = new System.Drawing.Size(1062, 296);
+            this.dgvQscore.Size = new System.Drawing.Size(1200, 357);
             this.dgvQscore.TabIndex = 0;
             this.dgvQscore.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
             // 
@@ -1279,9 +1319,9 @@
             this.panel9.Controls.Add(this.btnGetQscore);
             this.panel9.Controls.Add(this.txtCatmatchQscore);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(3, 299);
+            this.panel9.Location = new System.Drawing.Point(3, 360);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1062, 56);
+            this.panel9.Size = new System.Drawing.Size(1200, 56);
             this.panel9.TabIndex = 8;
             // 
             // chkGetCatQScore
@@ -1318,7 +1358,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage6.Size = new System.Drawing.Size(1206, 419);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "获取关键词报表数据";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1331,7 +1371,7 @@
             this.gridControlKeywordRpt.Location = new System.Drawing.Point(3, 3);
             this.gridControlKeywordRpt.MainView = this.gridViewKeywordRpt;
             this.gridControlKeywordRpt.Name = "gridControlKeywordRpt";
-            this.gridControlKeywordRpt.Size = new System.Drawing.Size(1062, 296);
+            this.gridControlKeywordRpt.Size = new System.Drawing.Size(1200, 357);
             this.gridControlKeywordRpt.TabIndex = 3;
             this.gridControlKeywordRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewKeywordRpt});
@@ -1473,11 +1513,11 @@
             // 
             // colKeywordRptPay
             // 
-            this.colKeywordRptPay.Caption = "pay";
-            this.colKeywordRptPay.FieldName = "pay";
+            this.colKeywordRptPay.Caption = "totalpay";
+            this.colKeywordRptPay.FieldName = "totalpay";
             this.colKeywordRptPay.Name = "colKeywordRptPay";
             this.colKeywordRptPay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pay", "总计：{0}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "totalpay", "总计：{0}")});
             this.colKeywordRptPay.Visible = true;
             this.colKeywordRptPay.VisibleIndex = 8;
             this.colKeywordRptPay.Width = 50;
@@ -1498,11 +1538,11 @@
             // 
             // colKeywordRptPayCount
             // 
-            this.colKeywordRptPayCount.Caption = "paycount";
-            this.colKeywordRptPayCount.FieldName = "paycount";
+            this.colKeywordRptPayCount.Caption = "totalpaycount";
+            this.colKeywordRptPayCount.FieldName = "totalpaycount";
             this.colKeywordRptPayCount.Name = "colKeywordRptPayCount";
             this.colKeywordRptPayCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "paycount", "总计：{0}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "totalpaycount", "总计：{0}")});
             this.colKeywordRptPayCount.Visible = true;
             this.colKeywordRptPayCount.VisibleIndex = 9;
             this.colKeywordRptPayCount.Width = 60;
@@ -1565,9 +1605,9 @@
             this.panel4.Controls.Add(this.btnGetAllKeywordRpt);
             this.panel4.Controls.Add(this.btnGetKeywordRpt);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(3, 299);
+            this.panel4.Location = new System.Drawing.Point(3, 360);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1062, 56);
+            this.panel4.Size = new System.Drawing.Size(1200, 56);
             this.panel4.TabIndex = 2;
             // 
             // chkSoureDistinguish
@@ -1708,7 +1748,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage10.Size = new System.Drawing.Size(1206, 419);
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "获取推广组报表";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1721,7 +1761,7 @@
             this.gridControlAdgroupRpt.Location = new System.Drawing.Point(3, 3);
             this.gridControlAdgroupRpt.MainView = this.gridViewAdgroupRpt;
             this.gridControlAdgroupRpt.Name = "gridControlAdgroupRpt";
-            this.gridControlAdgroupRpt.Size = new System.Drawing.Size(1062, 296);
+            this.gridControlAdgroupRpt.Size = new System.Drawing.Size(1200, 357);
             this.gridControlAdgroupRpt.TabIndex = 5;
             this.gridControlAdgroupRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAdgroupRpt});
@@ -1790,7 +1830,7 @@
             this.colAdgroupRptImp.FieldName = "impressions";
             this.colAdgroupRptImp.Name = "colAdgroupRptImp";
             this.colAdgroupRptImp.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "impressions", "Sum={0:N0}")});
             this.colAdgroupRptImp.Visible = true;
             this.colAdgroupRptImp.VisibleIndex = 2;
             // 
@@ -1800,7 +1840,7 @@
             this.colAdgroupRptClick.FieldName = "click";
             this.colAdgroupRptClick.Name = "colAdgroupRptClick";
             this.colAdgroupRptClick.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "click", "Sum={0:N0}")});
             this.colAdgroupRptClick.Visible = true;
             this.colAdgroupRptClick.VisibleIndex = 3;
             // 
@@ -1810,7 +1850,7 @@
             this.colAdgroupRptCost.FieldName = "cost";
             this.colAdgroupRptCost.Name = "colAdgroupRptCost";
             this.colAdgroupRptCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "cost", "Sum={0:N2}")});
             this.colAdgroupRptCost.Visible = true;
             this.colAdgroupRptCost.VisibleIndex = 4;
             // 
@@ -1840,7 +1880,7 @@
             this.colAdgroupRptTotalpay.FieldName = "totalpay";
             this.colAdgroupRptTotalpay.Name = "colAdgroupRptTotalpay";
             this.colAdgroupRptTotalpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "totalpay", "Sum={0:N2}")});
             this.colAdgroupRptTotalpay.Visible = true;
             this.colAdgroupRptTotalpay.VisibleIndex = 7;
             // 
@@ -1850,7 +1890,7 @@
             this.colAdgroupRptDirectpaycount.FieldName = "directpaycount";
             this.colAdgroupRptDirectpaycount.Name = "colAdgroupRptDirectpaycount";
             this.colAdgroupRptDirectpaycount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "directpaycount", "Sum={0:N2}")});
             this.colAdgroupRptDirectpaycount.Visible = true;
             this.colAdgroupRptDirectpaycount.VisibleIndex = 8;
             // 
@@ -1860,7 +1900,7 @@
             this.colAdgroupRptIndirectpaycount.FieldName = "indirectpaycount";
             this.colAdgroupRptIndirectpaycount.Name = "colAdgroupRptIndirectpaycount";
             this.colAdgroupRptIndirectpaycount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "indirectpaycount", "Sum={0:N2}")});
             this.colAdgroupRptIndirectpaycount.Visible = true;
             this.colAdgroupRptIndirectpaycount.VisibleIndex = 9;
             // 
@@ -1870,7 +1910,7 @@
             this.colAdgroupRptFavitemcount.FieldName = "favitemcount";
             this.colAdgroupRptFavitemcount.Name = "colAdgroupRptFavitemcount";
             this.colAdgroupRptFavitemcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favitemcount", "Sum={0:N0}")});
             this.colAdgroupRptFavitemcount.Visible = true;
             this.colAdgroupRptFavitemcount.VisibleIndex = 10;
             // 
@@ -1880,7 +1920,7 @@
             this.colAdgroupRptFavshopcount.FieldName = "favshopcount";
             this.colAdgroupRptFavshopcount.Name = "colAdgroupRptFavshopcount";
             this.colAdgroupRptFavshopcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favshopcount", "Sum={0:N0}")});
             this.colAdgroupRptFavshopcount.Visible = true;
             this.colAdgroupRptFavshopcount.VisibleIndex = 11;
             // 
@@ -1900,7 +1940,7 @@
             this.colAdgroupRptAvgpos.FieldName = "avgpos";
             this.colAdgroupRptAvgpos.Name = "colAdgroupRptAvgpos";
             this.colAdgroupRptAvgpos.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "avgpos", "AVG={0:N0}")});
             this.colAdgroupRptAvgpos.Visible = true;
             this.colAdgroupRptAvgpos.VisibleIndex = 13;
             // 
@@ -1922,9 +1962,9 @@
             this.panel10.Controls.Add(this.btnGetAllAdgroupRpt);
             this.panel10.Controls.Add(this.btnGetAdgroupRpt);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel10.Location = new System.Drawing.Point(3, 299);
+            this.panel10.Location = new System.Drawing.Point(3, 360);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1062, 56);
+            this.panel10.Size = new System.Drawing.Size(1200, 56);
             this.panel10.TabIndex = 4;
             // 
             // btnNewAdgroupRptForm
@@ -2054,7 +2094,7 @@
             this.tabPage11.Controls.Add(this.panel11);
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage11.Size = new System.Drawing.Size(1206, 419);
             this.tabPage11.TabIndex = 10;
             this.tabPage11.Text = "获取创意报表数据";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -2067,7 +2107,7 @@
             this.gridControlCreativeRpt.Location = new System.Drawing.Point(0, 0);
             this.gridControlCreativeRpt.MainView = this.gridViewCreativeRpt;
             this.gridControlCreativeRpt.Name = "gridControlCreativeRpt";
-            this.gridControlCreativeRpt.Size = new System.Drawing.Size(1068, 302);
+            this.gridControlCreativeRpt.Size = new System.Drawing.Size(1206, 363);
             this.gridControlCreativeRpt.TabIndex = 6;
             this.gridControlCreativeRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCreativeRpt});
@@ -2138,7 +2178,7 @@
             this.colCreativeRptImpressions.FieldName = "impressions";
             this.colCreativeRptImpressions.Name = "colCreativeRptImpressions";
             this.colCreativeRptImpressions.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "impressions", "(Sum={0:N})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "impressions", "Sum={0:N0}")});
             this.colCreativeRptImpressions.Visible = true;
             this.colCreativeRptImpressions.VisibleIndex = 3;
             // 
@@ -2148,7 +2188,7 @@
             this.colCreativeRptClick.FieldName = "click";
             this.colCreativeRptClick.Name = "colCreativeRptClick";
             this.colCreativeRptClick.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "click", "(Sum={0:N})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "click", "Sum={0:N0}")});
             this.colCreativeRptClick.Visible = true;
             this.colCreativeRptClick.VisibleIndex = 4;
             // 
@@ -2158,7 +2198,7 @@
             this.colCreativeRptCost.FieldName = "cost";
             this.colCreativeRptCost.Name = "colCreativeRptCost";
             this.colCreativeRptCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "cost", "(Sum={0:C})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "cost", "Sum={0:C}")});
             this.colCreativeRptCost.Visible = true;
             this.colCreativeRptCost.VisibleIndex = 5;
             // 
@@ -2188,7 +2228,7 @@
             this.colCreativeRptPay.FieldName = "totalpay";
             this.colCreativeRptPay.Name = "colCreativeRptPay";
             this.colCreativeRptPay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "totalpay", "(Sum={0:C})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "totalpay", "Sum={0:C}")});
             this.colCreativeRptPay.Visible = true;
             this.colCreativeRptPay.VisibleIndex = 8;
             // 
@@ -2226,7 +2266,7 @@
             this.colCreativeRptFavItemCount.FieldName = "favitemcount";
             this.colCreativeRptFavItemCount.Name = "colCreativeRptFavItemCount";
             this.colCreativeRptFavItemCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favitemcount", "(Sum={0:N})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favitemcount", "Sum={0:N}")});
             this.colCreativeRptFavItemCount.Visible = true;
             this.colCreativeRptFavItemCount.VisibleIndex = 11;
             // 
@@ -2236,7 +2276,7 @@
             this.colCreativeRptFavShopCount.FieldName = "favshopcount";
             this.colCreativeRptFavShopCount.Name = "colCreativeRptFavShopCount";
             this.colCreativeRptFavShopCount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favshopcount", "(Sum={0:N})")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "favshopcount", "Sum={0:N}")});
             this.colCreativeRptFavShopCount.Visible = true;
             this.colCreativeRptFavShopCount.VisibleIndex = 12;
             // 
@@ -2260,9 +2300,9 @@
             this.panel11.Controls.Add(this.btnGetAllCreativeRpt);
             this.panel11.Controls.Add(this.btnGetCreativeRpt);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel11.Location = new System.Drawing.Point(0, 302);
+            this.panel11.Location = new System.Drawing.Point(0, 363);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(1068, 56);
+            this.panel11.Size = new System.Drawing.Size(1206, 56);
             this.panel11.TabIndex = 7;
             // 
             // btnNewCreativeRptForm
@@ -2393,7 +2433,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1068, 358);
+            this.tabPage7.Size = new System.Drawing.Size(1206, 419);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "获取计划报表数据";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -2405,7 +2445,7 @@
             this.gridControlCampaignRpt.Location = new System.Drawing.Point(3, 3);
             this.gridControlCampaignRpt.MainView = this.gridViewCampaignRpt;
             this.gridControlCampaignRpt.Name = "gridControlCampaignRpt";
-            this.gridControlCampaignRpt.Size = new System.Drawing.Size(1062, 290);
+            this.gridControlCampaignRpt.Size = new System.Drawing.Size(1200, 351);
             this.gridControlCampaignRpt.TabIndex = 1;
             this.gridControlCampaignRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCampaignRpt});
@@ -2453,7 +2493,7 @@
             this.colCampaignRptImp.FieldName = "impressions";
             this.colCampaignRptImp.Name = "colCampaignRptImp";
             this.colCampaignRptImp.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "impressions", "Avg={0:N}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "impressions", "Avg={0:N0}")});
             this.colCampaignRptImp.Visible = true;
             this.colCampaignRptImp.VisibleIndex = 1;
             // 
@@ -2463,7 +2503,7 @@
             this.colCampaignRptClick.FieldName = "click";
             this.colCampaignRptClick.Name = "colCampaignRptClick";
             this.colCampaignRptClick.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "click", "Avg={0:N}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "click", "Avg={0:N0}")});
             this.colCampaignRptClick.Visible = true;
             this.colCampaignRptClick.VisibleIndex = 2;
             // 
@@ -2473,7 +2513,7 @@
             this.colCampaignRptCost.FieldName = "cost";
             this.colCampaignRptCost.Name = "colCampaignRptCost";
             this.colCampaignRptCost.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "cost", "Avg={0:C}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "cost", "Avg={0:N2}")});
             this.colCampaignRptCost.Visible = true;
             this.colCampaignRptCost.VisibleIndex = 3;
             // 
@@ -2503,7 +2543,7 @@
             this.colCampaignRptDirectpay.FieldName = "directpay";
             this.colCampaignRptDirectpay.Name = "colCampaignRptDirectpay";
             this.colCampaignRptDirectpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "directpay", "Avg={0:C}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "directpay", "Avg={0:N2}")});
             // 
             // colCampaignRptIndirectpay
             // 
@@ -2511,7 +2551,7 @@
             this.colCampaignRptIndirectpay.FieldName = "indirectpay";
             this.colCampaignRptIndirectpay.Name = "colCampaignRptIndirectpay";
             this.colCampaignRptIndirectpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "indirectpay", "Avg={0:C}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "indirectpay", "Avg={0:N2}")});
             // 
             // colCampaignTotalpay
             // 
@@ -2519,7 +2559,7 @@
             this.colCampaignTotalpay.FieldName = "totalpay";
             this.colCampaignTotalpay.Name = "colCampaignTotalpay";
             this.colCampaignTotalpay.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "totalpay", "Avg={0:C}")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "totalpay", "Avg={0:N2}")});
             this.colCampaignTotalpay.Visible = true;
             this.colCampaignTotalpay.VisibleIndex = 6;
             // 
@@ -2529,7 +2569,7 @@
             this.colCampaignRptDirectpaycount.FieldName = "directpaycount";
             this.colCampaignRptDirectpaycount.Name = "colCampaignRptDirectpaycount";
             this.colCampaignRptDirectpaycount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "directpaycount", "Avg={0:N2}")});
             this.colCampaignRptDirectpaycount.Visible = true;
             this.colCampaignRptDirectpaycount.VisibleIndex = 7;
             // 
@@ -2539,7 +2579,7 @@
             this.colCampaignRptIndirectpaycount.FieldName = "indirectpaycount";
             this.colCampaignRptIndirectpaycount.Name = "colCampaignRptIndirectpaycount";
             this.colCampaignRptIndirectpaycount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "indirectpaycount", "Avg={0:N2}")});
             this.colCampaignRptIndirectpaycount.Visible = true;
             this.colCampaignRptIndirectpaycount.VisibleIndex = 8;
             // 
@@ -2549,7 +2589,7 @@
             this.colCampaignRptFavitemcount.FieldName = "favitemcount";
             this.colCampaignRptFavitemcount.Name = "colCampaignRptFavitemcount";
             this.colCampaignRptFavitemcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "favitemcount", "Avg={0:N2}")});
             this.colCampaignRptFavitemcount.Visible = true;
             this.colCampaignRptFavitemcount.VisibleIndex = 9;
             // 
@@ -2559,7 +2599,7 @@
             this.colCampaignRptFavshopcount.FieldName = "favshopcount";
             this.colCampaignRptFavshopcount.Name = "colCampaignRptFavshopcount";
             this.colCampaignRptFavshopcount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "favshopcount", "Avg={0:N2}")});
             this.colCampaignRptFavshopcount.Visible = true;
             this.colCampaignRptFavshopcount.VisibleIndex = 10;
             // 
@@ -2579,7 +2619,7 @@
             this.colCampaignRptAvgpos.FieldName = "avgpos";
             this.colCampaignRptAvgpos.Name = "colCampaignRptAvgpos";
             this.colCampaignRptAvgpos.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average)});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "avgpos", "Avg={0:N2}")});
             this.colCampaignRptAvgpos.Visible = true;
             this.colCampaignRptAvgpos.VisibleIndex = 12;
             // 
@@ -2596,9 +2636,9 @@
             this.panel5.Controls.Add(this.btnNewCampaignRptForm);
             this.panel5.Controls.Add(this.btnGetCampaignRpt);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(3, 293);
+            this.panel5.Location = new System.Drawing.Point(3, 354);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1062, 62);
+            this.panel5.Size = new System.Drawing.Size(1200, 62);
             this.panel5.TabIndex = 0;
             // 
             // btnNewCampaignRptForm
@@ -2620,6 +2660,295 @@
             this.btnGetCampaignRpt.Text = "计划合并报表";
             this.btnGetCampaignRpt.UseVisualStyleBackColor = true;
             this.btnGetCampaignRpt.Click += new System.EventHandler(this.btnGetCampaignRpt_Click);
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.gridControlUserRpt);
+            this.tabPage8.Controls.Add(this.panel6);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(1206, 419);
+            this.tabPage8.TabIndex = 11;
+            this.tabPage8.Text = "获取账户报表";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // gridControlUserRpt
+            // 
+            this.gridControlUserRpt.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gridControlUserRpt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlUserRpt.Location = new System.Drawing.Point(3, 3);
+            this.gridControlUserRpt.MainView = this.gridViewUserRpt;
+            this.gridControlUserRpt.Name = "gridControlUserRpt";
+            this.gridControlUserRpt.Size = new System.Drawing.Size(1200, 351);
+            this.gridControlUserRpt.TabIndex = 2;
+            this.gridControlUserRpt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewUserRpt});
+            // 
+            // gridViewUserRpt
+            // 
+            this.gridViewUserRpt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9,
+            this.gridColumn10,
+            this.gridColumn11,
+            this.gridColumn12,
+            this.gridColumn13,
+            this.gridColumn14,
+            this.gridColumn15,
+            this.gridColumn16});
+            this.gridViewUserRpt.GridControl = this.gridControlUserRpt;
+            this.gridViewUserRpt.Name = "gridViewUserRpt";
+            this.gridViewUserRpt.OptionsSelection.MultiSelect = true;
+            this.gridViewUserRpt.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewUserRpt.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
+            this.gridViewUserRpt.OptionsView.ShowFooter = true;
+            this.gridViewUserRpt.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "date";
+            this.gridColumn1.FieldName = "date";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "date", "个数：{0}")});
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "imp";
+            this.gridColumn2.FieldName = "impressions";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "impressions", "Avg={0:N0}")});
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "click";
+            this.gridColumn3.FieldName = "click";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "click", "Avg={0:N0}")});
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "cost";
+            this.gridColumn4.FieldName = "cost";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "cost", "Avg={0:N2}")});
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "ctr";
+            this.gridColumn5.FieldName = "ctr";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 4;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "cpc";
+            this.gridColumn6.FieldName = "cpc";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 5;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "directpay";
+            this.gridColumn7.FieldName = "directpay";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "directpay", "Avg={0:N2}")});
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "indirectpay";
+            this.gridColumn8.FieldName = "indirectpay";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "indirectpay", "Avg={0:N2}")});
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "totalpay";
+            this.gridColumn9.FieldName = "totalpay";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "totalpay", "Avg={0:N2}")});
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 6;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "directpaycount";
+            this.gridColumn10.FieldName = "directpaycount";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "directpaycount", "Avg={0:N2}")});
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 7;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "indirectpaycount";
+            this.gridColumn11.FieldName = "indirectpaycount";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "indirectpaycount", "Avg={0:N2}")});
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 8;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "favitemcount";
+            this.gridColumn12.FieldName = "favitemcount";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "favitemcount", "Avg={0:N2}")});
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 9;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "favshopcount";
+            this.gridColumn13.FieldName = "favshopcount";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "favshopcount", "Avg={0:N2}")});
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 10;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "roi";
+            this.gridColumn14.FieldName = "roi";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom)});
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 11;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "avgpos";
+            this.gridColumn15.FieldName = "avgpos";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Average, "avgpos", "Avg={0:N2}")});
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 12;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "campaignId";
+            this.gridColumn16.FieldName = "campaign_id";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 13;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.btnGetUserRpt);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(3, 354);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1200, 62);
+            this.panel6.TabIndex = 3;
+            // 
+            // btnGetUserRpt
+            // 
+            this.btnGetUserRpt.Location = new System.Drawing.Point(38, 25);
+            this.btnGetUserRpt.Name = "btnGetUserRpt";
+            this.btnGetUserRpt.Size = new System.Drawing.Size(99, 23);
+            this.btnGetUserRpt.TabIndex = 1;
+            this.btnGetUserRpt.Text = "获取";
+            this.btnGetUserRpt.UseVisualStyleBackColor = true;
+            this.btnGetUserRpt.Click += new System.EventHandler(this.btnGetUserRpt_Click);
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.gridControlUserItem);
+            this.tabPage12.Controls.Add(this.panel12);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(1206, 419);
+            this.tabPage12.TabIndex = 12;
+            this.tabPage12.Text = "获取在售的宝贝";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // gridControlUserItem
+            // 
+            this.gridControlUserItem.ContextMenuStrip = this.cMenuDgvUserItem;
+            this.gridControlUserItem.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gridControlUserItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlUserItem.Location = new System.Drawing.Point(3, 3);
+            this.gridControlUserItem.MainView = this.gridViewUserItem;
+            this.gridControlUserItem.Name = "gridControlUserItem";
+            this.gridControlUserItem.Size = new System.Drawing.Size(1200, 364);
+            this.gridControlUserItem.TabIndex = 9;
+            this.gridControlUserItem.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewUserItem});
+            // 
+            // gridViewUserItem
+            // 
+            this.gridViewUserItem.GridControl = this.gridControlUserItem;
+            this.gridViewUserItem.Name = "gridViewUserItem";
+            this.gridViewUserItem.OptionsSelection.MultiSelect = true;
+            this.gridViewUserItem.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.gridViewUserItem.OptionsView.ShowGroupPanel = false;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.chkGetUserAllItemFromCache);
+            this.panel12.Controls.Add(this.btnGetUserAllItem);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel12.Location = new System.Drawing.Point(3, 367);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(1200, 49);
+            this.panel12.TabIndex = 10;
+            // 
+            // chkGetUserAllItemFromCache
+            // 
+            this.chkGetUserAllItemFromCache.AutoSize = true;
+            this.chkGetUserAllItemFromCache.Checked = true;
+            this.chkGetUserAllItemFromCache.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkGetUserAllItemFromCache.Location = new System.Drawing.Point(310, 20);
+            this.chkGetUserAllItemFromCache.Name = "chkGetUserAllItemFromCache";
+            this.chkGetUserAllItemFromCache.Size = new System.Drawing.Size(72, 16);
+            this.chkGetUserAllItemFromCache.TabIndex = 1;
+            this.chkGetUserAllItemFromCache.Text = "缓存获取";
+            this.chkGetUserAllItemFromCache.UseVisualStyleBackColor = true;
+            // 
+            // btnGetUserAllItem
+            // 
+            this.btnGetUserAllItem.Location = new System.Drawing.Point(63, 14);
+            this.btnGetUserAllItem.Name = "btnGetUserAllItem";
+            this.btnGetUserAllItem.Size = new System.Drawing.Size(188, 23);
+            this.btnGetUserAllItem.TabIndex = 0;
+            this.btnGetUserAllItem.Text = "获取用户线上在售的所有宝贝";
+            this.btnGetUserAllItem.UseVisualStyleBackColor = true;
+            this.btnGetUserAllItem.Click += new System.EventHandler(this.btnGetUserAllItem_Click);
             // 
             // label1
             // 
@@ -2666,7 +2995,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1076, 83);
+            this.panel1.Size = new System.Drawing.Size(1214, 83);
             this.panel1.TabIndex = 1;
             // 
             // chkIsUseLocalCache
@@ -2713,11 +3042,25 @@
             this.btnGetTopSession.UseVisualStyleBackColor = true;
             this.btnGetTopSession.Click += new System.EventHandler(this.btnGetTopSession_Click);
             // 
+            // cMenuDgvUserItem
+            // 
+            this.cMenuDgvUserItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.网页打开宝贝ToolStripMenuItem2});
+            this.cMenuDgvUserItem.Name = "cMenuDgvUserItem";
+            this.cMenuDgvUserItem.Size = new System.Drawing.Size(149, 26);
+            // 
+            // 网页打开宝贝ToolStripMenuItem2
+            // 
+            this.网页打开宝贝ToolStripMenuItem2.Name = "网页打开宝贝ToolStripMenuItem2";
+            this.网页打开宝贝ToolStripMenuItem2.Size = new System.Drawing.Size(148, 22);
+            this.网页打开宝贝ToolStripMenuItem2.Text = "网页打开宝贝";
+            this.网页打开宝贝ToolStripMenuItem2.Click += new System.EventHandler(this.网页打开宝贝ToolStripMenuItem2_Click);
+            // 
             // FrmAPITest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1076, 467);
+            this.ClientSize = new System.Drawing.Size(1214, 528);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -2787,8 +3130,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCampaignRpt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCampaignRpt)).EndInit();
             this.panel5.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlUserRpt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewUserRpt)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.tabPage12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlUserItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewUserItem)).EndInit();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.cMenuDgvUserItem.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3025,5 +3378,34 @@
         private DevExpress.XtraGrid.Columns.GridColumn colAdgroupRptCampaignid;
         private System.Windows.Forms.ComboBox cbxKeywordMatchscope;
         private System.Windows.Forms.Button btnUpdateKeywordMatchscope;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TabPage tabPage12;
+        private DevExpress.XtraGrid.GridControl gridControlUserRpt;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewUserRpt;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button btnGetUserRpt;
+        private DevExpress.XtraGrid.GridControl gridControlUserItem;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewUserItem;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Button btnGetUserAllItem;
+        private System.Windows.Forms.CheckBox chkGetUserAllItemFromCache;
+        private System.Windows.Forms.ContextMenuStrip cMenuDgvUserItem;
+        private System.Windows.Forms.ToolStripMenuItem 网页打开宝贝ToolStripMenuItem2;
     }
 }

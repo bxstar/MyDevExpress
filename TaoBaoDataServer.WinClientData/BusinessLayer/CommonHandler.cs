@@ -48,6 +48,28 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
         public const string Const_MajorizationConfig浮动降价 = "花费过高浮动降价策略";
 
         /// <summary>
+        /// 缓存，获取用户上架在线销售的全部宝贝，默认从缓存那数据
+        /// </summary>
+        public static List<EntityItem> GetUserOnlineItems(TopSession session, string projectEngName, Boolean isFromCache = true)
+        {
+            List<EntityItem> lstItem = null;
+            try
+            {
+                string strResult = wsFindKeywordProxy.GetUserOnlineItems(null, session.ProxyUserName, session.TopSessions, projectEngName, isFromCache);
+                if (strResult != null)
+                {
+                    lstItem = DynamicJsonParser.ToObject<List<EntityItem>>(CommonFunction.Decompress(strResult));
+                }
+            }
+            catch (Exception se)
+            {
+                logger.Error("缓存，获取类目下热门词错误", se);
+                return null;
+            }
+            return lstItem;
+        }
+
+        /// <summary>
         /// 线上，获取宝贝信息，类目名称小写
         /// </summary>
         public static EntityItem GetItemOnline(string itemIdOrUrl)
