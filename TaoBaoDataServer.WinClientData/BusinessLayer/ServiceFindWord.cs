@@ -86,7 +86,7 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer.WService.FindWord
         /// <remarks/>
         public WebServiceForKeywordForecast()
         {
-            this.Url = "http://112.124.56.29:30002/WebServiceForKeywordForecast.asmx";
+            this.Url = "http://longcache.taokuaiche.com/WebServiceForKeywordForecast.asmx";
         }
 
         /// <remarks/>

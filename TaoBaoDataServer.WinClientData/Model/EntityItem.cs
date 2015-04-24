@@ -46,6 +46,11 @@ namespace TaoBaoDataServer.WinClientData.Model
         public string pic_url { get; set; }
         #region 扩展属性
         /// <summary>
+        /// 商品图片，多幅
+        /// </summary>
+        public List<string> LstItemImg { get; set; }
+
+        /// <summary>
         /// 宝贝的属性列表
         /// </summary>
         public List<string> LstPropsName { get; set; }

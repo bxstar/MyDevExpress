@@ -1405,6 +1405,7 @@ namespace TaoBaoDataServer.WinClientData
 
             List<EntityItem> lstItem = CommonHandler.GetUserOnlineItems(session, projectEngName, chkGetUserAllItemFromCache.Checked);
             gridControlUserItem.DataSource = lstItem;
+            gridViewUserItem.Columns.First().Visible = false;
         }
     }
 }
