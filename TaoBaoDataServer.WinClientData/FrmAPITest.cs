@@ -510,7 +510,7 @@ namespace TaoBaoDataServer.WinClientData
             string strMsg = string.Empty;
             lstAll = reportHandler.GetAllCampaignRpt(session, 30, ref strMsg);
             if (string.IsNullOrEmpty(strMsg))
-                gridControlUserRpt.DataSource = lstAll.OrderByDescending(o => o.date);
+                gridControlUserRpt.DataSource = lstAll != null ? lstAll.OrderByDescending(o => o.date) : null;
             else
                 frmOutPut.OutPutMsg(strMsg);
         }
