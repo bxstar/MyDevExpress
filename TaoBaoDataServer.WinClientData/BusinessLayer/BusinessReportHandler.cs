@@ -139,6 +139,8 @@ namespace TaoBaoDataServer.WinClientData.BusinessLayer
                         lstRpt.Add(date_rpt);
                     }
 
+                    date_rpt.directpay = date_rpt.directpay + CommonFunction.JsonObjectToInt(service["directpay"]) / 100.0M;
+                    date_rpt.indirectpay = date_rpt.indirectpay + CommonFunction.JsonObjectToInt(service["indirectpay"]) / 100.0M;
                     date_rpt.totalpay = date_rpt.totalpay + CommonFunction.JsonObjectToInt(service["directpay"]) / 100.0M + CommonFunction.JsonObjectToInt(service["indirectpay"]) / 100.0M;
                 }
             }
